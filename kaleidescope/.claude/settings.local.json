@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(make help:*)",
+      "Bash(where make:*)",
+      "Bash(python:*)",
+      "Bash(export IDF_PATH=\"$HOME/.platformio/packages/framework-espidf\")",
+      "Bash(~/.platformio/penv/Scripts/python.exe --version)",
+      "Bash(bash:*)",
+      "Bash(export PATH:*)",
+      "Bash(export IDF_TOOLS_PATH=\"$HOME/.platformio/packages\")",
+      "Bash(make DEVICE=Mystrix FAMILY=MatrixBlock6 build:*)",
+      "Bash(pio run:*)",
+      "Bash(\"C:\\Users\\mark\\.platformio\\penv\\Scripts\\platformio.exe\" run)",
+      "Bash(platformio run)",
+      "Bash(\"C:\\Users\\mark\\.platformio\\penv\\Scripts\\platformio.exe\" run --target upload)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

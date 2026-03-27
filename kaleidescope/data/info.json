@@ -1,0 +1,40 @@
+{
+    "info":{
+        "fname":"Mark",
+        "lname":"Snyder",
+        "add1":"249 Clark Road",
+        "city":"Hershey",
+        "state":"PA",
+        "zip":"17033",
+        "email":"markinteractive88@gmail.com",
+        "phone":"301.325.1312",
+        "image":"img/mark.jpg"
+    },
+    "skills":[
+        {
+            "label":"HTML5/JS/CSS3",
+            "description":"body copy here",
+            "example":"pop up here"
+        }
+    ],
+    "experience":[
+         {
+            "label":"Screen Printer",
+            "description":"body copy here",
+            "example":"pop up here",
+            "time":"09_80-04_82"
+        },
+        {
+            "label":"1 Hour Photo/Title Slides",
+            "description":"body copy here",
+            "example":"pop up here",
+            "time":"09_82-04_84"
+        },
+        {
+            "label":"Tram Driver/Tour Guide",
+            "description":"body copy here",
+            "example":"pop up here",
+            "time":"04_83-09_85"
+        }
+    ]
+}

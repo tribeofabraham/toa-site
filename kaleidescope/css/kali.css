@@ -1,0 +1,311 @@
+body,
+html {
+    background-color: black;
+    font-family: 'BodyText';
+}
+
+#wrapper {
+    position: absolute;
+    top: 0em;
+    bottom: 0em;
+    left: 0em;
+    right: 0em;
+    background-color: var(--backgroundDark);
+    color: white;
+    overflow: hidden;
+
+}
+
+.slice {
+    opacity: 1;
+}
+
+/*Photo Easter Egg*/
+.kaliSelect {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 4em;
+    list-style: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: .8em;
+}
+
+.kaliSelect li {
+    position: relative;
+    display: block;
+    border-radius: 50%;
+    height: 3em;
+    width: 3em;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+
+    margin: 0;
+    margin-bottom: 1em;
+
+    box-shadow: inset 0 0 .2em black;
+
+}
+
+.kaliSelect li .shadow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0+1,0.55+65,1+83,1+100 */
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.55) 65%, rgba(0, 0, 0, 1) 83%, rgba(0, 0, 0, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+}
+
+.kaliSelect img {
+    height: 3em;
+    width: 3em;
+}
+
+.controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 2em;
+}
+
+.controls li {
+    display: inline-block;
+    padding: 0;
+    margin: .2em;
+    height: 1.4em;
+    width: 1.4em;
+    text-align: center;
+    border-radius: 50%;
+    color:var(--ghostWhite40);
+    border: solid .1em var(--ghostWhite40);
+    cursor:pointer;
+}
+
+
+.kali {
+    font-size: 3em;
+    box-shadow: .2em .2em .2em rgba(0, 0, 0, .8);
+    /*border: solid .04em var(--ghostWhite80);*/
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 3em;
+    right: auto;
+    height: 8em;
+    width: 8em;
+    border-radius: 50%;
+    overflow: visible;
+    z-index: 1;
+    background-size: 100% auto;
+    border: solid 1em black;
+}
+
+.kaliInnerShadow {
+    position: absolute;
+    top: -1em;
+    left: -1em;
+    right: -1em;
+    bottom: -1em;
+    border-radius: 50%;
+    overflow: visible;
+    z-index: 2;
+
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0+1,0.55+31,1+58,1+100 */
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.55) 31%, rgba(0, 0, 0, 1) 58%, rgba(0, 0, 0, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+}
+
+.slice {
+    position: absolute;
+    height: 10em;
+    width: 10em;
+    top: -1em;
+    left: -1em;
+    clip-path: polygon(5em 5em, 9em 5em, 9em 2.6em);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.sliceOdd {
+    position: absolute;
+    height: 10em;
+    width: 10em;
+    top: -1em;
+    left: -1em;
+    clip-path: polygon(5em 5em, 9em 5em, 9em 7.4em);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.flipH {
+    transform: scaleX(-1);
+}
+
+.kali img {
+    position: absolute;
+    height: 10em;
+    width: 10em;
+    left: 0;
+    top: 0;
+}
+
+/*End Photo Easter Egg*/
+
+/*Speed Control Slider*/
+.speedControl {
+    position: absolute;
+    right: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ghostWhite80);
+    font-size: .8em;
+    /* Position next to thumbnails */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.5em;
+    height: 32em;
+}
+
+.speedControl label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+#speedSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #44ff44 0%, #666 50%, #ff4444 100%);
+    outline: none;
+    border-radius: 1em;
+    cursor: grab;
+    padding: 0;
+    margin: 0;
+    writing-mode: vertical-lr;
+    direction: rtl;
+}
+
+#speedSlider:active {
+    cursor: grabbing;
+}
+
+#speedSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 2.5em;
+    height: 2.5em;
+    background: white;
+    cursor: grab;
+    border-radius: 50%;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.8);
+    border: 0.15em solid #333;
+}
+
+#speedSlider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+}
+
+#speedSlider::-moz-range-thumb {
+    width: 2.5em;
+    height: 2.5em;
+    background: white;
+    cursor: grab;
+    border-radius: 50%;
+    border: 0.15em solid #333;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.8);
+}
+
+#speedSlider::-moz-range-thumb:active {
+    cursor: grabbing;
+}
+
+.speedLabels {
+    display: none;
+}
+
+@media (orientation: portrait) {
+    .kali {
+        font-size: 4.5em;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        top: 1em;
+        z-index: 0;
+    }
+
+    .kaliSelect {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 44em;
+        bottom: auto;
+        font-size: 1em;
+        width: 34em;
+        z-index: 10;
+    }
+
+    .kaliSelect li {
+        display: inline-block;
+        height: 4em;
+        width: 4em;
+        margin-right: 0.25em;
+        margin-bottom: 0;
+    }
+
+    .kaliSelect img {
+        height: 4em;
+        width: 4em;
+    }
+
+    .speedControl {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 49em;
+        width: calc(8 * 4.25em); /* 8 thumbnails × (4em width + 0.25em margin) */
+        height: 2em;
+        font-size: 1em;
+        z-index: 10;
+    }
+
+    #speedSlider {
+        width: 100%;
+        height: 100%;
+        transform: none;
+        background: linear-gradient(to right, #ff4444 0%, #666 50%, #44ff44 100%);
+        writing-mode: horizontal-tb;
+        direction: ltr;
+    }
+
+    #speedSlider::-webkit-slider-thumb {
+        width: 2em;
+        height: 2em;
+    }
+
+    #speedSlider::-moz-range-thumb {
+        width: 2em;
+        height: 2em;
+    }
+}
+
+/*End Speed Control Slider*/
+/*Contact Styling*/

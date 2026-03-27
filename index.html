@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tribe of Abraham — Play Together. Right Now.</title>
+
+<!-- Favicon & App Icons -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="images/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="images/favicon-16x16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0d0b09">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tribe of Abraham">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tribe of Abraham — Play Together. Right Now.">
+<meta property="og:description" content="Free, open-source music education tools built around the Nashville Number System.">
+<meta property="og:image" content="images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tribe of Abraham — Play Together. Right Now.">
+<meta name="twitter:description" content="Free, open-source music education tools built around the Nashville Number System.">
+<meta name="twitter:image" content="images/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── ACCESSIBILITY ───────────────────────────────────── */
+.skip-link {
+  position: absolute; top: -100%; left: 1rem;
+  padding: 0.8rem 1.5rem; background: var(--brass); color: var(--ink);
+  font-size: 0.85rem; font-weight: 500; text-decoration: none;
+  z-index: 200; border-radius: 0 0 4px 4px;
+}
+.skip-link:focus { top: 0; }
+
+*:focus-visible {
+  outline: 2px solid var(--brass-light);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+:root {
+  --ink:         #0d0b09;
+  --paper:       #f4efe6;
+  --cream:       #e8e0d0;
+  --brass:       #b8923a;
+  --brass-light: #d4aa55;
+  --warm:        #1e1810;
+  --mid:         #2e2620;
+  --muted:       #9a8e7e;
+  --serif:       'Sorts Mill Goudy', Georgia, serif;
+  --sans:        'DM Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NAV ──────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 3rem;
+  background: linear-gradient(to bottom, rgba(13,11,9,0.96), transparent);
+}
+.nav-logo { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; }
+.nav-star {
+  width: 32px; height: 32px; flex-shrink: 0;
+}
+.nav-star img {
+  width: 100%; height: 100%; display: block;
+}
+.nav-wordmark {
+  font-family: var(--serif); font-size: 1.1rem;
+  letter-spacing: 0.03em; color: var(--paper);
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: var(--cream); text-decoration: none;
+  font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+  opacity: 0.85; transition: opacity 0.2s, color 0.2s;
+}
+.nav-links a:hover, .nav-links a:focus-visible { opacity: 1; color: var(--brass-light); }
+
+/* ── HERO ─────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 9rem 3rem 6rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,146,58,0.06) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--brass); margin-bottom: 1.2rem;
+  animation: fadeUp 1s ease-out 0.3s both;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  font-weight: 400; line-height: 1.1; color: var(--paper);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 1s ease-out 0.4s both;
+}
+.hero h1 em { font-style: italic; color: var(--brass-light); }
+.hero-sub {
+  font-size: 1.1rem; font-weight: 300; color: var(--cream); opacity: 0.9;
+  max-width: 540px; line-height: 1.8; margin: 0 auto 2.5rem;
+  animation: fadeUp 1s ease-out 0.5s both;
+}
+.hero-cta {
+  display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp 1s ease-out 0.6s both;
+}
+.btn {
+  display: inline-block; padding: 0.85rem 2.2rem;
+  font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+  text-decoration: none; border: 1px solid var(--brass); color: var(--brass-light);
+  transition: all 0.25s; position: relative; overflow: hidden;
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0; background: var(--brass);
+  transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1;
+}
+.btn:hover { color: var(--ink); }
+.btn:hover::before { transform: translateX(0); }
+.btn-ghost { border-color: rgba(184,146,58,0.4); color: var(--cream); }
+.btn-ghost::before { background: rgba(184,146,58,0.1); }
+.btn-ghost:hover { color: var(--paper); }
+
+/* ── MISSION ──────────────────────────────────────────── */
+.mission {
+  background: var(--warm); padding: 7rem 5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+}
+.mission-text p {
+  font-size: 1.05rem; color: var(--cream);
+  line-height: 1.85; margin-bottom: 1.2rem;
+}
+.mission-text p strong { color: var(--paper); font-weight: 500; }
+.mission-pull {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 400; line-height: 1.4; color: var(--paper);
+  border-left: 3px solid var(--brass); padding-left: 2rem;
+}
+.mission-pull em { font-style: italic; color: var(--brass-light); }
+
+/* ── SECTION COMMONS ──────────────────────────────────── */
+section { padding: 7rem 5rem; }
+.section-label {
+  font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--brass); margin-bottom: 0.8rem;
+}
+h2 {
+  font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 400; line-height: 1.15; color: var(--paper);
+}
+h2 em { font-style: italic; color: var(--brass-light); }
+.divider {
+  width: 48px; height: 1px; background: var(--brass);
+  opacity: 0.5; margin: 1.8rem 0;
+}
+
+/* ── TOOLS ────────────────────────────────────────────── */
+.tools { background: var(--ink); }
+.tools-header { max-width: 540px; margin-bottom: 5rem; }
+.tools-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(184,146,58,0.12);
+}
+.tool-card {
+  background: var(--ink); padding: 3rem;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+  display: flex; flex-direction: column;
+}
+.tool-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--brass); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.tool-card:hover { background: var(--warm); }
+.tool-card:hover::before { transform: scaleX(1); }
+.tool-num {
+  font-family: var(--serif); font-size: 3rem; font-weight: 400;
+  color: rgba(184,146,58,0.7); line-height: 1; margin-bottom: 1.4rem;
+  transition: color 0.3s;
+}
+.tool-card:hover .tool-num { color: rgba(184,146,58,0.85); }
+.tool-name {
+  font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
+  color: var(--paper); line-height: 1.2; margin-bottom: 0.5rem;
+}
+.tool-status {
+  font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--brass); margin-bottom: 1.2rem;
+}
+.tool-status.soon { color: var(--muted); }
+.tool-desc {
+  font-size: 0.88rem; color: var(--muted); line-height: 1.8;
+  flex: 1; margin-bottom: 2rem;
+}
+.tool-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: auto; }
+.tool-link {
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--brass); text-decoration: none;
+  border-bottom: 1px solid rgba(184,146,58,0.3); padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.tool-link:hover { color: var(--brass-light); border-color: var(--brass-light); }
+.tool-link.git { color: var(--muted); border-color: rgba(122,110,96,0.3); }
+.tool-link.git:hover { color: var(--paper); border-color: var(--muted); }
+
+/* ── NOTATION PREVIEW ─────────────────────────────────── */
+.notation-preview { background: var(--warm); }
+.notation-preview-header { max-width: 540px; margin-bottom: 3rem; }
+.notation-preview p {
+  font-size: 1rem; color: var(--cream);
+  line-height: 1.8; margin-bottom: 1rem; max-width: 560px;
+}
+.preview-wrapper {
+  position: relative; border: 1px solid rgba(184,146,58,0.2);
+  overflow: hidden; background: #111;
+}
+.preview-wrapper iframe {
+  width: 100%; aspect-ratio: 16 / 9; border: none; display: block;
+}
+.preview-cta {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1rem;
+  background: rgba(13,11,9,0.55);
+  opacity: 0; transition: opacity 0.3s;
+}
+.preview-wrapper:hover .preview-cta { opacity: 1; }
+
+/* ── OPEN SOURCE ──────────────────────────────────────── */
+.opensource {
+  background: var(--ink);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: center;
+}
+.opensource-text p {
+  font-size: 1rem; color: var(--cream);
+  line-height: 1.8; margin-bottom: 1rem;
+}
+.opensource-text p strong { color: var(--paper); font-weight: 500; }
+.contrib-list { list-style: none; margin-top: 2rem; }
+.contrib-list li {
+  font-size: 0.88rem; color: var(--muted); padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(184,146,58,0.1);
+  padding-left: 1.4rem; position: relative;
+}
+.contrib-list li::before {
+  content: '—'; position: absolute; left: 0;
+  color: var(--brass); opacity: 0.6;
+}
+.contrib-list li:last-child { border-bottom: none; }
+.github-card {
+  background: var(--warm); padding: 3rem;
+  border: 1px solid rgba(184,146,58,0.15);
+}
+.github-card h3 {
+  font-family: var(--serif); font-size: 1.8rem;
+  font-weight: 400; color: var(--paper);
+  margin-bottom: 0.5rem; line-height: 1.2;
+}
+.github-card p {
+  font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 2rem;
+}
+.github-repos { list-style: none; margin-bottom: 2.5rem; }
+.github-repos li {
+  padding: 0.9rem 0; border-bottom: 1px solid rgba(184,146,58,0.1);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.github-repos li:last-child { border-bottom: none; }
+.repo-name {
+  font-family: var(--sans); font-size: 0.82rem; color: var(--paper);
+  font-weight: 400;
+}
+.repo-desc {
+  font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem;
+}
+.repo-link {
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--brass); text-decoration: none;
+  border-bottom: 1px solid rgba(184,146,58,0.3); padding-bottom: 2px;
+  white-space: nowrap; margin-left: 1rem;
+  transition: color 0.2s;
+}
+.repo-link:hover { color: var(--brass-light); }
+
+/* ── CONTACT ──────────────────────────────────────────── */
+.contact { background: var(--warm); text-align: center; padding: 8rem 3rem; }
+.contact h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.2rem; }
+.contact p {
+  font-size: 1rem; color: var(--muted);
+  max-width: 480px; margin: 0 auto 3rem; line-height: 1.7;
+}
+.contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+
+/* ── FOOTER ───────────────────────────────────────────── */
+footer {
+  background: var(--ink); padding: 2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(184,146,58,0.12);
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-text { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a {
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--brass-light); }
+
+/* ── SCROLL REVEAL ────────────────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  section, .mission, .opensource { padding: 5rem 1.5rem; }
+  .mission, .opensource { grid-template-columns: 1fr; gap: 3rem; }
+  .tools-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- NAV -->
+<nav aria-label="Main navigation">
+  <a href="#" class="nav-logo">
+    <div class="nav-star"><img src="images/LogoOnly.svg" alt="Tribe of Abraham — eight-pointed star of shared abundance"></div>
+    <span class="nav-wordmark">Tribe of Abraham</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#notation">Notation Wheel</a></li>
+    <li><a href="#sequencer">Drum Sequencer</a></li>
+    <li><a href="#kaleidoscope">Kaleidoscope</a></li>
+    <li><a href="#opensource">Open Source</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<main id="main">
+<section class="hero">
+  <img src="images/LogoFull.svg" alt="Tribe of Abraham" class="hero-logo" style="width: clamp(220px, 36vw, 420px); margin-bottom: 2.5rem; animation: fadeUp 1s ease-out 0.2s both;">
+  <p class="hero-eyebrow">Open Source Music Education</p>
+  <h1>Play together.<br><em>Right now.</em></h1>
+  <p class="hero-sub">Free tools that help people make music together without years of theory. Pick up a guitar. Sit down at a keyboard. Find the 1 chord and go.</p>
+  <div class="hero-cta">
+    <a href="music/" class="btn" target="_blank" rel="noopener">Open Music App</a>
+    <a href="#tools" class="btn btn-ghost">See All Tools</a>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="mission-text reveal">
+    <p class="section-label">Why This Exists</p>
+    <h2>Music is a <em>shared language</em></h2>
+    <div class="divider"></div>
+    <p>Most people who've taken lessons still can't play with other people. They learned songs, not the language. The Nashville Number System changes that — it's how working musicians communicate in real time, without sheet music, without rehearsal.</p>
+    <p>Tribe of Abraham builds free, open-source tools that teach that language. <strong>The goal is simple:</strong> a family sitting together, the chord chart on the screen, everyone finding their part. The same way television replaced silence in the living room — music can replace television.</p>
+    <p>We've seen it work with communities that had never encountered this kind of music at all. The tools meet people exactly where they are.</p>
+  </div>
+  <div class="mission-pull reveal reveal-delay-2">
+    <em>"The chord chart on the screen. Everyone finds their part. The music starts."</em>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools" id="tools">
+  <div class="tools-header reveal">
+    <p class="section-label">The Tools</p>
+    <h2>Six tools.<br><em>Free. Always.</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="tools-grid">
+
+    <div class="tool-card reveal">
+      <div class="tool-num" aria-hidden="true">01</div>
+      <h3 class="tool-name">Music</h3>
+      <div class="tool-status">Live Now</div>
+      <p class="tool-desc">The full experience — Nashville Notation Wheel and Drum Sequencer on one screen. Change the time signature and the chord progression adapts. 3/4 gives you three chords. 7/8 gives you seven. Pick a key, pick a groove, and play.</p>
+      <div class="tool-links">
+        <a href="music/" class="tool-link" target="_blank" rel="noopener">Open Tool →</a>
+        <a href="https://github.com/ragamuffinstudios" class="tool-link git">GitHub</a>
+      </div>
+    </div>
+
+    <div class="tool-card reveal reveal-delay-1">
+      <div class="tool-num" aria-hidden="true">02</div>
+      <h3 class="tool-name">Nashville Notation Wheel</h3>
+      <div class="tool-status">Live Now</div>
+      <p class="tool-desc">An interactive circle of fifths built around the Nashville Number System. Select a key, see the numbers light up with chord diagrams for guitar and color-coded piano keyboards for every position. Transpose instantly. Works on any screen, any device — designed to run on a TV in a living room.</p>
+      <div class="tool-links">
+        <a href="notation/" class="tool-link" target="_blank" rel="noopener">Open Tool →</a>
+        <a href="https://github.com/ragamuffinstudios" class="tool-link git">GitHub</a>
+      </div>
+    </div>
+
+    <div class="tool-card reveal reveal-delay-1">
+      <div class="tool-num" aria-hidden="true">03</div>
+      <h3 class="tool-name">Drum Sequencer</h3>
+      <div class="tool-status">Live Now</div>
+      <p class="tool-desc">A visual drum step sequencer loaded with rhythmic patterns from around the world — Afrobeat, Balkan, Latin, Middle Eastern, and more. Designed to expose people to grooves and time signatures they may never have heard before. Pick a pattern, hit play, and hear how the rest of the world moves.</p>
+      <div class="tool-links">
+        <a href="sequencer/" class="tool-link" target="_blank" rel="noopener">Open Tool →</a>
+        <a href="https://github.com/ragamuffinstudios" class="tool-link git">GitHub</a>
+      </div>
+    </div>
+
+    <div class="tool-card reveal reveal-delay-2">
+      <div class="tool-num" aria-hidden="true">03</div>
+      <h3 class="tool-name">Programmable Pedal Firmware</h3>
+      <div class="tool-status">In Development</div>
+      <p class="tool-desc">Open-source firmware for the Tribe of Abraham programmable pedal — built on the ESP32-S3 by Ragamuffin Workshop. Looping is just one function. Configure everything through a web UI served from the pedal's own WiFi hotspot. No apps. No drivers. No computer required. The entire codebase is on GitHub — read it, build it, modify it, contribute to it.</p>
+      <div class="tool-links">
+        <a href="https://github.com/ragamuffinstudios" class="tool-link git">View on GitHub →</a>
+        <a href="https://ragamuffinstudios.com" class="tool-link git">Buy Hardware →</a>
+      </div>
+    </div>
+
+    <div class="tool-card reveal reveal-delay-3">
+      <div class="tool-num" aria-hidden="true">04</div>
+      <h3 class="tool-name">Pedal Flash Tool</h3>
+      <div class="tool-status">In Development</div>
+      <p class="tool-desc">A browser-based firmware flashing tool for the programmable pedal. No command line. No drivers. Plug in via USB, open this page, and your pedal is updated. Built on WebUSB so it runs right in the browser — anyone can flash the latest firmware without installing anything.</p>
+      <div class="tool-links">
+        <a href="https://github.com/ragamuffinstudios" class="tool-link git">GitHub</a>
+      </div>
+    </div>
+
+    <div class="tool-card reveal reveal-delay-4">
+      <div class="tool-num" aria-hidden="true">05</div>
+      <h3 class="tool-name">Kaleidoscope</h3>
+      <div class="tool-status">Live Now</div>
+      <p class="tool-desc">An interactive HTML5 kaleidoscope — twelve mirrored slices that rotate, shift, and transform in real time. Choose from multiple patterns, control the speed and direction. Pure browser — no plugins, no install. Built to mesmerize.</p>
+      <div class="tool-links">
+        <a href="kaleidescope/" class="tool-link" target="_blank" rel="noopener">Open Tool →</a>
+        <a href="https://github.com/ragamuffinstudios" class="tool-link git">GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NOTATION PREVIEW -->
+<section class="notation-preview" id="notation">
+  <div class="notation-preview-header reveal">
+    <p class="section-label">Nashville Notation Wheel</p>
+    <h2>Find the <em>1 chord.</em><br>Everything else follows.</h2>
+    <div class="divider"></div>
+    <p>Select any key. The wheel shows you the Nashville numbers — 1 through 7 — with guitar chord diagrams and color-coded piano keyboards for each position. Transpose to any key in one click. No theory required.</p>
+    <p>Built to be readable across a room. Run it on a TV or a tablet and everyone at the session can see where they are.</p>
+  </div>
+  <div class="preview-wrapper reveal reveal-delay-1">
+    <iframe src="notation/" title="Nashville Notation Wheel" scrolling="no"></iframe>
+    <div class="preview-cta">
+      <a href="notation/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEQUENCER PREVIEW -->
+<section class="notation-preview" id="sequencer">
+  <div class="notation-preview-header reveal">
+    <p class="section-label">Drum Sequencer</p>
+    <h2>Rhythms you've <em>never heard.</em></h2>
+    <div class="divider"></div>
+    <p>Most people only know the rhythms they grew up with. This sequencer is loaded with patterns from musical traditions around the world — so you can hear how a 7/8 Balkan groove feels, what makes an Afrobeat pattern lock in, or why a bossa nova swings differently than a shuffle. Pick a pattern and press play.</p>
+  </div>
+  <div class="preview-wrapper reveal reveal-delay-1">
+    <iframe src="sequencer/" title="Drum Sequencer" scrolling="no"></iframe>
+    <div class="preview-cta">
+      <a href="sequencer/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- KALEIDOSCOPE PREVIEW -->
+<section class="notation-preview" id="kaleidoscope">
+  <div class="notation-preview-header reveal">
+    <p class="section-label">Kaleidoscope</p>
+    <h2>Pure HTML5. <em>Pure visual.</em></h2>
+    <div class="divider"></div>
+    <p>Twelve mirrored slices built entirely in the browser. Pick a pattern, control the rotation speed and direction. No canvas, no WebGL — just HTML5 and CSS transforms.</p>
+  </div>
+  <div class="preview-wrapper reveal reveal-delay-1">
+    <iframe src="kaleidescope/" title="Kaleidoscope" scrolling="no"></iframe>
+    <div class="preview-cta">
+      <a href="kaleidescope/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN SOURCE -->
+<section class="opensource" id="opensource">
+  <div class="opensource-text reveal">
+    <p class="section-label">Open Source</p>
+    <h2>Built in the open.<br><em>Yours to use.</em></h2>
+    <div class="divider"></div>
+    <p>Every tool on this site is free and open source — MIT licensed, hosted on GitHub, available for anyone to use, fork, or contribute to. Teachers, developers, musicians, and community organizers are all welcome.</p>
+    <p>If you're building something in this space — music education, community music-making, accessible theory tools — <strong>we want to work with you.</strong></p>
+    <ul class="contrib-list">
+      <li>Use any tool freely in your classroom or community</li>
+      <li>Fork and adapt for your own context</li>
+      <li>Contribute code, translations, or chord data</li>
+      <li>Commission custom tools through Ragamuffin Studios</li>
+    </ul>
+  </div>
+  <div class="github-card reveal reveal-delay-2">
+    <h3>Repositories</h3>
+    <p>All source code lives on GitHub. Everything is MIT licensed unless otherwise noted.</p>
+    <ul class="github-repos">
+      <li>
+        <div>
+          <div class="repo-name">tribe-of-abraham / notation-wheel</div>
+          <div class="repo-desc">Nashville Number System interactive tool</div>
+        </div>
+        <a href="https://github.com/ragamuffinstudios" class="repo-link">View →</a>
+      </li>
+      <li>
+        <div>
+          <div class="repo-name">tribe-of-abraham / kaleidoscope</div>
+          <div class="repo-desc">HTML5 interactive kaleidoscope</div>
+        </div>
+        <a href="https://github.com/ragamuffinstudios" class="repo-link">View →</a>
+      </li>
+      <li>
+        <div>
+          <div class="repo-name">tribe-of-abraham / drum-sequencer</div>
+          <div class="repo-desc">World rhythm explorer — drum patterns from global traditions</div>
+        </div>
+        <a href="https://github.com/ragamuffinstudios" class="repo-link">View →</a>
+      </li>
+      <li>
+        <div>
+          <div class="repo-name">tribe-of-abraham / pedal-firmware</div>
+          <div class="repo-desc">ESP32-S3 programmable pedal firmware — web UI hotspot config</div>
+        </div>
+        <a href="https://github.com/ragamuffinstudios" class="repo-link">View →</a>
+      </li>
+      <li>
+        <div>
+          <div class="repo-name">tribe-of-abraham / flash-tool</div>
+          <div class="repo-desc">Browser-based WebUSB firmware flash utility</div>
+        </div>
+        <a href="https://github.com/ragamuffinstudios" class="repo-link">View →</a>
+      </li>
+    </ul>
+    <a href="https://github.com/ragamuffinstudios" class="btn">View All on GitHub</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label">Get Involved</p>
+  <h2>Join the <em>Tribe.</em></h2>
+  <p>Whether you want to contribute code, use the tools in your community, or commission something new — reach out.</p>
+  <div class="contact-links">
+    <a href="mailto:mark@tribeofabraham.com" class="btn">Get In Touch</a>
+    <a href="https://github.com/ragamuffinstudios" class="btn btn-ghost">GitHub</a>
+    <a href="https://ragamuffinstudios.com" class="btn btn-ghost">Ragamuffin Studios</a>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-text">Tribe of Abraham — Open Source Music Education — tribeofabraham.com</span>
+  <div class="footer-links">
+    <a href="notation/" target="_blank" rel="noopener">Notation Wheel</a>
+    <a href="https://ragamuffinstudios.com">Ragamuffin Studios</a>
+    <a href="https://github.com/ragamuffinstudios">GitHub</a>
+    <a href="mailto:mark@tribeofabraham.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
