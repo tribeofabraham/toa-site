@@ -114,46 +114,44 @@ body {
 .controls-bar {
   background: #000000;
   border-bottom: none;
-  padding: 0.5em 1em;
+  padding: 0.6em 1em;
   flex-shrink: 0;
   font-size: 1.4vw;
 }
 .controls {
   display: flex; flex-wrap: wrap; align-items: flex-end;
-  justify-content: center; gap: 1em;
+  justify-content: center; gap: 1.2em;
   margin: 0 auto;
 }
 .control-group {
-  display: flex; flex-direction: column; align-items: center; gap: 0.25em;
+  display: flex; flex-direction: column; align-items: center; gap: 0.3em;
 }
 .control-group label {
-  font-family: var(--display); font-size: 0.5em;
+  font-family: var(--display); font-size: 0.7em;
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--text-muted);
+  color: white;
 }
 .control-group select {
   background-color: white;
   color: black;
-  border: solid 0.08em rgba(255,255,255,0.4);
-  font-family: var(--body); font-size: 0.85em; font-weight: 400;
-  padding: 0.3em 1.6em 0.3em 0.5em;
-  border-radius: 0.2em;
+  border: solid .01em rgba(0,0,0,0.4);
+  font-family: var(--display); font-size: 1em;
+  height: 1.2em;
+  padding: 0 0.3em;
+  border-radius: .2em;
   cursor: pointer; outline: none;
   -webkit-appearance: none; appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23000000' fill-opacity='0.4'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.4em center;
-  transition: border-color 0.2s;
   text-align: center;
   text-align-last: center;
+  line-height: 1.1em;
 }
 .control-group select:hover,
-.control-group select:focus { border-color: white; }
-.control-group select option { background: white; color: black; }
+.control-group select:focus { border-color: black; }
+.control-group select option { background: white; color: black; font-size: .6em; }
 
 input[type="range"] {
   -webkit-appearance: none; appearance: none;
-  width: 10em; height: 0.15em;
+  width: 14em; height: 0.15em;
   background: rgba(255,255,255,0.15); border: none; border-radius: 0.15em;
   outline: none;
 }
@@ -178,33 +176,35 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ── TRANSPORT BUTTONS ── */
-.transport { display: flex; gap: 0.5em; align-items: flex-end; }
+.transport { display: flex; gap: 0.5em; align-items: flex-end; margin-top: 0.4em; }
 .btn {
-  font-family: var(--display); font-size: 0.7em;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: white; background: #000000;
-  border: solid 0.08em rgba(255,255,255,0.4);
-  border-radius: 0.2em;
-  padding: 0.45em 1.4em; cursor: pointer;
+  background-color: rgba(0,0,0,0.4);
+  cursor: pointer;
+  height: 3em;
+  width: 3em;
+  border-radius: .2em;
+  border: solid .05em rgba(255,255,255,0.4);
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
   transition: all 0.2s;
 }
-.btn:hover { border-color: white; color: white; }
-.btn span { position: relative; z-index: 1; }
+.btn:hover { border-color: rgba(255,255,255,0.8); }
+.btn svg { width: 60%; height: 60%; }
 .btn.active {
-  background: var(--c1);
   border-color: var(--c1);
-  color: white;
 }
-.btn-clear:hover { border-color: var(--c3); color: var(--c3); }
+.btn-clear:hover { border-color: rgba(255,255,255,0.8); }
 
 /* ── (preset-info and legend removed — info lives in overlay) ──*/
 
 /* ── SEQUENCER GRID ── */
 .sequencer-wrap {
   flex: 1;
-  padding: clamp(0.3rem, 1vmin, 1rem);
-  padding-right: clamp(2rem, 6vmin, 5rem);
+  padding: 1em;
+  padding-top: 1.5em;
+  padding-right: 4em;
   width: 100%;
+  font-size: 1.4vw;
 }
 .sequencer {
   display: grid; gap: clamp(0.05em, 0.15vmin, 0.2em);
@@ -260,6 +260,37 @@ input[type="range"]::-moz-range-thumb {
 .step-number.active-col { color: #fff; opacity: 1; }
 
 
+
+/* ── RESPONSIVE: portrait ── */
+@media (orientation: portrait) {
+  .controls {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 1.5em;
+    row-gap: 0.4em;
+    justify-content: start;
+    align-items: center;
+    padding-left: 1em;
+  }
+  .control-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .cg-preset { grid-column: 1; grid-row: 1; justify-self: start; }
+  .cg-timesig { grid-column: 1; grid-row: 2; justify-self: start; }
+  .cg-tempo { grid-column: 2; grid-row: 1; margin-left: 1.5em; }
+  .cg-swing { grid-column: 2; grid-row: 2; margin-left: 1.5em; }
+  input[type="range"] { width: 20em; }
+  .transport {
+    position: absolute;
+    right: 4em;
+    bottom: 0.3em;
+  }
+  .controls-bar { position: relative; }
+}
+
 /* ── color-mix fallback for older browsers ── */
 @supports not (background: color-mix(in srgb, red 50%, transparent)) {
   .step.vel-1 { opacity: 0.35; }
@@ -292,9 +323,9 @@ input[type="range"]::-moz-range-thumb {
       <input type="range" id="swingSlider" min="0" max="75" value="0">
     </div>
     <div class="transport">
-      <button class="btn" id="playBtn" onclick="togglePlay()"><span>Play</span></button>
-      <button class="btn btn-clear" id="clearBtn" onclick="clearGrid()"><span>Clear</span></button>
-      <button class="info-btn" onclick="toggleInfo()" title="Info">?</button>
+      <button class="btn" id="playBtn" onclick="togglePlay()"><svg id="playIcon" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="6,4 20,12 6,20"/></svg><svg id="stopIcon" viewBox="0 0 24 24" fill="white" stroke="none" style="display:none"><rect x="5" y="5" width="14" height="14"/></svg></button>
+      <button class="btn btn-clear" id="clearBtn" onclick="clearGrid()"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <!-- <button class="info-btn" onclick="toggleInfo()" title="Info">?</button> -->
     </div>
   </div>
 </div>
@@ -946,14 +977,16 @@ function startPlay() {
   ensureAudio(); isPlaying = true; currentStep = -1;
   nextStepTime = audioCtx.currentTime + 0.05;
   document.getElementById('playBtn').classList.add('active');
-  document.getElementById('playBtn').querySelector('span').textContent = 'Stop';
+  document.getElementById('playIcon').style.display = 'none';
+  document.getElementById('stopIcon').style.display = '';
   scheduler();
 }
 
 function stopPlay() {
   isPlaying = false; clearTimeout(timerID);
   document.getElementById('playBtn').classList.remove('active');
-  document.getElementById('playBtn').querySelector('span').textContent = 'Play';
+  document.getElementById('playIcon').style.display = '';
+  document.getElementById('stopIcon').style.display = 'none';
   document.querySelectorAll('.step.playing').forEach(el => el.classList.remove('playing'));
   document.querySelectorAll('.step-number.active-col').forEach(el => el.classList.remove('active-col'));
   currentStep = -1;
