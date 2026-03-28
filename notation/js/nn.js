@@ -123,13 +123,26 @@ function setKeys() {
                 parseInt($('#selectProg3 .chordSelect').prop('selectedIndex')),
                 parseInt($('#selectProg4 .chordSelect').prop('selectedIndex'))
             ]
-            let md = [
-                parseInt($('#selectProg1 .modSelect').prop('selectedIndex')),
-                parseInt($('#selectProg2 .modSelect').prop('selectedIndex')),
-                parseInt($('#selectProg3 .modSelect').prop('selectedIndex')),
-                parseInt($('#selectProg4 .modSelect').prop('selectedIndex'))
+            let mv = [
+                parseInt($('#selectProg1 .modSelect').val()),
+                parseInt($('#selectProg2 .modSelect').val()),
+                parseInt($('#selectProg3 .modSelect').val()),
+                parseInt($('#selectProg4 .modSelect').val())
             ];
-            let tempKey = i + key + steps[pg[k]];
+            // 0=maj, 1=m, 2=7, 3=b, 4=bm, 5=b7
+            let md = [
+                (mv[0] === 1 || mv[0] === 4) ? 1 : ((mv[0] === 2 || mv[0] === 5) ? 2 : 0),
+                (mv[1] === 1 || mv[1] === 4) ? 1 : ((mv[1] === 2 || mv[1] === 5) ? 2 : 0),
+                (mv[2] === 1 || mv[2] === 4) ? 1 : ((mv[2] === 2 || mv[2] === 5) ? 2 : 0),
+                (mv[3] === 1 || mv[3] === 4) ? 1 : ((mv[3] === 2 || mv[3] === 5) ? 2 : 0)
+            ];
+            let ac = [
+                (mv[0] >= 3) ? -1 : 0,
+                (mv[1] >= 3) ? -1 : 0,
+                (mv[2] >= 3) ? -1 : 0,
+                (mv[3] >= 3) ? -1 : 0
+            ];
+            let tempKey = i + key + steps[pg[k]] + ac[k];
             if (tempKey > 36) {
                 tempKey = tempKey - 36;
             }
@@ -221,13 +234,17 @@ function loadScales() {
 }
 
 function loadCharts() {
-        //Set default chord progression
-    $('#selectProg1 .chordSelect').val(1);
-    $('#selectProg2 .chordSelect').val(5);
-    $('#selectProg3 .chordSelect').val(6);
-    $('#selectProg4 .chordSelect').val(4);
+        //Set default chord progression — Amazing Grace in D: D C G D (1 b7 4 1)
+    $('#selectKey select').prop('selectedIndex', 2); // D
+    key = 2;
+    rot = key * -30;
+    $('#keys').css('transform', 'rotate(' + rot + 'deg)');
 
-    $('#selectProg3 .modSelect').prop('selectedIndex','1');
+    $('#selectProg1 .chordSelect').val(1);
+    $('#selectProg2 .chordSelect').val(7);
+    $('#selectProg2 .modSelect').val(3); // b = flat
+    $('#selectProg3 .chordSelect').val(4);
+    $('#selectProg4 .chordSelect').val(1);
 
     var svgFilePath = 'img/chords.svg';
     // Use $.get() to fetch the SVG content
@@ -273,20 +290,39 @@ function setCharts() {
     $('.chordChart svg > g').hide();
     let chart1, chart2, chart3, chart4;
     let ch1, ch2, ch3, ch4;
-    ch1 = key + steps[$("#selectProg1 select.chordSelect").prop('selectedIndex')] - key;
-    ch2 = key + steps[$("#selectProg2 select.chordSelect").prop('selectedIndex')] - key;
-    ch3 = key + steps[$("#selectProg3 select.chordSelect").prop('selectedIndex')] - key;
-    ch4 = key + steps[$("#selectProg4 select.chordSelect").prop('selectedIndex')] - key;
 
-    ch1 = (ch1 + key) % 12;
-    ch2 = (ch2 + key) % 12;
-    ch3 = (ch3 + key) % 12;
-    ch4 = (ch4 + key) % 12;
+    // modSelect values: 0=major, 1=m, 2=7, 3=b, 4=bm, 5=b7
+    // Parse into accidental offset and chord suffix for SVG lookup
+    function parseMod(val) {
+        val = parseInt(val);
+        var acc = 0, suffix = '';
+        if (val === 1) { suffix = 'm'; }
+        else if (val === 2) { suffix = '7'; }
+        else if (val === 3) { acc = -1; }
+        else if (val === 4) { acc = -1; suffix = 'm'; }
+        else if (val === 5) { acc = -1; suffix = '7'; }
+        return { acc: acc, suffix: suffix };
+    }
 
-    chart1 = keys[ch1] + $("#selectProg1 select.modSelect").val();
-    chart2 = keys[ch2] + $("#selectProg2 select.modSelect").val();
-    chart3 = keys[ch3] + $("#selectProg3 select.modSelect").val();
-    chart4 = keys[ch4] + $("#selectProg4 select.modSelect").val();
+    var m1 = parseMod($('#selectProg1 select.modSelect').val());
+    var m2 = parseMod($('#selectProg2 select.modSelect').val());
+    var m3 = parseMod($('#selectProg3 select.modSelect').val());
+    var m4 = parseMod($('#selectProg4 select.modSelect').val());
+
+    ch1 = steps[$("#selectProg1 select.chordSelect").prop('selectedIndex')] + m1.acc;
+    ch2 = steps[$("#selectProg2 select.chordSelect").prop('selectedIndex')] + m2.acc;
+    ch3 = steps[$("#selectProg3 select.chordSelect").prop('selectedIndex')] + m3.acc;
+    ch4 = steps[$("#selectProg4 select.chordSelect").prop('selectedIndex')] + m4.acc;
+
+    ch1 = ((ch1 + key) % 12 + 12) % 12;
+    ch2 = ((ch2 + key) % 12 + 12) % 12;
+    ch3 = ((ch3 + key) % 12 + 12) % 12;
+    ch4 = ((ch4 + key) % 12 + 12) % 12;
+
+    chart1 = keys[ch1] + m1.suffix;
+    chart2 = keys[ch2] + m2.suffix;
+    chart3 = keys[ch3] + m3.suffix;
+    chart4 = keys[ch4] + m4.suffix;
 
     $('#selectProg1 #' + chart1 + '').show();
     $('#selectProg2 #' + chart2 + '').show();
@@ -295,9 +331,22 @@ function setCharts() {
 
 }
 
+// Content aspect ratio threshold — only cap when window is wider than this
+var contentRatio = 1.6;
 function sizer() {
     if (active) {
         currentWidth = $('body').width();
+        var winH = $(window).height();
+        var windowRatio = currentWidth / winH;
+        // Cap based on aspect ratio — different thresholds for landscape vs portrait
+        if (windowRatio > contentRatio) {
+            currentWidth = winH * contentRatio;
+        }
+        // In portrait, cap the max font size so bottom row doesn't clip
+        if (windowRatio < 1) {
+            var maxSize = (winH / 900) * referenceWidth;
+            if (currentWidth > maxSize) currentWidth = maxSize;
+        }
         sizePercent = (currentWidth / referenceWidth) * 100;
         $('body').css('font-size', sizePercent + '%');
     } else {
@@ -424,6 +473,29 @@ $(document).ready(function () {
     loadScales();
     initInterface();
 
+    // Listen for parent frame messages
+    window.addEventListener('message', function (e) {
+        var d = e.data;
+        if (!d || d.target !== 'notation') return;
 
+        if (d.type === 'setSong') {
+            // Set key
+            key = d.keyIndex;
+            rot = key * -30;
+            trans = 0;
+            $('#selectKey select').prop('selectedIndex', key);
+            $('#trans').html(trans);
+            $('#keys').css('transform', 'rotate(' + rot + 'deg)');
 
+            // Set chord progression
+            // chords: [1-7], mods: [0=none, 1=m, 2=7, 3=b, 4=bm, 5=b7]
+            for (var i = 0; i < 4; i++) {
+                $('#selectProg' + (i + 1) + ' .chordSelect').prop('selectedIndex', d.chords[i] - 1);
+                $('#selectProg' + (i + 1) + ' .modSelect').val(d.mods[i]);
+            }
+
+            setCharts();
+            setPiano();
+        }
+    });
 });

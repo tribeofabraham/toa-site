@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/TribeOfAbrahamGit/nashville-notation//**)",
+      "Read(//d/TribeOfAbrahamGit/drum-sequencer//**)",
+      "Read(//d/TribeOfAbrahamGit/harmony-rhythm//**)",
+      "Read(//d/TribeOfAbrahamGit/midi-foot-pedal-flasher//**)",
+      "Bash(cp /d/TribeOfAbrahamGit/toa-site/notation/index.html /d/TribeOfAbrahamGit/nashville-notation/index.html)",
+      "Bash(cp /d/TribeOfAbrahamGit/toa-site/notation/js/nn.js /d/TribeOfAbrahamGit/nashville-notation/js/nn.js)",
+      "Bash(cp /d/TribeOfAbrahamGit/toa-site/notation/css/nn.css /d/TribeOfAbrahamGit/nashville-notation/css/nn.css)"
+    ],
+    "additionalDirectories": [
+      "D:\\TribeOfAbrahamGit\\midi-foot-pedal-flasher"
+    ]
+  }
+}

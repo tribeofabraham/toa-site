@@ -182,7 +182,7 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
   height: 3em;
   width: 3em;
-  border-radius: .2em;
+  border-radius: 50%;
   border: solid .05em rgba(255,255,255,0.4);
   display: flex; align-items: center; justify-content: center;
   padding: 0;
@@ -222,32 +222,38 @@ input[type="range"]::-moz-range-thumb {
 }
 .step {
   width: 100%; aspect-ratio: 1;
-  background: rgba(255,255,255,0.04);
-  border: none; border-radius: 0.15em;
+  background: transparent;
+  border: none; border-radius: 50%;
   cursor: pointer;
-  transition: background 0.08s, transform 0.08s;
+  transition: background 0.08s, box-shadow 0.08s;
   position: relative;
+  display: flex; align-items: center; justify-content: center;
 }
-.step:hover {
-  background: rgba(255,255,255,0.12);
-  transform: scale(1.1);
-  z-index: 2;
+.step::before {
+  content: '';
+  width: 20%; height: 20%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  transition: width 0.1s, height 0.1s, background 0.1s, box-shadow 0.1s;
+}
+.step:hover::before {
+  background: rgba(255,255,255,0.18);
+  width: 45%; height: 45%;
 }
 /* Velocity colors are set per-row via inline CSS custom property --rc */
-.step.vel-1 { background: color-mix(in srgb, var(--rc) 30%, transparent); }
-.step.vel-2 { background: color-mix(in srgb, var(--rc) 60%, transparent); }
-.step.vel-3 { background: var(--rc); box-shadow: 0 0 0.4em color-mix(in srgb, var(--rc) 50%, transparent); }
+.step.vel-1::before { width: 35%; height: 35%; background: color-mix(in srgb, var(--rc) 50%, transparent); }
+.step.vel-2::before { width: 65%; height: 65%; background: color-mix(in srgb, var(--rc) 75%, transparent); }
+.step.vel-3::before { width: 100%; height: 100%; background: var(--rc); box-shadow: 0 0 0.4em color-mix(in srgb, var(--rc) 50%, transparent); }
 
 .step.playing::after {
   content: '';
   position: absolute; inset: -0.08em;
   border: 0.15em solid #fff;
-  border-radius: 0.15em;
+  border-radius: 50%;
   pointer-events: none;
 }
 .step.downbeat {
   border-left: 0.15em solid rgba(255,255,255,0.15);
-  border-radius: 0.15em 0.15em 0.15em 0;
 }
 
 /* Step numbers */
@@ -291,11 +297,19 @@ input[type="range"]::-moz-range-thumb {
   .controls-bar { position: relative; }
 }
 
+/* ── THUMBNAIL: hide controls when embedded tiny ── */
+@media (max-height: 160px) {
+  .controls-bar { display: none; }
+  .sequencer-wrap { padding: 0.2em; font-size: 1vmin; }
+  .row-label { display: none; }
+  .step-number { display: none; }
+}
+
 /* ── color-mix fallback for older browsers ── */
 @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-  .step.vel-1 { opacity: 0.35; }
-  .step.vel-2 { opacity: 0.65; }
-  .step.vel-3 { opacity: 1; }
+  .step.vel-1::before { opacity: 0.35; background: var(--rc); }
+  .step.vel-2::before { opacity: 0.65; background: var(--rc); }
+  .step.vel-3::before { opacity: 1; background: var(--rc); }
 }
 </style>
 </head>
@@ -323,9 +337,7 @@ input[type="range"]::-moz-range-thumb {
       <input type="range" id="swingSlider" min="0" max="75" value="0">
     </div>
     <div class="transport">
-      <button class="btn" id="playBtn" onclick="togglePlay()"><svg id="playIcon" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="6,4 20,12 6,20"/></svg><svg id="stopIcon" viewBox="0 0 24 24" fill="white" stroke="none" style="display:none"><rect x="5" y="5" width="14" height="14"/></svg></button>
       <button class="btn btn-clear" id="clearBtn" onclick="clearGrid()"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      <!-- <button class="info-btn" onclick="toggleInfo()" title="Info">?</button> -->
     </div>
   </div>
 </div>
@@ -605,7 +617,7 @@ const presets = {
     }
   },
   'funk': {
-    name: 'Funk', timeSig: '4/4', bpm: 100, swing: 20,
+    name: 'Funk', timeSig: '4/4', bpm: 104, swing: 20,
     desc: 'James Brown / Clyde Stubblefield funk pocket. Ghost notes on the snare create the greasy feel.',
     pattern: {
       kick:    [3,0,0,1, 0,0,0,0, 3,0,3,0, 0,0,0,0],
@@ -786,6 +798,63 @@ const presets = {
       cowbell: [2,0,0, 2,0,0, 2,0,0, 0,0,2, 0,0,0, 2,0,0],
     }
   },
+  'country': {
+    name: 'Country', timeSig: '4/4', bpm: 120, swing: 0,
+    desc: 'Classic country two-step \u2014 kick on 1 and 3, snare on 2 and 4, driving hi-hat eighths. Nashville, Tennessee.',
+    pattern: {
+      kick:    [3,0,0,0, 0,0,0,0, 3,0,0,0, 0,0,0,0],
+      snare:   [0,0,0,0, 3,0,0,0, 0,0,0,0, 3,0,0,0],
+      hihat:   [3,0,2,0, 3,0,2,0, 3,0,2,0, 3,0,2,0],
+      rimshot: [0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1],
+    }
+  },
+  'country-train': {
+    name: 'Country Train Beat', timeSig: '4/4', bpm: 130, swing: 0,
+    desc: 'The train beat \u2014 a driving sixteenth-note pattern that mimics the sound of a freight train rolling down the tracks. A staple of uptempo country.',
+    pattern: {
+      kick:    [3,0,0,0, 0,0,3,0, 3,0,0,0, 0,0,3,0],
+      snare:   [0,0,0,0, 3,0,0,0, 0,0,0,0, 3,0,0,0],
+      hihat:   [2,1,2,1, 2,1,2,1, 2,1,2,1, 2,1,2,1],
+    }
+  },
+  'country-shuffle': {
+    name: 'Country Shuffle', timeSig: '12/8', bpm: 110, swing: 0,
+    desc: 'A triplet-feel shuffle heard in honky-tonk and Western swing. The groove that makes a barstool sway.',
+    pattern: {
+      kick:    [3,0,0, 0,0,0, 3,0,0, 0,0,0, 3,0,0, 0,0,0, 3,0,0, 0,0,0],
+      snare:   [0,0,0, 3,0,0, 0,0,0, 3,0,0, 0,0,0, 3,0,0, 0,0,0, 3,0,0],
+      hihat:   [2,0,2, 2,0,2, 2,0,2, 2,0,2, 2,0,2, 2,0,2, 2,0,2, 2,0,2],
+    }
+  },
+  'bluegrass': {
+    name: 'Bluegrass', timeSig: '4/4', bpm: 140, swing: 0,
+    desc: 'Boom-chuck \u2014 the rhythmic engine of bluegrass. Bass on the downbeat, snare on the upbeat. Fast, dry, and forward-leaning. Appalachia.',
+    pattern: {
+      kick:    [3,0,0,0, 0,0,0,0, 3,0,0,0, 0,0,0,0],
+      snare:   [0,0,0,0, 3,0,0,0, 0,0,0,0, 3,0,0,0],
+      hihat:   [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],
+      shaker:  [2,0,2,0, 2,0,2,0, 2,0,2,0, 2,0,2,0],
+    }
+  },
+  'bluegrass-roll': {
+    name: 'Bluegrass Roll', timeSig: '4/4', bpm: 155, swing: 0,
+    desc: 'A driving bluegrass feel with sixteenth-note momentum \u2014 the kind of groove that sits behind a banjo roll or flatpick run.',
+    pattern: {
+      kick:    [3,0,0,0, 0,0,1,0, 3,0,0,0, 0,0,1,0],
+      snare:   [0,0,0,0, 3,0,0,0, 0,0,0,0, 3,0,0,0],
+      shaker:  [2,1,2,1, 2,1,2,1, 2,1,2,1, 2,1,2,1],
+      rimshot: [0,0,0,0, 0,0,0,2, 0,0,0,0, 0,0,0,2],
+    }
+  },
+  'bluegrass-waltz': {
+    name: 'Bluegrass Waltz', timeSig: '3/4', bpm: 160, swing: 0,
+    desc: 'Three-quarter time bluegrass \u2014 bass on 1, backbeats on 2 and 3. The feel behind every mountain waltz and gospel number.',
+    pattern: {
+      kick:    [3,0,0,0, 0,0, 0,0,0,0, 0,0],
+      snare:   [0,0,0,0, 3,0, 0,0,0,0, 3,0],
+      shaker:  [2,0,2,0, 2,0, 2,0,2,0, 2,0],
+    }
+  },
 };
 
 // ═══════════════════════════════════════════
@@ -816,21 +885,20 @@ function init() {
   tsSelect.addEventListener('change', (e) => setTimeSig(e.target.value));
 
   const pSelect = document.getElementById('presetSelect');
-  let lastTimeSig = '';
+  const groups = {};
   for (const [key, preset] of Object.entries(presets)) {
-    if (preset.timeSig !== lastTimeSig && key !== 'empty') {
-      const og = document.createElement('optgroup');
-      og.label = preset.timeSig;
-      pSelect.appendChild(og);
-      lastTimeSig = preset.timeSig;
-    }
     const opt = document.createElement('option');
     opt.value = key; opt.textContent = preset.name;
-    if (key !== 'empty') {
-      const g = pSelect.querySelector('optgroup[label="' + preset.timeSig + '"]');
-      if (g) g.appendChild(opt); else pSelect.appendChild(opt);
-    } else {
+    if (key === 'empty') {
       pSelect.appendChild(opt);
+    } else {
+      if (!groups[preset.timeSig]) {
+        const og = document.createElement('optgroup');
+        og.label = preset.timeSig;
+        pSelect.appendChild(og);
+        groups[preset.timeSig] = og;
+      }
+      groups[preset.timeSig].appendChild(opt);
     }
   }
   pSelect.addEventListener('change', (e) => loadPreset(e.target.value));
@@ -850,7 +918,21 @@ function init() {
     }
   });
 
-  loadPreset('afrobeat');
+  loadPreset('funk');
+
+  // Listen for parent frame messages
+  window.addEventListener('message', function (e) {
+    var d = e.data;
+    if (!d || d.target !== 'sequencer') return;
+    if (d.type === 'loadPreset' && presets[d.preset]) {
+      loadPreset(d.preset);
+    } else if (d.type === 'togglePlay') {
+      togglePlay();
+      if (window.parent) window.parent.postMessage({ target: 'music', type: 'playState', playing: isPlaying }, '*');
+    } else if (d.type === 'getPlayState') {
+      if (window.parent) window.parent.postMessage({ target: 'music', type: 'playState', playing: isPlaying }, '*');
+    }
+  });
 }
 
 function setTimeSig(sig) {
@@ -976,17 +1058,11 @@ function togglePlay() { if (isPlaying) stopPlay(); else startPlay(); }
 function startPlay() {
   ensureAudio(); isPlaying = true; currentStep = -1;
   nextStepTime = audioCtx.currentTime + 0.05;
-  document.getElementById('playBtn').classList.add('active');
-  document.getElementById('playIcon').style.display = 'none';
-  document.getElementById('stopIcon').style.display = '';
   scheduler();
 }
 
 function stopPlay() {
   isPlaying = false; clearTimeout(timerID);
-  document.getElementById('playBtn').classList.remove('active');
-  document.getElementById('playIcon').style.display = '';
-  document.getElementById('stopIcon').style.display = 'none';
   document.querySelectorAll('.step.playing').forEach(el => el.classList.remove('playing'));
   document.querySelectorAll('.step-number.active-col').forEach(el => el.classList.remove('active-col'));
   currentStep = -1;
