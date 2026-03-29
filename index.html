@@ -199,55 +199,36 @@ h2 em { font-style: italic; color: var(--brass-light); }
   opacity: 0.5; margin: 1.8rem 0;
 }
 
-/* ── TOOLS ────────────────────────────────────────────── */
-.tools { background: var(--ink); }
-.tools-header { max-width: 540px; margin-bottom: 5rem; }
-.tools-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: rgba(184,146,58,0.12);
+
+/* ── PEDAL SECTION ────────────────────────────────────── */
+.pedal-section {
+  background: var(--ink);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
 }
-.tool-card {
-  background: var(--ink); padding: 3rem;
-  position: relative; overflow: hidden;
-  transition: background 0.3s;
-  display: flex; flex-direction: column;
+.pedal-section p {
+  font-size: 1rem; color: var(--cream);
+  line-height: 1.8; margin-bottom: 1rem;
 }
-.tool-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: var(--brass); transform: scaleX(0); transform-origin: left;
-  transition: transform 0.4s ease;
+.pedal-section p strong { color: var(--paper); font-weight: 500; }
+.pedal-image {
+  position: relative;
 }
-.tool-card:hover { background: var(--warm); }
-.tool-card:hover::before { transform: scaleX(1); }
-.tool-num {
-  font-family: var(--serif); font-size: 3rem; font-weight: 400;
-  color: rgba(184,146,58,0.7); line-height: 1; margin-bottom: 1.4rem;
-  transition: color 0.3s;
+.pedal-image img {
+  width: 100%; border-radius: 4px;
+  border: 1px solid rgba(184,146,58,0.15);
 }
-.tool-card:hover .tool-num { color: rgba(184,146,58,0.85); }
-.tool-name {
-  font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
-  color: var(--paper); line-height: 1.2; margin-bottom: 0.5rem;
+.pedal-image .pedal-caption {
+  font-size: 0.72rem; color: var(--muted);
+  margin-top: 0.8rem; line-height: 1.6;
+  font-style: italic;
 }
-.tool-status {
-  font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--brass); margin-bottom: 1.2rem;
+.pedal-links {
+  display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;
 }
-.tool-status.soon { color: var(--muted); }
-.tool-desc {
-  font-size: 0.88rem; color: var(--muted); line-height: 1.8;
-  flex: 1; margin-bottom: 2rem;
+@media (max-width: 900px) {
+  .pedal-section { grid-template-columns: 1fr; gap: 3rem; }
 }
-.tool-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: auto; }
-.tool-link {
-  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--brass); text-decoration: none;
-  border-bottom: 1px solid rgba(184,146,58,0.3); padding-bottom: 2px;
-  transition: color 0.2s, border-color 0.2s;
-}
-.tool-link:hover { color: var(--brass-light); border-color: var(--brass-light); }
-.tool-link.git { color: var(--muted); border-color: rgba(122,110,96,0.3); }
-.tool-link.git:hover { color: var(--paper); border-color: var(--muted); }
 
 /* ── NOTATION PREVIEW ─────────────────────────────────── */
 .notation-preview { background: var(--warm); }
@@ -386,10 +367,10 @@ footer {
     <span class="nav-wordmark">Tribe of Abraham</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#tools">Tools</a></li>
-    <li><a href="#notation">Notation Wheel</a></li>
-    <li><a href="#sequencer">Drum Sequencer</a></li>
-    <li><a href="#kaleidoscope">Kaleidoscope</a></li>
+    <li><a href="#tools">Music</a></li>
+    <li><a href="#pedal">Pedal</a></li>
+    <li><a href="#notation">Notation</a></li>
+    <li><a href="#sequencer">Sequencer</a></li>
     <li><a href="#opensource">Open Source</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -404,7 +385,7 @@ footer {
   <p class="hero-sub">Free tools that help people make music together without years of theory. Pick up a guitar. Sit down at a keyboard. Find the 1 chord and go.</p>
   <div class="hero-cta">
     <a href="music/" class="btn" target="_blank" rel="noopener">Open Music App</a>
-    <a href="#tools" class="btn btn-ghost">See All Tools</a>
+    <a href="#pedal" class="btn btn-ghost">See the Pedal</a>
   </div>
 </section>
 
@@ -423,92 +404,53 @@ footer {
   </div>
 </section>
 
-<!-- TOOLS -->
-<section class="tools" id="tools">
-  <div class="tools-header reveal">
-    <p class="section-label">The Tools</p>
-    <h2>Six tools.<br><em>Free. Always.</em></h2>
+<!-- MUSIC APP -->
+<section class="notation-preview" id="tools">
+  <div class="notation-preview-header reveal">
+    <p class="section-label">Music App</p>
+    <h2>Pick a key. Pick a groove.<br><em>Play.</em></h2>
     <div class="divider"></div>
+    <p>The full experience — Nashville Notation Wheel and Drum Sequencer on one screen. Change the time signature and the chord progression adapts. 3/4 gives you three chords. 7/8 gives you seven. Pick a key, pick a groove, and play.</p>
+    <p style="margin-top: 1rem;"><a href="music/" class="btn" target="_blank" rel="noopener">Open Music App →</a> <a href="https://github.com/tribeofabraham/harmony-rhythm" class="btn btn-ghost">GitHub</a></p>
   </div>
-  <div class="tools-grid">
-
-    <div class="tool-card reveal">
-      <div class="tool-num" aria-hidden="true">01</div>
-      <h3 class="tool-name">Nashville Notation Wheel</h3>
-      <div class="tool-status">Live Now</div>
-      <p class="tool-desc">An interactive circle of fifths built around the Nashville Number System. Select a key, see the numbers light up with chord diagrams for guitar and color-coded piano keyboards for every position. Transpose instantly. Works on any screen, any device — designed to run on a TV in a living room.</p>
-      <div class="tool-links">
-        <a href="notation/" class="tool-link" target="_blank" rel="noopener">Open Tool →</a>
-        <a href="https://github.com/tribeofabraham/nashville-notation" class="tool-link git">GitHub</a>
-      </div>
+  <div class="preview-wrapper reveal reveal-delay-1">
+    <iframe src="music/" title="Music App" scrolling="no"></iframe>
+    <div class="preview-cta">
+      <a href="music/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
     </div>
-
-    <div class="tool-card reveal reveal-delay-1">
-      <div class="tool-num" aria-hidden="true">02</div>
-      <h3 class="tool-name">Drum Sequencer</h3>
-      <div class="tool-status">Live Now</div>
-      <p class="tool-desc">A visual drum step sequencer loaded with rhythmic patterns from around the world — Afrobeat, Balkan, Latin, Middle Eastern, and more. Designed to expose people to grooves and time signatures they may never have heard before. Pick a pattern, hit play, and hear how the rest of the world moves.</p>
-      <div class="tool-links">
-        <a href="sequencer/" class="tool-link" target="_blank" rel="noopener">Open Tool →</a>
-        <a href="https://github.com/tribeofabraham/drum-sequencer" class="tool-link git">GitHub</a>
-      </div>
-    </div>
-
-    <div class="tool-card reveal reveal-delay-2">
-      <div class="tool-num" aria-hidden="true">03</div>
-      <h3 class="tool-name">Music</h3>
-      <div class="tool-status">Live Now</div>
-      <p class="tool-desc">The full experience — Nashville Notation Wheel and Drum Sequencer on one screen. Change the time signature and the chord progression adapts. 3/4 gives you three chords. 7/8 gives you seven. Pick a key, pick a groove, and play.</p>
-      <div class="tool-links">
-        <a href="music/" class="tool-link" target="_blank" rel="noopener">Open Tool →</a>
-        <a href="https://github.com/tribeofabraham/harmony-rhythm" class="tool-link git">GitHub</a>
-      </div>
-    </div>
-
-    <div class="tool-card reveal reveal-delay-3">
-      <div class="tool-num" aria-hidden="true">04</div>
-      <h3 class="tool-name">Programmable Pedal Firmware</h3>
-      <div class="tool-status">In Development</div>
-      <p class="tool-desc">Open-source firmware for the Tribe of Abraham programmable pedal — built on the ESP32-S3 by Ragamuffin Workshop. Looping is just one function. Configure everything through a web UI served from the pedal's own WiFi hotspot. No apps. No drivers. No computer required. The entire codebase is on GitHub — read it, build it, modify it, contribute to it.</p>
-      <div class="tool-links">
-        <a href="https://github.com/tribeofabraham/midi-foot-pedal" class="tool-link git">View on GitHub →</a>
-        <a href="https://ragamuffinstudios.com" class="tool-link git">Buy Hardware →</a>
-      </div>
-    </div>
-
-    <div class="tool-card reveal reveal-delay-3">
-      <div class="tool-num" aria-hidden="true">05</div>
-      <h3 class="tool-name">Pedal Flash Tool</h3>
-      <div class="tool-status">In Development</div>
-      <p class="tool-desc">A browser-based firmware flashing tool for the programmable pedal. No command line. No drivers. Plug in via USB, open this page, and your pedal is updated. Built on WebUSB so it runs right in the browser — anyone can flash the latest firmware without installing anything.</p>
-      <div class="tool-links">
-        <a href="midi-foot-pedal-flasher/" class="tool-link" target="_blank" rel="noopener">Open Tool →</a>
-        <a href="https://github.com/tribeofabraham/midi-foot-pedal-flasher" class="tool-link git">GitHub</a>
-      </div>
-    </div>
-
-    <div class="tool-card reveal reveal-delay-4">
-      <div class="tool-num" aria-hidden="true">06</div>
-      <h3 class="tool-name">Kaleidoscope</h3>
-      <div class="tool-status">Live Now</div>
-      <p class="tool-desc">This has nothing to do with music education. We just thought it was cool. An interactive HTML5 kaleidoscope — twelve mirrored slices that rotate, shift, and transform in real time. Choose from multiple patterns, control the speed and direction. Pure browser — no plugins, no install.</p>
-      <div class="tool-links">
-        <a href="kaleidescope/" class="tool-link" target="_blank" rel="noopener">Open Tool →</a>
-        <a href="https://github.com/tribeofabraham/kaleidoscope" class="tool-link git">GitHub</a>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- NOTATION PREVIEW -->
+<!-- PEDAL -->
+<section class="pedal-section" id="pedal">
+  <div class="reveal">
+    <p class="section-label">Hardware</p>
+    <h2>Built by hand.<br><em>Open to everyone.</em></h2>
+    <div class="divider"></div>
+    <p>The first version was a simple cherry slab — didn't even have a bottom. An M0 SAMD XIAO, a single RGB LED, and four machined aluminum buttons. No WiFi. No firmware updates. No web UI. It's been running for four years and still lives on the Moog station because it's awesome at what it does.</p>
+    <p>The new version is built on the <strong>ESP32-S3</strong> — WiFi hotspot configuration, browser-based firmware flashing, and a fully programmable MIDI foot controller. Curly maple enclosure, handmade at <strong>Ragamuffin Workshop</strong>. Looping is just one function. The entire codebase is open source and the firmware flashes from a web page.</p>
+    <p>No apps. No drivers. No computer required to configure it. Plug it in, connect to its hotspot, and set it up from your phone.</p>
+    <div class="pedal-links">
+      <a href="https://github.com/tribeofabraham/midi-foot-pedal" class="btn btn-ghost">Firmware on GitHub</a>
+      <a href="midi-foot-pedal-flasher/" class="btn btn-ghost" target="_blank" rel="noopener">Flash Tool</a>
+      <a href="https://ragamuffinstudios.com" class="btn">Buy Hardware</a>
+    </div>
+  </div>
+  <div class="pedal-image reveal reveal-delay-2">
+    <img src="images/looper.png" alt="Tribe of Abraham programmable foot pedal — curly maple enclosure with machined aluminum buttons, handmade at Ragamuffin Workshop">
+    <p class="pedal-caption">Front: the current ESP32-S3 in curly maple. Back: the original cherry slab — four years on the Moog station and counting.</p>
+  </div>
+</section>
+
+<!-- NOTATION WHEEL -->
 <section class="notation-preview" id="notation">
   <div class="notation-preview-header reveal">
     <p class="section-label">Nashville Notation Wheel</p>
     <h2>Find the <em>1 chord.</em><br>Everything else follows.</h2>
     <div class="divider"></div>
-    <p>Select any key. The wheel shows you the Nashville numbers — 1 through 7 — with guitar chord diagrams and color-coded piano keyboards for each position. Transpose to any key in one click. No theory required.</p>
+    <p>An interactive circle of fifths built around the Nashville Number System. Select a key, see the numbers light up with chord diagrams for guitar and color-coded piano keyboards for every position. Transpose instantly. Works on any screen, any device — designed to run on a TV in a living room.</p>
     <p>Built to be readable across a room. Run it on a TV or a tablet and everyone at the session can see where they are.</p>
+    <p style="margin-top: 1rem;"><a href="notation/" class="btn" target="_blank" rel="noopener">Open Notation Wheel →</a> <a href="https://github.com/tribeofabraham/nashville-notation" class="btn btn-ghost">GitHub</a></p>
   </div>
   <div class="preview-wrapper reveal reveal-delay-1">
     <iframe src="notation/" title="Nashville Notation Wheel" scrolling="no"></iframe>
@@ -518,13 +460,14 @@ footer {
   </div>
 </section>
 
-<!-- SEQUENCER PREVIEW -->
+<!-- DRUM SEQUENCER -->
 <section class="notation-preview" id="sequencer">
   <div class="notation-preview-header reveal">
     <p class="section-label">Drum Sequencer</p>
     <h2>Rhythms you've <em>never heard.</em></h2>
     <div class="divider"></div>
     <p>Most people only know the rhythms they grew up with. This sequencer is loaded with patterns from musical traditions around the world — so you can hear how a 7/8 Balkan groove feels, what makes an Afrobeat pattern lock in, or why a bossa nova swings differently than a shuffle. Pick a pattern and press play.</p>
+    <p style="margin-top: 1rem;"><a href="sequencer/" class="btn" target="_blank" rel="noopener">Open Sequencer →</a> <a href="https://github.com/tribeofabraham/drum-sequencer" class="btn btn-ghost">GitHub</a></p>
   </div>
   <div class="preview-wrapper reveal reveal-delay-1">
     <iframe src="sequencer/" title="Drum Sequencer" scrolling="no"></iframe>
@@ -534,13 +477,14 @@ footer {
   </div>
 </section>
 
-<!-- KALEIDOSCOPE PREVIEW -->
+<!-- KALEIDOSCOPE -->
 <section class="notation-preview" id="kaleidoscope">
   <div class="notation-preview-header reveal">
     <p class="section-label">Kaleidoscope</p>
     <h2>Not music. <em>Just cool.</em></h2>
     <div class="divider"></div>
     <p>This has absolutely nothing to do with music education. But we built it, it's mesmerizing, and we're not taking it down. Twelve mirrored slices, pure HTML5 and CSS transforms — pick a pattern, control the speed, and lose a few minutes.</p>
+    <p style="margin-top: 1rem;"><a href="kaleidescope/" class="btn" target="_blank" rel="noopener">Open Kaleidoscope →</a> <a href="https://github.com/tribeofabraham/kaleidoscope" class="btn btn-ghost">GitHub</a></p>
   </div>
   <div class="preview-wrapper reveal reveal-delay-1">
     <iframe src="kaleidescope/" title="Kaleidoscope" scrolling="no"></iframe>
