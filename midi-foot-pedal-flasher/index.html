@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tribe of Abraham — MIDI Foot Pedal Flasher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script
+    type="module"
+    src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
+  ></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d0b09;
+      --paper: #f4efe6;
+      --brass: #b8923a;
+      --brass-light: #d4aa55;
+      --warm: #1e1810;
+      --mid: #2e2620;
+      --cream: #e8e0d0;
+      --muted: #9a8e7e;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 300;
+      background: var(--ink);
+      color: var(--paper);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      animation: fade-up 1s ease both;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .container { animation: none; }
+    }
+
+    .logo {
+      width: 72px;
+      height: auto;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: rgba(184, 146, 58, 0.5);
+      margin: 0 auto 2rem;
+    }
+
+    h1 {
+      font-family: 'Sorts Mill Goudy', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+      color: var(--paper);
+    }
+
+    .subtitle {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background: var(--warm);
+      border: 1px solid rgba(184, 146, 58, 0.15);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .steps {
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .steps ol {
+      padding-left: 1.4rem;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps li {
+      counter-increment: step;
+      margin-bottom: 0.75rem;
+      line-height: 1.7;
+      color: var(--cream);
+      font-weight: 300;
+      position: relative;
+      padding-left: 0.2rem;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: -1.4rem;
+      color: var(--brass);
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+
+    .steps li strong {
+      color: var(--paper);
+      font-weight: 500;
+    }
+
+    esp-web-install-button {
+      display: block;
+    }
+
+    esp-web-install-button button {
+      background: transparent;
+      color: var(--brass-light);
+      border: 1px solid var(--brass);
+      border-radius: 2px;
+      padding: 0.85rem 2.2rem;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    esp-web-install-button button:hover {
+      background: var(--brass);
+      color: var(--ink);
+    }
+
+    esp-web-install-button button:focus-visible {
+      outline: 2px solid var(--brass-light);
+      outline-offset: 3px;
+    }
+
+    .unsupported {
+      display: none;
+      background: rgba(184, 146, 58, 0.08);
+      border: 1px solid rgba(184, 146, 58, 0.2);
+      border-radius: 2px;
+      padding: 1rem;
+      color: var(--brass-light);
+      font-size: 0.88rem;
+      margin-top: 1rem;
+    }
+
+    .info {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
+
+    .info a {
+      color: var(--brass);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    .info a:hover {
+      border-bottom-color: var(--brass);
+    }
+
+    /* Show unsupported message when WebSerial is not available */
+    esp-web-install-button[install-unsupported] + .unsupported {
+      display: block;
+    }
+
+    esp-web-install-button[install-unsupported] button {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="images/logo.svg" alt="Tribe of Abraham" class="logo">
+    <h1>Tribe of Abraham</h1>
+    <p class="subtitle">MIDI Foot Pedal Flasher</p>
+    <div class="divider"></div>
+
+    <div class="card">
+      <div class="steps">
+        <ol>
+          <li>Plug your <strong>MIDI foot pedal</strong> into USB</li>
+          <li>Click <strong>Connect &amp; Flash</strong> below</li>
+          <li>Select your ESP32-S3 device in the browser popup</li>
+          <li>Wait for the flash to complete — the pedal restarts automatically</li>
+        </ol>
+      </div>
+
+      <esp-web-install-button manifest="manifest.json">
+        <button slot="activate">Connect &amp; Flash Firmware</button>
+      </esp-web-install-button>
+
+      <div class="unsupported">
+        Your browser does not support WebSerial.<br>
+        Please use <strong>Google Chrome</strong> or <strong>Microsoft Edge</strong> on desktop.
+      </div>
+    </div>
+
+    <p class="info">
+      ESP32-S3 Super Mini &middot; USB MIDI &middot; NeoPixel<br>
+      <a href="https://github.com/tribeofabraham/midi-foot-pedal">Firmware source on GitHub</a>
+    </p>
+  </div>
+</body>
+</html>
