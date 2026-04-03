@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loud Math — Frequency Stacker</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="icon" href="../../images/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../../images/favicon-16x16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loud Math — Frequency Stacker">
+<meta property="og:description" content="Pick notes, stack waves, hear the math. Simple ratios make clean repeating waves — tension makes complexity.">
+<meta property="og:image" content="https://www.tribeofabraham.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Loud Math — Frequency Stacker">
+<meta name="twitter:image" content="https://www.tribeofabraham.com/images/og-image.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Bebas+Neue&display=swap');
+  :root {
+    --bg: #0a0a0a; --surface: #141414; --border: #2a2a2a;
+    --text: #e8e8e0; --muted: #555; --accent: #c8a850;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Courier Prime', monospace; min-height: 100vh; padding: 20px; }
+  header { text-align: center; margin-bottom: 16px; }
+  .brand { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; letter-spacing: 0.2em; color: var(--accent); line-height: 1; }
+  .brand span { color: #fff; }
+  .app-title { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.25em; color: var(--muted); margin-top: 4px; }
+  .tagline { font-size: 0.6rem; color: #2a2a2a; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 4px; }
+
+  .controls {
+    display: flex; align-items: center; gap: 12px;
+    justify-content: center; margin-bottom: 14px; flex-wrap: wrap;
+  }
+  .btn { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.1em; padding: 7px 20px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; transition: all 0.15s; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+  /* KEYBOARD */
+  .keyboard-wrap {
+    max-width: 820px;
+    margin: 0 auto 16px;
+    background: #111;
+    border: 1px solid var(--border);
+    padding: 12px 12px 0;
+    border-radius: 4px;
+  }
+
+  .keyboard-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  #keyboard-svg {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* white keys */
+  .wkey {
+    fill: #f0ece0;
+    stroke: #888;
+    stroke-width: 1;
+    transition: fill 0.1s;
+    cursor: pointer;
+  }
+  .wkey:hover { fill: #e8e4d0; }
+  .wkey.active { stroke: #333; stroke-width: 1.5; }
+
+  /* black keys */
+  .bkey {
+    fill: #1a1a1a;
+    stroke: #000;
+    stroke-width: 1;
+    cursor: pointer;
+  }
+  .bkey:hover { fill: #2a2a2a; }
+  .bkey.active { stroke: #555; }
+
+  .key-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 9px;
+    fill: #888;
+    text-anchor: middle;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* STACK */
+  .stack-wrap {
+    max-width: 820px;
+    margin: 0 auto 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-height: 36px;
+  }
+
+  .stack-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 70px 28px;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+  }
+
+  .stack-note { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; }
+  .stack-hz { font-size: 0.58rem; color: var(--muted); }
+  .stack-ratio { font-size: 0.65rem; color: var(--muted); text-align: right; }
+  .stack-ratio strong { font-size: 0.8rem; }
+  canvas.wave-mini { width: 100%; height: 32px; display: block; }
+
+  .remove-btn { font-size: 0.85rem; padding: 2px 6px; border: 1px solid #330000; background: transparent; color: #553333; cursor: pointer; }
+  .remove-btn:hover { color: #aa2222; border-color: #aa2222; }
+
+  /* COMBINED */
+  .combined-wrap {
+    max-width: 820px;
+    margin: 0 auto 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px;
+  }
+  .combined-header {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .harmony-tag { color: var(--accent); font-size: 0.75rem; letter-spacing: 0.15em; }
+  canvas#combined { width: 100%; height: 80px; display: block; }
+
+  .empty-msg { text-align: center; color: #252525; font-size: 0.75rem; letter-spacing: 0.2em; padding: 10px; font-family: 'Bebas Neue', sans-serif; }
+
+  .info { text-align: center; margin-top: 12px; font-size: 0.65rem; color: #2a2a2a; letter-spacing: 0.1em; line-height: 1.8; }
+  footer { text-align: center; margin-top: 20px; font-family: 'Bebas Neue', sans-serif; font-size: 0.7rem; letter-spacing: 0.3em; color: #1a1a1a; }
+  footer a { color: #252525; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><span>LOUD</span> MATH</div>
+  <div class="app-title">Frequency Stacker</div>
+  <div class="tagline">by Tribe of Abraham · Pick notes · stack waves · hear the math</div>
+</header>
+
+<div class="controls">
+  <button class="btn" id="play-btn" onclick="togglePlay()">PLAY STACK</button>
+  <button class="btn" onclick="clearStack()">CLEAR</button>
+</div>
+
+<div class="keyboard-wrap">
+  <div class="keyboard-label">Click keys to add — click again to remove</div>
+  <svg id="keyboard-svg" viewBox="0 0 784 140" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<div class="stack-wrap" id="stack-wrap"></div>
+
+<div class="combined-wrap">
+  <div class="combined-header">
+    <span>Combined Wave</span>
+    <span class="harmony-tag" id="harmony-tag"></span>
+  </div>
+  <canvas id="combined"></canvas>
+</div>
+
+<div class="info">
+  Try C + G (perfect fifth) · then add E (major triad) · then add Bb (dominant seventh)<br>
+  Simple ratios make clean repeating waves · tension makes complexity
+</div>
+
+<footer><a href="https://tribeofabraham.com" target="_blank">TRIBEOFABRAHAM.COM</a></footer>
+
+<script>
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+const COLORS = [
+  '#c85050','#c87850','#c8a850','#78c850',
+  '#50c878','#5078c8','#7850c8','#c850a0'
+];
+
+// Two octaves: C3 to B4
+const NOTES = [
+  {name:'C3', freq:130.81, sharp:false},
+  {name:'C#3',freq:138.59, sharp:true},
+  {name:'D3', freq:146.83, sharp:false},
+  {name:'D#3',freq:155.56, sharp:true},
+  {name:'E3', freq:164.81, sharp:false},
+  {name:'F3', freq:174.61, sharp:false},
+  {name:'F#3',freq:185.00, sharp:true},
+  {name:'G3', freq:196.00, sharp:false},
+  {name:'G#3',freq:207.65, sharp:true},
+  {name:'A3', freq:220.00, sharp:false},
+  {name:'A#3',freq:233.08, sharp:true},
+  {name:'B3', freq:246.94, sharp:false},
+  {name:'C4', freq:261.63, sharp:false},
+  {name:'C#4',freq:277.18, sharp:true},
+  {name:'D4', freq:293.66, sharp:false},
+  {name:'D#4',freq:311.13, sharp:true},
+  {name:'E4', freq:329.63, sharp:false},
+  {name:'F4', freq:349.23, sharp:false},
+  {name:'F#4',freq:369.99, sharp:true},
+  {name:'G4', freq:392.00, sharp:false},
+  {name:'G#4',freq:415.30, sharp:true},
+  {name:'A4', freq:440.00, sharp:false},
+  {name:'A#4',freq:466.16, sharp:true},
+  {name:'B4', freq:493.88, sharp:false},
+  {name:'C5', freq:523.25, sharp:false},
+];
+
+const WHITE_NOTES = NOTES.filter(n => !n.sharp);
+const BLACK_NOTES = NOTES.filter(n => n.sharp);
+
+const W_KEY_W = 784 / WHITE_NOTES.length;
+const W_KEY_H = 130;
+const B_KEY_W = W_KEY_W * 0.6;
+const B_KEY_H = 82;
+
+let stack = [];
+let globalPlaying = false;
+
+// Build SVG keyboard
+function buildKeyboard() {
+  const svg = document.getElementById('keyboard-svg');
+
+  // White keys
+  WHITE_NOTES.forEach((note, i) => {
+    const x = i * W_KEY_W;
+    const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    rect.setAttribute('x', x + 1);
+    rect.setAttribute('y', 2);
+    rect.setAttribute('width', W_KEY_W - 2);
+    rect.setAttribute('height', W_KEY_H);
+    rect.setAttribute('rx', 3);
+    rect.setAttribute('class','wkey');
+    rect.setAttribute('id', `key-${note.name}`);
+    rect.addEventListener('click', () => toggleNote(note));
+    svg.appendChild(rect);
+
+    // Note label at bottom
+    const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+    text.setAttribute('x', x + W_KEY_W/2);
+    text.setAttribute('y', W_KEY_H - 6);
+    text.setAttribute('class','key-label');
+    text.textContent = note.name;
+    svg.appendChild(text);
+  });
+
+  // Black keys — position based on white key positions
+  // Map: sharp note name → position after which white key
+  const sharpMap = {
+    'C#3':0,'D#3':1,'F#3':3,'G#3':4,'A#3':5,
+    'C#4':7,'D#4':8,'F#4':10,'G#4':11,'A#4':12,
+  };
+
+  BLACK_NOTES.forEach(note => {
+    const wIdx = sharpMap[note.name];
+    if (wIdx === undefined) return;
+    const x = (wIdx + 1) * W_KEY_W - B_KEY_W/2;
+    const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', 2);
+    rect.setAttribute('width', B_KEY_W);
+    rect.setAttribute('height', B_KEY_H);
+    rect.setAttribute('rx', 2);
+    rect.setAttribute('class','bkey');
+    rect.setAttribute('id', `key-${note.name}`);
+    rect.addEventListener('click', () => toggleNote(note));
+    svg.appendChild(rect);
+  });
+}
+
+function toggleNote(note) {
+  const idx = stack.findIndex(s => s.name === note.name);
+  if (idx >= 0) {
+    removeFromStack(idx);
+  } else {
+    if (stack.length >= 8) return;
+    const color = COLORS[stack.length % COLORS.length];
+    stack.push({ ...note, color, osc: null, gain: null, playing: false });
+    colorKey(note.name, color, note.sharp);
+    if (globalPlaying) startNote(stack.length - 1);
+    renderStack();
+    drawCombined();
+  }
+}
+
+function colorKey(name, color, sharp) {
+  const key = document.getElementById(`key-${name}`);
+  if (!key) return;
+  if (sharp) {
+    key.style.fill = color;
+  } else {
+    key.style.fill = color;
+  }
+  key.classList.add('active');
+}
+
+function resetKey(name, sharp) {
+  const key = document.getElementById(`key-${name}`);
+  if (!key) return;
+  key.style.fill = sharp ? '#1a1a1a' : '#f0ece0';
+  key.classList.remove('active');
+}
+
+function removeFromStack(i) {
+  stopNote(i);
+  const { name, sharp } = stack[i];
+  resetKey(name, sharp);
+  stack.splice(i, 1);
+  renderStack();
+  drawCombined();
+}
+
+function renderStack() {
+  const wrap = document.getElementById('stack-wrap');
+  wrap.innerHTML = '';
+
+  if (stack.length === 0) {
+    const msg = document.createElement('div');
+    msg.className = 'empty-msg';
+    msg.textContent = 'SELECT NOTES ON THE KEYBOARD';
+    wrap.appendChild(msg);
+    return;
+  }
+
+  const baseFreq = stack[0].freq;
+
+  stack.forEach((v, i) => {
+    const row = document.createElement('div');
+    row.className = 'stack-row';
+    row.style.borderLeftColor = v.color;
+    row.style.borderLeftWidth = '3px';
+
+    const noteDiv = document.createElement('div');
+    noteDiv.innerHTML = `<div class="stack-note" style="color:${v.color}">${v.name}</div><div class="stack-hz">${v.freq.toFixed(2)} Hz</div>`;
+
+    const cvWrap = document.createElement('div');
+    const cv = document.createElement('canvas');
+    cv.className = 'wave-mini';
+    cv.width = 500; cv.height = 32;
+    cvWrap.appendChild(cv);
+
+    const ratio = v.freq / baseFreq;
+    const ratioDiv = document.createElement('div');
+    ratioDiv.className = 'stack-ratio';
+    ratioDiv.innerHTML = `ratio<br><strong style="color:${v.color}">${ratio.toFixed(3)}</strong>`;
+
+    const rem = document.createElement('button');
+    rem.className = 'remove-btn';
+    rem.textContent = '✕';
+    rem.onclick = () => removeFromStack(i);
+
+    row.appendChild(noteDiv);
+    row.appendChild(cvWrap);
+    row.appendChild(ratioDiv);
+    row.appendChild(rem);
+    wrap.appendChild(row);
+
+    drawWaveMini(cv, v.freq, v.color, baseFreq);
+  });
+
+  updateHarmonyTag();
+}
+
+function drawWaveMini(canvas, freq, color, baseFreq) {
+  const W = canvas.width, H = canvas.height;
+  const c = canvas.getContext('2d');
+  c.clearRect(0, 0, W, H);
+  c.beginPath(); c.strokeStyle = '#1e1e1e'; c.lineWidth = 1;
+  c.moveTo(0, H/2); c.lineTo(W, H/2); c.stroke();
+  const relFreq = freq / baseFreq;
+  const cycles = 4;
+  c.beginPath(); c.strokeStyle = color; c.lineWidth = 2;
+  for (let x = 0; x < W; x++) {
+    const t = (x / W) * cycles * Math.PI * 2 * relFreq;
+    const y = H/2 - (H * 0.42) * Math.sin(t);
+    x === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
+  }
+  c.stroke();
+}
+
+function drawCombined() {
+  const canvas = document.getElementById('combined');
+  const W = canvas.width = canvas.offsetWidth || 760;
+  const H = canvas.height = 80;
+  const c = canvas.getContext('2d');
+  c.clearRect(0, 0, W, H);
+
+  c.beginPath(); c.strokeStyle = '#1a1a1a'; c.lineWidth = 1;
+  c.moveTo(0, H/2); c.lineTo(W, H/2); c.stroke();
+
+  if (stack.length === 0) return;
+
+  const baseFreq = stack[0].freq;
+  const cycles = 4;
+
+  // Individual waves faint
+  stack.forEach(v => {
+    const relFreq = v.freq / baseFreq;
+    c.beginPath(); c.strokeStyle = v.color + '35'; c.lineWidth = 1.5;
+    for (let x = 0; x < W; x++) {
+      const t = (x / W) * cycles * Math.PI * 2 * relFreq;
+      const y = H/2 - (H * 0.35) * Math.sin(t);
+      x === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
+    }
+    c.stroke();
+  });
+
+  // Combined bold
+  c.beginPath(); c.strokeStyle = '#c8a850'; c.lineWidth = 2.5;
+  for (let x = 0; x < W; x++) {
+    let sum = 0;
+    stack.forEach(v => {
+      const relFreq = v.freq / baseFreq;
+      sum += Math.sin((x / W) * cycles * Math.PI * 2 * relFreq);
+    });
+    const amp = (H * 0.38) / Math.max(stack.length, 1);
+    const y = H/2 - amp * sum;
+    x === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
+  }
+  c.stroke();
+}
+
+function updateHarmonyTag() {
+  const tag = document.getElementById('harmony-tag');
+  if (stack.length < 2) { tag.textContent = ''; return; }
+  const r = stack.map(v => v.freq / stack[0].freq);
+  let label = '';
+  if (stack.length === 2) {
+    if (Math.abs(r[1]-2)<0.015) label='Octave';
+    else if (Math.abs(r[1]-1.5)<0.015) label='Perfect 5th';
+    else if (Math.abs(r[1]-1.333)<0.015) label='Perfect 4th';
+    else if (Math.abs(r[1]-1.25)<0.02) label='Major 3rd';
+    else if (Math.abs(r[1]-1.2)<0.02) label='Minor 3rd';
+    else if (Math.abs(r[1]-1.125)<0.015) label='Major 2nd';
+  } else if (stack.length === 3) {
+    if (Math.abs(r[1]-1.25)<0.02 && Math.abs(r[2]-1.5)<0.015) label='Major Triad';
+    else if (Math.abs(r[1]-1.2)<0.02 && Math.abs(r[2]-1.5)<0.015) label='Minor Triad';
+    else if (Math.abs(r[1]-1.25)<0.02 && Math.abs(r[2]-1.333)<0.015) label='Sus4 / Quartal';
+  } else if (stack.length === 4) {
+    if (Math.abs(r[1]-1.25)<0.02 && Math.abs(r[2]-1.5)<0.015 && Math.abs(r[3]-1.778)<0.02) label='Major 7th';
+    if (Math.abs(r[1]-1.25)<0.02 && Math.abs(r[2]-1.5)<0.015 && Math.abs(r[3]-1.667)<0.02) label='Dominant 7th';
+  }
+  tag.textContent = label;
+}
+
+function togglePlay() {
+  if (!audioCtx) audioCtx = new AudioContext();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  globalPlaying = !globalPlaying;
+  const btn = document.getElementById('play-btn');
+  btn.classList.toggle('active', globalPlaying);
+  btn.textContent = globalPlaying ? 'STOP' : 'PLAY STACK';
+  if (globalPlaying) stack.forEach((_, i) => startNote(i));
+  else stack.forEach((_, i) => stopNote(i));
+}
+
+function startNote(i) {
+  if (!audioCtx) return;
+  const v = stack[i];
+  if (v.playing) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = v.freq;
+  gain.gain.setValueAtTime(0, audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 0.03);
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  osc.start();
+  stack[i].osc = osc; stack[i].gain = gain; stack[i].playing = true;
+}
+
+function stopNote(i) {
+  const v = stack[i];
+  if (!v||!v.playing||!v.gain) return;
+  v.gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.06);
+  v.osc.stop(audioCtx.currentTime + 0.07);
+  stack[i].osc = null; stack[i].gain = null; stack[i].playing = false;
+}
+
+function clearStack() {
+  stack.forEach((_, i) => stopNote(i));
+  stack = [];
+  globalPlaying = false;
+  document.getElementById('play-btn').classList.remove('active');
+  document.getElementById('play-btn').textContent = 'PLAY STACK';
+  document.querySelectorAll('.wkey').forEach(k => { k.style.fill = '#f0ece0'; k.classList.remove('active'); });
+  document.querySelectorAll('.bkey').forEach(k => { k.style.fill = '#1a1a1a'; k.classList.remove('active'); });
+  renderStack();
+  drawCombined();
+}
+
+buildKeyboard();
+renderStack();
+drawCombined();
+</script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0a0a0a;
+    color: #e8e4d8;
+    font-family: 'Courier Prime', monospace;
+    padding: 24px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+    border-bottom: 1px solid #2a2a2a;
+    padding-bottom: 16px;
+  }
+  .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    letter-spacing: 0.2em;
+    color: #c8a850;
+  }
+  .brand span { color: #fff; }
+  .subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: #444;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  .unit {
+    margin-bottom: 24px;
+    border: 1px solid #1a1a1a;
+    background: #0d0d0d;
+  }
+
+  .unit-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .unit-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: #333;
+    min-width: 28px;
+  }
+
+  .unit-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    flex: 1;
+  }
+
+  .unit-grade {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: #555;
+    text-transform: uppercase;
+  }
+
+  .unit-body {
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  .col-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 6px;
+  }
+
+  .math-concept {
+    font-size: 0.72rem;
+    color: #888;
+    line-height: 1.7;
+  }
+
+  .music-concept {
+    font-size: 0.72rem;
+    color: #888;
+    line-height: 1.7;
+  }
+
+  .app-item {
+    font-size: 0.68rem;
+    color: #555;
+    line-height: 1.7;
+    padding-left: 8px;
+    border-left: 2px solid #1a1a1a;
+    margin-bottom: 4px;
+  }
+
+  .app-item.built {
+    color: #c8a850;
+    border-left-color: #c8a850;
+  }
+
+  .app-item.planned {
+    color: #4a9fd4;
+    border-left-color: #4a9fd4;
+  }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: #444;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .dot-built { background: #c8a850; }
+  .dot-planned { background: #4a9fd4; }
+  .dot-future { background: #333; }
+
+  /* Unit accent colors */
+  .u1 .unit-title { color: #4a9fd4; }
+  .u2 .unit-title { color: #50c8a8; }
+  .u3 .unit-title { color: #c8a850; }
+  .u4 .unit-title { color: #c87850; }
+  .u5 .unit-title { color: #a050c8; }
+  .u6 .unit-title { color: #c85050; }
+  .u7 .unit-title { color: #50a878; }
+
+  .u1 .unit-header { border-left: 3px solid #4a9fd4; }
+  .u2 .unit-header { border-left: 3px solid #50c8a8; }
+  .u3 .unit-header { border-left: 3px solid #c8a850; }
+  .u4 .unit-header { border-left: 3px solid #c87850; }
+  .u5 .unit-header { border-left: 3px solid #a050c8; }
+  .u6 .unit-header { border-left: 3px solid #c85050; }
+  .u7 .unit-header { border-left: 3px solid #50a878; }
+
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: #222;
+    padding-top: 12px;
+    border-top: 1px solid #1a1a1a;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand"><span>LOUD</span> MATH</div>
+  <div class="subtitle">Music & Mathematics Curriculum — by Tribe of Abraham</div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot dot-built"></div> Built</div>
+  <div class="legend-item"><div class="dot dot-planned"></div> Planned</div>
+  <div class="legend-item"><div class="dot dot-future"></div> Future</div>
+</div>
+
+<!-- UNIT 1 -->
+<div class="unit u1">
+  <div class="unit-header">
+    <div class="unit-num">01</div>
+    <div class="unit-title">Rhythm & Fractions</div>
+    <div class="unit-grade">Grades 3–6</div>
+  </div>
+  <div class="unit-body">
+    <div>
+      <div class="col-label">Math Concepts</div>
+      <div class="math-concept">
+        Fractions as division<br>
+        Numerator & denominator<br>
+        Equivalent fractions<br>
+        Comparing fractions<br>
+        Adding fractions<br>
+        Common denominators
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Music Concepts</div>
+      <div class="music-concept">
+        Beat subdivision<br>
+        Time signatures<br>
+        Quarter, eighth, sixteenth notes<br>
+        Whole & half notes<br>
+        Polyrhythm<br>
+        Tempo
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Apps</div>
+      <div class="app-item built">Fraction Drum Machine</div>
+      <div class="app-item planned">Fraction Stack Visualizer</div>
+      <div class="app-item planned">Polyrhythm Builder</div>
+      <div class="app-item future">Rhythm Notation Converter</div>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 2 -->
+<div class="unit u2">
+  <div class="unit-header">
+    <div class="unit-num">02</div>
+    <div class="unit-title">Frequency & Number</div>
+    <div class="unit-grade">Grades 4–7</div>
+  </div>
+  <div class="unit-body">
+    <div>
+      <div class="col-label">Math Concepts</div>
+      <div class="math-concept">
+        Multiplication & doubling<br>
+        Ratios<br>
+        Proportional reasoning<br>
+        Powers of 2<br>
+        Number patterns<br>
+        Rate & cycles per second
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Music Concepts</div>
+      <div class="music-concept">
+        Pitch as frequency (Hz)<br>
+        Octaves as doubling<br>
+        The harmonic series<br>
+        Consonance & dissonance<br>
+        Tuning systems<br>
+        String length & pitch
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Apps</div>
+      <div class="app-item built">String Length & Frequency</div>
+      <div class="app-item built">Frequency Stacker</div>
+      <div class="app-item planned">Harmonic Series Builder</div>
+      <div class="app-item future">Octave Explorer</div>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 3 -->
+<div class="unit u3">
+  <div class="unit-header">
+    <div class="unit-num">03</div>
+    <div class="unit-title">Waves & Geometry</div>
+    <div class="unit-grade">Grades 6–9</div>
+  </div>
+  <div class="unit-body">
+    <div>
+      <div class="col-label">Math Concepts</div>
+      <div class="math-concept">
+        Sine & cosine functions<br>
+        Amplitude & period<br>
+        Radians & degrees<br>
+        Phase shift<br>
+        Graphing functions<br>
+        Superposition
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Music Concepts</div>
+      <div class="music-concept">
+        Sine waves as pure tone<br>
+        Waveform shapes<br>
+        Timbre & harmonic content<br>
+        Phase relationships<br>
+        Interference patterns<br>
+        Beat frequencies
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Apps</div>
+      <div class="app-item planned">Wave Shape Explorer</div>
+      <div class="app-item planned">Phase Relationship Visualizer</div>
+      <div class="app-item planned">Beat Frequency Demo</div>
+      <div class="app-item future">Lissajous Figure Builder</div>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 4 -->
+<div class="unit u4">
+  <div class="unit-header">
+    <div class="unit-num">04</div>
+    <div class="unit-title">Scale & Logarithms</div>
+    <div class="unit-grade">Grades 7–10</div>
+  </div>
+  <div class="unit-body">
+    <div>
+      <div class="col-label">Math Concepts</div>
+      <div class="math-concept">
+        Geometric sequences<br>
+        Logarithms<br>
+        Exponential growth<br>
+        The 12th root of 2<br>
+        Equal temperament math<br>
+        Irrational numbers
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Music Concepts</div>
+      <div class="music-concept">
+        Fret spacing on guitar<br>
+        Equal vs just temperament<br>
+        Semitones & cents<br>
+        The chromatic scale<br>
+        Why frets get closer<br>
+        Decibels as log scale
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Apps</div>
+      <div class="app-item planned">Fret Position Calculator</div>
+      <div class="app-item planned">Temperament Comparator</div>
+      <div class="app-item planned">Decibel Scale Explorer</div>
+      <div class="app-item future">Just vs Equal Tuning Demo</div>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 5 -->
+<div class="unit u5">
+  <div class="unit-header">
+    <div class="unit-num">05</div>
+    <div class="unit-title">Harmony & Ratio</div>
+    <div class="unit-grade">Grades 6–9</div>
+  </div>
+  <div class="unit-body">
+    <div>
+      <div class="col-label">Math Concepts</div>
+      <div class="music-concept">
+        Rational numbers<br>
+        Simple ratios<br>
+        Greatest common divisor<br>
+        Modular arithmetic<br>
+        Circular geometry<br>
+        Number theory
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Music Concepts</div>
+      <div class="music-concept">
+        Intervals as ratios<br>
+        Perfect 5th (3:2)<br>
+        Major 3rd (5:4)<br>
+        Circle of fifths<br>
+        Chord construction<br>
+        Nashville Number System
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Apps</div>
+      <div class="app-item built">Nashville Notation Wheel</div>
+      <div class="app-item built">Frequency Stacker / Keyboard</div>
+      <div class="app-item planned">Interval Ratio Explorer</div>
+      <div class="app-item future">Circle of Fifths Navigator</div>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 6 -->
+<div class="unit u6">
+  <div class="unit-header">
+    <div class="unit-num">06</div>
+    <div class="unit-title">Synthesis & Functions</div>
+    <div class="unit-grade">Grades 8–12</div>
+  </div>
+  <div class="unit-body">
+    <div>
+      <div class="col-label">Math Concepts</div>
+      <div class="math-concept">
+        Functions & transformations<br>
+        Piecewise functions<br>
+        Rate of change<br>
+        Multiplication of functions<br>
+        Fourier series<br>
+        Signal processing
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Music Concepts</div>
+      <div class="music-concept">
+        Additive synthesis<br>
+        Envelope (ADSR)<br>
+        LFO as rate of change<br>
+        Ring modulation<br>
+        Filters as subtraction<br>
+        Timbre construction
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Apps</div>
+      <div class="app-item planned">Additive Synthesis Builder</div>
+      <div class="app-item planned">ADSR Envelope Shaper</div>
+      <div class="app-item planned">LFO Rate of Change Demo</div>
+      <div class="app-item future">Filter Frequency Subtractor</div>
+      <div class="app-item future">Ring Modulator Math</div>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT 7 -->
+<div class="unit u7">
+  <div class="unit-header">
+    <div class="unit-num">07</div>
+    <div class="unit-title">Pattern, Sequence & Structure</div>
+    <div class="unit-grade">Grades 5–10</div>
+  </div>
+  <div class="unit-body">
+    <div>
+      <div class="col-label">Math Concepts</div>
+      <div class="math-concept">
+        Sequences & series<br>
+        Fibonacci numbers<br>
+        Golden ratio<br>
+        Euclidean algorithm<br>
+        Permutations<br>
+        Symmetry & transformation
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Music Concepts</div>
+      <div class="music-concept">
+        Euclidean rhythms<br>
+        Fibonacci in musical form<br>
+        Twelve tone rows<br>
+        Call & response<br>
+        Canon & counterpoint<br>
+        Groove sequencing
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Apps</div>
+      <div class="app-item built">Groove Sequencer</div>
+      <div class="app-item planned">Euclidean Rhythm Generator</div>
+      <div class="app-item planned">Fibonacci Rhythm Explorer</div>
+      <div class="app-item future">Twelve Tone Row Builder</div>
+      <div class="app-item future">Canon Generator</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  LOUD MATH by Tribe of Abraham &nbsp;·&nbsp; tribeofabraham.com &nbsp;·&nbsp; WCAG 2.1 AA Compliant
+</div>
+
+</body>
+</html>
