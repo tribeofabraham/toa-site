@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archimedes' Circle — Approaching π</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;600&display=swap');
+
+  :root {
+    --bg:        #0c0b09;
+    --bg2:       #131109;
+    --gold:      #c9a84c;
+    --gold-lt:   #e8c97a;
+    --gold-dim:  #7a6328;
+    --blue:      #4a90c4;
+    --blue-lt:   #6fb3e8;
+    --red:       #c44a3a;
+    --red-lt:    #e87060;
+    --white:     #f0ece3;
+    --muted:     #6b6455;
+    --border:    rgba(201,168,76,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Raleway', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 3rem;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Subtle grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* ── HEADER ── */
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+    align-items: start;
+  }
+
+  @media (max-width: 680px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  /* ── CANVAS ── */
+  .canvas-wrap {
+    position: relative;
+    aspect-ratio: 1;
+    width: 100%;
+    max-width: 520px;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 4px;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 220px;
+  }
+
+  /* ── PI DISPLAY ── */
+  .pi-display {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    background: rgba(201,168,76,0.04);
+    text-align: center;
+  }
+
+  .pi-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    margin-bottom: 0.5rem;
+  }
+
+  .pi-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--gold-lt);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    transition: color 0.3s;
+  }
+
+  .pi-value.converged { color: #7fffaa; }
+
+  .pi-true {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+  }
+
+  /* ── BOUNDS ── */
+  .bounds {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .bound-row {
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .bound-inner {
+    background: rgba(74,144,196,0.08);
+    border-left: 2px solid var(--blue);
+  }
+
+  .bound-outer {
+    background: rgba(196,74,58,0.08);
+    border-left: 2px solid var(--red);
+  }
+
+  .bound-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .bound-inner .bound-label { color: var(--blue-lt); }
+  .bound-outer .bound-label { color: var(--red-lt); }
+
+  .bound-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--white);
+  }
+
+  .bound-desc {
+    font-size: 0.65rem;
+    color: var(--muted);
+    font-family: 'Raleway', sans-serif;
+  }
+
+  /* ── SIDES INFO ── */
+  .sides-info {
+    text-align: center;
+  }
+
+  .sides-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .sides-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  .shape-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--gold-dim);
+    margin-top: 0.3rem;
+    min-height: 1.2em;
+  }
+
+  /* ── SLIDER ── */
+  .slider-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .slider-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.52rem;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+  }
+
+  .slider-range {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--progress, 0%), #2a2518 var(--progress, 0%), #2a2518 100%);
+    outline: none;
+    cursor: pointer;
+    border-radius: 1px;
+  }
+
+  input[type=range]:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 8px rgba(201,168,76,0.5);
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+  }
+
+  input[type=range]::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 14px rgba(201,168,76,0.8);
+  }
+
+  input[type=range]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+    cursor: pointer;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-family: 'Raleway', sans-serif;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── LRS PANEL ── */
+  details {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  summary {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(201,168,76,0.03);
+  }
+
+  summary::after { content: '▸'; transition: transform 0.2s; }
+  details[open] summary::after { transform: rotate(90deg); }
+
+  summary:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  .lrs-fields {
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .lrs-fields input {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--white);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem;
+    padding: 0.4rem 0.6rem;
+    width: 100%;
+    outline: none;
+  }
+
+  .lrs-fields input:focus {
+    border-color: var(--gold-dim);
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+  }
+
+  .lrs-fields input::placeholder { color: var(--muted); }
+
+  .lrs-status {
+    font-size: 0.65rem;
+    font-family: 'Raleway', sans-serif;
+    color: var(--muted);
+    padding: 0 1rem 0.5rem;
+    background: rgba(0,0,0,0.2);
+    min-height: 1.4em;
+  }
+
+  .lrs-status.ok  { color: #7fffaa; }
+  .lrs-status.err { color: var(--red-lt); }
+
+  /* ── FOOTER NOTE ── */
+  .archimedes-note {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  /* ── SR-ONLY ── */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── LIVE REGION ── */
+  #live-announce {
+    position: absolute;
+    left: -9999px;
+    width: 1px; height: 1px;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+
+<div aria-live="polite" aria-atomic="true" id="live-announce" class="sr-only"></div>
+
+<header>
+  <p class="eyebrow">Open Source Math Education — Tribe of Abraham</p>
+  <h1>Archimedes' Circle<br><em>Approaching π</em></h1>
+  <p class="subtitle">The method of exhaustion, 250 BCE</p>
+</header>
+
+<div class="layout">
+
+  <!-- CANVAS -->
+  <div class="canvas-wrap">
+    <canvas id="c" width="520" height="520"
+      role="img"
+      aria-label="Animated diagram showing a circle with inscribed and circumscribed polygons. As sides increase, both polygons approach the circle, and π is approximated.">
+    </canvas>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="π approximation data">
+
+    <!-- Sides -->
+    <div class="sides-info" aria-live="polite" aria-atomic="true">
+      <div class="sides-num" id="sides-display" aria-label="Number of sides">4</div>
+      <div class="sides-label">SIDES</div>
+      <div class="shape-name" id="shape-name" aria-label="Shape name">Square</div>
+    </div>
+
+    <!-- π approximation -->
+    <div class="pi-display">
+      <div class="pi-label">π APPROXIMATION</div>
+      <div class="pi-value" id="pi-approx" aria-live="polite" aria-atomic="true">3.000</div>
+      <div class="pi-true">true π = 3.14159265…</div>
+    </div>
+
+    <!-- Bounds -->
+    <div class="bounds" aria-label="Upper and lower bounds for π">
+      <div class="bound-row bound-inner">
+        <span class="bound-label">Inner bound (inscribed)</span>
+        <span class="bound-val" id="inner-val" aria-live="polite">—</span>
+        <span class="bound-desc">Perimeter ÷ diameter · must be &lt; π</span>
+      </div>
+      <div class="bound-row bound-outer">
+        <span class="bound-label">Outer bound (circumscribed)</span>
+        <span class="bound-val" id="outer-val" aria-live="polite">—</span>
+        <span class="bound-desc">Perimeter ÷ diameter · must be &gt; π</span>
+      </div>
+    </div>
+
+    <!-- Slider -->
+    <div class="slider-section">
+      <div class="slider-header">
+        <label class="slider-label" for="sides-slider">ADD SIDES</label>
+        <span class="slider-range">4 – 96</span>
+      </div>
+      <input
+        type="range"
+        id="sides-slider"
+        min="4" max="96" step="1" value="4"
+        aria-label="Number of polygon sides, from 4 to 96"
+        aria-valuemin="4" aria-valuemax="96" aria-valuenow="4"
+      >
+    </div>
+
+    <!-- Legend -->
+    <div class="legend" aria-label="Color legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--gold); opacity:0.7;"></div>
+        <span>Circle (true boundary)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--blue-lt);"></div>
+        <span>Inscribed polygon (inner bound)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--red-lt);"></div>
+        <span>Circumscribed polygon (outer bound)</span>
+      </div>
+    </div>
+
+    <!-- LRS -->
+    <details>
+      <summary>LRS REPORTING</summary>
+      <div class="lrs-fields">
+        <label class="sr-only" for="lrs-endpoint">LRS Endpoint URL</label>
+        <input type="url" id="lrs-endpoint" placeholder="LRS endpoint URL" autocomplete="off">
+        <label class="sr-only" for="lrs-key">Auth Key</label>
+        <input type="text" id="lrs-key" placeholder="Auth key" autocomplete="off">
+        <label class="sr-only" for="lrs-secret">Auth Secret</label>
+        <input type="password" id="lrs-secret" placeholder="Auth secret" autocomplete="off">
+      </div>
+      <div class="lrs-status" id="lrs-status" aria-live="polite"></div>
+    </details>
+
+  </aside>
+
+  <p class="archimedes-note">
+    Archimedes (c. 287–212 BCE) squeezed π between the perimeters of polygons drawn inside and outside a circle.
+    More sides → smaller gap → closer to π. The squeeze never ends, but it converges.
+  </p>
+
+</div>
+
+<script>
+// ── SHAPE NAMES ──
+const NAMES = {
+  3:'Triangle', 4:'Square', 5:'Pentagon', 6:'Hexagon',
+  7:'Heptagon', 8:'Octagon', 9:'Nonagon', 10:'Decagon',
+  12:'Dodecagon', 16:'Hexadecagon', 20:'Icosagon',
+  24:'Icositetragon', 32:'Triacontadigon', 48:'Tetracontaoctagon',
+  96:'Enneacontahexagon'
+};
+function shapeName(n) {
+  if (NAMES[n]) return NAMES[n];
+  if (n >= 20) return n + '-gon';
+  return n + '-gon';
+}
+
+// ── MATH ──
+function innerPerimRatio(n) {
+  // inscribed polygon: perimeter = n * 2r*sin(π/n), ratio to diameter 2r = n*sin(π/n)
+  return n * Math.sin(Math.PI / n);
+}
+
+function outerPerimRatio(n) {
+  // circumscribed polygon: perimeter = n * 2r*tan(π/n), ratio to diameter = n*tan(π/n)
+  return n * Math.tan(Math.PI / n);
+}
+
+function approxPi(n) {
+  return (innerPerimRatio(n) + outerPerimRatio(n)) / 2;
+}
+
+// ── CANVAS DRAW ──
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = 520, H = 520;
+const cx = W/2, cy = H/2;
+const R = 200; // circle radius
+
+function drawPolygon(n, r, color, alpha, lineW) {
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const angle = (2 * Math.PI * i / n) - (Math.PI / n);
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.strokeStyle = color;
+  ctx.globalAlpha = alpha;
+  ctx.lineWidth = lineW;
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+}
+
+function drawScene(n) {
+  ctx.clearRect(0, 0, W, H);
+
+  // Very subtle radial bg glow
+  const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, R*1.4);
+  grd.addColorStop(0, 'rgba(201,168,76,0.04)');
+  grd.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, W, H);
+
+  // Outer polygon (circumscribed) — the polygon radius that circumscribes needs to be R/cos(π/n)
+  const outerR = R / Math.cos(Math.PI / n);
+  drawPolygon(n, outerR, '#c44a3a', 0.75, 1.5);
+
+  // Circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, 2*Math.PI);
+  ctx.strokeStyle = '#c9a84c';
+  ctx.globalAlpha = 0.85;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  // Inner polygon (inscribed)
+  drawPolygon(n, R, '#4a90c4', 0.85, 1.5);
+
+  // Center dot
+  ctx.beginPath();
+  ctx.arc(cx, cy, 2.5, 0, 2*Math.PI);
+  ctx.fillStyle = 'rgba(201,168,76,0.4)';
+  ctx.fill();
+
+  // Radius line (thin, muted)
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(cx + R, cy);
+  ctx.strokeStyle = 'rgba(201,168,76,0.2)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3,5]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Label: r
+  ctx.fillStyle = 'rgba(201,168,76,0.35)';
+  ctx.font = 'italic 13px Cormorant Garamond, serif';
+  ctx.fillText('r', cx + R/2 - 4, cy - 8);
+}
+
+// ── UI UPDATE ──
+const slider       = document.getElementById('sides-slider');
+const sidesDisplay = document.getElementById('sides-display');
+const shapeEl      = document.getElementById('shape-name');
+const piApprox     = document.getElementById('pi-approx');
+const innerVal     = document.getElementById('inner-val');
+const outerVal     = document.getElementById('outer-val');
+const liveAnnounce = document.getElementById('live-announce');
+
+let lastAnnounced = 0;
+let lrsMilestones = new Set();
+
+function updateProgress() {
+  const min = parseInt(slider.min), max = parseInt(slider.max), val = parseInt(slider.value);
+  const pct = ((val - min) / (max - min)) * 100;
+  slider.style.setProperty('--progress', pct + '%');
+}
+
+function update(announce) {
+  const n = parseInt(slider.value);
+  slider.setAttribute('aria-valuenow', n);
+  updateProgress();
+
+  const inner = innerPerimRatio(n);
+  const outer = outerPerimRatio(n);
+  const mid   = approxPi(n);
+  const diff  = Math.abs(mid - Math.PI);
+
+  sidesDisplay.textContent = n;
+  shapeEl.textContent = shapeName(n);
+
+  const fmt = v => v.toFixed(6);
+  piApprox.textContent = fmt(mid);
+  innerVal.textContent = fmt(inner);
+  outerVal.textContent = fmt(outer);
+
+  piApprox.classList.toggle('converged', diff < 0.001);
+
+  drawScene(n);
+
+  // Announce to screen readers every 4 sides, or on milestones
+  if (announce && (n !== lastAnnounced)) {
+    const milestones = [4,6,8,12,16,24,32,48,96];
+    if (milestones.includes(n) || n % 8 === 0) {
+      liveAnnounce.textContent = `${n} sides. π ≈ ${fmt(mid)}. Gap: ${diff.toFixed(6)}`;
+      lastAnnounced = n;
+    }
+  }
+
+  // xAPI reporting
+  reportMilestone(n, mid, diff);
+}
+
+// ── xAPI / LRS ──
+const ACTOR = {
+  objectType: 'Agent',
+  name: 'Learner',
+  mbox: 'mailto:learner@tribeofabraham.com'
+};
+
+function xapiStatement(verb, verbDisplay, extensions) {
+  return {
+    actor: ACTOR,
+    verb: {
+      id: `http://adlnet.gov/expapi/verbs/${verb}`,
+      display: { 'en-US': verbDisplay }
+    },
+    object: {
+      id: 'https://tribeofabraham.com/tools/archimedes-pi',
+      definition: {
+        name: { 'en-US': "Archimedes' Circle — Approaching π" },
+        description: { 'en-US': 'Interactive exploration of π via the method of exhaustion' },
+        type: 'http://adlnet.gov/expapi/activities/simulation'
+      }
+    },
+    context: {
+      extensions: {
+        'https://tribeofabraham.com/xapi/ext/sides': extensions.sides,
+        'https://tribeofabraham.com/xapi/ext/pi-approx': extensions.piApprox,
+        'https://tribeofabraham.com/xapi/ext/error': extensions.error
+      }
+    },
+    timestamp: new Date().toISOString()
+  };
+}
+
+async function sendStatement(stmt) {
+  const ep  = document.getElementById('lrs-endpoint').value.trim();
+  const key = document.getElementById('lrs-key').value.trim();
+  const sec = document.getElementById('lrs-secret').value.trim();
+  const statusEl = document.getElementById('lrs-status');
+
+  if (!ep || !key || !sec) return;
+
+  try {
+    const res = await fetch(ep + '/statements', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Experience-API-Version': '1.0.3',
+        'Authorization': 'Basic ' + btoa(key + ':' + sec)
+      },
+      body: JSON.stringify(stmt)
+    });
+    statusEl.className = 'lrs-status ' + (res.ok ? 'ok' : 'err');
+    statusEl.textContent = res.ok ? '✓ Statement sent' : '✗ Error ' + res.status;
+  } catch(e) {
+    statusEl.className = 'lrs-status err';
+    statusEl.textContent = '✗ ' + e.message;
+  }
+}
+
+const REPORT_MILESTONES = [4, 6, 8, 12, 16, 24, 32, 48, 96];
+
+function reportMilestone(n, mid, diff) {
+  if (!REPORT_MILESTONES.includes(n)) return;
+  if (lrsMilestones.has(n)) return;
+  lrsMilestones.add(n);
+
+  const stmt = xapiStatement('experienced', 'experienced', {
+    sides: n,
+    piApprox: parseFloat(mid.toFixed(8)),
+    error: parseFloat(diff.toFixed(8))
+  });
+  sendStatement(stmt);
+}
+
+// Send a "completed" statement when reaching 96 sides
+function reportCompleted(mid) {
+  const stmt = xapiStatement('completed', 'completed', {
+    sides: 96,
+    piApprox: parseFloat(mid.toFixed(8)),
+    error: parseFloat(Math.abs(mid - Math.PI).toFixed(8))
+  });
+  sendStatement(stmt);
+}
+
+// ── EVENTS ──
+slider.addEventListener('input', () => update(true));
+
+slider.addEventListener('change', () => {
+  const n = parseInt(slider.value);
+  if (n === 96) {
+    reportCompleted(approxPi(96));
+  }
+});
+
+// Keyboard: left/right arrows on slider are native; add Page Up/Down for big jumps
+slider.addEventListener('keydown', e => {
+  let n = parseInt(slider.value);
+  if (e.key === 'PageUp')   { slider.value = Math.min(n + 8, 96); update(true); e.preventDefault(); }
+  if (e.key === 'PageDown') { slider.value = Math.max(n - 8, 4);  update(true); e.preventDefault(); }
+});
+
+// ── INIT ──
+update(false);
+</script>
+</body>
+</html>
