@@ -101,7 +101,7 @@
 <main>
 <div class="controls">
   <button class="btn" id="play-btn" onclick="togglePlay()">PLAY</button>
-  <button class="btn" onclick="clearAll()">CLEAR</button>
+  <button class="btn" onclick="clearAll()">CLEAR ALL</button>
   <div class="tempo-wrap">
     <button class="btn" style="padding:0.4em 0.6em;font-size:1em;" onclick="nudgeBPM(-5)">−</button>
     <span id="bpm-display">110</span>
@@ -330,7 +330,7 @@ function updateDot(ri, bi) {
 }
 
 function toggleMute(ri) { rows[ri].muted = !rows[ri].muted; renderStack(); }
-function clearAll() { rows.forEach(row => row.pattern.fill(0)); renderStack(); }
+function clearAll() { rows = []; renderStack(); }
 
 function togglePlay() {
   if (!ctx) ctx = new AudioContext();
@@ -688,8 +688,48 @@ function sizer() {
 sizer();
 window.addEventListener('resize', sizer);
 
-// Boot with just a kick drum on 1/4
-addRow(4);
+// URL-based presets. Load empty by default.
+// Usage: ?preset=poly
+// Sound indices: 0=KICK 1=SNARE 2=HAT 3=CLAP 4=TOM 5=RIM 6=BONGO H 7=BONGO L 8=CONGA H 9=CONGA L 10=SHAKER 11=TAMB
+const PRESETS = {
+  poly: {
+    bpm: 104,
+    measures: 1,
+    rows: [
+      // Kick 1/4 — solid downbeat with a second kick on "and of 3" feel via velocity
+      { denom: 4,  soundIdx: 0,  pattern: [3, 0, 2, 0] },
+      // Snare 1/4 — classic backbeat, 4 slightly lighter
+      { denom: 4,  soundIdx: 1,  pattern: [0, 3, 0, 2] },
+      // Hat 1/8 — accented on beats, ghosts between
+      { denom: 8,  soundIdx: 2,  pattern: [3, 1, 2, 1, 3, 1, 2, 1] },
+      // Conga Hi 1/3 — three-over-four polyrhythm, humanized velocities
+      { denom: 3,  soundIdx: 8,  pattern: [3, 2, 2] },
+      // Shaker 1/16 — subtle texture with occasional accent
+      { denom: 16, soundIdx: 10, pattern: [1,1,2,1, 1,1,2,1, 1,1,2,1, 1,1,2,1] }
+    ]
+  }
+};
+
+function loadPreset(name) {
+  const p = PRESETS[name];
+  if (!p) return false;
+  bpm = p.bpm;
+  measures = p.measures;
+  document.getElementById('bpm-display').textContent = bpm;
+  document.getElementById('measures-display').textContent = measures;
+  rows = p.rows.map(function(r) {
+    return { denom: r.denom, soundIdx: r.soundIdx, pattern: r.pattern.slice(), muted: false };
+  });
+  renderStack();
+  return true;
+}
+
+// Check URL for preset param
+var urlParams = new URLSearchParams(window.location.search);
+var presetName = urlParams.get('preset');
+if (presetName) {
+  loadPreset(presetName);
+}
 </script>
 </body>
 </html>
