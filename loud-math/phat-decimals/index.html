@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loud Math — Fraction Drum Machine</title>
+<title>Loud Math — Phat Decimals</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,11 +13,11 @@
 <link rel="icon" href="../../images/favicon-16x16.png" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Loud Math — Fraction Drum Machine">
-<meta property="og:description" content="The denominator is the beat. Stack fractions to hear the math.">
+<meta property="og:title" content="Loud Math — Phat Decimals">
+<meta property="og:description" content="Slice the measure with decimals. Find the grooves hiding between fractions.">
 <meta property="og:image" content="https://www.tribeofabraham.com/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Loud Math — Fraction Drum Machine">
+<meta name="twitter:title" content="Loud Math — Phat Decimals">
 <meta name="twitter:image" content="https://www.tribeofabraham.com/images/og-image.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Bebas+Neue&display=swap');
@@ -37,27 +37,50 @@
   .btn:hover { border-color: var(--accent); color: var(--accent); }
   .btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
   .tempo-wrap { display: flex; align-items: center; gap: 0.5em; font-size: 0.75em; color: var(--muted); letter-spacing: 0.1em; }
-  #bpm-display, #measures-display { color: var(--text); font-weight: 700; min-width: 2.2em; text-align: center; }
+  #bpm-display, #measure-display { color: var(--text); font-weight: 700; min-width: 2.8em; text-align: center; }
   .stack { display: flex; flex-direction: column; gap: 0.6em; max-width: 52em; width: 100%; margin: 0 auto; flex: 1; overflow-y: auto; scrollbar-width: none; }
   .stack::-webkit-scrollbar { display: none; }
-  .row { display: grid; grid-template-columns: 3.5em 1fr 2.2em 2.2em 1.8em; align-items: center; gap: 0.6em; background: var(--surface); border: 0.06em solid var(--border); padding: 0.6em 0.8em; transition: border-color 0.2s; }
+  .row { display: grid; grid-template-columns: 4.4em 1fr 2.2em 2.2em 1.8em; align-items: center; gap: 0.6em; background: var(--surface); border: 0.06em solid var(--border); padding: 0.6em 0.8em; transition: border-color 0.2s; }
   .clear-btn { font-family: 'Courier Prime', monospace; font-size: 0.7em; padding: 0.25em 0.4em; border: 0.06em solid var(--border); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; }
   .clear-btn:hover { border-color: var(--accent); color: var(--accent); }
   .del-btn { font-size: 0.75em; padding: 0.25em 0.4em; border: 0.06em solid #7a3030; background: transparent; color: #e07070; cursor: pointer; transition: all 0.15s; }
   .del-btn:hover { color: #ff8888; border-color: #ff8888; }
   .row.active-row { border-color: var(--accent); }
-  .fraction { display: flex; flex-direction: column; align-items: center; line-height: 1; gap: 0.06em; }
-  .frac-num { font-size: 1.2em; font-weight: 700; color: var(--text); }
-  .frac-line { width: 1.8em; height: 0.06em; background: var(--accent); }
-  .frac-den { font-size: 1.2em; font-weight: 700; }
-  .row-controls { display: flex; flex-direction: column; align-items: center; gap: 0.25em; }
-  .fraction select { font-family: 'Bebas Neue', sans-serif; font-size: 1em; background: transparent; color: inherit; border: 0.06em solid var(--border); padding: 0.06em 0.12em; text-align: center; cursor: pointer; width: 2.8em; }
-  .fraction select:hover { border-color: var(--accent); }
+  .row-controls { display: flex; flex-direction: column; align-items: center; gap: 0.3em; }
+  .step-nudge { display: flex; align-items: center; gap: 0.15em; }
+  .step-nudge button {
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.85em;
+    background: transparent; color: var(--muted);
+    border: 0.06em solid var(--border); border-radius: 2px;
+    width: 1.2em; height: 1.4em; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0;
+  }
+  .step-nudge button:hover { border-color: var(--accent); color: var(--accent); }
+  .step-value {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1em;
+    background: transparent; color: inherit;
+    border: 0.06em solid var(--border); border-radius: 2px;
+    width: 3em; height: 1.4em;
+    text-align: center; padding: 0 0.15em;
+    font-variant-numeric: tabular-nums;
+    -moz-appearance: textfield;
+  }
+  .step-value::-webkit-outer-spin-button,
+  .step-value::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .step-value:focus { outline: none; border-color: var(--accent); color: var(--accent); }
   .sound-select { font-family: 'Courier Prime', monospace; font-size: 0.65em; letter-spacing: 0.05em; background: transparent; color: var(--muted); border: 0.06em solid var(--border); padding: 0.12em 0.25em; cursor: pointer; text-align: center; width: 100%; }
   .sound-select:hover { border-color: var(--accent); }
-  .grid-wrap { overflow: hidden; }
-  .beat-grid { display: grid; gap: 0.2em; align-items: center; height: 1.8em; }
-  .beat-dot { height: 100%; border-radius: 0.25em; cursor: pointer; transition: filter 0.05s; }
+  .grid-wrap { overflow: hidden; position: relative; }
+  .beat-grid { position: relative; height: 1.8em; width: 100%; }
+  .beat-dot {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-radius: 0.25em;
+    cursor: pointer;
+    transition: filter 0.05s;
+  }
   .beat-dot.vel-0 { opacity: 0.12; }
   .beat-dot.vel-1 { opacity: 0.35; }
   .beat-dot.vel-2 { opacity: 0.65; }
@@ -67,8 +90,7 @@
   .mute-btn:hover { border-color: var(--text); color: var(--text); }
   .mute-btn.muted { background: #2a0a0a; border-color: #aa5555; color: #e07070; }
   main { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-  .add-row-wrap { text-align: center; margin-top: 0.5em; }
-  select { font-family: 'Courier Prime', monospace; background: var(--surface); color: var(--text); border: 0.06em solid var(--border); padding: 0.4em 0.6em; font-size: 0.85em; cursor: pointer; margin-right: 0.4em; }
+  .add-row-wrap { text-align: center; margin-top: 0.5em; display: flex; justify-content: center; align-items: center; gap: 0.5em; }
   .info { text-align: center; margin-top: 1.2em; font-size: 0.7em; color: var(--muted); letter-spacing: 0.1em; line-height: 1.8; }
   footer { text-align: center; margin-top: 2em; font-family: 'Bebas Neue', sans-serif; font-size: 0.75em; letter-spacing: 0.3em; color: var(--muted); }
   footer a { color: var(--muted); text-decoration: none; }
@@ -83,7 +105,7 @@
     .controls { margin-bottom: 0.4em; gap: 0.6em; }
     .btn { padding: 0.3em 1em; font-size: 0.9em; }
     .row { padding: 0.3em 0.6em; gap: 0.4em; }
-    .beat-grid { height: 1.4em; gap: 0.15em; }
+    .beat-grid { height: 1.4em; }
     .stack { gap: 0.3em; }
     .add-row-wrap { margin-top: 0.3em; }
     .info { margin-top: 0.5em; font-size: 0.55em; }
@@ -95,7 +117,7 @@
 
 <header>
   <h1 class="brand"><img src="../images/loud_mathBanner.svg" alt="Loud Math"></h1>
-  <div class="app-title"><span style="color:#fff">Fraction Drum Machine:</span><br class="land-break"> The Denominator is the Beat</div>
+  <div class="app-title"><span style="color:#fff">Phat Decimals:</span><br class="land-break"> Slice the Measure Your Way</div>
 </header>
 
 <main>
@@ -109,27 +131,17 @@
     <button class="btn" style="padding:0.4em 0.6em;font-size:1em;" onclick="nudgeBPM(1)">+</button>
   </div>
   <div class="tempo-wrap">
-    <button class="btn" style="padding:0.4em 0.6em;font-size:1em;" onclick="nudgeMeasures(-1)">−</button>
-    <span id="measures-display">1</span>
-    <span>BAR</span>
-    <button class="btn" style="padding:0.4em 0.6em;font-size:1em;" onclick="nudgeMeasures(1)">+</button>
+    <button class="btn" style="padding:0.4em 0.6em;font-size:1em;" onclick="nudgeMeasure(-0.05)">−</button>
+    <span id="measure-display">1.00</span>
+    <span>MEASURE</span>
+    <button class="btn" style="padding:0.4em 0.6em;font-size:1em;" onclick="nudgeMeasure(0.05)">+</button>
   </div>
 </div>
 
 <div class="stack" id="stack"></div>
 
 <div class="add-row-wrap">
-  <select id="add-denom" aria-label="Fraction to add">
-    <option value="1">1/1 — whole</option>
-    <option value="2">1/2 — half</option>
-    <option value="3">1/3 — triplet</option>
-    <option value="4" selected>1/4 — quarter</option>
-    <option value="6">1/6 — sextuplet</option>
-    <option value="8">1/8 — eighth</option>
-    <option value="12">1/12 — twelfth</option>
-    <option value="16">1/16 — sixteenth</option>
-  </select>
-  <button class="btn" onclick="addRow()">+ ADD FRACTION</button>
+  <button class="btn" onclick="addRow()">+ ADD DECIMAL</button>
 </div>
 
 </main>
@@ -140,9 +152,6 @@
 <script>
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 let ctx = null;
-
-const DENOMS = [1, 2, 3, 4, 6, 8, 12, 16];
-const DENOM_LABELS = {1:'whole', 2:'half', 3:'triplet', 4:'quarter', 6:'sextuplet', 8:'eighth', 12:'twelfth', 16:'sixteenth'};
 
 const SOUNDS = [
   { name: 'KICK',   color: '#e06060', fn: makeKick },
@@ -160,32 +169,56 @@ const SOUNDS = [
 ];
 
 const velMap = [0, 0.25, 0.55, 0.9];
+const EPS = 1e-6;
+const MIN_STEP = 0.02;
+const MAX_STEP = 1.0;
 
 let rows = [];
 let playing = false;
-let measures = 1;
+let measureLen = 1.0; // one whole note (= 4 quarter notes)
 let bpm = 110;
 
-const BASE_DIV = 48;
-let nextTickTime = 0;
-let currentStep = 0;
+// Time-based scheduler state
+let nextMeasureTime = 0;
 let schedulerTimer = null;
-const SCHEDULE_AHEAD = 0.12;
-const SCHEDULER_INTERVAL = 25;
+const SCHEDULE_AHEAD = 0.15; // seconds
+const SCHEDULER_INTERVAL = 25; // ms
+let scheduledFlashes = [];
 
-function totalSteps() { return BASE_DIV * measures; }
-function blocksForRow(denom) { return denom * measures; }
-function stepsPerBlock(denom) { return BASE_DIV / denom; }
+function measureDuration() {
+  // 1.0 measure = 4 quarter notes. bpm is quarter notes per minute.
+  return measureLen * 4 * (60 / bpm);
+}
 
-function addRow(denom) {
-  denom = denom || parseInt(document.getElementById('add-denom').value);
+function blocksForStep(step) {
+  // number of hit positions 0, step, 2*step, ... that fit strictly inside the measure
+  return Math.floor((measureLen - EPS) / step) + 1;
+}
+
+function roundStep(v) {
+  v = Math.round(v * 1000) / 1000;
+  if (v < MIN_STEP) v = MIN_STEP;
+  if (v > MAX_STEP) v = MAX_STEP;
+  return v;
+}
+
+function formatStep(v) {
+  // Pretty-print up to 3 decimal places, trim trailing zeros but keep at least 2 places
+  var s = v.toFixed(3);
+  // Trim trailing zeros but keep at least ".XX"
+  while (s.length > 4 && s.endsWith('0')) s = s.slice(0, -1);
+  if (s.endsWith('.')) s += '0';
+  return s;
+}
+
+function addRow(initialStep) {
+  const step = roundStep(initialStep || 0.25);
   if (rows.length >= 12) return;
   const soundIdx = rows.length % SOUNDS.length;
-  const blocks = blocksForRow(denom);
+  const blocks = blocksForStep(step);
   const pattern = new Array(blocks).fill(3);
-  rows.push({ denom, soundIdx, pattern, muted: false });
+  rows.push({ step, soundIdx, pattern, muted: false });
   if (playing) {
-    // Append without rebuilding so scheduled callbacks stay valid
     appendRow(rows.length - 1);
   } else {
     renderStack();
@@ -196,16 +229,17 @@ function appendRow(ri) {
   var stack = document.getElementById('stack');
   var row = rows[ri];
   var s = SOUNDS[row.soundIdx];
-  var blocks = blocksForRow(row.denom);
+  var blocks = blocksForStep(row.step);
   var div = buildRowEl(ri, row, s, blocks);
   stack.appendChild(div);
 }
 
-function changeDenom(ri, newDenom) {
+function changeStep(ri, newStep) {
   const row = rows[ri];
-  const oldBlocks = blocksForRow(row.denom);
-  row.denom = newDenom;
-  const newBlocks = blocksForRow(newDenom);
+  const step = roundStep(newStep);
+  const oldBlocks = row.pattern.length;
+  row.step = step;
+  const newBlocks = blocksForStep(step);
   const neu = new Array(newBlocks).fill(0);
   for (let i = 0; i < Math.min(oldBlocks, newBlocks); i++) neu[i] = row.pattern[i];
   row.pattern = neu;
@@ -224,25 +258,41 @@ function buildRowEl(ri, row, s, blocks) {
   const controls = document.createElement('div');
   controls.className = 'row-controls';
 
-  const frac = document.createElement('div');
-  frac.className = 'fraction';
-  const fracNum = document.createElement('span');
-  fracNum.className = 'frac-num'; fracNum.textContent = '1';
-  const fracLine = document.createElement('div');
-  fracLine.className = 'frac-line';
-  const denomSelect = document.createElement('select');
-  denomSelect.setAttribute('aria-label', 'Fraction denominator for row ' + (ri + 1));
-  denomSelect.style.color = s.color;
-  DENOMS.forEach(d => {
-    const opt = document.createElement('option');
-    opt.value = d; opt.textContent = d;
-    if (d === row.denom) opt.selected = true;
-    denomSelect.appendChild(opt);
-  });
-  denomSelect.onchange = function() { changeDenom(ri, parseInt(this.value)); };
-  frac.appendChild(fracNum);
-  frac.appendChild(fracLine);
-  frac.appendChild(denomSelect);
+  // Decimal step input with +/- nudges
+  const stepNudge = document.createElement('div');
+  stepNudge.className = 'step-nudge';
+
+  const minus = document.createElement('button');
+  minus.type = 'button';
+  minus.textContent = '−';
+  minus.setAttribute('aria-label', 'Decrease step for row ' + (ri + 1));
+  minus.onclick = function() { changeStep(ri, row.step - 0.01); };
+
+  const stepInput = document.createElement('input');
+  stepInput.type = 'text';
+  stepInput.inputMode = 'decimal';
+  stepInput.className = 'step-value';
+  stepInput.value = formatStep(row.step);
+  stepInput.style.color = s.color;
+  stepInput.setAttribute('aria-label', 'Decimal step for row ' + (ri + 1));
+  stepInput.onchange = function() {
+    const v = parseFloat(this.value);
+    if (!isNaN(v)) changeStep(ri, v);
+    else this.value = formatStep(row.step);
+  };
+  stepInput.onkeydown = function(e) {
+    if (e.key === 'Enter') this.blur();
+  };
+
+  const plus = document.createElement('button');
+  plus.type = 'button';
+  plus.textContent = '+';
+  plus.setAttribute('aria-label', 'Increase step for row ' + (ri + 1));
+  plus.onclick = function() { changeStep(ri, row.step + 0.01); };
+
+  stepNudge.appendChild(minus);
+  stepNudge.appendChild(stepInput);
+  stepNudge.appendChild(plus);
 
   const soundSel = document.createElement('select');
   soundSel.className = 'sound-select';
@@ -256,20 +306,27 @@ function buildRowEl(ri, row, s, blocks) {
   });
   soundSel.onchange = function() { changeSound(ri, parseInt(this.value)); };
 
-  controls.appendChild(frac);
+  controls.appendChild(stepNudge);
   controls.appendChild(soundSel);
 
+  // Beat grid — blocks positioned proportionally by step / measure
   const gridWrap = document.createElement('div');
   gridWrap.className = 'grid-wrap';
   const grid = document.createElement('div');
   grid.className = 'beat-grid'; grid.id = 'grid-' + ri;
-  grid.style.gridTemplateColumns = 'repeat(' + blocks + ', 1fr)';
+
+  const blockFrac = row.step / measureLen;          // width per block as fraction of measure
+  const blockWidthPct = blockFrac * 100;
+  const gapPct = Math.min(0.6, blockWidthPct * 0.08); // proportional gap
 
   for (let bi = 0; bi < blocks; bi++) {
     const dot = document.createElement('div');
     dot.className = 'beat-dot vel-' + row.pattern[bi];
     dot.style.background = s.color;
     dot.id = 'dot-' + ri + '-' + bi;
+    const leftPct = (bi * row.step / measureLen) * 100;
+    dot.style.left = leftPct + '%';
+    dot.style.width = Math.max(0, blockWidthPct - gapPct) + '%';
     dot.onclick = function() { cycleVel(ri, bi); };
     dot.oncontextmenu = function(e) { e.preventDefault(); rows[ri].pattern[bi] = 0; updateDot(ri, bi); };
     grid.appendChild(dot);
@@ -303,14 +360,13 @@ function renderStack() {
   const stack = document.getElementById('stack');
   stack.innerHTML = '';
   rows.forEach((row, ri) => {
-    stack.appendChild(buildRowEl(ri, row, SOUNDS[row.soundIdx], blocksForRow(row.denom)));
+    stack.appendChild(buildRowEl(ri, row, SOUNDS[row.soundIdx], blocksForStep(row.step)));
   });
 }
 
 function cycleVel(ri, bi) {
   rows[ri].pattern[bi] = (rows[ri].pattern[bi] + 1) % 4;
   updateDot(ri, bi);
-  // Preview sound
   if (rows[ri].pattern[bi] > 0) {
     if (!ctx) ctx = new AudioContext();
     if (ctx.state === 'suspended') ctx.resume();
@@ -334,51 +390,58 @@ function togglePlay() {
   document.getElementById('play-btn').classList.toggle('active', playing);
   document.getElementById('play-btn').textContent = playing ? 'STOP' : 'PLAY';
   if (playing) {
-    currentStep = 0;
-    nextTickTime = ctx.currentTime;
+    nextMeasureTime = ctx.currentTime + 0.05;
     schedulerTimer = setInterval(scheduler, SCHEDULER_INTERVAL);
   } else {
     clearInterval(schedulerTimer);
+    scheduledFlashes.forEach(id => clearTimeout(id));
+    scheduledFlashes = [];
     clearLit();
   }
 }
-
-function stepDuration() { return (60 / bpm) / (BASE_DIV / 4); } // one quarter note = BASE_DIV/4 steps
 
 function scheduler() {
-  while (nextTickTime < ctx.currentTime + SCHEDULE_AHEAD) {
-    scheduleStep(currentStep, nextTickTime);
-    currentStep = (currentStep + 1) % totalSteps();
-    nextTickTime += stepDuration();
+  const mDur = measureDuration();
+  while (nextMeasureTime < ctx.currentTime + SCHEDULE_AHEAD) {
+    scheduleMeasure(nextMeasureTime);
+    nextMeasureTime += mDur;
   }
 }
 
-function scheduleStep(step, time) {
-  const delay = Math.max(0, (time - ctx.currentTime) * 1000);
-  const firing = [];
-  rows.forEach((row, ri) => {
-    const spb = stepsPerBlock(row.denom);
-    if (step % spb !== 0) return;
-    const bi = Math.floor(step / spb);
-    if (bi >= row.pattern.length) return;
-    firing.push({ ri, bi, row });
-    if (!row.muted && row.pattern[bi] > 0) {
-      SOUNDS[row.soundIdx].fn(ctx, time, velMap[row.pattern[bi]]);
-    }
-  });
-  if (firing.length === 0) return;
-  setTimeout(function() {
-    if (!playing) return;
-    clearLit();
-    firing.forEach(function(f) {
-      var dot = document.getElementById('dot-' + f.ri + '-' + f.bi);
-      if (dot) dot.classList.add('lit');
-      if (f.row.pattern[f.bi] > 0) {
-        var rowEl = document.getElementById('row-' + f.ri);
-        if (rowEl) rowEl.classList.add('active-row');
+function scheduleMeasure(measureStart) {
+  const mDur = measureDuration();
+  for (let ri = 0; ri < rows.length; ri++) {
+    const row = rows[ri];
+    const blocks = blocksForStep(row.step);
+    for (let bi = 0; bi < blocks && bi < row.pattern.length; bi++) {
+      const v = row.pattern[bi];
+      if (v <= 0) continue;
+      const frac = (bi * row.step) / measureLen;
+      const hitTime = measureStart + frac * mDur;
+      if (!row.muted) {
+        SOUNDS[row.soundIdx].fn(ctx, hitTime, velMap[v]);
       }
-    });
-  }, delay);
+      const delay = Math.max(0, (hitTime - ctx.currentTime) * 1000);
+      const capturedRi = ri, capturedBi = bi;
+      const id = setTimeout(function() {
+        if (!playing) return;
+        flashDot(capturedRi, capturedBi);
+      }, delay);
+      scheduledFlashes.push(id);
+    }
+  }
+}
+
+function flashDot(ri, bi) {
+  const dot = document.getElementById('dot-' + ri + '-' + bi);
+  if (!dot) return;
+  dot.classList.add('lit');
+  const rowEl = document.getElementById('row-' + ri);
+  if (rowEl) rowEl.classList.add('active-row');
+  setTimeout(function() {
+    dot.classList.remove('lit');
+    if (rowEl) rowEl.classList.remove('active-row');
+  }, 90);
 }
 
 function clearLit() {
@@ -391,16 +454,19 @@ function nudgeBPM(delta) {
   document.getElementById('bpm-display').textContent = bpm;
 }
 
-function nudgeMeasures(delta) {
-  var newVal = Math.max(1, Math.min(4, measures + delta));
-  if (newVal === measures) return;
-  measures = newVal;
-  document.getElementById('measures-display').textContent = measures;
+function nudgeMeasure(delta) {
+  var newVal = Math.round((measureLen + delta) * 100) / 100;
+  if (newVal < 0.25) newVal = 0.25;
+  if (newVal > 2.0) newVal = 2.0;
+  if (newVal === measureLen) return;
+  measureLen = newVal;
+  document.getElementById('measure-display').textContent = measureLen.toFixed(2);
+  // Resize all row patterns
   rows = rows.map(function(row) {
-    var blocks = blocksForRow(row.denom);
-    var old = row.pattern;
-    var neu = new Array(blocks).fill(0);
-    for (var i = 0; i < Math.min(old.length, neu.length); i++) neu[i] = old[i];
+    const newBlocks = blocksForStep(row.step);
+    const old = row.pattern;
+    const neu = new Array(newBlocks).fill(0);
+    for (let i = 0; i < Math.min(old.length, newBlocks); i++) neu[i] = old[i];
     return Object.assign({}, row, { pattern: neu });
   });
   renderStack();
@@ -416,7 +482,6 @@ function noiseBuf(ctx, dur) {
 
 function makeKick(ctx, t, v) {
   v = v || 0.9;
-  // Body — sine with pitch drop
   const body = ctx.createOscillator(), bg = ctx.createGain();
   body.type = 'sine';
   body.frequency.setValueAtTime(160, t);
@@ -427,7 +492,6 @@ function makeKick(ctx, t, v) {
   bg.gain.exponentialRampToValueAtTime(0.001, t + 0.45);
   body.connect(bg); bg.connect(ctx.destination);
   body.start(t); body.stop(t + 0.45);
-  // Click transient
   const click = ctx.createOscillator(), cg = ctx.createGain();
   click.type = 'triangle';
   click.frequency.setValueAtTime(4000, t);
@@ -440,7 +504,6 @@ function makeKick(ctx, t, v) {
 
 function makeSnare(ctx, t, v) {
   v = v || 0.9;
-  // Body tone
   const body = ctx.createOscillator(), bg = ctx.createGain();
   body.type = 'triangle';
   body.frequency.setValueAtTime(220, t);
@@ -449,7 +512,6 @@ function makeSnare(ctx, t, v) {
   bg.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
   body.connect(bg); bg.connect(ctx.destination);
   body.start(t); body.stop(t + 0.12);
-  // Noise — snare wires
   const src = ctx.createBufferSource(), hp = ctx.createBiquadFilter(), lp = ctx.createBiquadFilter(), ng = ctx.createGain();
   src.buffer = noiseBuf(ctx, 0.2);
   hp.type = 'highpass'; hp.frequency.value = 1800;
@@ -462,7 +524,6 @@ function makeSnare(ctx, t, v) {
 
 function makeHat(ctx, t, v) {
   v = v || 0.9;
-  // Metallic — square oscs detuned
   const mix = ctx.createGain();
   mix.gain.setValueAtTime(0.35 * v, t);
   mix.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
@@ -474,7 +535,6 @@ function makeHat(ctx, t, v) {
     o.connect(bp); bp.connect(mix);
     o.start(t); o.stop(t + 0.06);
   });
-  // Noise layer
   const src = ctx.createBufferSource(), hp = ctx.createBiquadFilter(), ng = ctx.createGain();
   src.buffer = noiseBuf(ctx, 0.06);
   hp.type = 'highpass'; hp.frequency.value = 9000;
@@ -486,7 +546,6 @@ function makeHat(ctx, t, v) {
 
 function makeClap(ctx, t, v) {
   v = v || 0.9;
-  // Multiple short noise bursts for flammy attack
   for (let i = 0; i < 3; i++) {
     const off = i * 0.008;
     const src = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), g = ctx.createGain();
@@ -497,7 +556,6 @@ function makeClap(ctx, t, v) {
     src.connect(bp); bp.connect(g); g.connect(ctx.destination);
     src.start(t + off); src.stop(t + off + 0.015);
   }
-  // Main body
   const src = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), g = ctx.createGain();
   src.buffer = noiseBuf(ctx, 0.15);
   bp.type = 'bandpass'; bp.frequency.value = 1200; bp.Q.value = 0.6;
@@ -517,7 +575,6 @@ function makeTom(ctx, t, v) {
   g.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
   o.connect(g); g.connect(ctx.destination);
   o.start(t); o.stop(t + 0.3);
-  // Attack transient
   const n = ctx.createBufferSource(), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
   n.buffer = noiseBuf(ctx, 0.02);
   nf.type = 'bandpass'; nf.frequency.value = 800; nf.Q.value = 1;
@@ -529,7 +586,6 @@ function makeTom(ctx, t, v) {
 
 function makeRim(ctx, t, v) {
   v = v || 0.9;
-  // Two short tones for click
   const o1 = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain();
   o1.type = 'triangle'; o1.frequency.value = 1700;
   o2.type = 'triangle'; o2.frequency.value = 2500;
@@ -551,7 +607,6 @@ function makeBongoHi(ctx, t, v) {
   g.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
   o.connect(g); g.connect(ctx.destination);
   o.start(t); o.stop(t + 0.12);
-  // Slap transient
   const n = ctx.createBufferSource(), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
   n.buffer = noiseBuf(ctx, 0.01);
   nf.type = 'bandpass'; nf.frequency.value = 3500; nf.Q.value = 2;
@@ -572,7 +627,6 @@ function makeBongoLo(ctx, t, v) {
   g.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
   o.connect(g); g.connect(ctx.destination);
   o.start(t); o.stop(t + 0.2);
-  // Warmth — sub harmonic
   const sub = ctx.createOscillator(), sg = ctx.createGain();
   sub.type = 'sine';
   sub.frequency.setValueAtTime(160, t);
@@ -594,7 +648,6 @@ function makeCongaHi(ctx, t, v) {
   g.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
   o.connect(g); g.connect(ctx.destination);
   o.start(t); o.stop(t + 0.18);
-  // Slap
   const n = ctx.createBufferSource(), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
   n.buffer = noiseBuf(ctx, 0.015);
   nf.type = 'bandpass'; nf.frequency.value = 2500; nf.Q.value = 1.5;
@@ -615,7 +668,6 @@ function makeCongaLo(ctx, t, v) {
   g.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
   o.connect(g); g.connect(ctx.destination);
   o.start(t); o.stop(t + 0.3);
-  // Sub resonance
   const sub = ctx.createOscillator(), sg = ctx.createGain();
   sub.type = 'sine';
   sub.frequency.setValueAtTime(100, t);
@@ -628,7 +680,6 @@ function makeCongaLo(ctx, t, v) {
 
 function makeShaker(ctx, t, v) {
   v = v || 0.9;
-  // Two bursts for shh-shh character
   for (let i = 0; i < 2; i++) {
     const off = i * 0.015;
     const src = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), hp = ctx.createBiquadFilter(), g = ctx.createGain();
@@ -644,7 +695,6 @@ function makeShaker(ctx, t, v) {
 
 function makeTamb(ctx, t, v) {
   v = v || 0.9;
-  // Jingle — metallic partials
   const mix = ctx.createGain();
   mix.gain.setValueAtTime(0.25 * v, t);
   mix.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
@@ -657,13 +707,12 @@ function makeTamb(ctx, t, v) {
     o.connect(bp); bp.connect(mix);
     o.start(t); o.stop(t + 0.12);
   });
-  // Noise body
   const src = ctx.createBufferSource(), hp = ctx.createBiquadFilter(), g = ctx.createGain();
   src.buffer = noiseBuf(ctx, 0.1);
   hp.type = 'highpass'; hp.frequency.value = 6000;
+  src.connect(hp); hp.connect(g); g.connect(ctx.destination);
   g.gain.setValueAtTime(0.4 * v, t);
   g.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
-  src.connect(hp); hp.connect(g); g.connect(ctx.destination);
   src.start(t); src.stop(t + 0.1);
 }
 
@@ -683,24 +732,21 @@ function sizer() {
 sizer();
 window.addEventListener('resize', sizer);
 
-// URL-based presets. Load empty by default.
-// Usage: ?preset=poly
+// URL-based presets. Usage: ?preset=base10
 // Sound indices: 0=KICK 1=SNARE 2=HAT 3=CLAP 4=TOM 5=RIM 6=BONGO H 7=BONGO L 8=CONGA H 9=CONGA L 10=SHAKER 11=TAMB
 const PRESETS = {
-  poly: {
-    bpm: 104,
-    measures: 1,
+  base10: {
+    bpm: 95,
+    measureLen: 1.0,
     rows: [
-      // Kick 1/4 — solid downbeat with a second kick on "and of 3" feel via velocity
-      { denom: 4,  soundIdx: 0,  pattern: [3, 0, 2, 0] },
-      // Snare 1/4 — classic backbeat, 4 slightly lighter
-      { denom: 4,  soundIdx: 1,  pattern: [0, 3, 0, 2] },
-      // Hat 1/8 — accented on beats, ghosts between
-      { denom: 8,  soundIdx: 2,  pattern: [3, 1, 2, 1, 3, 1, 2, 1] },
-      // Conga Hi 1/3 — three-over-four polyrhythm, humanized velocities
-      { denom: 3,  soundIdx: 8,  pattern: [3, 2, 2] },
-      // Shaker 1/16 — subtle texture with occasional accent
-      { denom: 16, soundIdx: 10, pattern: [1,1,2,1, 1,1,2,1, 1,1,2,1, 1,1,2,1] }
+      // Kick at 0.1 — hits on 1, 5, 8 (of 10) with velocity variation for a human feel
+      { step: 0.1,  soundIdx: 0,  pattern: [3, 0, 0, 0, 2, 0, 0, 2, 0, 0] },
+      // Snare at 0.1 — backbeat-ish on 4 and 9 of 10
+      { step: 0.1,  soundIdx: 1,  pattern: [0, 0, 0, 3, 0, 0, 0, 0, 2, 0] },
+      // Hat at 0.1 — alternating accents and ghosts across 10 positions
+      { step: 0.1,  soundIdx: 2,  pattern: [2, 1, 3, 1, 2, 1, 3, 1, 2, 1] },
+      // Shaker at 0.05 — 20 fine positions for subtle texture
+      { step: 0.05, soundIdx: 10, pattern: [1, 0, 1, 1, 2, 0, 1, 1, 1, 0, 2, 1, 1, 0, 1, 1, 2, 0, 1, 1] }
     ]
   }
 };
@@ -709,17 +755,24 @@ function loadPreset(name) {
   const p = PRESETS[name];
   if (!p) return false;
   bpm = p.bpm;
-  measures = p.measures;
+  measureLen = p.measureLen;
   document.getElementById('bpm-display').textContent = bpm;
-  document.getElementById('measures-display').textContent = measures;
+  document.getElementById('measure-display').textContent = measureLen.toFixed(2);
   rows = p.rows.map(function(r) {
-    return { denom: r.denom, soundIdx: r.soundIdx, pattern: r.pattern.slice(), muted: false };
+    return {
+      step: r.step,
+      soundIdx: r.soundIdx,
+      pattern: r.pattern.slice(),
+      muted: false
+    };
   });
   renderStack();
   return true;
 }
 
-// Check URL for preset param
+// Boot with a quarter-note kick, then apply preset if specified
+addRow(0.25);
+
 var urlParams = new URLSearchParams(window.location.search);
 var presetName = urlParams.get('preset');
 if (presetName) {

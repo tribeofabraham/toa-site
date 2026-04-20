@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loud Math — Drum Forge</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="icon" href="../../images/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../../images/favicon-16x16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loud Math — Drum Forge">
+<meta property="og:description" content="Six voices. Three math systems. Turn the amp past the threshold and watch a sine become a square.">
+<meta property="og:image" content="https://www.tribeofabraham.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Loud Math — Drum Forge">
+<meta name="twitter:image" content="https://www.tribeofabraham.com/images/og-image.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Bebas+Neue&display=swap');
+  :root {
+    --bg: #0a0a0a; --surface: #141414; --surface-hi: #1c1c1c; --border: #3a3a3a;
+    --text: #e8e8e0; --muted: #8a8a8a; --accent: #c8a850;
+    --c1: #e06060; --c2: #6090e0; --c3: #d4b860; --c4: #60d890; --c5: #e09060; --c6: #c070e0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow: hidden; }
+  body { background: var(--bg); color: var(--text); font-family: 'Courier Prime', monospace; height: 100vh; padding: 0.55em 0.8em; display: flex; flex-direction: column; gap: 0.3em; }
+
+  header { text-align: center; flex-shrink: 0; }
+  .brand { display: block; width: 9.5em; margin: 0 auto; }
+  .brand img { width: 100%; height: auto; display: block; }
+  .app-title { font-family: 'Bebas Neue', sans-serif; font-size: 0.7em; letter-spacing: 0.2em; color: #999; margin-top: 0.1em; }
+
+  .transport { display: flex; align-items: center; gap: 0.5em; justify-content: center; flex-wrap: wrap; flex-shrink: 0; }
+  .btn { font-family: 'Bebas Neue', sans-serif; font-size: 0.85em; letter-spacing: 0.1em; padding: 0.35em 1em; border: 0.06em solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; transition: all 0.15s; border-radius: 2px; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .bpm-wrap { display: flex; align-items: center; gap: 0.3em; font-size: 0.65em; color: var(--muted); letter-spacing: 0.1em; }
+  #bpm-display { color: var(--text); font-weight: 700; min-width: 2.2em; text-align: center; }
+
+  /* ── MACHINE ── */
+  .machine {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 0.5em;
+  }
+
+  .rack {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 0.35em;
+    min-height: 0;
+    position: relative;
+  }
+
+  /* ── VOICE MODULE ── */
+  .voice {
+    background: var(--surface);
+    border: 0.06em solid var(--border);
+    border-radius: 3px;
+    padding: 0.5em 0.6em;
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
+    gap: 0.35em;
+    min-height: 0;
+    position: relative;
+    cursor: zoom-in;
+    transition: box-shadow 0.2s, border-color 0.15s;
+    overflow: hidden;
+  }
+  .voice:hover:not(.zoomed) { border-color: var(--accent); box-shadow: 0 0 0 0.08em rgba(200,168,80,0.15); }
+  .voice.lit { box-shadow: 0 0 0 0.1em rgba(200,168,80,0.5); }
+
+  .voice.c1 { border-top: 0.16em solid var(--c1); }
+  .voice.c2 { border-top: 0.16em solid var(--c2); }
+  .voice.c3 { border-top: 0.16em solid var(--c3); }
+  .voice.c4 { border-top: 0.16em solid var(--c4); }
+  .voice.c5 { border-top: 0.16em solid var(--c5); }
+  .voice.c6 { border-top: 0.16em solid var(--c6); }
+
+  .voice-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 0.65em;
+    color: var(--muted); letter-spacing: 0.1em;
+  }
+  .voice-head .num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.4em;
+    letter-spacing: 0.15em;
+  }
+
+  .voice-vis {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 0.3em;
+    min-height: 0;
+  }
+  .voice-vis canvas { display: block; width: 100%; height: 100%; min-height: 0; }
+  .circle-wrap { aspect-ratio: 1; max-height: 100%; margin: 0 auto; }
+  .wave-wrap {
+    min-height: 0;
+    background: rgba(0,0,0,0.3); border-radius: 2px;
+    border: 0.04em solid var(--border);
+    position: relative;
+  }
+  .adsr-wrap {
+    height: 1.8em;
+    background: rgba(0,0,0,0.3); border-radius: 2px;
+    border: 0.04em solid var(--border);
+  }
+
+  .voice-ctrls { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2em 0.5em; font-size: 0.55em; }
+  .nudge {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 0.2em;
+  }
+  .nudge .lbl { color: var(--muted); letter-spacing: 0.08em; }
+  .nudge .val { color: var(--text); font-weight: 700; text-align: center; font-variant-numeric: tabular-nums; min-width: 2.6em; }
+  .nudge button {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1em;
+    background: transparent; color: var(--muted);
+    border: 0.08em solid var(--border); border-radius: 2px;
+    width: 1.3em; height: 1.3em; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; padding: 0;
+  }
+  .nudge button:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── ZOOMED VOICE (Besiege-style) ── */
+  .voice.zoomed {
+    position: fixed;
+    inset: 1em;
+    z-index: 100;
+    cursor: default;
+    grid-template-rows: auto 1fr auto;
+    padding: 1.2em 1.6em;
+    font-size: 1.15em;
+    box-shadow: 0 1em 3em rgba(0,0,0,0.7);
+  }
+  .zoom-close {
+    display: none;
+    position: absolute;
+    top: 0.4em;
+    right: 0.6em;
+    font-family: 'Courier Prime', monospace;
+    font-size: 1.4em;
+    color: var(--muted);
+    background: transparent;
+    border: 0.06em solid var(--border);
+    border-radius: 3px;
+    width: 1.6em;
+    height: 1.6em;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+  .voice.zoomed .zoom-close { display: flex; }
+  .zoom-close:hover { color: var(--accent); border-color: var(--accent); }
+
+  .voice.zoomed .voice-vis {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8em;
+  }
+  .voice.zoomed .circle-wrap { max-height: 80%; }
+
+  .backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(10,10,10,0.88);
+    z-index: 50;
+  }
+  .backdrop.active { display: block; }
+
+  .voice.zoomed .big-ctrls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.4em 1em;
+    font-size: 0.85em;
+  }
+  .voice:not(.zoomed) .big-ctrls { display: none; }
+  .voice.zoomed .voice-ctrls { display: none; }
+
+  .math-note {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.72em;
+    color: var(--muted);
+    line-height: 1.5;
+    padding: 0.6em 0.8em;
+    background: rgba(200,168,80,0.05);
+    border-left: 0.15em solid var(--accent);
+    border-radius: 2px;
+    margin-top: 0.4em;
+  }
+  .math-note strong { color: var(--accent); }
+  .voice:not(.zoomed) .math-note { display: none; }
+
+  /* ── SEQUENCER ── */
+  .seq {
+    background: var(--surface);
+    border: 0.06em solid var(--border);
+    border-radius: 3px;
+    padding: 0.4em 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    max-height: 42vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .seq::-webkit-scrollbar { display: none; }
+  .seq-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.58em;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0.15em;
+  }
+  .seq-row {
+    display: grid;
+    grid-template-columns: 1.3em 2.4em 2.8em 1fr 1.5em 1.5em;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0.2em 0.3em;
+    border-radius: 2px;
+    font-size: 0.65em;
+    background: var(--surface-hi);
+    border: 0.04em solid var(--border);
+    transition: border-color 0.15s;
+  }
+  .seq-row.lit { border-color: var(--accent); }
+  .ch-badge {
+    width: 1.15em; height: 1.15em; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.7em;
+    color: var(--bg); font-weight: 700;
+  }
+  .ch-badge.c1 { background: var(--c1); }
+  .ch-badge.c2 { background: var(--c2); }
+  .ch-badge.c3 { background: var(--c3); }
+  .ch-badge.c4 { background: var(--c4); }
+  .ch-badge.c5 { background: var(--c5); }
+  .ch-badge.c6 { background: var(--c6); }
+  .mode-toggle, .mute-btn, .clr-btn {
+    font-family: 'Courier Prime', monospace; font-size: 0.85em;
+    background: transparent; border: 0.06em solid var(--border);
+    color: var(--muted); padding: 0.12em 0.28em; border-radius: 2px;
+    cursor: pointer; text-align: center; letter-spacing: 0.05em;
+  }
+  .mode-toggle:hover, .clr-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .mute-btn:hover { border-color: var(--text); color: var(--text); }
+  .mute-btn.muted { background: #2a0a0a; border-color: #aa5555; color: #e07070; }
+  .step-input {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1em;
+    background: transparent; color: var(--text);
+    border: 0.06em solid var(--border); border-radius: 2px;
+    padding: 0.08em 0.25em; text-align: center; width: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+  .step-input:focus { outline: none; border-color: var(--accent); }
+  .seq-cells { display: grid; gap: 0.12em; height: 1.3em; }
+  .cell { height: 100%; border-radius: 0.15em; cursor: pointer; transition: filter 0.05s; }
+  .cell.vel-0 { opacity: 0.12; }
+  .cell.vel-1 { opacity: 0.4; }
+  .cell.vel-2 { opacity: 0.7; }
+  .cell.vel-3 { opacity: 1; }
+  .cell.lit { filter: brightness(2); }
+
+  footer { text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: 0.55em; letter-spacing: 0.25em; color: var(--muted); flex-shrink: 0; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  @media (orientation: portrait), (max-width: 720px) {
+    .rack { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); }
+    .voice { font-size: 0.85em; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 class="brand"><img src="../images/loud_mathBanner.svg" alt="Loud Math"></h1>
+  <div class="app-title"><span style="color:#fff">Drum Forge:</span> Six Voices · Three Math Systems</div>
+</header>
+
+<div class="transport">
+  <button class="btn" id="play-btn" onclick="togglePlay()">PLAY</button>
+  <button class="btn" onclick="clearAll()">CLEAR</button>
+  <div class="bpm-wrap">
+    <button class="btn" style="padding:0.3em 0.5em;font-size:0.85em;" onclick="nudgeBPM(-1)" aria-label="Decrease BPM">−</button>
+    <span id="bpm-display">100</span>
+    <span>BPM</span>
+    <button class="btn" style="padding:0.3em 0.5em;font-size:0.85em;" onclick="nudgeBPM(1)" aria-label="Increase BPM">+</button>
+  </div>
+</div>
+
+<div class="machine">
+  <div class="rack" id="rack"></div>
+  <div class="seq" id="seq">
+    <div class="seq-title">Sequencer · 6 Channels · Fractions ↔ Decimals</div>
+  </div>
+</div>
+
+<div class="backdrop" id="backdrop" onclick="zoomOut()"></div>
+<footer><a href="https://tribeofabraham.com" target="_blank">TRIBEOFABRAHAM.COM</a></footer>
+
+<script>
+// ── STATE ──
+var AudioCtx = window.AudioContext || window.webkitAudioContext;
+var ctx = null, masterGain = null;
+
+// CLIP_THRESHOLD is fixed. When a voice's amp exceeds it, clipping/squaring begins.
+// This is THE pedagogical hook — ONE knob controls both loudness and harmonic richness.
+var CLIP_THRESHOLD = 0.65;
+
+var channels = [
+  { name: '1', color: '#e06060', cls: 'c1',
+    osc: { freq: 70,  amp: 0.9 },
+    env: { a: 1, d: 320, s: 0.0, r: 80 } },
+  { name: '2', color: '#6090e0', cls: 'c2',
+    osc: { freq: 200, amp: 0.8 },
+    env: { a: 1, d: 140, s: 0.03, r: 90 } },
+  { name: '3', color: '#d4b860', cls: 'c3',
+    osc: { freq: 900, amp: 0.6 },
+    env: { a: 1, d: 30,  s: 0.0, r: 35 } },
+  { name: '4', color: '#60d890', cls: 'c4',
+    osc: { freq: 140, amp: 1.1 }, // past threshold — edgy
+    env: { a: 1, d: 220, s: 0.04, r: 120 } },
+  { name: '5', color: '#e09060', cls: 'c5',
+    osc: { freq: 380, amp: 0.7 },
+    env: { a: 6, d: 60,  s: 0.0, r: 70 } },
+  { name: '6', color: '#c070e0', cls: 'c6',
+    osc: { freq: 600, amp: 0.5 },
+    env: { a: 1, d: 25,  s: 0.0, r: 15 } }
+];
+
+var seqChannels = [
+  { mode: 'frac', step: 0.25,  pattern: [3,0,0,0], muted: false },
+  { mode: 'frac', step: 0.25,  pattern: [0,0,3,0], muted: false },
+  { mode: 'frac', step: 0.125, pattern: [3,1,2,1,3,1,2,1], muted: false },
+  { mode: 'frac', step: 0.25,  pattern: [0,0,0,0], muted: false },
+  { mode: 'frac', step: 0.25,  pattern: [0,0,0,0], muted: false },
+  { mode: 'dec',  step: 0.1,   pattern: [1,0,1,0,1,0,1,0,1,0], muted: false }
+];
+
+// Envelope animation state per voice — tracks active ADSR draw
+var envAnims = channels.map(function() { return { active: false, fireTime: 0 }; });
+
+var velMap = [0, 0.2, 0.5, 0.85];
+
+var bpm = 100;
+var measureLen = 1.0;
+var playing = false;
+var nextMeasureTime = 0;
+var schedulerTimer = null;
+var scheduledFlashes = [];
+var zoomed = null;
+var animStart = performance.now();
+
+// ── AUDIO ──
+function ensureAudio() {
+  if (!ctx) ctx = new AudioCtx();
+  if (ctx.state === 'suspended') ctx.resume();
+  if (!masterGain) {
+    masterGain = ctx.createGain();
+    masterGain.connect(ctx.destination);
+  }
+  masterGain.gain.setValueAtTime(1, ctx.currentTime);
+  return masterGain;
+}
+
+// Hard-clip waveshaper at ±threshold. Input is the raw sine * amp.
+// When amp > threshold, the sine gets flat-topped → harmonic series emerges.
+function makeClipCurve(threshold) {
+  var n = 2048;
+  var curve = new Float32Array(n);
+  for (var i = 0; i < n; i++) {
+    var x = (i * 2) / n - 1;   // -1..1 across buffer
+    var y = x;
+    if (y > threshold) y = threshold;
+    else if (y < -threshold) y = -threshold;
+    curve[i] = y / threshold;  // normalize so output is always -1..1
+  }
+  return curve;
+}
+
+function playVoice(ci, time, vel) {
+  ensureAudio();
+  var ch = channels[ci];
+  var env = ch.env;
+  var v = (velMap[vel] || 0.7);
+  var atkEnd = time + env.a / 1000;
+  var decEnd = atkEnd + env.d / 1000;
+  var relEnd = decEnd + env.r / 1000;
+
+  var o = ctx.createOscillator();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(ch.osc.freq, time);
+
+  // Pre-gain drives the signal into the clipper — amp > threshold = clipping
+  var pre = ctx.createGain();
+  pre.gain.setValueAtTime(ch.osc.amp, time);
+
+  var shaper = ctx.createWaveShaper();
+  shaper.curve = makeClipCurve(CLIP_THRESHOLD);
+  shaper.oversample = '4x';
+
+  var g = ctx.createGain();
+  g.gain.setValueAtTime(0.0001, time);
+  g.gain.linearRampToValueAtTime(v, atkEnd);
+  g.gain.linearRampToValueAtTime(Math.max(0.0001, v * env.s), decEnd);
+  g.gain.exponentialRampToValueAtTime(0.0001, relEnd);
+
+  o.connect(pre); pre.connect(shaper); shaper.connect(g); g.connect(masterGain);
+  o.start(time);
+  o.stop(relEnd + 0.02);
+
+  // Kick off envelope animation
+  envAnims[ci] = { active: true, fireTime: time };
+}
+
+// ── SEQ MATH ──
+var EPS = 1e-6;
+function blocksForStep(step) { return Math.floor((measureLen - EPS) / step) + 1; }
+function resizePattern(sc) {
+  var n = blocksForStep(sc.step);
+  if (sc.pattern.length === n) return;
+  var neu = new Array(n).fill(0);
+  for (var i = 0; i < Math.min(sc.pattern.length, n); i++) neu[i] = sc.pattern[i];
+  sc.pattern = neu;
+}
+
+// ── ZOOM ──
+function zoomIn(idx) { zoomed = idx; render(); }
+function zoomOut() { zoomed = null; render(); }
+
+// ── RENDER ──
+function render() {
+  var rack = document.getElementById('rack');
+  rack.innerHTML = '';
+  for (var i = 0; i < 6; i++) {
+    if (zoomed === i) continue;
+    rack.appendChild(buildVoice(i, false));
+  }
+  var seq = document.getElementById('seq');
+  seq.innerHTML = '';
+  var stitle = document.createElement('div');
+  stitle.className = 'seq-title';
+  stitle.textContent = 'Sequencer · 6 Channels · Fractions ↔ Decimals';
+  seq.appendChild(stitle);
+  for (var i = 0; i < 6; i++) seq.appendChild(buildSeqRow(i));
+
+  document.getElementById('backdrop').classList.toggle('active', zoomed !== null);
+  var existing = document.querySelector('.voice.zoomed');
+  if (existing) existing.remove();
+  if (zoomed !== null) {
+    document.body.appendChild(buildVoice(zoomed, true));
+  }
+}
+
+function buildVoice(idx, isZoomed) {
+  var ch = channels[idx];
+  var v = document.createElement('div');
+  v.className = 'voice ' + ch.cls + (isZoomed ? ' zoomed' : '');
+  v.id = 'voice-' + idx;
+  if (!isZoomed) v.onclick = function(e) {
+    // don't zoom on nudge clicks
+    if (e.target.closest('.nudge button')) return;
+    zoomIn(idx);
+  };
+
+  var close = document.createElement('button');
+  close.className = 'zoom-close'; close.textContent = '×';
+  close.setAttribute('aria-label', 'Close');
+  close.onclick = function(e) { e.stopPropagation(); zoomOut(); };
+  v.appendChild(close);
+
+  var head = document.createElement('div');
+  head.className = 'voice-head';
+  var num = document.createElement('span');
+  num.className = 'num'; num.style.color = ch.color; num.textContent = 'CH ' + ch.name;
+  var info = document.createElement('span');
+  var clipState = ch.osc.amp > CLIP_THRESHOLD ? '· clipping' : '';
+  info.textContent = ch.osc.freq + 'Hz · amp ' + ch.osc.amp.toFixed(2) + ' ' + clipState;
+  head.appendChild(num); head.appendChild(info);
+  v.appendChild(head);
+
+  var vis = document.createElement('div');
+  vis.className = 'voice-vis';
+  var circleWrap = document.createElement('div');
+  circleWrap.className = 'circle-wrap';
+  var circle = document.createElement('canvas');
+  circle.id = (isZoomed ? 'circle-big-' : 'circle-') + idx;
+  circleWrap.appendChild(circle);
+  vis.appendChild(circleWrap);
+  var waveWrap = document.createElement('div');
+  waveWrap.className = 'wave-wrap';
+  var wave = document.createElement('canvas');
+  wave.id = (isZoomed ? 'wave-big-' : 'wave-') + idx;
+  waveWrap.appendChild(wave);
+  vis.appendChild(waveWrap);
+  v.appendChild(vis);
+
+  var adsrWrap = document.createElement('div');
+  adsrWrap.className = 'adsr-wrap';
+  if (isZoomed) adsrWrap.style.height = '6em';
+  var adsr = document.createElement('canvas');
+  adsr.id = (isZoomed ? 'adsr-big-' : 'adsr-') + idx;
+  adsrWrap.appendChild(adsr);
+  v.appendChild(adsrWrap);
+
+  // Controls
+  if (isZoomed) {
+    var big = document.createElement('div');
+    big.className = 'big-ctrls';
+    big.appendChild(mkNudge('FREQ', ch.osc.freq + ' Hz',
+      function() { ch.osc.freq = Math.min(2000, ch.osc.freq + 10); render(); },
+      function() { ch.osc.freq = Math.max(20, ch.osc.freq - 10); render(); }, 'ch ' + ch.name + ' freq'));
+    big.appendChild(mkNudge('AMP', ch.osc.amp.toFixed(2),
+      function() { ch.osc.amp = Math.min(2.0, Math.round((ch.osc.amp + 0.05) * 100) / 100); render(); },
+      function() { ch.osc.amp = Math.max(0.0, Math.round((ch.osc.amp - 0.05) * 100) / 100); render(); }, 'ch ' + ch.name + ' amp'));
+    big.appendChild(mkButton('PREVIEW', function(e) { e.stopPropagation(); ensureAudio(); playVoice(idx, ctx.currentTime, 3); }));
+    big.appendChild(mkNudge('ATTACK', ch.env.a + ' ms',
+      function() { ch.env.a = Math.min(2000, ch.env.a + 1); render(); },
+      function() { ch.env.a = Math.max(1, ch.env.a - 1); render(); }, 'ch ' + ch.name + ' attack'));
+    big.appendChild(mkNudge('DECAY', ch.env.d + ' ms',
+      function() { ch.env.d = Math.min(5000, ch.env.d + 10); render(); },
+      function() { ch.env.d = Math.max(1, ch.env.d - 10); render(); }, 'ch ' + ch.name + ' decay'));
+    big.appendChild(mkNudge('SUSTAIN', ch.env.s.toFixed(2),
+      function() { ch.env.s = Math.min(1, Math.round((ch.env.s + 0.05) * 100) / 100); render(); },
+      function() { ch.env.s = Math.max(0, Math.round((ch.env.s - 0.05) * 100) / 100); render(); }, 'ch ' + ch.name + ' sustain'));
+    big.appendChild(mkNudge('RELEASE', ch.env.r + ' ms',
+      function() { ch.env.r = Math.min(5000, ch.env.r + 10); render(); },
+      function() { ch.env.r = Math.max(1, ch.env.r - 10); render(); }, 'ch ' + ch.name + ' release'));
+    v.appendChild(big);
+
+    var peakSlope = ch.env.a > 0 ? (1000 / ch.env.a).toFixed(1) : '∞';
+    var note = document.createElement('div');
+    note.className = 'math-note';
+    var clipMsg = ch.osc.amp > CLIP_THRESHOLD
+      ? 'Amp ' + ch.osc.amp.toFixed(2) + ' <strong>exceeds the threshold ' + CLIP_THRESHOLD + '</strong> — the sine is clipping. Each step past the threshold adds more odd harmonics (3rd, 5th, 7th...). Push far enough and you have a square wave: Σ (sin(nx)/n) for odd n.'
+      : 'Amp ' + ch.osc.amp.toFixed(2) + ' is below the threshold ' + CLIP_THRESHOLD + ' — a pure sine. Turn amp up until the dot exceeds the dashed ring and watch the sine square up.';
+    note.innerHTML =
+      '<strong>Trig:</strong> ' + clipMsg +
+      '<br><br><strong>Calc:</strong> Envelope attack slope ≈ <strong>' + peakSlope + '/sec</strong>. The derivative at t=0 is what your ear hears as percussiveness.';
+    v.appendChild(note);
+  } else {
+    var ctrls = document.createElement('div');
+    ctrls.className = 'voice-ctrls';
+    ctrls.appendChild(mkNudgeTiny('FREQ', ch.osc.freq,
+      function(e) { e.stopPropagation(); ch.osc.freq = Math.min(2000, ch.osc.freq + 10); render(); },
+      function(e) { e.stopPropagation(); ch.osc.freq = Math.max(20, ch.osc.freq - 10); render(); }));
+    ctrls.appendChild(mkNudgeTiny('AMP', ch.osc.amp.toFixed(2),
+      function(e) { e.stopPropagation(); ch.osc.amp = Math.min(2.0, Math.round((ch.osc.amp + 0.05) * 100) / 100); render(); },
+      function(e) { e.stopPropagation(); ch.osc.amp = Math.max(0.0, Math.round((ch.osc.amp - 0.05) * 100) / 100); render(); }));
+    v.appendChild(ctrls);
+  }
+  return v;
+}
+
+function mkNudge(label, val, upCb, downCb, ariaName) {
+  var div = document.createElement('div');
+  div.className = 'nudge';
+  var lbl = document.createElement('span'); lbl.className = 'lbl'; lbl.textContent = label;
+  var minus = document.createElement('button');
+  minus.type = 'button'; minus.textContent = '−';
+  minus.setAttribute('aria-label', 'Decrease ' + ariaName);
+  minus.onclick = function(e) { e.stopPropagation(); downCb(); };
+  var vs = document.createElement('span'); vs.className = 'val'; vs.textContent = val;
+  var plus = document.createElement('button');
+  plus.type = 'button'; plus.textContent = '+';
+  plus.setAttribute('aria-label', 'Increase ' + ariaName);
+  plus.onclick = function(e) { e.stopPropagation(); upCb(); };
+  div.appendChild(lbl); div.appendChild(minus); div.appendChild(vs); div.appendChild(plus);
+  return div;
+}
+function mkNudgeTiny(label, val, upCb, downCb) {
+  return mkNudge(label, val, upCb, downCb, label);
+}
+function mkButton(label, cb) {
+  var b = document.createElement('button');
+  b.className = 'btn';
+  b.textContent = label;
+  b.onclick = cb;
+  return b;
+}
+
+// ── SEQ ROW ──
+function buildSeqRow(idx) {
+  var ch = channels[idx];
+  var sc = seqChannels[idx];
+  resizePattern(sc);
+  var row = document.createElement('div');
+  row.className = 'seq-row';
+  row.id = 'seq-row-' + idx;
+
+  var badge = document.createElement('div');
+  badge.className = 'ch-badge ' + ch.cls;
+  badge.textContent = ch.name;
+  row.appendChild(badge);
+
+  var mode = document.createElement('button');
+  mode.className = 'mode-toggle';
+  mode.textContent = sc.mode.toUpperCase();
+  mode.setAttribute('aria-label', 'Toggle mode for channel ' + ch.name);
+  mode.onclick = function() {
+    sc.mode = sc.mode === 'frac' ? 'dec' : 'frac';
+    sc.step = sc.mode === 'frac' ? 0.25 : 0.125;
+    resizePattern(sc); render();
+  };
+  row.appendChild(mode);
+
+  if (sc.mode === 'frac') {
+    var sel = document.createElement('select');
+    sel.className = 'step-input';
+    sel.setAttribute('aria-label', 'Fraction');
+    [1,2,3,4,6,8,12,16].forEach(function(d) {
+      var o = document.createElement('option');
+      o.value = String(1 / d); o.textContent = '1/' + d;
+      if (Math.abs(parseFloat(o.value) - sc.step) < 0.001) o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.onchange = function() { sc.step = parseFloat(this.value); resizePattern(sc); render(); };
+    row.appendChild(sel);
+  } else {
+    var input = document.createElement('input');
+    input.type = 'text'; input.inputMode = 'decimal';
+    input.className = 'step-input';
+    input.value = sc.step.toFixed(3).replace(/0+$/, '').replace(/\.$/, '.0');
+    input.onchange = function() {
+      var v = parseFloat(this.value);
+      if (!isNaN(v) && v > 0) sc.step = Math.max(0.02, Math.min(1.0, Math.round(v * 1000) / 1000));
+      resizePattern(sc); render();
+    };
+    row.appendChild(input);
+  }
+
+  var cellsWrap = document.createElement('div');
+  cellsWrap.className = 'seq-cells';
+  cellsWrap.style.gridTemplateColumns = 'repeat(' + sc.pattern.length + ', 1fr)';
+  for (var bi = 0; bi < sc.pattern.length; bi++) {
+    var cell = document.createElement('div');
+    cell.className = 'cell vel-' + sc.pattern[bi];
+    cell.style.background = ch.color;
+    cell.id = 'cell-' + idx + '-' + bi;
+    cell.onclick = (function(i, b) { return function() { cycleCell(i, b); }; })(idx, bi);
+    cell.oncontextmenu = (function(i, b) { return function(e) {
+      e.preventDefault(); seqChannels[i].pattern[b] = 0; updateCell(i, b);
+    }; })(idx, bi);
+    cellsWrap.appendChild(cell);
+  }
+  row.appendChild(cellsWrap);
+
+  var clr = document.createElement('button');
+  clr.className = 'clr-btn'; clr.textContent = 'CLR';
+  clr.onclick = (function(i) { return function() { seqChannels[i].pattern.fill(0); render(); }; })(idx);
+  row.appendChild(clr);
+
+  var mute = document.createElement('button');
+  mute.className = 'mute-btn' + (sc.muted ? ' muted' : '');
+  mute.textContent = sc.muted ? 'MUT' : 'M';
+  mute.onclick = (function(i) { return function() { seqChannels[i].muted = !seqChannels[i].muted; render(); }; })(idx);
+  row.appendChild(mute);
+
+  return row;
+}
+
+function cycleCell(idx, bi) {
+  seqChannels[idx].pattern[bi] = (seqChannels[idx].pattern[bi] + 1) % 4;
+  updateCell(idx, bi);
+  if (seqChannels[idx].pattern[bi] > 0) {
+    ensureAudio();
+    playVoice(idx, ctx.currentTime, seqChannels[idx].pattern[bi]);
+  }
+}
+function updateCell(idx, bi) {
+  var el = document.getElementById('cell-' + idx + '-' + bi);
+  if (el) el.className = 'cell vel-' + seqChannels[idx].pattern[bi];
+}
+
+// ── DRAW: CIRCLE ──
+function visualAngularRate(freq) {
+  var rps = Math.max(0.3, Math.min(2.2, freq / 60));
+  return rps * 2 * Math.PI;
+}
+
+function drawCircle(cv, ch, t) {
+  if (!cv) return;
+  var dpr = window.devicePixelRatio || 1;
+  var rect = cv.getBoundingClientRect();
+  var W = rect.width, H = rect.height;
+  if (W < 2 || H < 2) return;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  var c = cv.getContext('2d');
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  c.clearRect(0, 0, W, H);
+
+  var cx = W / 2, cy = H / 2;
+  var maxR = Math.min(W, H) / 2 - 2;
+  // Amp is in [0, ~2], display-cap at 1.5 so super-high amps don't overflow canvas
+  var visAmp = Math.min(1.5, ch.osc.amp);
+  var r = maxR * (visAmp / 1.0); // normalize so amp 1.0 = full maxR
+  if (r > maxR) r = maxR;
+
+  var clipR = maxR * CLIP_THRESHOLD;
+
+  // Clipping boundary ring (FIXED — this is the horizon)
+  c.strokeStyle = 'rgba(200,168,80,0.35)';
+  c.lineWidth = 1;
+  c.setLineDash([3, 3]);
+  c.beginPath(); c.arc(cx, cy, clipR, 0, Math.PI * 2); c.stroke();
+  c.setLineDash([]);
+
+  // Amplitude circle
+  c.strokeStyle = ch.color + (ch.osc.amp > CLIP_THRESHOLD ? 'ff' : '88');
+  c.lineWidth = ch.osc.amp > CLIP_THRESHOLD ? 2 : 1.5;
+  c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.stroke();
+
+  // Clip-zone shading on upper/lower caps if amp > threshold
+  if (ch.osc.amp > CLIP_THRESHOLD) {
+    c.fillStyle = ch.color + '22';
+    // Top cap (above y = cy - clipR)
+    c.beginPath();
+    c.rect(cx - r, cy - r, r * 2, (cy - clipR) - (cy - r));
+    c.fill();
+    // Bottom cap
+    c.beginPath();
+    c.rect(cx - r, cy + clipR, r * 2, (cy + r) - (cy + clipR));
+    c.fill();
+  }
+
+  // Rotating dot
+  var angle = visualAngularRate(ch.osc.freq) * t;
+  var dx_raw = cx + r * Math.cos(angle);
+  var dy_raw = cy - r * Math.sin(angle);
+  // Visual clip — the dot itself stays on the circle, but we mark where clipping happens
+  var clipped = Math.abs(dy_raw - cy) > clipR;
+  var dy_clipped = dy_raw;
+  if (dy_raw < cy - clipR) dy_clipped = cy - clipR;
+  else if (dy_raw > cy + clipR) dy_clipped = cy + clipR;
+
+  // Radius line
+  c.strokeStyle = ch.color;
+  c.lineWidth = 1;
+  c.beginPath(); c.moveTo(cx, cy); c.lineTo(dx_raw, dy_raw); c.stroke();
+
+  // Dot
+  c.fillStyle = clipped ? ch.color : '#f4ece0';
+  c.strokeStyle = ch.color;
+  c.lineWidth = 1.5;
+  c.beginPath(); c.arc(dx_raw, dy_raw, Math.max(2.5, maxR * 0.1), 0, Math.PI * 2);
+  c.fill(); c.stroke();
+
+  // Projection to the right (shows the clipped y value)
+  c.strokeStyle = ch.color + '66';
+  c.setLineDash([1, 2]);
+  c.beginPath(); c.moveTo(dx_raw, dy_raw); c.lineTo(W, dy_clipped); c.stroke();
+  c.setLineDash([]);
+}
+
+// ── DRAW: WAVE ──
+function drawWave(cv, ch, t) {
+  if (!cv) return;
+  var dpr = window.devicePixelRatio || 1;
+  var rect = cv.getBoundingClientRect();
+  var W = rect.width, H = rect.height;
+  if (W < 2 || H < 2) return;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  var c = cv.getContext('2d');
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  c.clearRect(0, 0, W, H);
+
+  var midY = H / 2;
+  var halfH = H / 2 - 2;
+  var ampScale = Math.min(1.5, ch.osc.amp);
+  var ampPx = halfH * ampScale;
+  var clipPx = halfH * CLIP_THRESHOLD;
+
+  // Zero line
+  c.strokeStyle = 'rgba(138,138,138,0.15)';
+  c.lineWidth = 1;
+  c.beginPath(); c.moveTo(0, midY); c.lineTo(W, midY); c.stroke();
+
+  // Clip lines
+  c.strokeStyle = 'rgba(200,168,80,0.3)';
+  c.setLineDash([3, 3]);
+  c.beginPath();
+  c.moveTo(0, midY - clipPx); c.lineTo(W, midY - clipPx);
+  c.moveTo(0, midY + clipPx); c.lineTo(W, midY + clipPx);
+  c.stroke();
+  c.setLineDash([]);
+
+  // Wave — 3 cycles, scrolling in sync with circle
+  var cycles = 3;
+  var angularRate = visualAngularRate(ch.osc.freq);
+  var phase = angularRate * t;
+
+  c.strokeStyle = ch.color;
+  c.lineWidth = 1.8;
+  c.beginPath();
+  for (var x = 0; x < W; x++) {
+    var ang = phase - (1 - x / W) * cycles * 2 * Math.PI;
+    var y = Math.sin(ang) * ampPx;
+    if (y > clipPx) y = clipPx;
+    else if (y < -clipPx) y = -clipPx;
+    var py = midY - y;
+    if (x === 0) c.moveTo(x, py); else c.lineTo(x, py);
+  }
+  c.stroke();
+
+  // Current-time marker
+  var yNow = Math.sin(phase) * ampPx;
+  if (yNow > clipPx) yNow = clipPx;
+  else if (yNow < -clipPx) yNow = -clipPx;
+  c.fillStyle = '#f4ece0';
+  c.beginPath(); c.arc(W - 2, midY - yNow, 2.5, 0, Math.PI * 2); c.fill();
+}
+
+// ── DRAW: ADSR (animated on trigger) ──
+function drawAdsr(cv, ch, idx, now) {
+  if (!cv) return;
+  var dpr = window.devicePixelRatio || 1;
+  var rect = cv.getBoundingClientRect();
+  var W = rect.width, H = rect.height;
+  if (W < 2 || H < 2) return;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  var c = cv.getContext('2d');
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  c.clearRect(0, 0, W, H);
+
+  var env = ch.env;
+  var total = env.a + env.d + env.r;
+  if (total < 1) total = 1;
+  var aX = (env.a / total) * W;
+  var dX = ((env.a + env.d) / total) * W;
+  var rX = W;
+  var topY = 3, botY = H - 3;
+  var susY = botY - env.s * (botY - topY);
+
+  c.strokeStyle = 'rgba(138,138,138,0.15)';
+  c.lineWidth = 1;
+  c.beginPath(); c.moveTo(0, botY); c.lineTo(W, botY); c.stroke();
+
+  // Static (dim) envelope shape
+  c.strokeStyle = ch.color + '33';
+  c.lineWidth = 1;
+  c.beginPath();
+  c.moveTo(0, botY); c.lineTo(aX, topY); c.lineTo(dX, susY); c.lineTo(rX, botY);
+  c.stroke();
+
+  // Animated progress when a trigger is active
+  var anim = envAnims[idx];
+  if (anim && anim.active && ctx) {
+    var elapsed = (now - anim.fireTime) * 1000; // ms since fire
+    if (elapsed > total) {
+      anim.active = false;
+    } else {
+      var progMs = elapsed;
+      var progX;
+      if (progMs <= env.a) progX = (progMs / env.a) * aX;
+      else if (progMs <= env.a + env.d) progX = aX + ((progMs - env.a) / env.d) * (dX - aX);
+      else progX = dX + ((progMs - env.a - env.d) / env.r) * (rX - dX);
+
+      // Fill under the curve up to progX
+      c.fillStyle = ch.color + '44';
+      c.beginPath();
+      c.moveTo(0, botY);
+      if (progX <= aX) {
+        var y = botY - (progMs / env.a) * (botY - topY);
+        c.lineTo(progX, y);
+      } else {
+        c.lineTo(aX, topY);
+        if (progX <= dX) {
+          var frac = (progMs - env.a) / env.d;
+          var y2 = topY + frac * (susY - topY);
+          c.lineTo(progX, y2);
+        } else {
+          c.lineTo(dX, susY);
+          var frac2 = (progMs - env.a - env.d) / env.r;
+          var y3 = susY + frac2 * (botY - susY);
+          c.lineTo(progX, y3);
+        }
+      }
+      c.lineTo(progX, botY);
+      c.closePath();
+      c.fill();
+
+      // Bright trace line on the curve up to progX
+      c.strokeStyle = ch.color;
+      c.lineWidth = 2;
+      c.beginPath();
+      c.moveTo(0, botY);
+      if (progX <= aX) {
+        var y = botY - (progMs / env.a) * (botY - topY);
+        c.lineTo(progX, y);
+      } else {
+        c.lineTo(aX, topY);
+        if (progX <= dX) {
+          var frac = (progMs - env.a) / env.d;
+          var y2 = topY + frac * (susY - topY);
+          c.lineTo(progX, y2);
+        } else {
+          c.lineTo(dX, susY);
+          var frac2 = (progMs - env.a - env.d) / env.r;
+          var y3 = susY + frac2 * (botY - susY);
+          c.lineTo(progX, y3);
+        }
+      }
+      c.stroke();
+
+      // Head dot at progress
+      var dotY;
+      if (progX <= aX) dotY = botY - (progMs / env.a) * (botY - topY);
+      else if (progX <= dX) dotY = topY + ((progMs - env.a) / env.d) * (susY - topY);
+      else dotY = susY + ((progMs - env.a - env.d) / env.r) * (botY - susY);
+      c.fillStyle = '#f4ece0';
+      c.strokeStyle = ch.color;
+      c.lineWidth = 1;
+      c.beginPath(); c.arc(progX, dotY, Math.max(2.5, H * 0.08), 0, Math.PI * 2);
+      c.fill(); c.stroke();
+    }
+  }
+}
+
+// ── ANIMATE ──
+function animate() {
+  var t = (performance.now() - animStart) / 1000;
+  var now = ctx ? ctx.currentTime : t;
+  for (var i = 0; i < 6; i++) {
+    var ch = channels[i];
+    drawCircle(document.getElementById('circle-' + i), ch, t);
+    drawWave(document.getElementById('wave-' + i), ch, t);
+    drawAdsr(document.getElementById('adsr-' + i), ch, i, now);
+    if (zoomed === i) {
+      drawCircle(document.getElementById('circle-big-' + i), ch, t);
+      drawWave(document.getElementById('wave-big-' + i), ch, t);
+      drawAdsr(document.getElementById('adsr-big-' + i), ch, i, now);
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+// ── PLAYBACK ──
+function togglePlay() {
+  ensureAudio();
+  playing = !playing;
+  var btn = document.getElementById('play-btn');
+  btn.classList.toggle('active', playing);
+  btn.textContent = playing ? 'STOP' : 'PLAY';
+  if (playing) {
+    masterGain.gain.setValueAtTime(1, ctx.currentTime);
+    nextMeasureTime = ctx.currentTime + 0.05;
+    schedulerTimer = setInterval(scheduler, 25);
+  } else {
+    masterGain.gain.cancelScheduledValues(ctx.currentTime);
+    masterGain.gain.setValueAtTime(0, ctx.currentTime);
+    masterGain.disconnect(); masterGain = null;
+    clearInterval(schedulerTimer);
+    scheduledFlashes.forEach(function(id) { clearTimeout(id); });
+    scheduledFlashes = [];
+    document.querySelectorAll('.cell.lit').forEach(function(d) { d.classList.remove('lit'); });
+    document.querySelectorAll('.seq-row.lit,.voice.lit').forEach(function(r) { r.classList.remove('lit'); });
+  }
+}
+
+function measureDuration() { return measureLen * 4 * (60 / bpm); }
+
+function scheduler() {
+  var mDur = measureDuration();
+  while (nextMeasureTime < ctx.currentTime + 0.15) {
+    scheduleMeasure(nextMeasureTime);
+    nextMeasureTime += mDur;
+  }
+}
+
+function scheduleMeasure(startTime) {
+  var mDur = measureDuration();
+  for (var idx = 0; idx < seqChannels.length; idx++) {
+    var sc = seqChannels[idx];
+    if (sc.muted) continue;
+    resizePattern(sc);
+    for (var bi = 0; bi < sc.pattern.length; bi++) {
+      var v = sc.pattern[bi];
+      if (v <= 0) continue;
+      var frac = bi * sc.step / measureLen;
+      var hitTime = startTime + frac * mDur;
+      playVoice(idx, hitTime, v);
+      var delay = Math.max(0, (hitTime - ctx.currentTime) * 1000);
+      var ci = idx, cb = bi;
+      var id = setTimeout((function(ix, bx) {
+        return function() {
+          if (!playing) return;
+          var cell = document.getElementById('cell-' + ix + '-' + bx);
+          if (cell) { cell.classList.add('lit'); setTimeout(function() { cell.classList.remove('lit'); }, 70); }
+          var row = document.getElementById('seq-row-' + ix);
+          if (row) { row.classList.add('lit'); setTimeout(function() { row.classList.remove('lit'); }, 70); }
+          var vvv = document.getElementById('voice-' + ix);
+          if (vvv) { vvv.classList.add('lit'); setTimeout(function() { vvv.classList.remove('lit'); }, 90); }
+        };
+      })(ci, cb), delay);
+      scheduledFlashes.push(id);
+    }
+  }
+}
+
+function clearAll() { seqChannels.forEach(function(sc) { sc.pattern.fill(0); }); render(); }
+function nudgeBPM(delta) {
+  bpm = Math.max(40, Math.min(240, bpm + delta));
+  document.getElementById('bpm-display').textContent = bpm;
+}
+
+// ── SIZER ──
+var refWidth = 1200;
+var contentRatio = 1.5;
+function sizer() {
+  var w = document.body.clientWidth;
+  var h = window.innerHeight;
+  if (w / h > contentRatio) w = h * contentRatio;
+  document.body.style.fontSize = ((w / refWidth) * 100) + '%';
+}
+sizer();
+window.addEventListener('resize', function() { sizer(); render(); });
+
+render();
+animate();
+</script>
+</body>
+</html>

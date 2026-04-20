@@ -1,6 +1,6 @@
 {
-  "name": "Tribe of Abraham MIDI Foot Pedal",
-  "version": "0.1.0",
+  "name": "Tribe of Abraham MIDI Foot Pedal (Single LED)",
+  "version": "0.2.0",
   "builds": [
     {
       "chipFamily": "ESP32-S3",

@@ -200,6 +200,73 @@ h2 em { font-style: italic; color: var(--brass-light); }
 }
 
 
+/* ── LOUD MATH ────────────────────────────────────────── */
+.loudmath-section {
+  background: var(--warm);
+}
+.loudmath-header { max-width: 640px; margin-bottom: 3rem; }
+.loudmath-header img.lm-banner {
+  width: clamp(180px, 22vw, 260px);
+  height: auto;
+  display: block;
+  margin-bottom: 1.2rem;
+  opacity: 0.95;
+}
+.loudmath-section p {
+  font-size: 1rem; color: var(--cream);
+  line-height: 1.8; margin-bottom: 1rem; max-width: 640px;
+}
+.loudmath-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(184,146,58,0.12);
+  margin-top: 2rem;
+}
+@media (max-width: 1100px) {
+  .loudmath-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.lm-card {
+  background: var(--ink);
+  padding: 2.5rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: background 0.3s;
+}
+.lm-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--brass); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.lm-card:hover { background: rgba(30,24,16,0.6); }
+.lm-card:hover::before { transform: scaleX(1); }
+.lm-card h3 {
+  font-family: var(--serif); font-size: 1.6rem;
+  font-weight: 400; color: var(--paper);
+  line-height: 1.2; margin-bottom: 0.3rem;
+}
+.lm-card h3 em { font-style: italic; color: var(--brass-light); }
+.lm-card .lm-tag {
+  font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--brass); margin-bottom: 1rem;
+}
+.lm-card p {
+  font-size: 0.9rem; color: var(--muted); line-height: 1.75;
+  flex: 1; margin-bottom: 1.6rem;
+}
+.lm-card .lm-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: auto; }
+.lm-card .lm-links a {
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--brass); text-decoration: none;
+  border-bottom: 1px solid rgba(184,146,58,0.3); padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.lm-card .lm-links a:hover { color: var(--brass-light); border-color: var(--brass-light); }
+@media (max-width: 900px) {
+  .loudmath-grid { grid-template-columns: 1fr; }
+}
+
 /* ── PEDAL SECTION ────────────────────────────────────── */
 .pedal-section {
   background: var(--ink);
@@ -371,6 +438,7 @@ footer {
     <li><a href="#pedal">Pedal</a></li>
     <li><a href="#notation">Notation</a></li>
     <li><a href="#sequencer">Sequencer</a></li>
+    <li><a href="#loudmath">Loud Math</a></li>
     <li><a href="#opensource">Open Source</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -476,6 +544,50 @@ footer {
     <div class="preview-cta">
       <a href="sequencer/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
     </div>
+  </div>
+</section>
+
+<!-- LOUD MATH -->
+<section class="loudmath-section" id="loudmath">
+  <div class="loudmath-header reveal">
+    <img src="loud-math/images/loud_mathBanner.svg" alt="Loud Math" class="lm-banner">
+    <p class="section-label">Open Source Math Education</p>
+    <h2>Math you can <em>hear.</em></h2>
+    <div class="divider"></div>
+    <p>A new branch of Tribe of Abraham — interactive tools that turn math concepts into sound, sight, and story. Built for classrooms, community workshops, and anyone curious. Same open source, same browser-first philosophy.</p>
+  </div>
+
+  <div class="loudmath-grid">
+
+    <div class="lm-card reveal">
+      <div class="lm-tag">Rhythm &amp; Fractions</div>
+      <h3>Fraction Drum <em>Machine</em></h3>
+      <p>The denominator is the beat. Stack fractions — quarter notes, triplets, sixteenths — and hear them layer into polyrhythms. Each row is a different instrument with multi-level velocity. Change a fraction, and the groove reorganizes itself. The math of African polyrhythms, visible and audible at the same time.</p>
+      <div class="lm-links">
+        <a href="loud-math/fractional-beats/" target="_blank" rel="noopener">Open Tool →</a>
+        <a href="loud-math/fractional-beats/?preset=poly" target="_blank" rel="noopener">Demo Groove →</a>
+      </div>
+    </div>
+
+    <div class="lm-card reveal reveal-delay-1">
+      <div class="lm-tag">Rhythm &amp; Decimals</div>
+      <h3>Phat <em>Decimals</em></h3>
+      <p>Fractions dropped the 4/8/16 grid — decimals drop the grid entirely. Type any decimal as a step value and slice the measure into rhythms Western music never found. 0.1 for base-ten grooves. 0.15 for something phat. Make the measure itself 0.875 and watch a 7/8 feel emerge from numbers a calculator understands. Polyrhythm by way of decimal expansion.</p>
+      <div class="lm-links">
+        <a href="loud-math/phat-decimals/" target="_blank" rel="noopener">Open Tool →</a>
+        <a href="loud-math/phat-decimals/?preset=base10" target="_blank" rel="noopener">Demo Groove →</a>
+      </div>
+    </div>
+
+    <div class="lm-card reveal reveal-delay-2">
+      <div class="lm-tag">Epidemiology &amp; R<sub>0</sub></div>
+      <h3>Kindness <em>Spreads</em></h3>
+      <p>The same math that spreads a disease spreads kindness. One act ripples through a community based on three variables: days actively kind, daily encounters, and chance of inspiration. Runs the classic SIR model with a reproduction number (R<sub>0</sub>) — but for good. In a pandemic you push R<sub>0</sub> below 1. Here the goal is to push it as high as you can.</p>
+      <div class="lm-links">
+        <a href="loud-math/kindness-spreads/" target="_blank" rel="noopener">Open Tool →</a>
+      </div>
+    </div>
+
   </div>
 </section>
 

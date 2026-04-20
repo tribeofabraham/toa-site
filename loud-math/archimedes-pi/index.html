@@ -55,27 +55,37 @@
   /* ── HEADER ── */
   header {
     text-align: center;
-    margin-bottom: clamp(0.5rem, 1.5vh, 1.25rem);
+    margin-bottom: clamp(0.3rem, 0.8vh, 0.7rem);
     position: relative;
     z-index: 1;
   }
 
   .eyebrow {
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.5rem, 0.85vw, 0.6rem);
+    font-size: clamp(0.45rem, 0.75vw, 0.55rem);
     letter-spacing: 0.35em;
     color: var(--gold-dim);
     text-transform: uppercase;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.15rem;
   }
 
   h1 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
-    font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+    font-size: 4.2vw;
     line-height: 1.05;
     color: var(--white);
     letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  h1 br { display: none; }
+
+  .title-row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8vw;
   }
 
   h1 em {
@@ -86,9 +96,9 @@
   .subtitle {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: clamp(0.78rem, 1.2vw, 0.95rem);
+    font-size: clamp(0.65rem, 1vw, 0.8rem);
     color: var(--muted);
-    margin-top: 0.25rem;
+    margin-top: 0.1rem;
   }
 
   /* ── MAIN LAYOUT ── */
@@ -455,95 +465,6 @@
     flex-shrink: 0;
   }
 
-  /* ── LRS PANEL ── */
-  details {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  summary {
-    font-family: 'Cinzel', serif;
-    font-size: 0.5rem;
-    letter-spacing: 0.25em;
-    color: var(--gold-dim);
-    padding: 0.5rem 0.85rem;
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(201,168,76,0.03);
-  }
-
-  summary::after { content: '▸'; transition: transform 0.2s; }
-  details[open] summary::after { transform: rotate(90deg); }
-
-  summary:focus {
-    outline: 2px solid var(--gold);
-    outline-offset: 2px;
-  }
-
-  .lrs-fields {
-    padding: 0.75rem 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    background: rgba(0,0,0,0.2);
-  }
-
-  .lrs-fields input {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    color: var(--white);
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.7rem;
-    padding: 0.4rem 0.6rem;
-    width: 100%;
-    outline: none;
-  }
-
-  .lrs-fields input:focus {
-    border-color: var(--gold-dim);
-    outline: 2px solid var(--gold);
-    outline-offset: 1px;
-  }
-
-  .lrs-fields input::placeholder { color: var(--muted); }
-
-  .lrs-status {
-    font-size: 0.65rem;
-    font-family: 'Raleway', sans-serif;
-    color: var(--muted);
-    padding: 0 1rem 0.5rem;
-    background: rgba(0,0,0,0.2);
-    min-height: 1.4em;
-  }
-
-  .lrs-status.ok  { color: #7fffaa; }
-  .lrs-status.err { color: var(--red-lt); }
-
-  /* ── FOOTER NOTE ── */
-  .archimedes-note {
-    text-align: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(0.72rem, 1.1vw, 0.85rem);
-    color: var(--muted);
-    margin-top: clamp(0.5rem, 1.5vh, 1rem);
-    line-height: 1.55;
-    max-width: 640px;
-    margin-inline: auto;
-    position: relative;
-    z-index: 1;
-    flex: 0 0 auto;
-  }
-
-  @media (max-height: 720px), (max-aspect-ratio: 1/1) {
-    .archimedes-note { display: none; }
-  }
-
   /* ── SR-ONLY ── */
   .sr-only {
     position: absolute;
@@ -568,18 +489,20 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 3vw;
+    height: 3vw;
     border-radius: 50%;
-    border: 1.5px solid var(--gold);
+    border: 0.12vw solid var(--gold);
     background: transparent;
     color: var(--gold);
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 2vw;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 0.6rem;
+    vertical-align: middle;
+    margin-right: 0.8vw;
+    padding: 0;
     transition: background 0.2s, color 0.2s, transform 0.15s;
   }
 
@@ -634,13 +557,14 @@
   .modal-backdrop.open .modal { transform: translateY(0); }
 
   .modal-close {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
+    position: sticky;
+    top: 0;
+    float: right;
+    margin: -0.5rem -0.75rem 0 0;
     width: 36px;
     height: 36px;
     border-radius: 4px;
-    background: transparent;
+    background: var(--bg2);
     border: 1px solid var(--border);
     color: var(--white);
     font-size: 1.4rem;
@@ -650,6 +574,7 @@
     align-items: center;
     justify-content: center;
     transition: background 0.2s, border-color 0.2s;
+    z-index: 2;
   }
 
   .modal-close:hover,
@@ -739,11 +664,13 @@
 
 <header>
   <p class="eyebrow">Open Source Math Education — Tribe of Abraham</p>
-  <h1>Archimedes' Circle<br><em>Approaching π</em></h1>
+  <div class="title-row">
+    <button type="button" class="info-btn" id="info-btn"
+            aria-label="About this activity"
+            aria-haspopup="dialog">i</button>
+    <h1>Archimedes' Circle<br><em>Approaching π</em></h1>
+  </div>
   <p class="subtitle">The method of exhaustion, 250 BCE</p>
-  <button type="button" class="info-btn" id="info-btn"
-          aria-label="About this activity"
-          aria-haspopup="dialog">i</button>
 </header>
 
 <!-- ── INFO MODAL ── -->
@@ -881,28 +808,9 @@
       </div>
     </div>
 
-    <!-- LRS -->
-    <details>
-      <summary>LRS REPORTING</summary>
-      <div class="lrs-fields">
-        <label class="sr-only" for="lrs-endpoint">LRS Endpoint URL</label>
-        <input type="url" id="lrs-endpoint" placeholder="LRS endpoint URL" autocomplete="off">
-        <label class="sr-only" for="lrs-key">Auth Key</label>
-        <input type="text" id="lrs-key" placeholder="Auth key" autocomplete="off">
-        <label class="sr-only" for="lrs-secret">Auth Secret</label>
-        <input type="password" id="lrs-secret" placeholder="Auth secret" autocomplete="off">
-      </div>
-      <div class="lrs-status" id="lrs-status" aria-live="polite"></div>
-    </details>
-
   </aside>
 
 </div>
-
-<p class="archimedes-note">
-  Archimedes (c. 287–212 BCE) squeezed π between the perimeters of polygons drawn inside and outside a circle.
-  More sides → smaller gap → closer to π. The squeeze never ends, but it converges.
-</p>
 
 <script>
 // ── SHAPE NAMES ──
@@ -1074,7 +982,6 @@ const outerVal     = document.getElementById('outer-val');
 const liveAnnounce = document.getElementById('live-announce');
 
 let lastAnnounced = 0;
-let lrsMilestones = new Set();
 
 // ── ARCHIMEDES TICK MARKS ──
 const ARCHIMEDES_STEPS = [6, 12, 24, 48, 96];
@@ -1145,104 +1052,10 @@ function update(announce) {
       lastAnnounced = n;
     }
   }
-
-  // xAPI reporting
-  reportMilestone(n, mid, diff);
-}
-
-// ── xAPI / LRS ──
-const ACTOR = {
-  objectType: 'Agent',
-  name: 'Learner',
-  mbox: 'mailto:learner@tribeofabraham.com'
-};
-
-function xapiStatement(verb, verbDisplay, extensions) {
-  return {
-    actor: ACTOR,
-    verb: {
-      id: `http://adlnet.gov/expapi/verbs/${verb}`,
-      display: { 'en-US': verbDisplay }
-    },
-    object: {
-      id: 'https://tribeofabraham.com/tools/archimedes-pi',
-      definition: {
-        name: { 'en-US': "Archimedes' Circle — Approaching π" },
-        description: { 'en-US': 'Interactive exploration of π via the method of exhaustion' },
-        type: 'http://adlnet.gov/expapi/activities/simulation'
-      }
-    },
-    context: {
-      extensions: {
-        'https://tribeofabraham.com/xapi/ext/sides': extensions.sides,
-        'https://tribeofabraham.com/xapi/ext/pi-approx': extensions.piApprox,
-        'https://tribeofabraham.com/xapi/ext/error': extensions.error
-      }
-    },
-    timestamp: new Date().toISOString()
-  };
-}
-
-async function sendStatement(stmt) {
-  const ep  = document.getElementById('lrs-endpoint').value.trim();
-  const key = document.getElementById('lrs-key').value.trim();
-  const sec = document.getElementById('lrs-secret').value.trim();
-  const statusEl = document.getElementById('lrs-status');
-
-  if (!ep || !key || !sec) return;
-
-  try {
-    const res = await fetch(ep + '/statements', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Experience-API-Version': '1.0.3',
-        'Authorization': 'Basic ' + btoa(key + ':' + sec)
-      },
-      body: JSON.stringify(stmt)
-    });
-    statusEl.className = 'lrs-status ' + (res.ok ? 'ok' : 'err');
-    statusEl.textContent = res.ok ? '✓ Statement sent' : '✗ Error ' + res.status;
-  } catch(e) {
-    statusEl.className = 'lrs-status err';
-    statusEl.textContent = '✗ ' + e.message;
-  }
-}
-
-const REPORT_MILESTONES = [4, 6, 8, 12, 16, 24, 32, 48, 96];
-
-function reportMilestone(n, mid, diff) {
-  if (!REPORT_MILESTONES.includes(n)) return;
-  if (lrsMilestones.has(n)) return;
-  lrsMilestones.add(n);
-
-  const stmt = xapiStatement('experienced', 'experienced', {
-    sides: n,
-    piApprox: parseFloat(mid.toFixed(8)),
-    error: parseFloat(diff.toFixed(8))
-  });
-  sendStatement(stmt);
-}
-
-// Send a "completed" statement when reaching 96 sides
-function reportCompleted(mid) {
-  const stmt = xapiStatement('completed', 'completed', {
-    sides: 96,
-    piApprox: parseFloat(mid.toFixed(8)),
-    error: parseFloat(Math.abs(mid - Math.PI).toFixed(8))
-  });
-  sendStatement(stmt);
 }
 
 // ── EVENTS ──
 slider.addEventListener('input', () => update(true));
-
-slider.addEventListener('change', () => {
-  const n = parseInt(slider.value);
-  if (n === 96) {
-    reportCompleted(approxPi(96));
-  }
-});
 
 // Keyboard: left/right arrows on slider are native; add Page Up/Down for big jumps
 slider.addEventListener('keydown', e => {
