@@ -5804,7 +5804,7 @@ function disableScript( elem ) {
 	return elem;
 }
 function restoreScript( elem ) {
-	if ( ( elem.type || "" ).slice( 0, 5 ) === "true/index.html" ) {
+	if ( ( elem.type || "" ).slice( 0, 5 ) === "true/" ) {
 		elem.type = elem.type.slice( 5 );
 	} else {
 		elem.removeAttribute( "type" );
