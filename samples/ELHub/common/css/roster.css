@@ -1,0 +1,58 @@
+body {
+    font-family:"DisplayText";
+    user-select: none;
+    font-size:2em;
+}
+
+.student {
+    position:absolute;
+    top:3em;
+    left:3em;
+    height:5em;
+    width:5em;
+    background-color:var(--primary);
+    text-align: center;
+    line-height: 5em;
+    border-radius:50%;
+    color:var(--ghost80);
+    border:solid .25em var(--primary);
+    cursor:move;
+}
+
+.r1 {
+    position:absolute;
+    top:.3125em;
+    left:.3125em;
+    height:4em;
+    width:4em;
+    text-align: center;
+    line-height: 5em;
+    border-radius:50%;
+    border:solid .2em var(--ghost20);
+}
+.r2 {
+    position:absolute;
+    top:.06em;
+    left:.06em;
+    height:4.5em;
+    width:4.5em;
+    border-radius:50%;
+    border:solid .2em var(--ghost60);
+}
+
+
+
+.r3 {
+    position:absolute;
+    top:-.2em;
+    left:-.2em;
+    height:5em;
+    width:5em;
+    border-radius:50%;
+    border:solid .2em var(--ghost80);
+}
+
+.dyx12 {
+    background-color:var(--secondary);
+      border:solid .25em var(--secondary);
+}

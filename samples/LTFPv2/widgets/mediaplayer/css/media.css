@@ -1,0 +1,802 @@
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    user-select: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'DisplayText';
+    /*src:url('../fonts/OpenSans-Bold.ttf')*/
+    src: url('../../../fonts/RGRCenturyGothicBold_21.otf');
+}
+
+
+.vid.bubble {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0);
+    height: 60em;
+    width: 41em;
+    /*border-radius: 50%;*/
+    overflow: hidden;
+    text-align: center;
+    /*overflow: hidden;*/
+    top: 0;
+
+}
+
+.vid.bubble .videoControlBlock {
+    position: absolute;
+    bottom: 1.4em;
+    left: 27.6em;
+    right: 13em;
+    height: 4.8em;
+    background-color: var(--clearblack);
+    z-index: 4;
+    
+}
+
+.vid.bubble .vidPlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30em;
+    width: 30em;
+    z-index: 11;
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(../img/play.svg);
+    cursor: pointer;
+}
+
+.vid.bubble .btn.vidPlayToggle {
+    position: absolute;
+    top: 0.25em;
+    left: 0em;
+    height: 39em;
+    width: 39em;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: none;
+    cursor: pointer;
+    border-radius: 50%;
+    border: solid .4em transparent;
+}
+
+.vid.bubble.avatar .btn.vidPlayToggle {
+    border-radius: 3em;
+    height: 42.4em;
+    width: 39.2em;
+}
+
+.vid.bubble.avatar .btn.vidPlayToggle.paused {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(../img/play.svg);
+    border: solid .4em var(--textWhite);
+}
+/*
+.vid.bubble .btn.vidPlayToggle:hover,
+.vid.bubble .btn.vidPlayToggle:focus {
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(../img/pause.svg);
+    border: solid .4em var(--textWhite);
+}
+
+.vid.bubble .btn.vidPlayToggle.paused:hover,
+.vid.bubble .btn.vidPlayToggle.paused:focus {
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(../img/play.svg);
+    border: solid .4em var(--textWhite);
+}*/
+
+.vid.bubble .btn {
+    position: absolute;
+    background-color: var(--clearBlack);
+    border: solid .4em transparent;
+    height: 7em;
+    width: 7em;
+    z-index: 3;
+    cursor: pointer;
+    border-radius: 2em;
+    background-image: none;
+    background-size: 90% auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.vid.bubble .btn:hover,
+.vid.bubble .btn:focus {
+    background-color: var(--control);
+    border: solid .4em var(--textWhite);
+}
+
+.vid.bubble .vidCCToggle {
+    top: .2em;
+    left: 8em;
+    background-image: url(../img/captions.svg);
+}
+
+.vid.bubble .vidCCToggle.captionsOff {
+    background-image: url(../img/captionsOff.svg);
+}
+
+.vid.bubble .vidAudioToggle {
+    top: .2em;
+    left: 16em;
+    background-image: url(../img/unmuted.svg);
+}
+
+.vid.bubble .vidAudioToggle.audioOff {
+    background-image: url(../img/muted.svg);
+}
+
+.vid.bubble .vidFullScreen {
+    top: .2em;
+    left: 24em;
+    background-image: url(../img/fullscreen.svg);
+}
+
+.vid.bubble .videoBox {
+    position: absolute;
+    height: 40em;
+    width: 40em;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.vid.bubble.avatar .videoBox {
+    position: absolute;
+    height: 46em;
+    width: 41em;
+    border-radius: .5em;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.vid.bubble video {
+    position: relative;
+    top: 0em;
+    height: 41em;
+    width: auto;
+    left: -18em;
+}
+
+.vid.bubble.avatar video {
+    position: relative;
+    top: 0em;
+    height: 50em;
+    width: auto;
+    left: -24em;
+
+}
+
+.vid.bubble.avatar .vidCaption {
+    bottom: 8em;
+    font-size: 2.2em;
+    width: 16.8em;
+}
+
+.vid.bubble .vidCaption {
+    background-color: var(--textWhite);
+    border: solid .2em var(--control);
+    color: var(--control);
+    position: absolute;
+    left: .6em;
+    bottom: 6em;
+    width: 14em;
+    padding: .2em;
+    font-size: 2.5em;
+    border-radius: 1em;
+    font-family: 'DisplayText';
+    z-index: 3;
+    box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+    ;
+}
+
+/*put new Vidbubble 16x9here----------------------------------------------------------*/
+.vid.bubble.bubble16x9 {
+    top: -.4em;
+    height: 32em;
+    width: 50em;
+    left: 1em;
+
+}
+
+.vid.bubble.bubble16x9 .videoBox {
+    top: 3em;
+    height: 20.4em;
+    width: 36em;
+    left: 3em;
+    border-radius: 0;
+    border-radius: 1em;
+    overflow: hidden;
+    position:absolute;
+
+}
+
+.vid.bubble.bubble16x9 video {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: auto;
+    width: 36.4em;
+    background-color: var(--control);
+}
+
+
+.vid.bubble.bubble16x9.videoControlBlock {
+    background-color: var(--control);
+
+    position: absolute;
+    z-index: -1;
+    bottom: -3.8em;
+    height: 3.8em;
+    width: 10.6em;
+    left:80em;
+    border-bottom-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    box-shadow: 0.625em 0.4375em 1.25em rgba(0, 0, 0, 0.2);
+
+}
+.vid.bubble.bubble16x9 .captionBlock {
+    position: absolute;
+    top: 25.6em;
+    left: 1.4em;
+    height: 20em;
+    width: 26em;
+
+}
+
+.vid.bubble.bubble16x9 .control {
+    position: absolute;
+    bottom: 0em;
+    height: 3.4em;
+    left: 0em;
+    right: 0em;
+    z-index: 0;
+    background-color: rgba(0, 0, 0, .5);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.vid.bubble.bubble16x9 .btn {
+    font-size: 1em;
+    position: absolute;
+    bottom: 2em;
+    height: 2em;
+    width: 2em;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: solid .2em rgba(255, 255, 255, 0);
+}
+
+.vid.bubble.bubble16x9 .btn:hover {
+    position: absolute;
+
+    background-color: rgba(255, 255, 255, .2);
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: solid .2em rgba(255, 255, 255, .4);
+}
+
+.vid.bubble.bubble16x9 .btn:focus {
+    border: solid .2em rgba(255, 255, 255, 1);
+    outline: none;
+}
+
+.vid.bubble.bubble16x9 .vidPlayToggle {
+    left: .6em;
+    background-image: url(../img/pause.svg);
+}
+
+.vid.bubble.bubble16x9 .vidPlayToggle.paused {
+    background-image: url(../img/play.svg);
+}
+
+
+
+.vid.bubble.bubble16x9 .vidCCToggle {
+    left: 3.2em;
+    background-image: url(../img/captions.svg);
+}
+
+.vid.bubble.bubble16x9 .vidCCToggle.captionsOff {
+    background-image: url(../img/captionsOff.svg);
+}
+
+.vid.bubble.bubble16x9 .vidAudioToggle {
+    left: 6em;
+    background-image: url(../img/unmuted.svg);
+}
+
+.vid.bubble.bubble16x9 .vidFullScreen {
+    right: 1em;
+    background-image: url(../img/fullscreen.svg);
+}
+
+.vid.bubble.bubble16x9 .vidClose {
+    left: 32em;
+    background-size: 60% auto;
+    background-image: url(../img/btnClose.svg);
+}
+
+.vid.bubble.bubble16x9 .vidAudioToggle.audioOff {
+    background-image: url(../img/muted.svg);
+}
+
+
+
+.vid.bubble.bubble16x9 .vidCaptionTextBlock {
+    position: relative;
+    left: 0;
+    top: 0em;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    font-size: .5em;
+    font-family: "DisplayText";
+    border-radius: .5em;
+    background-color: var(--clearBlack);
+
+}
+
+
+.vid.bubble.bubble16x9 .vidCaption {
+    background-color: var(--textWhite);
+    border: solid .2em var(--control);
+    color: var(--control);
+    position: relative;
+    left: 0em;
+    bottom: 0em;
+    width: 14em;
+    padding: .2em;
+    font-size: 2.5em;
+    border-radius: 1em;
+    font-family: 'DisplayText';
+    z-index: 3;
+    box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+    ;
+}
+
+.vid.bubble .vidCaption {
+    padding: .25em;
+    color: var(--control);
+    position: absolute;
+
+    width: auto;
+    font-family: "DisplayText";
+    margin: .25em;
+}
+
+.vid.bubble.bubble16x9 .vidSlider {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+    bottom: 1.8em;
+    right: 1.6em;
+    width: 17em;
+    display: block;
+    font-size: .5em;
+}
+
+/*Input Range Slider*/
+.vid.bubble.bubble16x9 input[type="range"] {
+    /* removing default appearance */
+     -webkit-appearance: none;*/
+     appearance: none;*/
+    position: absolute;
+    /* removing default appearance */
+
+    /* creating a custom design */
+    cursor: pointer;
+    outline: none;
+    border-radius: 2em;
+    overflow: hidden;
+    /* New additions */
+    background-color: var(--clearBlack);
+    border: solid .1em var(--ghostWhite60);
+    z-index: 1;
+    left:2em;
+    bottom:2.4em;
+    width:13em;
+}
+
+.vid.bubble.bubble16x9 input[type="range"]:focus {
+    border: solid .1em #fff;
+
+}
+
+/* Video Track */
+.vid.bubble.bubble16x9 input[type="range"]::-webkit-slider-runnable-track {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+/* Thumb: webkit */
+.vid.bubble.bubble16x9 input[type="range"].playing::-webkit-slider-thumb {
+    background-color: none;
+}
+
+.vid.bubble.bubble16x9 input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    /* creating a custom design */
+    background-image: url(../img/slider.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 1em;
+    width: 1em;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 50%;
+    border: solid .2em rgba(255, 255, 255, 0);
+    transition: .2s ease-in-out;
+    box-shadow: -8.5em 0 0 8em var(--ghostWhite80);
+}
+
+.vid.bubble.bubble16x9 input[type="range"].playing:hover::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, .6);
+}
+
+.vid.bubble.bubble16x9 input[type="range"]:hover::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, .6);
+}
+
+.vid.bubble.bubble16x9 input[type="range"].playing:focus::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, 1);
+    background-image: url(../img/interface/sdwIcons/pause.svg);
+}
+
+.vid.bubble.bubble16x9 input[type="range"]:focus::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, 1);
+}
+
+vid.bubble.bubble16x9 .vidCaption {
+    position: absolute;
+    top: auto;
+    left: 0em;
+    right: 24.2em;
+    bottom: 1.8em;
+    font-size: 1.2em;
+    width: auto;
+    min-height: 2.8em;
+
+}
+
+
+/*End new vid bubble-----------------------------------------------------------------*/
+/*Video Bubble 16x9*/
+/*.vid.bubble.bubble16x9  {
+
+    top:-.4em;
+        height: 32em;
+        width:50em;
+        left:0em;
+    }
+    .vid.bubble.bubble16x9 .btn.vidPlayToggle {
+        position: absolute;
+        top: 2.6em;
+        left: 0.25em;
+        height: 21em;
+        width: 39.4em;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0);
+        background-image: none;
+        cursor: pointer;
+        border-radius:2em;
+        border:solid .4em transparent;
+    }
+    .vid.bubble.bubble16x9 .btn.vidPlayToggle.paused {
+        position: absolute;
+        background-color: rgba(0, 0, 0, .5);
+        background-image: url(../img/play.svg);
+        border:solid .4em var(--textWhite);
+    }
+.vid.bubble.bubble16x9 .btn.vidPlayToggle:hover, .vid.bubble.bubble16x9 .btn.vidPlayToggle:focus  {
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(../img/pause.svg);
+    border:solid .4em var(--textWhite);
+}
+.vid.bubble.bubble16x9 .btn.vidPlayToggle.paused:hover, .vid.bubble.bubble16x9 .btn.vidPlayToggle.paused:focus  {
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(../img/play.svg);
+    border:solid .4em var(--textWhite);
+}
+    .vid.bubble.vid.bubble.bubble16x9 .videoControlBlock {
+        position:absolute;
+        bottom:3em;
+        left:29em;
+        right:0;
+        height:8em;
+        font-size:.62em;
+        background-color:var(--clearblack);
+        z-index: 4;;
+    }
+.vid.bubble.bubble16x9 video {
+    position:relative;
+    top:-1.7em;
+        height: 25em;
+        width:39em;
+        left:0.2em;
+        border-radius:2em;
+        border:none;
+    }
+    .vid.bubble.bubble16x9 .videoBox {
+        border-radius:2em;
+    
+    position:absolute;
+    height:21.6em;
+    width:39em;
+    
+    top:2.8em;
+    left:0.4em;
+    overflow:hidden;
+    }
+    .vid.bubble.vid.bubble.bubble16x9 .vidCaption {
+        position:absolute;
+        top:auto;
+        left:0em;
+        right:24.2em;
+        bottom:1.8em;
+        font-size:1.2em;
+        width:auto;
+        min-height: 2.8em;
+
+    }
+        */
+/*Video Bubble 4x3*/
+.vid.bubble.bubble4x3 {
+    left: 1em;
+    background-color: rgba(255, 0, 0, .2);
+}
+
+.vid.bubble.bubble4x3 .videoBox {
+    border-radius: 1em;
+}
+
+
+
+/*Standard Video Presentation*/
+.vid.standard {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0);
+    ;
+    height: 20em;
+    width: auto;
+    display: inline-block;
+    border-radius: .5em;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: .25em .25em .25em rgba(0, 0, 0, .5);
+}
+
+.vid.standard video {
+    position: relative;
+    height: 100%;
+    width: auto;
+}
+
+.vid.standard .vidPlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(../img/play.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.vid.standard .control {
+    position: absolute;
+    bottom: 0em;
+    height: 3.4em;
+    left: 0em;
+    right: 0em;
+    z-index: 0;
+    background-color: rgba(0, 0, 0, .5);
+
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.vid.standard .btn {
+    position: absolute;
+    bottom: .5em;
+    height: 2em;
+    width: 2em;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: 50%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: solid .2em rgba(255, 255, 255, .4);
+}
+
+.vid.standard .btn:focus {
+    border: solid .2em rgba(255, 255, 255, 1);
+    outline: none;
+}
+
+.vid.standard .vidPlayToggle {
+    left: 20em;
+    background-image: url(../img/pause.svg);
+}
+
+.vid.standard .vidPlayToggle.paused {
+    background-image: url(../img/play.svg);
+}
+
+
+
+.vid.standard .vidCCToggle {
+    left: 23em;
+    background-image: url(../img/captions.svg);
+}
+
+.vid.standard .vidCCToggle.captionsOff {
+    background-image: url(../img/captionsOff.svg);
+}
+
+.vid.standard .vidAudioToggle {
+    left: 26em;
+    background-image: url(../img/unmuted.svg);
+}
+
+.vid.standard .vidFullScreen {
+    left: 29em;
+    background-image: url(../img/fullscreen.svg);
+}
+
+.vid.standard .vidClose {
+    left: 32em;
+    background-size: 60% auto;
+    background-image: url(../img/btnClose.svg);
+}
+
+.vid.standard .vidAudioToggle.audioOff {
+    background-image: url(../img/muted.svg);
+}
+
+.vid.standard .captionBlock {
+    color: #fff;
+    position: absolute;
+    top: 0em;
+    width: 100%;
+    height: auto;
+}
+
+.vid.standard .vidCaptionTextBlock {
+    background-color: rgba(0, 0, 0, .6);
+    color: #fff;
+    position: relative;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+}
+
+.vid.standard .vidCaption {
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    width: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: .25em;
+}
+
+.vid.standard .vidSlider {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .8);
+    color: #fff;
+    bottom: .36em;
+    left: 1em;
+    width: 17em;
+    display: block;
+}
+
+/*Input Range Slider*/
+.vid.standard input[type="range"] {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    font-size: 1em;
+    /* removing default appearance */
+
+    /* creating a custom design */
+    cursor: pointer;
+    outline: none;
+    border-radius: 2em;
+    overflow: hidden;
+    /* New additions */
+    background-color: var(--ghostWhite40);
+    border: solid .1em var(--ghostWhite60);
+    z-index: 1;
+}
+
+/* Video Track */
+.vid.standard input[type="range"]::-webkit-slider-runnable-track {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+/* Thumb: webkit */
+.vid.standard input[type="range"].playing::-webkit-slider-thumb {
+    background-color: green;
+}
+
+.vid.standard input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    /* creating a custom design */
+    background-image: url(../img/slider.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 2em;
+    width: 2em;
+    background-color: rgba(255, 255, 255, .4);
+    border-radius: 50%;
+    border: solid .2em rgba(255, 255, 255, 0);
+    transition: .2s ease-in-out;
+
+}
+
+.vid.standard input[type="range"].playing:hover::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, .6);
+}
+
+.vid.standard input[type="range"]:hover::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, .6);
+}
+
+.vid.standard input[type="range"].playing:focus::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, 1);
+    background-image: url(../img/interface/sdwIcons/pause.svg);
+}
+
+.vid.standard input[type="range"]:focus::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, 1);
+}
+
+
+
+.vid.standard .vidBox {
+    position: absolute;
+    font-size: 1em;
+    border-radius: 3em;
+    overflow: hidden;
+    z-index: 10000;
+    display: none;
+}
+
+.vid.standard .vidBox .vid {
+    position: absolute;
+    font-size: 1em;
+    border-radius: 0;
+    top: -45%;
+    right: -45%;
+    left: -45%;
+    height: 190%;
+    width: 190%;
+}

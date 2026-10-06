@@ -1,0 +1,170 @@
+body.mark {
+    background-color:var(--textBlack);
+}
+
+
+.mark #wrapper .Logo {
+    background-color:var(--ghostBlack40);
+    border-radius:0;
+}
+
+.mark #wrapper .heading {
+    text-align: left;
+    color:var(--ghost60);
+    padding-bottom:.5em;
+}
+
+.mark #wrapper .sld {
+    background-color:var(--ghostBlack40);
+}
+
+.mark #wrapper .sld .med {
+    background-color:var(--secondary);
+    cursor:move;
+}
+.mark #wrapper .sld .med .vid{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    height:100%;
+    width:100%;
+    border-radius:0;
+}
+
+.mark #wrapper .sld .med .aud audio{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    height:100%;
+    width:100%;
+    border-radius:0;
+    background-color:red;
+}
+.mark #wrapper .sld .med .vid video{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    height:100%;
+    width:100%;
+}
+/*Media slider work*/
+/********** Range Input Styles **********/
+/*Range Reset*/
+#wrapper .med input[type="range"] {
+    border:solid .1em var(--textBlack);
+    border-radius:.5em;
+    cursor: pointer;
+    width: auto;
+    outline:none;
+}
+
+#wrapper input[type="range"].med.dark.vertical {
+
+  transform: rotate(270deg);
+  transform-origin: center;
+
+   }
+
+/* Removes default focus */
+#wrapper .med input[type="range"]:focus {
+  outline: none;
+    background: var(--ghost60);
+}
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+/* slider track */
+.med  input[type="range"]::-webkit-slider-runnable-track, input[type="range"].med::-webkit-slider-runnable-track {
+
+    border-radius: 0.5em;
+    outline:none;
+    border:none;
+    height: .75em;  
+    width:auto;
+    overflow: visible;
+    margin-left:-3em;
+    margin-right:-3em;
+} 
+/* slider thumb */
+#wrapper .med input[type="range"]::-webkit-slider-thumb, #wrapper input[type="range"].med::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+   appearance: none;
+   margin-top: -3.25em; /* Centers thumb on the track */
+   /*custom styles*/
+   background-color: var(--clearBlack);
+   height: 20em;
+   width: 6em;
+    background-image:url(../../common/img/interface/mediaPlayer/SVG/thumbSlider.svg);
+    background-position:center top;
+    background-repeat:no-repeat;
+    background-size:120% auto;
+    outline:none;
+    opacity:1;
+    border:none;
+    
+}
+
+.med input[type="range"]:focus::-webkit-slider-thumb {   
+opacity:1;
+    
+}
+
+
+#wrapper .med input[type="range"].vertical::-webkit-slider-thumb {
+ /* Centers thumb on the track */
+   /*custom styles*/
+   background-color: var(--control1);
+   height: 3.75em;
+   width: 3.75em;
+    background-image:url(../../common/img/interface/mediaPlayer/SVG/unmuted.svg);
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:90% auto;
+    outline:none;
+    opacity:1;
+    border:none;
+ border-radius:50%;
+    margin-top:-1.5em;
+     transform: rotate(90deg);
+  transform-origin: center;
+
+   }
+
+.med  input[type="range"].vertical::-webkit-slider-runnable-track {
+      border-radius: 0.5em;
+    outline:none;
+    border:none;
+    height: .75em;  
+    width:auto;;
+    overflow: visible;
+    margin-left:-.25em;
+    margin-right:-.25em;  
+}
+/******** Firefox styles ********/
+/* slider track */
+/*.med input[type="range"]::-moz-range-track {
+   background-color: #053a5f;
+   border-radius: 0.5rem;
+   height: 0.5rem;
+}
+
+/* slider thumb */
+/*
+.med input[type="range"]::-moz-range-thumb {
+   border: none;
+   border-radius: 0; 
+   background-color: #5cd5eb;
+   height: 2rem;
+   width: 1rem;
+}
+
+.med input[type="range"]:focus::-moz-range-thumb {
+  border: 1px solid #053a5f;
+  outline: 3px solid #053a5f;
+  outline-offset: 0.125rem; 
+}*/

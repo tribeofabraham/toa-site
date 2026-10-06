@@ -1,0 +1,36 @@
+@charset "UTF-8";
+@font-face {
+	font-family:'BoardText';
+	src:url('../fonts/SF_Cartoonist_Hand.ttf')
+}
+@font-face {
+	font-family:'TileText';
+	src:url('../fonts/RGRCenturyGothicBook_21.otf')
+}
+@font-face {
+	font-family:'BodyText';
+	/*src:url('../fonts/OpenSans-Light.ttf')*/
+    src:url('../fonts/RGRCenturyGothicBook_21.otf');
+}
+@font-face {
+	font-family:'BoldText';
+	/*src:url('../fonts/OpenSans-Semibold.ttf')*/
+    src:url('../fonts/RGRCenturyGothicSemiBold_21.otf');
+}
+
+@font-face {
+	font-family:'DisplayText';
+	/*src:url('../fonts/OpenSans-Bold.ttf')*/
+    src:url('../fonts/RGRCenturyGothicBold_21.otf');
+}
+
+@font-face {
+	font-family:'ItalicText';
+	/*src:url('../fonts/OpenSans-LightItalic.ttf')*/
+    src:url('../fonts/RGRCenturyGothicItalic_21.otf');
+}
+@font-face {
+	font-family:'BoldItalicText';
+	/*src:url('../fonts/OpenSans-SemiboldItalic.ttf')*/
+    src:url('../fonts/RGRCenturyGothicBoldItalic_21.otf');
+}

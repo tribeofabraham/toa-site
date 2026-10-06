@@ -1,0 +1,403 @@
+/*Styling for individual programs*/
+
+/*Countdown Program Branding*/
+body.cdn #wrapper {
+    background-color:var(--cdnBookBack);
+}
+
+/*Blast Program Branding*/
+body.blt #wrapper {
+    background-color:var(--bltBookBack);
+}
+
+/*HDWord Program Branding*/
+body.hdw #wrapper {
+    background-color:var(--hdwBookBack);;
+}
+
+/*Soundwall Program Branding*/
+body.sdw #wrapper {
+    background-color:var(--textBlack);
+}
+
+/*Noel & Lindsey: Putting Styling for E-Books Here*/
+#wrapper .sld {
+    background-color:var(--clearBack);
+    border-radius:1.5em;
+    font-size: .9em;
+}
+
+.object.ebkBrand.grp {
+    background-color:var(--clearBack); 
+    border-radius:.5em;
+}
+#wrapper .ebkBrand.title {
+    font-size: 2em;
+    color:var(--ghost80);
+}
+
+.cdn #wrapper .ebkBrand.title {
+    font-size: 2em;
+    color:var(--cdnBookTexts);
+}
+
+#wrapper .ebkBrand.logo {
+    border-radius:0;
+}
+
+.ebk:focus {
+    border:solid .25em var(--primary);
+}
+
+.ebk {
+    position:absolute;
+	background-color:rgba(0,0,255,0);
+    border:solid .25em rgba(0,0,255,0);
+	border-radius:.5em;
+	background-position:center center;
+	background-size:110% auto;
+    background-repeat:no-repeat;
+    font-size:.8em;
+    overflow: visible;
+    height:100%;
+    width:100%;
+    top:-.3em;
+    left:-.3em;
+}
+
+.ebkLink.blank .ebk{
+    cursor:not-allowed;
+}
+
+.ebkLink .lockedGhost {
+    position:absolute;
+    top:-.25em;
+    left:-.25em;
+    bottom:-.45em;
+    right:-.45em;
+    background-color:var(--ghostBlack40);
+    z-index:1000;
+    cursor:not-allowed;
+       border-radius:.5em;
+}
+
+.cdn .ebkLink .lockedGhost .image {
+    position:absolute;
+    top:0em;
+    left:1em;
+    height:3em;
+    width:2em;
+    background-image:url(../../common/img/interface/lockedPrimary.png);
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    cursor:not-allowed;
+ 
+}
+
+.blt .ebkLink .lockedGhost .image {
+    position:absolute;
+    top:0em;
+    left:1em;
+    height:3em;
+    width:2em;
+    background-image:url(../../common/img/interface/lockedPrimary.png);
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    cursor:not-allowed;
+ 
+}
+
+.hdw .ebkLink .lockedGhost .image {
+    position:absolute;
+    top:0em;
+    left:1em;
+    height:3em;
+    width:2em;
+    background-image:url(../../common/img/interface/lockedSecondary.png);
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    cursor:not-allowed;
+ 
+}
+
+.object.ebkPlayer {
+    background-color:rgba(64,64,64,1);
+    border:solid .25em rgba(0,0,0,1);
+    border-radius:2em;
+    overflow: hidden;
+}
+
+.object.ebkPlayer iframe {
+    width:100%;
+    height:100%;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
+.ebkLabel {
+    position:relative;
+    top:8em;
+    text-align:center;
+    font-family:'DisplayText';
+    color:#fff;
+}
+
+/*Specific to Countdown E-books*/
+.cdn .ebkLabel {
+    color:var(--cdnBookText);
+}
+
+.ebk {
+    border: solid .2em #000;
+}
+
+.ebkLink {
+position:absolute;
+    top:0;
+    left:0;
+    width:6em;
+    height:7em;
+
+    text-decoration: none;
+}
+.ebkLink:focus {
+position:absolute;
+    top:0;
+    left:0;
+    width:6em;
+    height:7em;
+    border:solid .25em blue;
+    text-decoration: none;
+}
+.ebkBlank {
+    background-color:#333;
+    height:100%;
+    width:7.5em;
+    top:.5em;
+    left:.5em;
+    border: solid .1em #555;
+}
+.ebkBlank2 {
+    background-color:#fff;
+    height:100%;
+    width:7.5em;
+    top:.4em;
+    left:.4em;
+    border: solid .1em #555;
+}
+.ebkBlank3 {
+    background-color:#fff;
+    height:100%;
+    width:7.5em;
+    top:.2em;
+    left:.2em;
+    border: solid .1em #555;
+}
+
+
+.pge {
+	background-color:white;
+	border-radius:1em;
+	display:none;
+}
+.imageLtextR img {
+	height:80%;
+	margin-left:1.5em;
+	float:left;
+	border-radius:1em;
+}
+#wrapper .imageLtextR div.txt {
+	position:absolute;
+	top:2em;
+	bottom:2em;
+	left:10em;
+	width:10em;
+	text-align: left;
+}
+/*
+
+
+
+/*Custom Object Styles Here*/
+.photo {
+	border-radius:1em;
+}
+
+
+/*Program Specific Styling*/
+.object.sortingStream {
+	background-image:url(../img/backgrounds/soundStream.svg);
+	background-size:110% auto;
+	background-position:center -.5em;
+}
+
+.object.wordMathMountain {
+	background-image:url(../img/backgrounds/wordMathMountain.svg);
+	background-size:auto 190%;
+	background-position:center -9em;
+}
+
+.object.consonantCanyon {
+	background-image:url(../img/backgrounds/consonantCanyon.svg);
+	background-size:auto 180%;
+	background-position:-12em -5em;
+}
+
+.object.library, .object.library1, .object.library2  {
+	/*background-image:url(../html/library/img/libraryBack.svg);*/
+	background-size:auto 10%;
+	background-position:60em 2em;
+	background-color:var(--secondary);
+	background-repeat: no-repeat;
+}
+
+.object.vowelValley, .object.vowelValley1, .object.vowelValley2  {
+	background-image:url(../img/backgrounds/vowelValleyLt.svg);
+	background-size:auto 180%;
+	background-position:-12em -5em;
+}
+
+.object.blast {
+	background-image:url(../img/backgrounds/countdown.svg);
+	background-size:auto 170%;
+	background-position:-11em -6em;
+}
+.object.countdown {
+	background-image:url(../img/backgrounds/countdown.svg);
+	background-size:auto 170%;
+	background-position:-11em -6em;
+}
+
+.object.sld.countdown {
+	background-image:none;
+	background-color:var(--clear);
+}
+.object.sld.hdword {
+	background-image:none;
+	background-color:var(--clear);
+}
+.object.sld.blast {
+	background-image:none;
+	background-color:var(--clear);
+}
+.object.sld.boost {
+	background-image:none;
+	background-color:var(--clear);
+}
+
+.object.sld.letterTileFreePlay {
+	background-image:none;
+	background-color:var(--clear);
+}
+
+
+.vowelValley, .vowelValley1, .vowelValley2 {
+    background-image: url('../img/presetArt/vvBack.svg');
+}
+
+.consonantCanyon {
+    background-image: url('../img/presetArt/ccBack.svg');
+}
+
+li.wordMathMountain {
+	background-color:#ADDFE7;
+    background-image: url('../img/presetArt/wmmBack.svg');
+	background-size:auto 130%;
+	background-position:-4em bottom;
+}
+li.sortingStream {
+    background-image: url('../img/presetArt/ssBack.svg');
+	background-size:auto 150%;
+	background-position:center bottom;
+}
+
+
+li.countdown {
+    background-image: url('../img/presetArt/cdBack.svg');
+}
+
+li.blast {
+    background-image: url('../img/presetArt/btBack.svg');
+}
+
+li.hdword {
+    background-image: url('../img/presetArt/hdBack.svg');
+}
+li.boost {
+    background-image: url('../img/presetArt/bsBack.svg');
+}
+
+li.lettertileFreePlay {
+    background-image: url('../img/presetArt/ltBack.svg');
+	background-size:86% auto
+}
+
+.object.happy {
+	background-image:url(../img/backgrounds/happy.png);
+	background-size:60% auto;
+	background-position:center center;
+	background-repeat: no-repeat;
+	background-color:#fff;
+}
+
+/*Sound Wall Styling*/
+.sdw #wrapper .img {
+    border-radius:2em;
+}
+
+.sdw #wrapper .lst li.soundFlag {
+    background-color:var(--primary);
+    height:2em;
+    color:#fff;
+    overflow: visible;
+    font-size:2em;
+    font-family:"DisplayText";
+    line-height: 1.75em;
+    margin:1em;
+    margin-bottom:.5em;
+}
+
+.sdw #wrapper .swIconLabel {
+    font-size:8em;
+    color:#fff;
+}
+
+.sdw #wrapper .swSubGroup {
+    background-color:var(--primary);
+    z-index: 100000;
+}
+
+.sdw #wrapper .vid {
+    background-color:var(--secondary);
+    z-index: 100000;
+    border-radius:2em;
+    background-image:url(../../common/img/interface/playVid.svg);
+    background-size:auto 70%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    cursor:pointer;
+}
+
+.sdw #wrapper .aud {
+    background-color:var(--primary);
+    z-index: 100000;
+    border-radius:50%;
+    background-image:url(../../common/img/interface/playAud.svg);
+    background-size:auto 50%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    border:solid .25em var(--primary);
+}
+
+.sdw #wrapper .aud:hover {
+    background-color:var(--primaryLight);
+    border:solid .25em var(--secondary);
+}
+
+.sdw #wrapper .swLabelMed {
+   font-size:6em;
+}
+

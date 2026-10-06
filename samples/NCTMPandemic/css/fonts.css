@@ -1,0 +1,23 @@
+@charset "UTF-8";
+@font-face {
+	font-family:'BodyText';
+	src:url('../fonts/Roboto-Regular.ttf')
+}
+@font-face {
+	font-family:'BoldText';
+	src:url('../fonts/Roboto-Black.ttf')
+}
+
+@font-face {
+	font-family:'DisplayText';
+	src:url('../fonts/Roboto-Black.ttf')
+}
+
+@font-face {
+	font-family:'LightText';
+	src:url('../fonts/Roboto-Light.ttf')
+}
+@font-face {
+	font-family:'BoldItalicText';
+	src:url('../fonts/Muli-Italic.html')
+}

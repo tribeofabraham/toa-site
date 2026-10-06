@@ -1,0 +1,369 @@
+.tabs {
+    z-index: 11;
+    position: absolute;
+    bottom: 0em;
+    height: 2.8em;
+    right:5em;
+    left:0;
+    font-size: .36em;
+}
+
+.tab {
+    position: absolute;
+    bottom: -9.8em;
+    background-color: var(--control);
+    border-top-right-radius: 1em;;
+  /*Begin Colorzilla---------------------------*/
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#9b4e95+0,9b4e95+0,683564+100 */
+    background: linear-gradient(to bottom, #b36bad 0%, #ad52a5 0%,#893282 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    
+    /*End Colorzilla-----------------------------*/
+   
+   
+    height: 9em;
+    width: 100%;
+    transition: all .5s 0s;
+    box-shadow: 0em -.01em .1em rgba(32, 32, 32, 0.5);
+    padding: .4em;
+}
+
+.tLabel.selected {
+    box-shadow: none
+}
+
+.tLabel {
+    text-align: center;
+    box-shadow: 0em -.1em .2em rgba(0, 0, 0, .5);
+    z-index: 100;
+    position: absolute;
+    top: -1.5em;
+    margin-left: .5em;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+    height: 1em;
+    padding: .5em;
+    padding-top: .2em;
+    padding-bottom: .3em;
+    color: white;
+    font-family: 'BodyText';
+    background-color: #9b5395;
+    cursor: pointer;
+}
+
+.tabContent {
+    font-size:1.96em;
+    position: relative;
+    height: auto;
+    width: auto;
+    display: block;
+}
+
+.subBox {
+    display: inline-block;
+    /*height:5em;*/
+    float: left;
+    line-height: .6em;
+    font-size: .8em;
+}
+
+.txt {
+    color:var(--textWhite);
+    font-size:.5em;
+    line-height: 1.2em;
+    position:relative;
+    width:auto;
+    display:inline-block;
+    padding:.4em;
+    float:left;
+}
+.divider {
+    background-color: var(--ghostWhite20);
+    display: inline-block;
+    width: .05em;
+    margin-top: .2em;
+    height: 3.2em;
+    margin: .1em;
+    margin-left:.2em;
+    margin-right:.1em;
+    float: left;
+}
+
+.dividerHalf {
+    background-color: var(--ghostWhite20);
+    display: inline-block;
+    width: .1em;
+    margin-top: .2em;
+    height: 1.8em;
+    margin: .2em;
+    float: left;
+}
+.uclc {
+    position:absolute;
+    top:2.6em;
+    right:1.4em;
+    height:1.4em;
+    width:1.4em;
+    cursor:pointer;
+    background-image:url(../img/lowercase.svg);
+    background-size: 90% auto;
+    background-position:center center;
+    background-repeat:no-repeat;
+    border: .1em solid transparent;
+    transition: border-color 0.2s ease;
+    border-radius:.2em;
+
+}
+
+.uclc:hover {
+    border: .1em solid #fff;
+     background-color: rgba(215,172,214,40%);
+    
+}
+
+.uclc:focus {
+     border: .1em solid #fff;
+}
+
+
+.uclc.uppercase {
+     background-image:url(../img/uppercase.svg);
+}
+.widget {
+    position: relative;
+    background-color: white;
+    padding: .1em;
+    padding-top: .4em;
+    display: inline-block;
+    margin: .2em;
+    margin-right: .1em;
+    margin-left: .1em;
+    height: 2.8em;
+    min-width: 6em;
+    text-align: center;
+    width:1.2em;
+    text-decoration: none;
+    border-radius: .2em;
+    border: solid .1em rgba(0, 0, 0, .5);
+    border-radius: .2em;
+    box-shadow: .05em .05em .25em rgba(0, 0, 0, .5);
+    background-size: auto 100%;
+    cursor:pointer;
+    color:var(--textWhite);
+    font-family:'BoldText';
+    line-height:1.2em;
+}
+
+.widget.vid {
+    background-color:green;
+
+    background-size:auto 110%;
+    background-position:center center;
+}
+.widget .widgetLabel {
+    position:absolute;
+    font-size:.6em;
+    left:.1em;
+    right:.1em;
+    bottom:1em;
+    z-index: 1;
+    line-height: 1.2em;
+}
+.widget .ghoster {
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    z-index: 0;
+    background-color:rgba(0,0,0,.5);
+}
+
+
+.widget.web {
+    background-image: url(../img/thumbs/olt.png);
+    background-repeat:no-repeat;
+    background-position:center bottom;
+    background-size: 100% auto;
+    background-color:var(--textWhite);
+}  
+
+.widget.pre {
+    background-image: url(../img/thumbs/pre01.png);
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-size: auto 105%;
+    background-color:var(--textWhite);
+}  
+
+.vidBub {
+    position: relative;
+    background-color: white;
+    padding: .1em;
+    display: inline-block;
+    margin: .2em;
+    margin-right: .1em;
+    margin-left: .1em;
+    height: 6em;
+    text-align: center;
+    width:6em;
+    text-decoration: none;
+    border-radius: .2em;
+    border: solid .1em rgba(0, 0, 0, .5);
+    border-radius: 50%;
+    box-shadow: .05em .05em .25em rgba(0, 0, 0, .5);
+    background-image: url(../widgets/mediaplayer/img/thumbs/23189c13-078d-425b-b24c-dd57f40740a3.png);
+    background-size: auto 100%;
+    cursor:pointer;
+    color:var(--textWhite);
+    font-family:'BoldText';
+    font-size:.6em;
+    line-height:1.2em;
+}  
+.vidBub .label {
+    position: absolute;
+    bottom:1em;
+    left:0;
+    right:0;
+}
+
+.preset {
+    background-color: white;
+    padding: .1em;
+    padding-top: .2em;
+    display: inline-block;
+    margin: .2em;
+    margin-right: .1em;
+    margin-left: .1em;
+    height: 1.3em;
+    min-width: 1.2em;
+    text-align: center;
+    width:1.2em;
+    text-decoration: none;
+    border-radius: .2em;
+    border: solid .1em rgba(0, 0, 0, .5);
+    border-radius: .2em;
+    box-shadow: .05em .05em .25em rgba(0, 0, 0, .5);
+    cursor:pointer;
+}
+
+
+.digraph {
+    background-color: white;
+    padding: .1em;
+    padding-top: .2em;
+    display: inline-block;
+    margin: .2em;
+    margin-right: .1em;
+    margin-left: .1em;
+    height: 1.3em;
+    min-width: 1.2em;
+    text-align: center;
+    width:1.2em;
+    text-decoration: none;
+    border-radius: .2em;
+    border: solid .1em rgba(0, 0, 0, .5);
+    border-radius: .2em;
+    box-shadow: .05em .05em .25em rgba(0, 0, 0, .5);
+    cursor:pointer;
+}
+
+.preset.w3 {
+    width: 1.8em;
+}
+.preset.w4 {
+    width: 2.6em;
+}
+.digraph.w3 {
+    width: 1.8em;
+}
+.digaph.w4 {
+    width: 2.6em;
+}
+.digraph .sub {
+    padding-top:.1em;
+    font-size: .7em;
+    height: 1.35em;
+    border-bottom: solid .1em;
+    line-height: 1.2em;
+}
+.preset .sub {
+    padding-top:.1em;
+    font-size: .7em;
+    height: 1.35em;
+    border-bottom: solid .1em;
+    line-height: 1.2em;
+}
+.preset.syllaboard {
+    border-radius: 0;
+    display:inline-block;
+}
+.preset.syllaboard.w3 {
+    border-radius: 0;
+    width: 3em;
+}
+.preset.syllaboard.w4 {
+    border-radius: 0;
+    width: 4em;
+}
+.preset.syllaboard.w5 {
+    border-radius: 0;
+    width: 5em;
+}
+.preset.syllaboard.w6 {
+    border-radius: 0;
+    width: 3em;
+}
+.preset.syllaboard.w10 {
+    border-radius: 0;
+    width: 6em;
+}
+.preset.syllaboard.w20 {
+    border-radius: 0;
+    width: 10em;
+}
+.preset.vowel {
+    color: var(--vowelRed);
+}
+.preset.vowel.vowelBlack {
+    color:#000;
+}
+.preset.color {
+    width: 1.2em;
+}
+
+.preset.color.Red {
+    background-color: var(--Red);
+}
+
+.preset.color.Green {
+    background-color: var(--Green);
+}
+
+.preset.color.Blue {
+    background-color: var(--Blue);
+}
+
+.preset.color.Cyan {
+    background-color: var(--Cyan);
+}
+
+.preset.color.Magenta {
+    background-color: var(--Magenta);
+}
+
+.preset.color.Yellow {
+    background-color: var(--Yellow);
+}
+
+.preset.color.Orange {
+    background-color: var(--Orange);
+}
+
+.preset.color.Purple {
+    background-color: var(--Purple);
+}
+
+.preset.color.Gray {
+    background-color: var(--Gray);
+}

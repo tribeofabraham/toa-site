@@ -1,0 +1,167 @@
+.controls {
+    font-size:3em;
+    background-color:var(--control1);
+    z-index:100000;
+    position:absolute;
+    right:0;
+    bottom:0em;
+    height:auto;
+    width:1.4em;
+    border-top-left-radius:.4em;
+
+    /*background-image: url(../img/interface/tools/RGRBurstWhite.png);*/
+      /*Begin Colorzilla---------------------------*/
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#9b4e95+0,9b4e95+0,683564+100 */
+    /*background: linear-gradient(to bottom, #b36bad 0%, #ad52a5 0%,#893282 100%);*/
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    /*End Colorzilla-----------------------------*/
+
+    box-shadow: -.01em 0em .3em rgba(32, 32, 32, 0.8);
+}
+
+.toolLogo {
+    position:relative;
+    height:.8em;
+    width:.8em;
+    margin:.2em;
+    opacity: 1;
+    border-radius:.2em;
+    cursor:pointer;
+    background-color:var(--ghost60);
+    background-image:url(../img/interface/tools/RGRBurstBlue.png);
+    background-size:100% auto;
+    background-position:center center;
+    background-repeat:no-repeat;
+    display:block;
+    border: .1em solid transparent;
+    cursor:pointer;
+}
+.toolLogo:hover {
+    background-color:var(--textWhite);
+    border: .1em solid #fff;
+}
+.toolLogo:focus {
+    background-color:var(--ghost80);
+    border: .1em solid #fff;
+}
+
+.tool {
+    position:relative;
+    height:.8em;
+    width:.8em;
+    background-image:url(../img/interface/playAud.svg);
+    background-repeat:no-repeat;
+    background-size:70% auto;
+    background-position: center center;
+    border: .1em solid transparent;
+    transition: border-color 0.2s ease;
+    border-radius: .2em;
+    background-color:var(--ghostWhite60);
+    margin:.2em;
+    /*display:none;*/
+    cursor:pointer;
+    display:none;
+}
+
+.tool:hover {
+    background-color:var(--textWhite);
+    border: .1em solid #fff;
+}
+.tool:focus {
+    background-color:var(--ghost80);
+    border: .1em solid #fff;
+}
+.controls .toolTip {
+    position:absolute;
+    z-index: 3;
+    top:-.5em;
+    right:-.7em;
+    color:var(--textWhite);
+    font-size:.2em;
+    display:block;
+    box-shadow: none;
+    padding-right:1em;
+    text-align: center;
+    display: block;
+    width:12em;
+    opacity:0;
+    transition: all .5s 0s;
+}
+.controls .tool:hover .toolTip{
+    transition: all .5s 1s;
+   opacity:1;
+}
+.controls .toolLogo:hover .toolTip{
+    transition: all .5s 1s;
+   opacity:1;
+}
+.toolTip span {
+    position: absolute;
+    right:0;
+    color:var(--textWhite);
+    background-color:var(--control1);
+    display:block;
+    width:auto;
+    border:solid .2em var(--textWhite);
+    border-radius:.2em;
+    padding:.2em;
+}
+.tool.video {
+    background-image:url(../img/interface/tools/video.png);
+    margin-top:.4em;
+    background-size:90% auto;
+} 
+
+.tool.video:hover, .tool.video:focus {
+    background-image:url(../img/interface/tools/videoBlue.png);
+}
+.tool.delete {
+    background-image:url(../img/interface/tools/delete.png);
+    margin-top:.4em;
+}
+.tool.undo {
+    background-image:url(../img/interface/tools/undo.png);
+}
+.tool.vowelColor {
+    background-image:url(../img/interface/tools/vowelRed.svg);
+}
+.tool.vowelColor.vowelBlack {
+    background-image:url(../img/interface/tools/vowelBlack.svg );
+}
+.tool.clear {
+    background-image:url(../img/interface/tools/eraser.svg);
+}
+.tool.resize {
+    background-image:url(../img/interface/tools/resize.png);
+    margin-bottom:.6em;
+}
+.tool.resize:hover, .tool.resize:focus {
+    background-image:url(../img/interface/tools/resizeBlue.png);
+}
+.tool.resizeOff {
+    background-image:url(../img/interface/tools/resizeOff.png);
+    margin-bottom:.6em;
+}
+.tool.resizeOff:hover, .tool.resizeOff:focus {
+    background-image:url(../img/interface/tools/resizeOffBlue.png);
+}
+.tool.search {
+    background-image:url(../img/interface/tools/resizeOff.png);
+    margin-bottom:.6em;
+}
+.tool.search:hover, .tool.search:focus {
+    background-image:url(../img/interface/tools/resizeOffBlue.png);
+}
+
+.tool.searchResultsBox {
+    display:block;
+    position: absolute;
+    height: 10em;
+    width:6em;
+    background-color:var(--control1);
+    border:solid .05em var(--textWhite);
+    left:-6.4em;
+    bottom:-1em;
+    z-index: -1;
+    border-radius:.4em;
+}

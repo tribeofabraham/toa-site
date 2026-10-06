@@ -1,0 +1,610 @@
+body {
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+    font-size: 1em;
+    font-family: 'BodyText';
+    /*background-color: var(--control1);*/
+    /*background-color: var(--back);*/
+    user-select: none;
+    overflow: hidden;
+
+}
+
+body,
+html {
+    font-size: 1em;
+    position: fixed;
+    background-color: #1F497D;
+}
+
+#wrapper {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#4f587c+0,30364c+100 */
+    /*background: linear-gradient(to bottom, rgba(86, 103, 169, 1) 0%, rgba(33, 29, 85, 1) 100%);*/
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-color: #275B9B;
+    /*background-color:#001f3e;*/
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    font-size: 5em;
+}
+
+#branding {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    height: 2em;
+    width: 3em;
+    opacity: .8;
+}
+
+#branding img {
+    height: auto;
+    width: 100%;
+}
+
+#tileArea {
+    position: absolute;
+    /*border:solid .1em var(--ghostWhite20);*/
+    left: 0;
+    right: 2em;
+    bottom: 3em;
+    top: 0;
+    z-index: 0;
+}
+
+#tileBack {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+#tiles {
+    position: absolute;
+    top: 0;
+    bottom: 6em;
+    left: 0;
+    right: 4em;
+    z-index: 9;
+    /*border:solid .1em green;*/
+}
+
+.lt.inBoard {
+    box-shadow: none;
+    opacity: 0;
+    z-index: 0;
+}
+
+.lt.inBoard.ltSylShow {
+    box-shadow: none;
+    opacity: 1;
+    z-index: 100;
+}
+
+.lt.inBoard.ltSylShowGhost {
+    box-shadow: none;
+    opacity: .8;
+    z-index: 100;
+}
+
+.lt.inBoard.ltSylSelected {
+    box-shadow: none;
+    opacity: .4;
+    z-index: 100;
+}
+
+.lt.inBoard.ltSylDrag {
+    display: none;
+}
+
+.lt.inBoard:hover {
+    opacity: 1;
+    z-index: 1;
+}
+
+.lt.inBoard:focus {
+    opacity: .2;
+    z-index: 1;
+}
+
+.lt.inBoard.selected {
+    background-color: var(--textWhite);
+    border: solid .15em rgba(0, 0, 0, .2);
+    opacity: 1;
+    z-index: 1;
+}
+
+.lt .syllaboardText .sub {
+    display: inline-block;
+}
+
+.lt .syllaboardText .color {
+    position: relative;
+    top: .2em;
+    background-color: red;
+    margin: .2em;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 0em;
+    width: .8em;
+    height: 1em;
+    border-radius: .1em;
+    display: inline-block;
+}
+
+.lt .syllaboardText .color.red {
+    background-color: var(--Red);
+}
+
+.lt .syllaboardText .color.green {
+    background-color: var(--Green);
+}
+
+.lt .syllaboardText .color.blue {
+    background-color: var(--Blue);
+}
+
+.lt .syllaboardText .color.cyan {
+    background-color: var(--Cyan);
+}
+
+.lt .syllaboardText .color.magenta {
+    background-color: var(--Magenta);
+}
+
+.lt .syllaboardText .color.yellow {
+    background-color: var(--Yellow);
+}
+
+.lt .syllaboardText .color.purple {
+    background-color: var(--Purple);
+}
+
+.lt .syllaboardText .color.orange {
+    background-color: var(--Orange);
+}
+
+.lt .syllaboardText .color.gray {
+    background-color: var(--Gray);
+}
+
+.lt {
+    position: absolute;
+    background-color: var(--textWhite);
+    height: 2em;
+    min-width: 1.6em;
+    font-size: 1em;
+    font-family: 'BodyText';
+    color: var(--textBlack);
+    text-align: center;
+    border-radius: .2em;
+    border: solid .1em rgba(0, 0, 0, 1);
+
+    /*box-shadow: .05em .05em .25em rgba(46, 46, 46, 0.5);*/
+    overflow: visible;
+    /*transition: all 1s 0s;*/
+    z-index: 2;
+    cursor: move;
+    letter-spacing: -.02em;
+}
+
+.lt.syllaboard {
+    z-index: 0;
+
+}
+
+.lt.syllaboard .syllaboardText {
+    font-size: 1.8em;
+    line-height: 1.4em;
+}
+
+.lt.syllaboard.w3 {
+    width: 3em;
+}
+
+.lt.syllaboard.w4 {
+    width: 4em;
+}
+
+.lt.syllaboard.w5 {
+    width: 5em;
+}
+
+.lt.syllaboard.w6 {
+    width: 4em;
+}
+
+.lt.syllaboard.w10 {
+    width: 8em;
+}
+
+.lt.syllaboard.w20 {
+    width: 18em;
+}
+
+.lt.syllaboard:focus .ltSub00 {
+
+    border: solid .1em var(--control1);
+}
+
+
+.lt.syllaboard .ltSub00 {
+    position: absolute;
+    top: -.4em;
+    bottom: -.4em;
+    left: -.4em;
+    right: -.4em;
+    border-radius: .1em;
+    background-color: var(--textWhite);
+    border: solid .1em var(--textBlack);
+}
+
+.w3 {
+    width: 2.6em;
+}
+
+.w4 {
+    width: 3.6em;
+}
+
+.lt .ltStackTab {
+    background-color: var(--textWhite);
+    position: absolute;
+    font-size: .15em;
+    top: 14.4em;
+    border-radius: .2em;
+    border: solid .1em var(--textBlack);
+    z-index: 1;
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
+    transition: all 1s 0s;
+    cursor: pointer;
+}
+
+.lt:focus {
+    z-index: 10;
+    outline: none;
+    border: solid .1em var(--focus);
+}
+
+.lt:hover {
+    z-index: 10;
+    outline: none;
+    border: solid .1em var(--Green);
+}
+
+.lt:focus .ltStackTab {
+    z-index: 10;
+    background-color: var(--textWhite);
+}
+
+.lt:hover .ltStackTab {
+    z-index: 10;
+    background-color: var(--ghostWhite80);
+}
+.lt.selected .ltStackTab {
+    z-index: 10;
+    background-color: var(--textWhite)
+}
+.lt.selected:hover .ltStackTab {
+    z-index: 10;
+    background-color: var(--textWhite)
+}
+
+.lt .ltStackTab .sub {
+    position: relative;
+    background-color: var(--textWhite);
+    border-bottom: solid .1em var(--textBlack);
+    margin: .2em;
+    padding: .1em;
+    margin-bottom: .2em;
+    margin-top: .1em;
+    line-height: 1.4em;
+    font-size: 1em;
+    left: -.1em;
+    background-color: blue;
+}
+
+.lt.lt.vowel .ltStackTab .sub {
+    border-bottom: solid .1em var(--vowelRed);
+}
+
+.lt .ltStackTab.sub0 {
+    display: none;
+}
+
+.lt .ltStackTab.sub1 {
+    left: 0em;
+}
+
+.lt .ltStackTab.sub2 {
+    left: 2em;
+}
+
+.lt .ltStackTab.sub3 {
+    left: 4em;
+}
+
+.lt .ltStackTab.sub4 {
+    left: 6em;
+}
+
+.lt .ltStackTab.sub5 {
+    left: 8em;
+}
+
+.lt .ltStackTab.sub6 {
+    top: 16.3em;
+    left: 0em;
+}
+
+.lt .ltStackTab.sub7 {
+    top: 16.3em;
+    left: 2em;
+}
+
+.lt .ltStackTab.sub8 {
+    top: 16.3em;
+    left: 4em;
+}
+
+.lt .ltStackTab.sub9 {
+    top: 16.3em;
+    left: 6em;
+}
+
+.lt .ltStackTab.sub10 {
+    top: 16.3em;
+    left: 8em;
+}
+
+/*.lt .ltStackTab.sub11 {
+    top: 18.2em;
+    left: 0em;
+}
+
+.lt .ltStackTab.sub12 {
+    top: 18.2em;
+    left: 2em;
+}
+
+.lt .ltStackTab.sub13 {
+    top: 18.2em;
+    left: 4em;
+}
+
+.lt .ltStackTab.sub14 {
+    top: 18.2em;
+    left: 6em;
+}
+
+.lt .ltStackTab.sub15 {
+    top: 18.2em;
+    left: 8em;
+}*/
+
+.lt .ltStackTab .syllaboardText .sub {
+    display: none;
+}
+
+.lt .ltMove {
+    height: .5em;
+    width: .5em;
+    background-color: rgba(0, 0, 0, .6);
+    cursor: pointer;
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    z-index: 5;
+    background-image: url(../img/move.png);
+    background-size: 60% auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-bottom-right-radius: 50%;
+    border-top-left-radius: .08em;
+    display: none;
+}
+
+.lt.lt.syllaboard .ltMove {
+    top: -.4em;
+    left: -.4em;
+}
+
+.lt.selected .ltMove {
+    display: block;
+}
+
+.lt.vowel {
+    color: var(--vowelRed);
+}
+
+.lt.vowel.vowelBlack {
+    color: #000;
+}
+
+.lt.color {
+    background-color: #fff;
+}
+
+.lt.color.red,
+.lt.color.red .ltStackTab {
+    background-color: var(--Red);
+}
+
+.lt.color.blue,
+.lt.color.blue .ltStackTab {
+    background-color: var(--Blue);
+}
+
+.lt.color.green,
+.lt.color.green .ltStackTab {
+    background-color: var(--Green);
+}
+
+.lt.color.orange,
+.lt.color.orange .ltStackTab {
+    background-color: var(--Orange);
+}
+
+.lt.color.yellow,
+.lt.color.yellow .ltStackTab {
+    background-color: var(--Yellow);
+}
+
+.lt.color.orange,
+.lt.color.orange .ltStackTab {
+    background-color: var(--Orange);
+}
+
+.lt.color.gray,
+.lt.color.gray .ltStackTab {
+    background-color: var(--Gray);
+}
+
+.lt.color.purple,
+.lt.color.purple .ltStackTab {
+    background-color: var(--Purple);
+}
+
+.lt.color.cyan,
+.lt.color.cyan .ltStackTab {
+    background-color: var(--Cyan);
+}
+
+.lt.color .ltSub00 {
+    display: none;
+}
+
+.lt.selected {
+    border: solid .1em rgb(1, 1, 248);
+    z-index: 5;
+}
+
+.ltSub {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: .94em;
+}
+
+.ltSub00 {
+    position: absolute;
+    top: .3em;
+    left: .1em;
+    right: .1em;
+    bottom: .4em;
+    z-index: 1;
+    border-bottom: solid .1em;
+}
+
+#lt01 .ltSub01 {
+    position: absolute;
+    top: auto;
+    left: auto;
+    bottom: 1.79em;
+    right: 0.3em;
+    height: 3em;
+    width: 3em;
+    z-index: 1;
+    display: none;
+}
+
+.ltSub02 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2em;
+    width: 1.6em;
+    background-color: var(--control1);
+    display: none;
+    background-image: url(../img/interface/mediaPlayer/SVG/unmuted.svg);
+    background-size: 80% auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 2
+}
+
+.ltSub02 audio {
+    background-color: red;
+    height: 1em;
+    width: 2em;
+    position: absolute;
+    bottom: 0em;
+    display: block;
+}
+
+.ltSub03 {
+    display: none;
+}
+
+.ltSub03 .vid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2em;
+    width: 1.6em;
+    overflow: hidden;
+    z-index: 3;
+}
+
+.ltSub03 .vid video {
+    position: absolute;
+    left: -1.2em;
+    height: 2em;
+    width: 4em;
+}
+
+.ltSub01 img {
+    position: absolute;
+    height: 100%;
+    width: auto;
+    z-index: -2;
+
+}
+
+#lt02 .ltSub01 {
+    position: absolute;
+    top: auto;
+    bottom: 2.5em;
+    left: .1em;
+    height: 1.5em;
+    width: 1.5em;
+    background-color: rgb(7, 126, 141, 1);
+    border: solid .05em var(--textBlack);
+    border-radius: 50%;
+    z-index: -1;
+    display: none;
+}
+
+#lt02 .ltSub01 img {
+    height: 103%;
+    width: auto;
+    left: 0em;
+    top: 0;
+}
+
+#lt03 .ltSub01 {
+    position: absolute;
+    top: auto;
+    bottom: 2em;
+    left: .25em;
+    height: 3em;
+    width: 1em;
+    z-index: -1;
+    display: none;
+}
+
+#lt03 .ltSub01 img {
+    height: 100%;
+    width: auto;
+    left: 0;
+}

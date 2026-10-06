@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="rewind" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 321.38 321.38">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="m65,172.16c-8.75-5.16-8.75-18.06,0-23.22l100.59-59.33c8.74-5.16,19.68,1.29,19.68,11.61v118.66c0,10.32-10.93,16.77-19.68,11.61l-100.59-59.33h0Z"/>
+  <rect class="cls-1" x="210.47" y="87.79" width="39.23" height="145.8" rx="12.1" ry="12.1"/>
+</svg>

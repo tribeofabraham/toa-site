@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.nctm.org/tools/pandemic2020/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 31 Aug 2025 21:10:51 GMT -->
+<head>
+    <title>NCTM: Pandemic 2020</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="css/colors.css">
+    <link rel="stylesheet" type="text/css" href="css/interface.css">
+    <link rel="stylesheet" type="text/css" href="css/plotting.css">
+
+    <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
+    <script src="js/sizer.js" type="text/javascript"></script>
+    <script src="js/pandemic.js" type="text/javascript"></script>
+    <script src="js/pandemicDraw.js" type="text/javascript"></script>
+
+<style type="text/css">
+/*Color Palettes for Pandemic 2020*/
+#wrapper {
+    --dark: rgba(80,80,80,1);
+    --med: rgba(120,120,120,1);
+    --light: rgba(240,240,240,1);
+    --uninfected: rgba(255,255,255,1);
+    /*--justInfected: rgba(255,30,0,1);*/
+	/*--contagious: rgba(255,80,180,1);*/
+    --justInfected: rgba(255,100,80,1);
+    --contagious: rgba(90,200,255,1);
+    --noLongerContagious: rgba(120,120,120,1);
+    --nctmLightBlue: rgba(20,130,200,1);
+    --nctmBlue: rgba(40,160,220,1);
+}
+
+body {
+    --history: #00a6d1;
+    --variation: #b9b532;
+    --experience: #f58e35;
+	--red: #b61e5c;
+    --other: #888;
+}
+</style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-30056-1" type="9b0659e3af73bb5640e205e5-text/javascript"></script>
+<script type="9b0659e3af73bb5640e205e5-text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-30056-1');
+</script>-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <div id="messageBox">
+            <h1>This math simulation models the spread of a virus through social contact. </h1>
+            <h2>The Spread of Virus Simulation has four variables you can control.</h2>
+            <dl>
+                <dt>Population Size:</dt>
+                <dd>Each small square represents a person</dd>
+            </dl>
+            <h2>Virus variables include</h2>
+            <dl>
+                <dt>Days Contagious</dt>
+                <dd>For the coronavirus this varies between 2 and 14 days before significant signs appear. A selection of 6-10 seems reasonable to start.</dd>
+                <dt>Chance of Contracting Virus per Contagious Contact</dt>
+                <dd>This is how likely an uninfected person is to catch the virus when contacted by a contagious person. This value is not known for coronavirus. Something between 10% and 4% may be reasonable.</dd>
+            </dl>
+
+            <h2>Social variable is one we can control.</h2>
+            <dl>
+                <dt>Number of Contacts per Day</dt>
+                <dd>This represents the number of contacts, other people, each person contacts per day. While in normal situations this could likely be in the 100s for students. In this setting between 10 and 2 seem reasonable.</dd>
+            </dl>
+
+            <p><strong>NOTE:</strong> This is a simulation and it has been simplified to a small number of variables. These variables are applied uniformly across each person in the population. Real life is much more variable and complicated. Our goal is to help learners of all ages better understand how our actions impact the collective result and how mathematics can be used to better understand our world.</p>
+            <p>Each time you click <span class="btnIcon btnIconCalc"></span> or <span class="btnIcon btnIconRecalc"></span> the simulation recalculates. For some cases the spread ends quickly. This is by chance given the variables. Click <span class="btnIcon btnIconRecalc"></span> again for a new simulation. You may need to run multiple times to get a sense of the variability and impact of the settings. This simulation/model is not predictive but is intended to show how our actions can impact our community.</p>
+
+
+           
+        </div>
+        <div id="populationPanel">
+            <div class="popMessage">
+
+            </div>
+
+            <div id="populationDiv">
+
+            </div>
+            <div id="populationDivSVG">
+                <svg id="graphSVG" width="100%" height="100%">
+
+                </svg>
+            </div>
+
+            <div id="populationLoader">
+                Running Simulation...
+            </div>
+        </div>
+        <div id="graphPanel">
+            <!--<canvas id="graphCanvas"></canvas>
+            <div id="graphControl"></div>-->
+            <svg id="chartSVG" width="90%" height="90%">
+
+            </svg>
+            <svg id="vertAxisSVG" width="10%" height="100%">
+
+                <text id="casesAxisText" transform="rotate(-90)" style="text-anchor:end;" x="-500%" y="5.5%">cases</text>
+
+                <text id="maxCasesText" x="5%" y="11%">####</text>
+
+
+            </svg>
+            <svg id="horizAxisSVG" width="100%" height="10%">
+
+                <text id="daysAxisText" x="50%" y="45%">days</text>
+                <text id="maxDaysText" x="99%" y="40%" text-anchor="end">--</text>
+
+
+            </svg>
+            <!--<img src="img/graph.svg"/>-->
+        </div>
+        <div id="inputPanel">
+            <h1>Parameters</h1>
+            <!--<div class="slidecontainer"><input type="range" min="1" max="100" value="50" step="10" class="slider" id="selectPopulation"></div>-->
+            <div class="pickPop">
+                <h2 class="blockSub">
+                    Population size:</h2>
+                <ul>
+                    <li class="selected">25</li><li>100</li><li>400</li><li>900</li>
+
+                </ul>
+                <div class="inputLabel">Subjects</div>
+            </div>
+            <div class="rule"></div>
+            <div class="pickDays">
+                <h2>Days contagious</h2>
+                <div class="inputBlock">
+                    <input id="daysContagious" type="number" value="10" min="0" />
+                    <div class="inputLabel inputLabelInline">Days</div>
+                </div>
+            </div>
+
+
+            <div class="pickPercent">
+
+                <h2>Chance of contracting virus per contagious contact</h2>
+                <div class="inputBlock">
+                    <input id="percentTransmission" type="number" value="6" min="0" max="100" />
+                    <div class="inputLabel inputLabelInline">%</div>
+                </div>
+            </div>
+            <div class="rule"></div>
+            <div class="pickContacts">
+                <h2>Number of contacts per day</h2>
+                <div class="inputBlock">
+                    <input id="contacts" type="number" value="4" min="0" />
+                    <div class="inputLabel inputLabelInline">Contacts</div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div id="resultPanel">
+            <h1>Results</h1>
+            <div class="runSimulationBox">
+                <div id="btnCalc" class="btnStandard">Calculate Results</div>
+            </div>
+            <div id="controlPanel">
+                <div id="dayFirst" class="btnControl btnFirst disabled"></div>
+                <div id="dayPrev" class="btnControl btnPrev disabled"></div>
+                <div id="dayPlay" class="btnControl btnPlay disabled"></div>
+                <div id="dayNext" class="btnControl btnNext disabled"></div>
+                <div id="dayLast" class="btnControl btnLast disabled"></div>
+            </div>
+            <div class="dayCounter">Day <span id="rDayText">--</span> of <span id="rDayTotalText">--</span></div>
+            <div id="resultsInfo">
+
+                <div id="re1" class="resultEntry">
+                    <div class="resultLabel">Uninfected:</div>
+                    <div id="r1a" class="resultValue1">--</div>
+                    <div id="rsb1" class="resultSampleBox uninfected"></div>
+                    <div id="r1b" class="resultValue2">--%</div>
+                </div><br />
+                <div id="re2" class="resultEntry">
+                    <div class="resultLabel">Just infected:</div>
+                    <div id="r2a" class="resultValue1">--</div>
+                    <div id="rsb2" class="resultSampleBox justInfected plot"></div>
+                    <div id="r2b" class="resultValue2">--%</div>
+                </div><br />
+                <div id="re3" class="resultEntry">
+                    <div class="resultLabel">Contagious:</div>
+                    <div id="r3a" class="resultValue1">--</div>
+                    <div id="rsb3" class="resultSampleBox contagious plot"></div>
+                    <div id="r3b" class="resultValue2">--%</div>
+                </div><br />
+                <div id="re4" class="resultEntry">
+                    <div class="resultLabel">No longer contagious:</div>
+                    <div id="r4a" class="resultValue1">--</div>
+                    <div id="rsb4" class="resultSampleBox noLongerContagious plot"></div>
+                    <div id="r4b" class="resultValue2">--%</div>
+                </div>
+            </div>
+
+        </div>
+        <div id="brandingPanel">
+
+        </div>
+        <div id="egg1"></div>
+        <div id="egg2"></div>
+    </div>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="9b0659e3af73bb5640e205e5-|49" defer></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977f8455c96f4b06',t:'MTc1NjY3NDY1MA=='};var a=document.createElement('script');a.src='../../cdn-cgi/challenge-platform/h/b/scripts/jsd/4710d66e8fda/maind41d.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"ed7fff6a1ebe4952b95ed1678d6ec6bf","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+
+
+<!-- Mirrored from www.nctm.org/tools/pandemic2020/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 31 Aug 2025 21:10:53 GMT -->
+</html>

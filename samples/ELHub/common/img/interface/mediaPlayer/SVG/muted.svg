@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="muted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 321.38 321.38">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 20px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="m169.66,248.37h0c-2.03,0-3.99-.71-5.55-2l-54.89-45.5v-80.42l54.89-45.43c1.56-1.29,3.52-2,5.55-2h0c4.81,0,8.7,3.9,8.7,8.7v157.95c0,4.81-3.9,8.7-8.7,8.7h0Z"/>
+  <path class="cls-2" d="m94.38,120.48h-26.11c-10.53,0-19.06,8.54-19.06,19.06v42.29c0,10.53,8.53,19.06,19.06,19.06h26.12v-80.41h-.01Z"/>
+  <line class="cls-1" x1="201.55" y1="133.25" x2="256.33" y2="188.04"/>
+  <line class="cls-1" x1="256.33" y1="133.25" x2="201.55" y2="188.04"/>
+</svg>

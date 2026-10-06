@@ -1,0 +1,92 @@
+body {
+/*Universal Colors*/
+    --primary: rgb(155, 78, 149);
+
+    --secondary: #004ca8;
+    --tertiary: #7db40a;
+    --focus: rgb(60, 30, 255);
+	--clear: rgba(255, 255, 255, 0);
+    --clearblack: rgba(0, 0, 0, 0);
+    --solidgrey: #b5b5b5;
+    --textBlack:#333333;
+    --textWhite:#ffffff;  
+    --paperWhite:#dddddd; 
+    --control1: rgb(0,105,112);
+    --control2: #004D53;
+    --control3: #7db40a;
+    --control4: #0073be;
+    --control5: #004ca8;
+    --control6: #ffd300;
+    --control7: #ff7d1e;
+    --ghost20: rgba(255, 255, 255, .2);
+    --ghost40: rgba(255, 255, 255, .4);
+    --ghost60: rgba(255, 255, 255, .6);
+    --ghost80: rgba(255, 255, 255, .8);
+	--ghost90: rgba(255, 255, 255, .9);
+    --ghostBlack06: rgba(0, 0, 0, .06);
+    --ghostBlack20: rgba(0, 0, 0, .2);
+    --ghostBlack40: rgba(0, 0, 0, .4);
+    --ghostBlack60: rgba(0, 0, 0, .6);
+    --ghostBlack80: rgba(0, 0, 0, .8);
+    --ghostBlack95: rgba(0, 0, 0, .95);
+    --solidgrey: #9a9a9a;
+    --textBlack:#333333;
+    --textWhite:#ffffff;  
+    --paperWhite:#f0f0f0;  
+    --supfile: rgb(255, 234, 210);
+    --suptan: #EFE2CD;
+    --MyApps: rgb(246,217,245);
+    --vitcbk:rgb(248,251,255);
+    --vitchd:rgb(7,63,112);
+    --vitc:rgb(242, 244, 255);
+    --vitcgroup:rgb(255,255,255);
+    --buttonclear:rgba(255,255,255,0);
+    --tabtext:rgba(0,40,95);
+    --tabdark:rgba(235,215,185);
+    --scroll:rgb(163,88,157);
+
+    
+
+/*Secondary Colors*/
+    --accent: #ffd300;
+
+
+/*HD Word*/
+
+
+/*Blast*/
+
+
+/*Countdown*/
+
+
+/*Ebooks*/
+    --bltBookBack: #071336;
+    --cdnBookBack: #76C7D0;
+    --cdnBookText: #002528;
+    --hdwBookBack: #080325;
+
+/*Soundwall*/
+    --mediabk: rgb(153,214,220);
+    --darkbox: rgb(46,122,128);
+    --chatborder: rgb(12,81,87,1);
+    
+/*VITCS*/
+    --vitcbk:rgb(248,251,255);
+    --vitchd:rgb(7,63,112);
+    --vitc:rgb(242, 244,255);
+    --vitcagenda:rgb(7,126,141,1);
+    --vitcgroup:rgb(255,255,255);
+    --vitclinks:rgba(155,78,149,0.07);
+    --vitcprimary:rgb(163,88,157);
+
+/* Spanish Media Server */
+--assistpanel:rgba(155,78,149,0.2);
+--box:rgb(215,176,213);
+--control:rgba(127,54,121,1);
+
+/* El Resource Hub */
+--langbtn:rgb(235,215,185);
+}
+
+

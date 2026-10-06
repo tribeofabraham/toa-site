@@ -1,0 +1,394 @@
+
+#ghoster {
+    background-color:var(--ghostBlack80);
+    position:absolute;
+    top:-.2em;
+    bottom:-.4em;
+    left:-.2em;
+    right:-.2em;
+    z-index: 10000;
+    display:none;
+}
+
+#wrapper .object  .menuBox {
+	 background-color:var(--clear);
+	border-radius:1em;
+	position:relative;
+	height:auto;
+	margin:0;
+	padding:0;
+	margin:.25em;
+	text-align: center;
+}
+
+#wrapper .object  .lst {
+	 background-color:var(--clear);
+	border-radius: 0% 0% 10% 10%;
+	position:relative;
+	height:auto;
+	padding:2;
+	margin:.25em;
+    overflow: visible;
+}
+#wrapper  .object .grp>.lst>.itm .lst>.itm .lst>.itm{
+
+	font-size:.8em;
+	display:inline-block;
+	margin:.25em;
+}
+
+#wrapper .object  .itm {
+	border-radius:0em;
+	position:relative;
+	height:80%;
+	margin:0;
+	padding:.8;
+	margin:.0em;
+
+}
+
+#wrapper .object  .txt {
+	border-radius:0;
+	position:absolute;
+	height:1.75em;
+	margin:0;
+	padding:0;
+	margin:0;
+	font-family: "DisplayText", "arial";
+    font-weight: bolder;
+	text-align: center;
+	font-size:2.75em;
+	width:100%;
+}
+
+#wrapper .object  .htm {
+	border-radius:0;
+	position:absolute;
+	height:auto;
+	margin:0;
+	padding:0;
+	margin:.25em;
+	font-family: 'BodyText', 'arial';
+	text-align: left;
+    background-color:rgba(255,255,255,1);
+
+}
+
+
+#wrapper  .object.menuTitle {
+	background-color:rgb(215,176,213);
+	color:#fff;
+	font-family:'DisplayText';
+	border-radius:1em;
+	position:static;
+	margin:.25em;
+	padding:.75em;
+}
+
+
+
+#wrapper .object.ghost90 {
+	background-color:var(--ghost90);
+}
+#wrapper .object {
+    z-index: 1;
+}
+
+
+#wrapper .fullScreen:focus {
+	border:solid .25em rgba(1,0,0,1);
+}
+
+#wrapper .object .object.objHidden{
+    opacity:0;
+    height:0em;
+    width:0em;
+}
+
+.object {
+    height:10em;
+    width:10em;
+    border-radius:50%;
+    display:block;
+    border:solid .2em var(--clearblack);
+    position:absolute;
+    overflow:visible;
+    z-index: 0;
+}
+
+
+
+
+ #wrapper .object .ui-handle {
+    border:solid .2em blue;
+}  
+
+.object .btnClose {
+	height:2em;
+	width:2em;
+	position:absolute;
+	top:1em;
+    right:1em;
+	cursor:pointer;
+	z-index: 10;
+    border-radius:50%;
+    padding:0;
+    margin:0;
+}
+.object .btnClose:hover .btnCloseBack { 
+    border:solid .25em var(--chatborder);
+    background-color: var(--vitcgroup);
+    border-radius:50%;
+}
+
+.object .btnClose:focus {
+    border:solid .25em rgba(0,0,0,.2);
+    
+}
+.object .btnCloseBack {
+	height:2em;
+	width:2em;
+	position:absolute;
+    left:-.25em;
+	top:-.5em;
+    background-image:url(../img/interface/mediaPlayer/SVG/closeK.svg);
+	background-position:center center;
+	background-size: 60% auto;
+	background-repeat:no-repeat;
+	background-color:var(--vitcgroup);
+	z-index: 10;
+    border:solid .25em rgba(0,0,0,0);
+    border-radius:50%;
+}
+.object .btnhome {
+	height:4em;
+	width:10.75em;
+	position:absolute;
+    left:0em;
+	top:0em;
+    background-image:url(../assets/img/home.svg);
+	background-position: left center;
+	background-size: 50% auto;
+	background-repeat:no-repeat;
+	background-color:var(--vitcgroup);
+	z-index: 10;
+    border:solid .25em rgba(0,0,0,0);
+    border-radius:50%;
+}
+
+.btnICBack home:hover .btnhomeICBack home{
+    border:solid .25em var(--secondary);
+    background-color: var(--vitcgroup);
+    border-radius:50%;
+}
+
+
+/*Styling for Slide Objects*/
+.object.sld {
+	position:absolute;
+	border-radius:1.5em;
+	background-color:#7CB309;
+	padding:2em;
+	text-align:left;
+	background-size:auto 105%;
+	background-position:center center;
+	left:0;
+	top:0;
+}
+.object.sld h1 {
+	color:#fff;
+	font-size:2em;
+	font-family:'DisplayText';
+}
+
+/*Styling for groups*/
+.object.grp {
+	background-color:(155,78,149,0.2);
+	border-radius:2em;
+	text-align:center;
+}
+
+.object.grp h1 {
+	color: var(--primary);
+	font-size:2em;
+	line-height:1.2em;	
+}
+
+.object.card {
+    position: absolute;
+    background-color:#fff;
+    /*background-image:url(../img/backgrounds/blueBG.png);
+    background-position: -1em center;
+    background-size:110% auto;*/
+    background-repeat:no-repeat;
+    overflow:visible;
+    height:120em;
+    width:104em;
+	border-radius:12em;
+	border-top-left-radius:60em;
+	border-bottom-left-radius:60em;
+	text-align: left;
+	padding:2em;
+	padding-left:140em;
+	padding-right:4em;
+}
+.object.card h1{
+    font-size:24em;
+    line-height: 1.5em;
+	font-family:"DisplayText"
+}
+.object.icn {
+	font-size:.4em;
+    background-color:var(--control5);
+    overflow:visible;
+    background-size:auto 105%;
+    background-position:center center;
+    background-repeat:no-repeat;
+}
+
+.object.text {
+    background-color:var(--ghostBlack40);
+    color:var(--ghost80);
+
+}
+
+.object.image {
+    background-color:var(--control3);
+}
+
+.object.audio {
+    background-color:var(--control4);
+}
+
+#wrapper .object.vidFull {
+    position:absolute;
+	background-color:var(--mediabk);
+    border-radius:1em;
+    z-index: 10;
+}
+
+#wrapper .object.vidFull .btn{
+    position:absolute;
+    z-index: 10;
+}
+
+
+.object.htm {
+    background-color:var(--control6);
+}
+.object.pdf {
+    background-color:var(--control7);
+}
+
+/* Object Text Formatting */
+.object.text h1 {
+    position:absolute;
+    font-size:2.25em;
+    top:0;
+    left:0;
+    right:0;
+    text-align: center;
+    line-height:4.5em;
+	z-index: 10;
+}
+
+/* Object Image Formatting */
+.object.image img {
+    height:60%;
+    position:relative;
+    top:20%;
+    border: solid .2em var(--ghost80);
+	z-index: 10;
+}
+
+.object audio {
+    position:relative;
+    top:2em;
+    height:3em;
+    width:9em;
+	z-index: 10;
+}
+
+.object iframe {
+    position:relative;
+    top:2.75em;
+    height:4.5em;
+	z-index: 10;
+}
+.med .object {
+    position:absolute;
+    height:auto;
+    width:auto;
+	z-index: 10;
+    border-radius:0;
+}
+#wrapper .med .object.vid {
+    position:absolute;
+    height:auto;
+    width:auto;
+	z-index: 0;
+    border-radius:0;
+    cursor:pointer;
+    /*background-color:var(--ghostBlack40);*/
+
+}
+
+.med .object.vid video{
+    position:absolute;
+    height:100%;
+    width:100%;
+    left:0;
+    right:0;
+
+}
+#wrapper .object .vid video {
+
+    height:100%;
+    width:100%;
+}
+
+
+
+#wrapper .object iframe.fullScreen {
+    position:absolute;
+    top:0em;
+    bottom:0em;
+    right:0em;
+	left:0em;
+	z-index: 10;
+}
+/* Styling for Sample pages  */
+
+.sample {
+	background-image:url(/html/samplePages/img/0.png);
+	background-size:auto 105%;
+	background-position:center center;
+	background-repeat: no-repeat;
+	background-color:#fff;
+	display:none;
+}
+
+
+.sample0 {
+	background-image:url(http://www.reallygreatreading.com/articulateRGRAssets/sso/html/samplePages/img/0.png);
+}
+
+.sample1 {
+	background-image:url(http://www.reallygreatreading.com/articulateRGRAssets/sso/html/samplePages/img/1.png);
+}
+
+.sample2 {
+	background-image:url(http://www.reallygreatreading.com/articulateRGRAssets/sso/html/samplePages/img/2.png);
+}
+
+.sample3 {
+	background-image:url(http://www.reallygreatreading.com/articulateRGRAssets/sso/html/samplePages/img/3.png);
+}
+
+.sample4 {
+	background-image:url(http://www.reallygreatreading.com/articulateRGRAssets/sso/html/samplePages/img/4.png);
+}
+
+.sample5 {
+	background-image:url(http://www.reallygreatreading.com/articulateRGRAssets/sso/html/samplePages/img/5.png);
+}

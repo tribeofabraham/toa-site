@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ragamuffin Telephone</title>
+    <style>
+        :root {
+            --ink: #0d0b09;
+            --muted: #a09282;
+            --brass-light: #d4aa55;
+        }
+
+        * { box-sizing: border-box; margin: 0; }
+
+        html, body { height: 100%; }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background: var(--ink);
+            color: var(--muted);
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        }
+
+        .bar {
+            display: flex;
+            justify-content: space-between;
+            gap: 1em;
+            padding: 0.6em 1em;
+            font-size: 0.9em;
+            border-bottom: 0.0625em solid rgba(184, 146, 58, 0.25);
+        }
+
+        .bar a { color: var(--brass-light); text-decoration: none; }
+        .bar a:hover, .bar a:focus-visible { text-decoration: underline; }
+
+        /* The telephone itself: microphone allowed, filling the rest of the window */
+        iframe { flex: 1; width: 100%; border: 0; }
+    </style>
+</head>
+
+<body>
+    <nav class="bar" aria-label="Sample">
+        <a href="../">&larr; All samples</a>
+        <a href="https://telephone.ragamuffinstudios.com" target="_blank" rel="noopener">Open in its own window &#8599;</a>
+    </nav>
+    <iframe src="https://telephone.ragamuffinstudios.com" title="Ragamuffin Telephone"
+        allow="microphone; autoplay"></iframe>
+</body>
+
+</html>

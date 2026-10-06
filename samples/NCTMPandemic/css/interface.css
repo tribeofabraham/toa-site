@@ -1,0 +1,536 @@
+body, html {
+	width:100%;
+    height:100%;
+	font-size:14px;
+	height:100%;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select: none;
+	user-select:none;
+	font-family:'BodyText';
+    position: fixed;
+    text-align:center;
+
+zoom: 100%;
+
+}
+
+#wrapper {
+    font-size: .5em;
+    height:100%;
+    display:inline-block;
+    overflow: hidden;
+    position:relative;
+    line-height: 1.2em;
+    border:solid .1em var(--nctmLightBlue);
+    border-radius:1.25em;
+    background-color:var(--light);
+    overflow: hidden;
+}
+/*Messaging Window to start app*/
+
+#messageBox {
+    position:absolute;
+    top:2%;
+    bottom:52.5%;
+    left:2.5%;
+    right:2.5%;
+    background-color:#fff;
+    z-index: 100;
+     font-size:.75em;
+    text-align:left;
+    padding:2em;
+    padding-top:2em;
+    border: solid 1px var(--nctmLightBlue);
+    box-sizing: border-box;
+    border-radius:1em;
+    overflow: hidden;
+    color:var(--dark); 
+    display:none;
+}
+#messageBox h1 {
+    color:var(--nctmLightBlue);
+    font-family:'BoldText';
+    font-size:1.5em;
+    margin-bottom:.5em;
+
+}
+#messageBox h2 {
+
+    color:var(--dark);
+    font-family:'BoldText';
+    font-size:1.3em;
+    margin:0;
+    margin-bottom:.5em;
+    
+
+}
+#messageBox p {
+    color:var(--dark);
+    font-size:1.4em;
+    margin-bottom:.75em;
+    line-height: 1.2em;
+}
+#messageBox .btnText{
+    color:var(--nctmLightBlue);
+    font-family:'BoldText';
+}
+#messageBox dl {
+    font-size:1.3em;
+    display:inline-block;
+    margin-bottom:.5em;
+
+}
+#messageBox dt {
+        clear:both;
+
+    width:14em;
+    vertical-align: top;
+    float:left;
+    color:var(--nctmLightBlue);
+    font-family:"BoldText";
+    text-align:right;
+    padding-right:.5em;
+    margin-bottom:.5em;
+}
+#messageBox dd {
+    width:52em;
+    float:left;
+    padding-left:.5em;
+    border-left:solid .1em var(--nctmLightBlue);
+    margin-bottom:.5em;
+}
+
+.btnIcon {
+    height:1.1em;
+    width:4em;
+    display:inline-block;
+    background-position:center center;
+    background-size:auto 100%;
+    background-repeat:no-repeat;
+    position:relative;
+    top:.2em
+}
+
+#messageBox strong {
+    font-family:'DisplayText';
+    color:var(--nctmLightBlue);
+}
+
+.btnIcon.btnIconCalc {
+    background-image: url('../img/infoCalcBtnIcon.png');
+}
+.btnIcon.btnIconRecalc {
+    background-image: url('../img/infoRecalcBtnIcon.png');
+}
+#messageBox #messageCallToAction {
+    color:var(--light);
+    background-color:var(--nctmLightBlue);
+    padding:.8em;
+    font-family:'DisplayText';
+    font-size:3em;
+    text-align:center;
+    border-radius:.5em;
+    margin-top:1em;
+}
+/*Panel Styling*/
+
+#graphPanel{
+    position:absolute;
+    top:2%;
+    bottom:55%;
+    left:52%;
+    right:5%;
+    text-align: left;
+}
+
+
+
+
+#brandingPanel {
+
+    position:absolute;
+    top:90%;
+    bottom:0;
+    left:0;
+    right:0;
+    background-image:url(../img/centennial_logo_320x61.png);
+    background-position:1em center;
+    background-size:auto 50%;
+    background-repeat:no-repeat;
+
+}
+
+/*Population Panel Styling*/
+#populationPanel {
+    position:absolute;
+    top:5%;
+    bottom:55%;
+    left:5%;
+    right:55%;
+    text-align:center;
+
+       font-size:.8em
+}
+
+#populationPanel .popMessage {
+    text-align:left;
+    font-size:1.5em;
+    line-height:1.2em;
+    padding:1em;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:11;
+    color:var(--dark);
+    font-weight:bold;
+}
+#populationPanel .popMessage p{
+    padding-bottom:1em;
+}
+
+
+
+/*End Population Panel Styling*/
+/*Input Panel Styling*/
+#inputPanel, #resultPanel {
+    position:absolute;
+    top:50%;
+    bottom:10%;
+     font-size:.9em;
+    text-align:center;
+    padding:2em;
+    padding-top:4.5em;
+    border: solid 1px var(--nctmLightBlue);
+    box-sizing: border-box;
+    border-radius:1em;
+    overflow: hidden;
+}
+#resultPanel {
+    left:52%;
+    right:2.5%;
+}
+#inputPanel {
+    left:2.5%;
+    right:52%;
+   
+}
+#inputPanel h1, #resultPanel h1 {
+    font-size:1.35em;
+    font-weight:bold;
+    color:var(--light);
+    background-color:var(--nctmLightBlue);
+    padding:.8em;
+    padding-top:.6em;
+    padding-bottom:.6em;
+    text-align: left;
+    position:absolute;
+    top:0;
+    left:-2px;
+    right:-2px;
+    margin:0;
+    box-sizing: border-box;
+}
+#inputPanel h2 {
+    font-size:1.2em;
+    color:var(--dark);
+    margin:.4em;
+    text-align:center;
+    padding-right:.5em;
+    font-weight: bold;
+}
+#inputPanel h2.blockSub {
+    display:block;
+}
+#inputPanel div.rule {
+    width:70%;
+    display:inline-block;
+    color:var(--nctmLightBlue);
+    background-color:var(--nctmLightBlue);
+    border:none;
+    height:.1em;
+    margin-bottom:.5em;
+}
+#inputPanel ul {
+    display:inline-block;
+}
+#inputPanel li {
+    font-size:1.4em;
+    font-family: 'DisplayText';
+    display:inline-block;
+    color:var(--light);
+    background-color:var(--dark);
+    padding:.6em;
+    padding-left:.75em;
+    padding-right:.75em;
+    cursor:pointer;
+
+}
+
+#inputPanel li:first-child {
+    border-top-left-radius:.5em;
+    border-bottom-left-radius:.5em;
+}
+
+#inputPanel li:last-child {
+    border-top-right-radius:.5em;
+    border-bottom-right-radius:.5em;
+}
+
+#inputPanel li.selected {
+    background-color:var(--nctmLightBlue)
+}
+#inputPanel .inputLabel {
+    font-weight: bold;
+    color:var(--dark);
+    padding:.5em;
+}
+#inputPanel .inputLabel.inputLabelInline {
+    display:inline-block;
+}
+#inputPanel input {
+    color:var(--dark);
+    text-align: center;
+    zoom: 100%;
+        border: none;
+    border:solid .1em var(--med);
+    cursor:pointer;
+    border-radius: .5em; 
+    font-family:'DisplayText';
+    font-size:1.2em;
+ 
+    padding:0;
+    background-color:#fff;
+    box-sizing: border-box;;
+    margin:0;
+    width:4em;
+}
+
+#inputPanel input[type=number] {
+
+}
+input[type=submit] {
+   /*your styles here.....*/
+}
+textarea{
+   /*your styles here.....*/
+}
+
+#inputPanel .inputBlock {
+    display:inline-block;
+    width:12em;
+    padding-left:1em;
+}
+#inputPanel .inputBlock .inputLabel{
+    display:inline-block;
+    width:4em;
+    text-align: left;
+}
+.btnStandard {
+    background-color:var(--nctmLightBlue);
+    color:var(--light);
+    display:inline-block;
+    padding:1em;
+    cursor:pointer;
+    border-radius:1em;
+    text-align:center;
+    font-family: 'DisplayText';
+    text-transform:uppercase;
+}
+
+#btnCalc {
+    margin-bottom:1em;
+    width:12em;
+}
+
+.pickPop {
+    margin-bottom:.25em;
+}
+.pickDays, .pickContacts, .pickPercent {
+    margin-bottom:1em;
+}
+.pickCalc {
+    margin-top:3em;
+    text-align:center;
+}
+/*End Input Panel Styling*/
+/*Result Panel Styling */
+
+.dayCounter {
+    font-size:1.5em;
+    font-weight: bold;
+    font-family:'DisplayText';
+    margin-bottom:1em;
+    color:var(--dark);
+}
+#controlPanel{
+    text-align: center;
+    border-radius:1em;
+    height:4em;
+    position:relative;
+    margin-bottom:2em;
+}
+.btnControl {
+    display:inline-block;
+    height:4em;
+    width:4em;
+    cursor:pointer;
+    background-position:center center;
+    background-size:80% auto;
+    background-repeat: no-repeat
+}
+
+.btnControl.btnPlay {
+    background-image:url(../img/controller/play.svg);
+}
+
+.btnControl.btnReplay {
+    background-image:url(../img/controller/replay.svg);
+}
+
+.btnControl.btnPause {
+    background-image:url(../img/controller/pause.svg);
+}
+
+.btnControl.btnPrev {
+    background-image:url(../img/controller/prev.svg);
+}
+.btnControl.btnNext {
+    background-image:url(../img/controller/next.svg);
+}
+
+.btnControl.btnFirst {
+    background-image:url(../img/controller/first.svg);
+}
+
+.btnControl.btnLast {
+    background-image:url(../img/controller/last.svg);
+}
+
+.btnControl.disabled {
+    cursor:default;
+    opacity:.5;
+}
+#resultsInfo {
+    margin-bottom: 1em;
+    margin-right:5em;
+}
+.resultEntry {
+    position:relative;
+    text-align: right;
+    font-size:1.2em;
+    font-weight: bold;
+    color:var(--dark);
+
+    margin:0;
+    padding:0;
+    height:1em;
+}
+
+
+.resultEntry div{
+    display:inline-block;
+    text-align: right;
+    padding:.25em;
+}
+.resultLabel {
+    width:11em;
+}
+.resultSampleBox {
+    height:1em;
+    width:1em;
+    border:solid .05em var(--dark);
+    position:relative;
+    top:.4em;
+    background-image:url('../img/eyeOff.svg');
+    background-size:60% auto;
+    background-position:center center;
+    background-repeat:no-repeat;
+}
+.plot {
+    background-image:url('../img/eye.svg');
+}
+.resultValue1 {
+    width:5em;
+}
+.resultValue2 {
+    width:2em;
+}
+
+#resultsInfo h2 {
+    padding:0;
+    margin:0;
+    font-size:1.6em;
+    font-weight: bold;
+    margin:1em;
+    color:var(--dark);
+}
+/*End Result Panel Styling*/
+
+/*End Panel Styling*/
+
+/*Population Slider Styling*/
+.slidecontainer {
+  width: 80%; /* Width of the outside container*/
+    display:inline-block;
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: .5em;
+  border-radius: .5em;;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+display:inline-block;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%; 
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%; 
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+
+/*End Population Slider Styling*/
+
+/*Eggs*/
+#egg1 {
+    position:absolute;
+    bottom:0;
+    left:0;
+    height:2em;
+    width:2em;
+    cursor:none;
+}
+#egg2 {
+    position:absolute;
+    bottom:0;
+    right:0;
+    height:2em;
+    width:2em;
+    cursor:none;
+}

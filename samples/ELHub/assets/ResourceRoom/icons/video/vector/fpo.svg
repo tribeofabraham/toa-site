@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        isolation: isolate;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke-width: 0px;
+      }
+
+      .cls-3 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-4 {
+        fill: #ff0606;
+        opacity: .6;
+      }
+
+      .cls-4, .cls-5 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-6 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-5 {
+        fill: #fff;
+        font-family: 'RGRCenturyGothic_21-Bold', 'RGR Century Gothic_21';
+        font-size: 794.9px;
+        font-weight: 700;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-2" x="1834" width="86" height="1080"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="cls-2" width="1860.7" height="1080"/>
+    </clipPath>
+  </defs>
+  <g class="cls-6">
+    <image class="cls-1" width="1520" height="794" transform="translate(1738.2 0) scale(1.4)" xlink:href="fpo-1.png"/>
+  </g>
+  <g class="cls-3">
+    <g>
+      <image class="cls-1" width="1520" height="794" transform="translate(-133.1 0) scale(1.4)" xlink:href="fpo-2.png"/>
+      <rect class="cls-4" x="-133.1" y="0" width="2068" height="1080"/>
+      <text class="cls-5" transform="translate(150.2 804.1)"><tspan x="0" y="0">FPO</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,69 @@
+
+#wrapper {
+    font-size: 1rem;
+}
+
+.grid, #tiles {
+    font-size:.5rem;
+}
+.grid {
+    position:absolute;
+    top:0;
+    left:0;
+    height:60em;
+    width:60em;
+    display:none;
+    z-index: 1;
+}
+#refDot {
+    height:.5rem;
+    width:.5rem;
+    background-color:rgba(0,0,0,0);
+    position: absolute;
+    top: 0;
+    right:0;
+    border:none;
+    padding:0;
+    margin:0;
+    font-size:1em;
+}
+
+.gridDot {
+    -webkit-appearance: none;       
+    position:absolute;
+    height:.6em;
+    width:.6em;
+    border-radius:0%;
+    background-color:rgba(255,255,255,0);
+    font-size:1em;
+    border:solid .2em rgba(0,0,0,0);
+    border:none;
+    cursor:move;
+    outline: none;
+}
+.gridDot:hover {
+ 
+}
+.gridDot:focus {
+   
+}
+
+.gridDot .indicator {
+    position:absolute;
+    height:.2em;
+    width:.2em;
+    left:0.2em;
+    top:0.2em;
+    border-radius:50%;
+    background-color:rgba(255,255,255,.1);
+}
+
+.gridDot:focus .indicator {
+    position:absolute;
+    height:.8em;
+    width:.8em;
+    left: -0.1em;
+    top:-0.1em;
+    border-radius:50%;
+    background-color:rgba(255,255,255,.2);
+}

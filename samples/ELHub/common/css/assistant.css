@@ -1,0 +1,964 @@
+body,
+html {
+    width: 100%;
+    font-size: 14px;
+    height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: 'BodyText','arial';
+    overflow: hidden;
+    background-color: rgba(0,0,0,0);
+}
+
+.assistant {
+    position:absolute;
+    z-index: 1000;
+    bottom:4em;
+    right:0em;
+    background-color:var(--primary);
+    color:var(--ghost80);
+    background-size:auto 3em;
+    background-position:1em bottom;
+    background-repeat:no-repeat;
+    border-top-left-radius:1em;
+    border-bottom-left-radius:1em;
+    transition:all .5s 0s;
+    height:auto;
+    width:5em;
+    overflow: hidden;
+    padding-bottom:1em;
+    font-size:1.25em;
+}
+.assistant.assistantClosed {
+    background-color:var(--primary);
+    height:5em;
+}
+.assistant.assistantRemote {
+    background-color:var(--secondary);
+    height:30em;
+}
+.assistant.assistantResources {
+    background-color:var(--secondary);
+    height:30em;
+    width:50em;
+}
+.assistant.assistantAI {
+    background-color:var(--control1);
+    height:36em;
+    width:60em;
+}
+
+img.assistAvatar {
+    border-radius:.5em;
+    border:none;
+    position:absolute;
+}
+.assistant iframe {
+    display:none;
+}
+.assistant.assistantAI iframe {
+    height:30em;
+    width:58em;
+    display:block;
+}
+.assistControl {
+    position:absolute;
+    left:1em;
+    top:1em;
+    height:3em;
+    width:3em;
+}
+.object.assistGroup {
+    background-color: var(--ghost60);
+    border-radius:.3em;
+    width:auto;
+}
+
+.object.assistGroup {
+    background-color: rgb(215,176,213,0.4);
+    border-radius:.2em;
+    width:auto;
+}
+
+.object.assistGroup.assistClassroom {
+    background-color: var(--ghostBlack80);
+    border-radius:.2em;
+    width:auto;
+}
+.assistPanel  .med.container {
+    font-size:.9em;
+}
+.assistPanel  .med.container input, .assistPanel  .med.container .btn{
+    font-size:.9em;
+}
+
+.assistPanel  .verticalSlider {
+    background-color: var(--clearBlack);
+    border-radius:.2em;
+    width:auto;
+}
+.object.assistGroup .assistPupil {
+    background-color: var(--primary);
+    color:var(--ghost80);
+    line-height:2.5em;
+    font-size:.75em;
+    border:solid .25em rgba(0,0,0,0);
+}
+.object.assistGroup .assistPupil.btn[r="1"] {
+    border:solid .25em var(--ghost40);
+}
+.object.assistGroup .assistPupil.btn[r="2"] {
+    border:solid .25em var(--ghost60);;
+}
+.object.assistGroup .assistPupil.btn[r="3"] {
+    border:solid .25em var(--ghost80);;
+}
+.object.assistGroup .btnIcBack.assistPupil {
+    display:none;
+    
+
+}
+.assistHeader {
+    visibility:visible;
+    color:var(--primary);
+    font-size:1em;
+    font-family: 'DisplayText';
+    text-align: center;
+    border-radius:0;
+    transform: rotate(270deg);
+    transform-origin: bottom;
+}
+
+.assistPanel .assistTextBlock {
+    background-color:var(--ghost80);
+    border-radius:.25em;
+}
+.assistPanel .assistTextSubhead {
+color:var(--primary);
+    border-radius:0;
+    font-family:"BoldText";
+    font-size:1.25em;
+    text-align:left;
+}
+.assistPanel .assistTextBody {
+color:var(--textBlack);
+    border-radius:0;
+    text-align:left;
+}
+.assistant ul {
+    position:relative;
+    background-color:blue;
+    margin-top:5em;
+}
+
+.assistant .rgrGear {
+    background-image: url(../img/interface/rgrGear.svg);
+    cursor:pointer;
+}
+
+
+
+
+.assistant ul>li {
+    background-size:100% auto;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-color:red;
+        cursor:pointer;
+    position:relative;
+    display:block;
+}
+
+.assistant.assistantClosed ul {
+    /*display:none;*/
+}
+
+iframe.assistOLT{
+    position:absolute;
+}
+
+
+
+
+/*Style internal Assist Panels Here*/
+.object.grp.assistPanel {
+    background-color:var(--assistpanel);
+    border-radius:0;
+    border-bottom-left-radius:1em;
+    width:auto;
+    font-size:1.75em;
+    z-index: 10;
+}
+.assistant .grp {
+    position:static;
+    margin-top:5em;
+}
+.assistant .btn {
+    background-color:var(--ghost40);
+    position:static;
+    display:inline-block;
+     margin-left:1em;
+    cursor:pointer;
+}
+.assistant .btn:active {
+    border: .25em solid white;
+}
+
+.assistant .btn:hover {
+    border: .25em solid white;
+}
+
+.assistPanel .btn{
+    background-color:rgba(127,54,121,12);
+       
+}
+
+.assistPanel .btn:hover {
+    border: .25em solid var( --textWhite);
+    
+}
+.assistPanel .btn:active {
+    border: .25em solid var( --textWhite);
+}
+
+
+.grp .btn .btnIcBack {
+    opacity:1;
+    height:100%;
+    width:100%;
+    background-position:center center;
+    background-repeat:no-repeat;
+}
+
+.grp  .btn .rewind.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/rewind.svg);
+}
+.grp  .btn .rewindK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/rewindK.svg);
+}
+.grp  .btn .back.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/back.svg);
+}
+.grp  .btn .backK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/backK.svg);
+}
+.grp .btn .play.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/play.svg);
+}
+.grp  .btn .playK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/playK.svg);
+}
+
+.grp .btn .play.pause.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/pause.svg);
+}
+.grp  .btn .playK.pause.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/pauseK.svg);
+}
+
+.grp  .btn.paused .play.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/pause.svg);
+}
+.grp  .btn.paused .playK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/pauseK.svg);
+}
+.grp  .btn .pause {
+    background-image:url(../img/interface/mediaPlayer/SVG/pause.svg);
+}
+.grp  .btn .pauseK {
+    background-image:url(../img/interface/mediaPlayer/SVG/pauseK.svg);
+}
+.grp  .btn .stop {
+    background-image:url(../img/interface/mediaPlayer/SVG/stop.svg);
+}
+.grp  .btn .stopK {
+    background-image:url(../img/interface/mediaPlayer/SVG/stopK.svg);
+}
+.grp  .btn .record {
+    background-image:url(../img/interface/mediaPlayer/SVG/record.svg);
+}
+.grp  .btn .recordK {
+    background-image:url(../img/interface/mediaPlayer/SVG/recordK.svg);
+}
+.grp  .btn .forward {
+    background-image:url(../img/interface/mediaPlayer/SVG/forward.svg);
+}
+.grp  .btn .forwardK {
+    background-image:url(../img/interface/mediaPlayer/SVG/forwardK.svg);
+}
+.grp  .btn .end {
+    background-image:url(../img/interface/mediaPlayer/SVG/end.svg);
+}
+.grp  .btn .endK {
+    background-image:url(../img/interface/mediaPlayer/SVG/endK.svg);
+}
+.grp  .btn .unmuted {
+    background-image:url(../img/interface/mediaPlayer/SVG/unmuted.svg);
+}
+.grp  .btn .unmutedK {
+    background-image:url(../img/interface/mediaPlayer/SVG/unmutedK.svg);
+}
+
+.grp  .btn.muted  .unmuted{
+    background-image:url(../img/interface/mediaPlayer/SVG/muted.svg);
+}
+.grp  .btn.muted .unmutedK {
+    background-image:url(../img/interface/mediaPlayer/SVG/mutedK.svg);
+}
+.grp  .btn .muted {
+    background-image:url(../img/interface/mediaPlayer/SVG/muted.svg);
+}
+.grp  .btn .mutedK {
+    background-image:url(../img/interface/mediaPlayer/SVG/mutedK.svg);
+}
+.grp  .btn .mic {
+    background-image:url(../img/interface/mediaPlayer/SVG/mic.svg);
+    background-size:75% auto;
+}
+.grp  .btn .micK {
+    background-image:url(../img/interface/mediaPlayer/SVG/micK.svg);
+    background-size:75% auto;
+}
+.grp  .btn .micOff {
+    background-image:url(../img/interface/mediaPlayer/SVG/micOff.svg);
+}
+.grp  .btn .micOffK {
+    background-image:url(../img/interface/mediaPlayer/SVG/micOffK.svg);
+}
+.grp  .btn .headphones {
+    background-image:url(../img/interface/mediaPlayer/SVG/headphones.svg);
+}
+.grp  .btn .headphonesK {
+    background-image:url(../img/interface/mediaPlayer/SVG/headphonesK.svg);
+}
+.grp  .btn .video {
+    background-image:url(../img/interface/mediaPlayer/SVG/video.svg);
+}
+.grp  .btn .videoK {
+    background-image:url(../img/interface/mediaPlayer/SVG/videoK.svg);
+}
+.grp  .btn .computer {
+    background-image:url(../img/interface/mediaPlayer/SVG/computer.svg);
+}
+.grp  .btn .computerK {
+    background-image:url(../img/interface/mediaPlayer/SVG/computerK.svg);
+}
+.grp .btn .bookOpen {
+    background-image:url(../img/interface/mediaPlayer/SVG/bookOpen.svg);
+}
+.grp  .btn .bookOpenK {
+    background-image:url(../img/interface/mediaPlayer/SVG/bookOpenK.svg);
+}
+.grp  .btn .love {
+    background-image:url(../img/interface/mediaPlayer/SVG/love.svg);
+}
+.grp  .btn .loveK {
+    background-image:url(../img/interface/mediaPlayer/SVG/loveK.svg);
+}
+.grp  .btn .captions {
+    background-image:url(../img/interface/mediaPlayer/SVG/captions.svg);
+}
+.grp  .btn .captionsK {
+    background-image:url(../img/interface/mediaPlayer/SVG/captionsK.svg);
+}
+.grp  .btn .replay {
+    background-image:url(../img/interface/mediaPlayer/SVG/replay.svg);
+     background-size:75% auto;
+}
+.grp  .btn .replayK {
+    background-image:url(../img/interface/mediaPlayer/SVG/replayK.svg);
+    background-size:75% auto;
+}
+.grp  .btn .send {
+    background-image:url(../img/interface/mediaPlayer/SVG/send.svg);
+}
+.grp  .btn .sendK {
+    background-image:url(../img/interface/mediaPlayer/SVG/sendK.svg);
+}
+.grp  .btn .ai {
+    background-image:url(../img/interface/mediaPlayer/SVG/ai.svg);
+}
+.grp  .btn .aiK {
+    background-image:url(../img/interface/mediaPlayer/SVG/aiK.svg);
+}
+.grp  .btn .remote {
+    background-image:url(../img/interface/mediaPlayer/SVG/remote.svg);
+}
+.grp  .btn .remoteK {
+    background-image:url(../img/interface/mediaPlayer/SVG/remoteK.svg);
+}
+.grp  .btn .resources {
+    background-image:url(../img/interface/mediaPlayer/SVG/resources.svg);
+}
+.grp  .btn .resourcesK {
+    background-image:url(../img/interface/mediaPlayer/SVG/resourcesK.svg);
+}
+.grp  .btn .sales {
+    background-image:url(../img/interface/mediaPlayer/SVG/ai.svg);
+}
+.grp  .btn .salesK {
+    background-image:url(../img/interface/mediaPlayer/SVG/aiK.svg);
+}
+.grp  .btn .seatingChart {
+    background-image:url(../img/interface/mediaPlayer/SVG/seatingchart.svg);
+}
+.grp  .btn .seatingChartK {
+    background-image:url(../img/interface/mediaPlayer/SVG/seatingchartK.svg);
+}
+
+.grp  .btn .playground {
+    background-image:url(../img/interface/mediaPlayer/SVG/playground.svg);
+}
+.grp  .btn .playgroundK {
+    background-image:url(../img/interface/mediaPlayer/SVG/playgroundK.svg);
+}
+.grp  .btn .close {
+    background-image:url(../img/interface/mediaPlayer/SVG/close.svg);
+}
+.grp  .btn .closeK {
+    background-image:url(../img/interface/mediaPlayer/SVG/closeK.svg);
+}
+
+.grp  .btn .dashboard {
+    background-size: 60%;
+    background-image:url(../img/interface/mediaPlayer/SVG/dashboard.svg);
+}
+.grp  .btn .dashboardK {
+    background-size: 60%;
+    background-image:url(../img/interface/mediaPlayer/SVG/remoteK.svg);
+}
+.grp  .txt {
+    
+}
+
+.assistPanel .object.grp.med.light {
+    background-color:var(--darkbox);
+    border-radius:.25em;
+}
+.object.vid {
+    position:absolute;
+    border-radius:0;
+}
+.object.assistPanel video  {
+    position:absolute;
+    top:0;
+    border-radius:0;
+}
+.object.med.container {
+    border-radius:0;
+}
+/*from media stuff*/
+
+
+/*Styling for Player Starts Here. Container first. Note subclass implemetation. The spaces are important. With the container the actual div has the class. Everthing else is a child of that. That is why the space in everythign after the container.*/
+.med.container {
+    border-radius:1em;
+    position:absolute;
+    font-family:"DisplayText";
+}
+.med.container.dark {
+    
+}
+
+
+
+/*--- Media Window */
+.med .window {
+    
+}
+
+/*------ Media Window Audio */
+.med .window .audio {
+    
+}
+
+/*------ Media Window video */
+.med.vid{
+    border:solid .25em red;
+    border-radius:0;
+    position:absolute;
+}
+.container{
+
+    position:absolute;
+}
+/*------ Media Window Frame */
+.med .window .frame {
+    border-radius:.4em;
+    border:solid .1em var(--textWhite);
+}
+/*--Chat components--*/
+.chat {
+    background-color:var(--vitc);
+    border-radius:.4em;
+    border:solid .1em var(--chatborder);
+    color:var(--darkbox);
+    font-family:"BodyText";
+    line-height: 1.2em;
+    padding:.25em;
+    margin:-.25em;
+}
+
+.chatInput {
+    position: absolute;
+    background-color:var(--vitc);
+    border-radius:.4em;
+    border:solid .1em var(--chatborder);
+    color:var(--darkbox);
+    font-family:"BodyText";
+    line-height: 1.2em;
+    padding:.25em;
+    padding-left:.75em;
+    padding-right:.75em;
+    margin:-.25em;
+    outline:none;
+}
+.chatInput:focus {
+    border:solid .2em var(--chatborder);
+}
+
+.chatInput::placeholder{
+    color:var(--ghost40);
+}
+/*--- Media Player Buttons ---*/
+
+.med .btn {
+    border-radius:50%;
+    background-color:var(--vitcgroup);
+    outline: none;
+    border:solid .25em rgba(0,0,0,0);
+    cursor:pointer;
+    transition: all 1s 0s;
+    overflow: visible;
+}
+
+.med.dark .btn {
+    background-color:var(--ghost80);
+}
+
+.med.light .btn {
+    background-color:var(--vitcgroup);
+  
+}
+
+#wrapper .icn .toolTip {
+    position:absolute;
+    top:30%;
+    left:0em;
+    font-size:2em;
+    width:3.5em;
+    text-align: center;
+    background-color:var(--paperWhite);
+    color:var(--textBlack);
+    padding:.25em;
+    border-radius:.25em;
+    border:solid .1em var(--textBlack);
+    opacity:0;
+}
+#wrapper .icn:hover .toolTip {
+    opacity:1;
+    transition: all .5s 1s;
+}
+.med .btn .toolTip {
+    position:absolute;
+    top:-2em;
+    left:-2em;
+    font-size:.5em;
+    width:auto;
+    text-align: center;
+    width:7em;
+    background-color:var(--paperWhite);
+    color:var(--textBlack);
+    padding:.25em;
+    border-radius:.25me;
+    opacity:0;
+}
+.med .btn:hover .toolTip {
+    opacity:1;
+    transition: all .5s 1s;
+}
+
+.med .btn:active {
+    border:solid .25em var(--ghost80);
+}
+.med .btn:focus {
+    border:solid .25em var(--ghost60);
+    transition: all 0s 0s;
+}
+.med .btn:hover {
+    border:solid .25em var(--chatborder);
+    transition: all 0s 0s;
+}
+.med .btn .btnIcBack {
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    top:0;
+    opacity:.4;
+    transition: all 1s 0s;
+    background-size:100% auto;
+    background-position: center center;
+    background-repeat:no-repeat;
+}
+.med .btn:hover .btnIcBack {
+    transition: all 0s 0s;
+    opacity:.6;
+}
+.med .btn:focus .btnIcBack {
+    opacity:.8;
+    transition: all 0s 0s;
+}
+
+#wrapper .med .btn.selected {
+   background-color:red;
+    box-shadow: 0 0 1em rgba(255,50,50,.7);
+}
+.med .btn.selected .btnIcBack {
+    opacity:1;
+    transition: all 0s 0s;
+}
+
+.med.dark .btn:active {
+    border:solid .25em var(--ghost80);
+}
+.med.light .btn:active {
+    border:solid .25em var(--ghostBlack80);
+}
+
+.med.dark .btn:focus {
+    border:solid .25em var(--ghost60);
+}
+
+.med.light .btn:focus {
+    border:solid .25em var(--ghostBlack60);
+}
+
+.med.dark .btn:hover {
+   
+}
+.med.light .btn:hover {
+
+}
+
+.med .btn .rewind.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/rewind.svg);
+}
+.med .btn .rewindK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/rewindK.svg);
+}
+.med .btn .back.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/back.svg);
+}
+.med .btn .backK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/backK.svg);
+}
+.med .btn .play.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/play.svg);
+}
+.med .btn .playK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/playK.svg);
+}
+.med .btn.paused .play.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/pause.svg);
+}
+.med .btn.paused .playK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/pauseK.svg);
+}
+.med .btn .pause {
+    background-image:url(../img/interface/mediaPlayer/SVG/pause.svg);
+}
+.med .btn .pauseK {
+    background-image:url(../img/interface/mediaPlayer/SVG/pauseK.svg);
+}
+.med .btn .stop {
+    background-image:url(../img/interface/mediaPlayer/SVG/stop.svg);
+}
+.med .btn .stopK {
+    background-image:url(../img/interface/mediaPlayer/SVG/stopK.svg);
+}
+.med .btn .record {
+    background-image:url(../img/interface/mediaPlayer/SVG/record.svg);
+}
+.med .btn .recordK {
+    background-image:url(../img/interface/mediaPlayer/SVG/recordK.svg);
+}
+.med .btn .forward {
+    background-image:url(../img/interface/mediaPlayer/SVG/forward.svg);
+}
+.med .btn .forwardK {
+    background-image:url(../img/interface/mediaPlayer/SVG/forwardK.svg);
+}
+.med .btn .end {
+    background-image:url(../img/interface/mediaPlayer/SVG/end.svg);
+}
+.med .btn .endK {
+    background-image:url(../img/interface/mediaPlayer/SVG/endK.svg);
+}
+.med .btn .unmuted {
+    background-image:url(../img/interface/mediaPlayer/SVG/unmuted.svg);
+}
+.med .btn .unmutedK {
+    background-image:url(../img/interface/mediaPlayer/SVG/unmutedK.svg);
+}
+
+.med .btn.muted  .unmuted{
+    background-image:url(../img/interface/mediaPlayer/SVG/muted.svg);
+}
+.med .btn.muted .unmutedK {
+    background-image:url(../img/interface/mediaPlayer/SVG/mutedK.svg);
+}
+.med .btn .muted {
+    background-image:url(../img/interface/mediaPlayer/SVG/muted.svg);
+}
+.med .btn .mutedK {
+    background-image:url(../img/interface/mediaPlayer/SVG/mutedK.svg);
+}
+.med .btn .mic {
+    background-image:url(../img/interface/mediaPlayer/SVG/mic.svg);
+    background-size:75% auto;
+}
+.med .btn .micK {
+    background-image:url(../img/interface/mediaPlayer/SVG/micK.svg);
+    background-size:75% auto;
+}
+.med .btn .micOff {
+    background-image:url(../img/interface/mediaPlayer/SVG/micOff.svg);
+}
+.med .btn .micOffK {
+    background-image:url(../img/interface/mediaPlayer/SVG/micOffK.svg);
+}
+.med .btn .headphones {
+    background-image:url(../img/interface/mediaPlayer/SVG/headphones.svg);
+}
+.med .btn .headphonesK {
+    background-image:url(../img/interface/mediaPlayer/SVG/headphonesK.svg);
+}
+.med .btn .video {
+    background-image:url(../img/interface/mediaPlayer/SVG/video.svg);
+}
+.med .btn .videoK {
+    background-image:url(../img/interface/mediaPlayer/SVG/videoK.svg);
+}
+.med .btn .computer {
+    background-image:url(../img/interface/mediaPlayer/SVG/computer.svg);
+}
+.med .btn .computerK {
+    background-image:url(../img/interface/mediaPlayer/SVG/computerK.svg);
+}
+.med .btn .bookOpen {
+    background-image:url(../img/interface/mediaPlayer/SVG/bookOpen.svg);
+}
+.med .btn .bookOpenK {
+    background-image:url(../img/interface/mediaPlayer/SVG/bookOpenK.svg);
+}
+.med .btn .love {
+    background-image:url(../img/interface/mediaPlayer/SVG/love.svg);
+}
+.med .btn .loveK {
+    background-image:url(../img/interface/mediaPlayer/SVG/loveK.svg);
+}
+.med .btn .captions {
+    background-image:url(../img/interface/mediaPlayer/SVG/captions.svg);
+}
+.med .btn .captionsK {
+    background-image:url(../img/interface/mediaPlayer/SVG/captionsK.svg);
+}
+.med .btn .replay {
+    background-image:url(../img/interface/mediaPlayer/SVG/replay.svg);
+     background-size:75% auto;
+}
+.med .btn .replayK {
+    background-image:url(../img/interface/mediaPlayer/SVG/replayK.svg);
+    background-size:75% auto;
+}
+.med .btn .send {
+    background-image:url(../img/interface/mediaPlayer/SVG/send.svg);
+}
+.med .btn .sendK {
+    background-image:url(../img/interface/mediaPlayer/SVG/sendK.svg);
+}
+.med .btn .close {
+    background-image:url(../img/interface/mediaPlayer/SVG/close.svg);
+}
+.med .btn .closeK {
+    background-image:url(../img/interface/mediaPlayer/SVG/closeK.svg);
+}
+.med .txt {
+    
+}
+
+/*Default Input Field Styling*/
+
+.med input {
+    position:absolute;
+    font-size:1em;
+}
+
+/*Input Range Slider*/
+input[type="range"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  cursor: pointer;
+  outline: none;
+  border-radius: 2em;
+  overflow: hidden; 
+  /* New additions */
+  background: var(--solidgrey);
+    border: solid .05em var(--textBlack);
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  height: 2em;
+  width: 2em;
+  background-color: var(--textBlack);
+  border-radius: 50%;
+  border: solid .1em var(--textBlack);
+box-shadow: -11em 0 0 10em var(--control4);
+  transition: .2s ease-in-out;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    background-color:var(--control5);
+}
+
+input[type="range"].vertical {
+    transform: rotate(270deg);
+  transform-origin: center;
+}
+
+/* Hover, active & focus Thumb: Webkit */
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  
+}
+input[type="range"]:active::-webkit-slider-thumb {
+  
+}
+input[type="range"]:focus::-webkit-slider-thumb {
+  
+}
+
+
+
+
+/*vertical audio slider*/
+#wrapper .verticalSlider {
+    position:absolute;
+    z-index: 1000001;
+    border-radius:0;
+    background-color:var(--clearBlack);
+}
+
+#wrapper .verticalSlider .btn {
+    position:absolute;
+    z-index: 10000003;
+    background-color:var(--textWhite);
+
+}
+#wrapper .verticalSlider .btn:focus {
+    background-color:var(--textWhite);
+
+}
+#wrapper .verticalSlider .btn:hover {
+    border:solid .25em var(--textWhite);
+}
+#wrapper .verticalSlider input:focus {
+    border:solid .1em var(--ghostBlack80);
+
+}
+#wrapper .verticalSlider input:hover {
+    border:solid .1em var(--ghostBlack60);
+}
+#wrapper .object .verticalSlider .btn {
+    z-index: 100002;
+    background-color: var(--clearBlack);
+}
+
+#wrapper .object.vidFull .verticalSlider .btn:hover {
+    z-index: 100002;
+    background-color:  var(--clearBlack);
+}
+
+#wrapper .object.vidFull .verticalSlider .btn:focus {
+    z-index: 100002;
+    background-color: var(--clearBlack);
+}
+
+#wrapper .object.vidFull .verticalSlider input[type="range"].vertical.audio {
+    position: absolute;
+    transform: rotate(270deg);
+  transform-origin: center;
+    z-index: 100001;
+    border:solid .05em var(--ghostBlack40);
+    display:none;
+}
+#wrapper .object.vidFull .verticalSlider input[type="range"].vertical.audio:hover {
+    border:solid .05em var(--ghostBlack40);
+}
+#wrapper .object.vidFull .verticalSlider input[type="range"].vertical.audio:focus {
+    border:solid .05em var(--ghostBlack60);
+}
+
+input[type="range"].vertical.audio::-webkit-slider-thumb {
+  margin-left:1em;
+    height:0em;
+    width:2em;
+    border-radius:0;
+    border:none;
+    background-color:var(--clearBlack);  
+    box-shadow: -11em 0 0 10em var(--textWhite);
+}
+
+/*SALES STUFF*/
+.Sales .object.assistGroup{
+    border-radius:50%;
+}
+.Sales .videoFull {
+    background-color:var(--primary);;
+    overflow: hidden;
+    border-radius:50%;
+} 
+
+.object.assistPanel.Sales  video {
+    position:absolute;
+    background-color:blue;
+    height:8em;
+    width:12em;
+    left:-3.5em;
+    top:-1em;
+}
+
+.object.assistPanel.Sales  .btn.salesVidControl {
+    position:absolute;
+    left:-.2em;
+    top:-.2em;
+    background-color:var(--clearBlack);
+    
+    border:none;
+    background-image: none;
+    background-size:60% 60%;
+    background-position:center center;
+    background-repeat: no-repeat;
+    cursor:pointer;
+}
+
+.object.assistPanel.Sales  .btn.salesVidControl:hover {
+    background-color:var(--ghost40);
+    background-image: url(../img/interface/mediaPlayer/SVG/pause.svg);
+}
+
+.object.assistPanel.Sales  .btn.salesVidControl.paused {
+    background-image: url(../img/interface/mediaPlayer/SVG/play.svg);
+    background-color:var(--ghost40);
+}
+/*END SALES STUFF*/

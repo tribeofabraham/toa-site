@@ -1,0 +1,406 @@
+var objString = '';
+
+function buildObjectString(data) {
+
+	var htmlString = '';
+	for (var o = 0; o < data.length; o++) {
+		console.log(data[o].type);
+
+		switch (data[o].type) {
+			case 'sld':
+				console.log('slide detected');
+				htmlString += '<div class="object ' + data[o].type;
+
+				if (data[o].style) {
+					htmlString += ' ' + data[o].style;
+				};
+
+				htmlString += '" style="';
+
+
+				if (data[o].top) {
+					htmlString += ' top:' + data[o].top + ';';
+				};
+				
+				if (data[o].left) {
+					htmlString += ' left:' + data[o].left + ';';
+				};
+
+
+				if (data[o].height) {
+					htmlString += ' height:' + data[o].height + ';';
+				};
+
+				if (data[o].width) {
+					htmlString += ' width:' + data[o].width + ';';
+				};
+
+				if (data[o].visible) {
+					if (data[o].visible == "false") {
+						htmlString += ' display:none;';
+					} 
+
+				};
+
+
+				htmlString += '"><div class="btnClose"></div>';
+				break;
+			case 'grp':
+				console.log('group detected');
+				htmlString += '<div class="object ' + data[o].type;
+				if (data[o].style) {
+					htmlString += ' ' + data[o].style;
+				};
+				htmlString += '" style="';
+
+
+				if (data[o].top) {
+					htmlString += ' top:' + data[o].top + ';';
+				};
+				if (data[o].left) {
+					htmlString += ' left:' + data[o].left + ';';
+				};
+
+
+				if (data[o].height) {
+					htmlString += ' height:' + data[o].height + ';';
+				};
+
+				if (data[o].width) {
+					htmlString += ' width:' + data[o].width + ';';
+				};
+
+				if (data[o].visible) {
+					if (data[o].visible == "false") {
+						htmlString += ' display:none;';
+					} 
+
+				};
+
+				htmlString += '">';
+				break
+			case 'lst':
+				console.log(data[o]);
+				htmlString += '<ul ';
+				if (data[o].id) {
+					htmlString += 'id="' + data[o].id + '" ';
+				}
+
+				htmlString += 'class="object ' + data[o].type;
+				if (data[o].style) {
+					htmlString += ' ' + data[o].style;
+				};
+				htmlString += '" style="';
+
+
+				if (data[o].top) {
+					htmlString += ' top:' + data[o].top + ';';
+				};
+				if (data[o].left) {
+					htmlString += ' left:' + data[o].left + ';';
+				};
+
+
+				if (data[o].height) {
+					htmlString += ' height:' + data[o].height + ';';
+				};
+
+				if (data[o].width) {
+					htmlString += ' width:' + data[o].width + ';';
+				};
+
+				if (data[o].visible) {
+					if (data[o].visible == "false") {
+						htmlString += ' display:none;';
+					} 
+				};
+
+				htmlString += '">';
+				break;
+			case 'itm':
+
+				htmlString += '<li ';
+				if (data[o].id) {
+					htmlString += 'id="' + data[o].id + '" ';
+				}
+
+				htmlString += 'class="object ' + data[o].type;
+
+				if (data[o].style) {
+					htmlString += ' ' + data[o].style;
+				};
+				htmlString += '" style="';
+
+
+				if (data[o].top) {
+					htmlString += ' top:' + data[o].top + ';';
+				};
+				if (data[o].left) {
+					htmlString += ' left:' + data[o].left + ';';
+				};
+
+
+				if (data[o].height) {
+					htmlString += ' height:' + data[o].height + ';';
+				};
+
+				if (data[o].width) {
+					htmlString += ' width:' + data[o].width + ';';
+				};
+
+				if (data[o].visible) {
+					if (data[o].visible == "false") {
+						htmlString += ' display:none;';
+					}
+				};
+
+				htmlString += '">' + data[o].content;
+				break
+			case 'btn':
+				htmlString += '<div class="object ' + data[o].type + '">' + data[o].content;
+				break
+			case 'txt':
+				console.log('txt detected');
+				htmlString += '<div class="object ' + data[o].type;
+				if (data[o].style) {
+					htmlString += ' ' + data[o].style;
+				};
+				htmlString += '" style="';
+
+
+				if (data[o].top) {
+					htmlString += ' top:' + data[o].top + ';';
+				};
+				if (data[o].left) {
+					htmlString += ' left:' + data[o].left + ';';
+				};
+
+
+				if (data[o].height) {
+					htmlString += ' height:' + data[o].height + ';';
+				};
+
+				if (data[o].width) {
+					htmlString += ' width:' + data[o].width + ';';
+				};
+
+				if (data[o].visible) {
+					if (data[o].visible == "false") {
+						htmlString += ' display:none;';
+					} 
+
+				};
+
+				htmlString += '">' +data[o].content;
+				break
+				
+				case 'htm':
+				console.log('group detected');
+				htmlString += '<iframe src="'+data[o].url+'" class="object ' + data[o].type;
+				if (data[o].style) {
+					htmlString += ' ' + data[o].style;
+				};
+				htmlString += '" style="';
+
+
+				if (data[o].top) {
+					htmlString += ' top:' + data[o].top + ';';
+				};
+				if (data[o].left) {
+					htmlString += ' left:' + data[o].left + ';';
+				};
+				
+				if (data[o].bottom) {
+					htmlString += ' bottom:' + data[o].top + ';';
+				};
+				if (data[o].right) {
+					htmlString += ' right:' + data[o].left + ';';
+				};
+
+
+				if (data[o].height) {
+					htmlString += ' height:' + data[o].height + ';';
+				};
+
+				if (data[o].width) {
+					htmlString += ' width:' + data[o].width + ';';
+				};
+
+				if (data[o].visible) {
+					if (data[o].visible == "false") {
+						htmlString += ' display:none;';
+					} 
+
+				};
+
+				htmlString += '">';
+				break
+		}
+
+
+		if (data[o].children) {
+			console.log('children found');
+			htmlString += buildObjectString(data[o].children);
+		}
+		switch (data[o].type) {
+			case 'sld':
+				htmlString += '</div>';
+				break;
+			case 'grp':
+				htmlString += '</div>';
+				break
+			case 'lst':
+				htmlString += '</ul>';
+				break
+			case 'itm':
+				htmlString += '</li>';
+				break
+			case 'btn':
+				htmlString += '</div>';
+				break
+							case 'txt':
+				htmlString += '</div>';
+				break
+				
+				case 'htm':
+				htmlString += '</iframe>';
+				break
+
+		}
+
+	}
+
+
+	return htmlString;
+}
+
+function buildObjects(data) {
+	var testString = buildObjectString(data[0].content);
+	$('#wrapper').html(testString);
+	initializeObjects(data);
+}
+
+function positionObjects(data) {
+	for (var o = 0; o < data.length; o++) {
+
+	}
+}
+
+function initializeObjects(data) {
+
+	$('#a1').bind('click', function () {
+
+		$('#a1>ul').slideDown(500);
+		$('#a2>ul').slideUp(250);
+		$('#a3>ul').slideUp(250);
+	});
+
+
+	$('#a2').bind('click', function () {
+
+		$('#a2>ul').slideDown(500);
+		$('#a1>ul').slideUp(250);
+		$('#a3>ul').slideUp(250);
+	});
+
+	$('#a3').bind('click', function () {
+
+		$('#a3>ul').slideDown(500);
+		$('#a2>ul').slideUp(250);
+		$('#a1>ul').slideUp(250);
+	});
+/////////////////////////////////////////////////////////////////
+	$('#a1 .b1').bind('click', function () {
+		$('#a1 .b1>ul').slideDown(500);
+		$('#a1 .b2 ul').slideUp(250);
+		$('#a1 .b3 ul').slideUp(250);
+	});
+
+
+	$('#a1 .b2').bind('click', function () {
+		$('#a1 .b2>ul').slideDown(500);
+		$('#a1 .b1 ul').slideUp(250);
+		$('#a1 .b3 ul').slideUp(250);
+	});
+
+	$('#a1 .b3').bind('click', function () {
+		$('#a1 .b3>ul').slideDown(500);
+		$('#a1 .b1 ul').slideUp(250);
+		$('#a1 .b2 ul').slideUp(250);
+	});
+//////////////////////////////////////////////////////////////////////
+	
+	/////////////////////////////////////////////////////////////////
+	$('#a2 .b1').bind('click', function () {
+		$('#a2 .b1>ul').slideDown(500);
+		$('#a2 .b2 ul').slideUp(250);
+		$('#a2 .b3 ul').slideUp(250);
+	});
+
+
+	$('#a2 .b2').bind('click', function () {
+		$('#a2 .b2>ul').slideDown(500);
+		$('#a2 .b1 ul').slideUp(250);
+		$('#a2 .b3 ul').slideUp(250);
+	});
+
+	$('#a2 .b3').bind('click', function () {
+		$('#a2 .b3>ul').slideDown(500);
+		$('#a2 .b1 ul').slideUp(250);
+		$('#a2 .b2 ul').slideUp(250);
+	});
+//////////////////////////////////////////////////////////////////////
+	
+		/////////////////////////////////////////////////////////////////
+	$('#a3 .b1').bind('click', function () {
+		$('#a3 .b1>ul').slideDown(500);
+		$('#a3 .b2 ul').slideUp(250);
+		$('#a3 .b3 ul').slideUp(250);
+	});
+
+
+	$('#a3 .b2').bind('click', function () {
+		$('#a3 .b2>ul').slideDown(500);
+		$('#a3 .b1 ul').slideUp(250);
+		$('#a3 .b3 ul').slideUp(250);
+	});
+
+	$('#a3 .b3').bind('click', function () {
+		$('#a3 .b3>ul').slideDown(500);
+		$('#a3 .b1 ul').slideUp(250);
+		$('#a3 .b2 ul').slideUp(250);
+	});
+	
+	
+	$('.btnClose').bind('click', function () {
+		$('#wrapper').html('');
+		
+	});
+//////////////////////////////////////////////////////////////////////
+//SUBS HERE
+	$('.sb1').bind('click', function () {
+		$('.c1').attr('src','http://reallygreatreading.local/html/storyLineSample/index.html');
+		$('.g1').slideDown(500);
+		
+	});
+		$('.sb2').bind('click', function () {
+				$('.c1').attr('src','http://reallygreatreading.local/html/storyLineSample/index.html');
+
+			$('.g1').slideDown(500);
+	});
+		$('.sb3').bind('click', function () {
+		$('.c1').attr('src','http://reallygreatreading.local/html/storyLineSample/index.html');
+
+			$('.g1').slideDown(500);
+	});
+		$('.sb4').bind('click', function () {
+		$('.c1').attr('src','http://reallygreatreading.local/html/storyLineSample/index.html');
+
+			$('.g1').slideDown(500);
+	});
+		$('.sb5').bind('click', function () {
+		$('.c1').attr('src','http://reallygreatreading.local/html/storyLineSample/index.html');
+
+			$('.g1').slideDown(500);
+	});
+}

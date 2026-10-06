@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 56.63 80.58">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #414142;
+      }
+
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        stroke: #fff;
+        stroke-width: 4px;
+      }
+
+      .cls-3 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-4 {
+        fill: #104fa2;
+      }
+
+      .cls-4, .cls-5, .cls-6 {
+        stroke-width: 0px;
+      }
+
+      .cls-5 {
+        fill: #231f20;
+      }
+
+      .cls-6 {
+        fill: #fff;
+      }
+    </style>
+    <filter id="drop-shadow-1" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3"/>
+      <feGaussianBlur result="blur" stdDeviation="1"/>
+      <feFlood flood-color="#231f20" flood-opacity=".1"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <g>
+        <path class="cls-5" d="M0,53.04h2.21v3.15c1.79-2.37,4.03-3.6,6.85-3.6,2.44,0,4.55.88,6.27,2.66,1.75,1.75,2.63,3.86,2.63,6.36s-.88,4.68-2.6,6.46-3.8,2.66-6.23,2.66c-2.76,0-5.07-1.17-6.92-3.41v9.25H0v-23.54ZM8.9,54.72c-1.92,0-3.54.68-4.87,2.01-1.33,1.33-1.98,3.02-1.98,5-.16,3.93,3.12,6.98,6.88,6.95,3.54.13,6.92-3.28,6.82-7.01.06-3.67-3.21-7.11-6.85-6.95Z"/>
+        <path class="cls-5" d="M22.11,46.38h2.24v9.74c1.79-2.37,3.96-3.54,6.46-3.54,1.27,0,2.4.32,3.41,1.01,1.01.65,1.75,1.53,2.24,2.63.49,1.1.71,2.83.71,5.2v8.86h-2.24v-8.21c0-1.98-.06-3.31-.23-3.99-.55-2.31-2.01-3.44-4.35-3.44-1.33,0-2.53.45-3.6,1.33-1.07.88-1.75,1.98-2.11,3.31-.19.84-.29,2.4-.29,4.68v6.33h-2.24v-23.9Z"/>
+      </g>
+      <g class="cls-3">
+        <rect class="cls-4" x="2.24" width="32.46" height="38.98"/>
+      </g>
+      <g>
+        <line class="cls-1" x1="22.73" y1="80.08" x2="36.99" y2="80.08"/>
+        <line class="cls-1" x1=".22" y1="80.08" x2="18.01" y2="80.08"/>
+      </g>
+      <g>
+        <path class="cls-2" d="M47.45,63.37c8.49-9.57,9.38-23.24,3.1-33.64"/>
+        <polygon class="cls-6" points="56.15 27.53 45.03 23.11 46.75 34.95 56.15 27.53"/>
+      </g>
+    </g>
+  </g>
+</svg>

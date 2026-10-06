@@ -1,0 +1,1161 @@
+
+.clickable {
+    cursor:pointer;
+}
+
+.copyright {
+    position:absolute;
+    border-radius:0em;
+    color:var(--ghost80);
+    font-family:"BodyText";
+    font-size:2.5em;
+}
+
+/*General Media Player for flexible assets*/
+
+/*Only for authoring purposes*/
+body.med {
+    background-color:black;
+    font-family:"DisplayText";
+}
+#wrapper .object.sld.media {
+    background-color:var(--mediabk);
+}
+
+
+
+#wrapper .object.med.container .window {
+        border-radius:.5em;
+    border:solid .1em var(--ghost80);
+    position:absolute;
+      padding:.25em;
+    margin:-.25em;
+}
+
+
+
+
+/*Styling for Player Starts Here. Container first. Note subclass implemetation. The spaces are important. With the container the actual div has the class. Everthing else is a child of that. That is why the space in everythign after the container.*/
+.med.container {
+    border-radius:1em;
+    position:absolute;
+    font-family:"DisplayText";
+}
+.med.container.dark {
+    background-color:var(--darkbox);
+}
+.med.container.light {
+    background-color:var(--ghost60);
+}
+
+
+/*--- Media Window */
+.med .window {
+    
+}
+
+/*------ Media Window Audio */
+.med .window .audio {
+    
+}
+
+/*------ Media Window video */
+.med .window .video {
+    
+}
+
+/*------ Media Window Frame */
+.med .window .frame {
+    border-radius:.4em;
+    border:solid .1em var(--textWhite);
+}
+/*--Chat components--*/
+.chat {
+    background-color:var(--ghost20);
+    border-radius:.4em;
+    border:solid .1em var(--textWhite);
+    color:var(--ghost80);
+    font-family:"BodyText";
+    line-height: 1.2em;
+    padding:.25em;
+    margin:-.25em;
+}
+
+.chatInput {
+    position: absolute;
+    background-color:var(--ghost20);
+    border-radius:.4em;
+    border:solid .20em var(--textWhite);
+    color:var(--ghost80);
+    font-family:"BodyText";
+    line-height: 1.2em;
+    padding:.25em;
+    padding-left:.75em;
+    padding-right:.75em;
+    margin:-.25em;
+    outline:none;
+}
+.chatInput:focus {
+    border:solid .25em var(--ghost80);
+}
+
+.chatInput::placeholder{
+    color:var(--ghost40);
+}
+/*--- Media Button */
+.med .btn {
+    border-radius:50%;
+    background-color:var(--ghost20);
+    outline: none;
+    border:solid .25em rgba(0,0,0,0);
+    cursor:pointer;
+    transition: all 1s 0s;
+}
+
+
+.med .btn:active {
+    border:solid .25em var(--ghost80);
+}
+.med .btn:focus {
+    border:solid .25em var(--ghost60);
+    transition: all 0s 0s;
+}
+.med .btn:hover {
+    border:solid .25em var(--ghost80);
+    transition: all 0s 0s;
+}
+.med .btn .btnIcBack {
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    top:0;
+    opacity:.4;
+    transition: all 1s 0s;
+}
+.med .btn:hover .btnIcBack {
+    transition: all 0s 0s;
+    opacity:.8;
+}
+.med .btn:focus .btnIcBack {
+    opacity:1;
+    transition: all 0s 0s;
+}
+.med.dark .btn {
+    background-color:var(--ghost40);
+}
+.med.light .btn {
+    background-color:var(--ghostBlack40);
+}
+.med.dark .btn:active {
+    border:solid .25em var(--ghost80);
+}
+.med.light .btn:active {
+    border:solid .25em var(--ghostBlack80);
+}
+
+.med.dark .btn:focus {
+    border:solid .25em var(--ghost60);
+}
+
+.med.light .btn:focus {
+    border:solid .25em var(--ghostBlack60);
+}
+
+.med.dark .btn:hover {
+    border:solid .25em var(--ghost80);
+    background-color: var(--ghost80);
+}
+.med.light .btn:hover {
+    border:solid .25em var(--ghostBlack80);
+    background-color: var(--ghostBlack80);
+}
+
+
+
+.med .btn .rewind.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/rewind.svg);
+}
+.med .btn .rewindK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/rewindK.svg);
+}
+.med .btn .back.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/back.svg);
+}
+.med .btn .backK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/backK.svg);
+}
+.med .btn .play.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/play.svg);
+}
+.med .btn .playK.btnIcBack {
+    background-image:url(../img/interface/mediaPlayer/SVG/playK.svg);
+}
+.med .btn .pause {
+    background-image:url(../img/interface/mediaPlayer/SVG/pause.svg);
+}
+.med .btn .pauseK {
+    background-image:url(../img/interface/mediaPlayer/SVG/pauseK.svg);
+}
+.med .btn .stop {
+    background-image:url(../img/interface/mediaPlayer/SVG/stop.svg);
+}
+.med .btn .stopK {
+    background-image:url(../img/interface/mediaPlayer/SVG/stopK.svg);
+}
+.med .btn .record {
+    background-image:url(../img/interface/mediaPlayer/SVG/record.svg);
+}
+.med .btn .recordK {
+    background-image:url(../img/interface/mediaPlayer/SVG/recordK.svg);
+}
+.med .btn .forward {
+    background-image:url(../img/interface/mediaPlayer/SVG/forward.svg);
+}
+.med .btn .forwardK {
+    background-image:url(../img/interface/mediaPlayer/SVG/forwardK.svg);
+}
+.med .btn .end {
+    background-image:url(../img/interface/mediaPlayer/SVG/end.svg);
+}
+.med .btn .endK {
+    background-image:url(../img/interface/mediaPlayer/SVG/endK.svg);
+}
+.med .btn .unmuted {
+    background-image:url(../img/interface/mediaPlayer/SVG/unmuted.svg);
+}
+.med .btn .unmutedK {
+    background-image:url(../img/interface/mediaPlayer/SVG/unmutedK.svg);
+}
+.med .btn .muted {
+    background-image:url(../img/interface/mediaPlayer/SVG/muted.svg);
+}
+.med .btn .mutedK {
+    background-image:url(../img/interface/mediaPlayer/SVG/mutedK.svg);
+}
+.med .btn .mic {
+    background-image:url(../img/interface/mediaPlayer/SVG/mic.svg);
+}
+.med .btn .micK {
+    background-image:url(../img/interface/mediaPlayer/SVG/micK.svg);
+}
+.med .btn .micOff {
+    background-image:url(../img/interface/mediaPlayer/SVG/micOff.svg);
+}
+.med .btn .micOffK {
+    background-image:url(../img/interface/mediaPlayer/SVG/micOffK.svg);
+}
+.med .btn .headphones {
+    background-image:url(../img/interface/mediaPlayer/SVG/headphones.svg);
+}
+.med .btn .headphonesK {
+    background-image:url(../img/interface/mediaPlayer/SVG/headphonesK.svg);
+}
+.med .btn .video {
+    background-image:url(../img/interface/mediaPlayer/SVG/video.svg);
+}
+.med .btn .videoK {
+    background-image:url(../img/interface/mediaPlayer/SVG/videoK.svg);
+}
+.med .btn .computer {
+    background-image:url(../img/interface/mediaPlayer/SVG/computer.svg);
+}
+.med .btn .computerK {
+    background-image:url(../img/interface/mediaPlayer/SVG/computerK.svg);
+}
+.med .btn .bookOpen {
+    background-image:url(../img/interface/mediaPlayer/SVG/bookOpen.svg);
+}
+.med .btn .bookOpenK {
+    background-image:url(../img/interface/mediaPlayer/SVG/bookOpenK.svg);
+}
+.med .btn .love {
+    background-image:url(../img/interface/mediaPlayer/SVG/love.svg);
+}
+.med .btn .loveK {
+    background-image:url(../img/interface/mediaPlayer/SVG/loveK.svg);
+}
+
+.med .txt {
+    
+}
+
+.med input {
+    position:absolute;
+    font-size:1em;
+}
+
+.med.container input {
+  box-sizing: border-box;
+}
+
+.med.container input[type=range] {
+    appearance:none;
+    background-color:var(--mediabk);
+    color:red;
+ }
+
+.med.container input[type=radio] {
+     appearance:none;
+    border:solid .2em red;
+    border-radius:50%;
+    background:blue;
+    
+    
+  }
+
+.med.container input[type=checkbox] {
+     appearance:none;
+     border:solid .2em red;
+    border-radius:.25em;
+    background:blue;
+  }
+#wrapper .med input.inputRadio {
+    appearance:none;
+    background-color:none;
+    border-radius:50%; 
+}
+.med input.inputCheckbox {
+    color:red;
+}
+.med input.inputDateTime {
+    color:red;
+}
+
+
+/*--- Media Slider Controller */
+.med .slider {
+    
+}
+/*------ Media Slider Controller Elements */
+.med .slider .puck {
+    
+}
+
+/*End Media Player Styling*/
+
+/*Styling for individual programs*/
+
+/*Countdown Program Branding*/
+body.cdn #wrapper {
+    background-color:var(--cdnBookBack);
+}
+
+/*Blast Program Branding*/
+body.blt #wrapper {
+    background-color:var(--bltBookBack);
+}
+
+/*HDWord Program Branding*/
+body.hdw #wrapper {
+    background-color:var(--hdwBookBack);;
+}
+
+/*Soundwall Program Branding*/
+body.sdw #wrapper {
+    background-color:var(--textBlack);
+}
+
+
+
+
+/*Noel & Lindsey: Putting Styling for E-Books Here*/
+#wrapper .sld {
+    background-color:var(--clearBack);
+    border-radius:1.5em;
+    font-size: .9em;
+}
+
+.object.ebkBrand.grp {
+    background-color:var(--clearBack); 
+    border-radius:.5em;
+}
+#wrapper .ebkBrand.title {
+    font-size: 2em;
+    color:var(--textWhite);
+}
+
+.cdn #wrapper .ebkBrand.title {
+    font-size: 2em;
+    color:var(--cdnBookTexts);
+}
+
+#wrapper .ebkBrand.logo {
+    border-radius:0;
+}
+
+.ebk:focus {
+    border:solid .25em var(--primary);
+}
+
+.ebk {
+    position:absolute;
+	background-color:rgba(0,0,255,0);
+    border:solid .25em rgba(0,0,255,0);
+	border-radius:.5em;
+	background-position:center center;
+	background-size:110% auto;
+    background-repeat:no-repeat;
+    font-size:.8em;
+    overflow: visible;
+    height:100%;
+    width:100%;
+    top:-.3em;
+    left:-.3em;
+}
+
+.ebkLink.blank .ebk{
+    cursor:not-allowed;
+}
+
+.ebkLink .lockedGhost {
+    position:absolute;
+    top:-.25em;
+    left:-.25em;
+    bottom:-.45em;
+    right:-.45em;
+    background-color:var(--ghostBlack40);
+    z-index:1000;
+    cursor:not-allowed;
+       border-radius:.5em;
+}
+
+.cdn .ebkLink .lockedGhost .image {
+    position:absolute;
+    top:0em;
+    left:1em;
+    height:3em;
+    width:2em;
+    background-image:url(../../common/img/interface/lockedPrimary.png);
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    cursor:not-allowed;
+ 
+}
+
+.blt .ebkLink .lockedGhost .image {
+    position:absolute;
+    top:0em;
+    left:1em;
+    height:3em;
+    width:2em;
+    background-image:url(../../common/img/interface/lockedPrimary.png);
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    cursor:not-allowed;
+ 
+}
+
+.hdw .ebkLink .lockedGhost .image {
+    position:absolute;
+    top:0em;
+    left:1em;
+    height:3em;
+    width:2em;
+    background-image:url(../../common/img/interface/lockedSecondary.png);
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    cursor:not-allowed;
+ 
+}
+
+.object.ebkPlayer {
+    background-color:rgba(64,64,64,1);
+    border:solid .25em rgba(0,0,0,1);
+    border-radius:2em;
+    overflow: hidden;
+}
+
+.object.ebkPlayer iframe {
+    width:100%;
+    height:100%;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
+.ebkLabel {
+    position:relative;
+    top:8em;
+    text-align:center;
+    font-family:'DisplayText';
+    color:#fff;
+}
+
+/*Specific to Countdown E-books*/
+.cdn .ebkLabel {
+    color:var(--cdnBookText);
+}
+
+.ebk {
+    border: solid .2em #000;
+}
+
+.ebkLink {
+position:absolute;
+    top:0;
+    left:0;
+    width:6em;
+    height:7em;
+
+    text-decoration: none;
+}
+.ebkLink:focus {
+position:absolute;
+    top:0;
+    left:0;
+    width:6em;
+    height:7em;
+    border:solid .25em blue;
+    text-decoration: none;
+}
+.ebkBlank {
+    background-color:#333;
+    height:100%;
+    width:7.5em;
+    top:.5em;
+    left:.5em;
+    border: solid .1em #555;
+}
+.ebkBlank2 {
+    background-color:#fff;
+    height:100%;
+    width:7.5em;
+    top:.4em;
+    left:.4em;
+    border: solid .1em #555;
+}
+.ebkBlank3 {
+    background-color:#fff;
+    height:100%;
+    width:7.5em;
+    top:.2em;
+    left:.2em;
+    border: solid .1em #555;
+}
+
+
+.pge {
+	background-color:white;
+	border-radius:1em;
+	display:none;
+}
+.imageLtextR img {
+	height:80%;
+	margin-left:1.5em;
+	float:left;
+	border-radius:1em;
+}
+#wrapper .imageLtextR div.txt {
+	position:absolute;
+	top:2em;
+	bottom:2em;
+	left:10em;
+	width:10em;
+	text-align: left;
+}
+/*
+
+
+
+/*Custom Object Styles Here*/
+.photo {
+	border-radius:1em;
+}
+
+
+/*Program Specific Styling*/
+.object.sortingStream {
+	background-image:url(../img/backgrounds/soundStream.svg);
+	background-size:110% auto;
+	background-position:center -.5em;
+}
+
+.object.wordMathMountain {
+	background-image:url(../img/backgrounds/wordMathMountain.svg);
+	background-size:auto 190%;
+	background-position:center -9em;
+}
+
+.object.consonantCanyon {
+	background-image:url(../img/backgrounds/consonantCanyon.svg);
+	background-size:auto 130%;
+	background-position:-1em -5em;
+}
+
+.object.library, .object.library1, .object.library2  {
+	/*background-image:url(../html/library/img/libraryBack.svg);*/
+	background-size:auto 10%;
+	background-position:60em 2em;
+	background-color:var(--secondary);
+	background-repeat: no-repeat;
+}
+
+.object.vowelValley, .object.vowelValley1, .object.vowelValley2  {
+	background-image:url(../img/backgrounds/vowelValleyLt.svg);
+	background-size:auto 180%;
+	background-position:-12em -5em;
+}
+
+.object.blast {
+	background-image:url(../img/backgrounds/countdown.svg);
+	background-size:auto 170%;
+	background-position:-11em -6em;
+}
+.object.countdown {
+	background-image:url(../img/backgrounds/countdown.svg);
+	background-size:auto 170%;
+	background-position:-11em -6em;
+}
+
+.object.sld.countdown {
+	background-image:none;
+	background-color:var(--clear);
+}
+.object.sld.hdword {
+	background-image:none;
+	background-color:var(--clear);
+}
+.object.sld.blast {
+	background-image:none;
+	background-color:var(--clear);
+}
+.object.sld.boost {
+	background-image:none;
+	background-color:var(--clear);
+}
+
+.object.sld.letterTileFreePlay {
+	background-image:none;
+	background-color:var(--clear);
+}
+
+
+.vowelValley, .vowelValley1, .vowelValley2 {
+    background-image: url('../img/presetArt/vvBack.svg');
+}
+
+.consonantCanyon {
+    background-image: url('../img/presetArt/ccBack.svg');
+}
+
+li.wordMathMountain {
+	background-color:#ADDFE7;
+    background-image: url('../img/presetArt/wmmBack.svg');
+	background-size:auto 130%;
+	background-position:-4em bottom;
+}
+li.sortingStream {
+    background-image: url('../img/presetArt/ssBack.svg');
+	background-size:auto 150%;
+	background-position:center bottom;
+}
+
+
+li.countdown {
+    background-image: url('../img/presetArt/cdBack.svg');
+}
+
+li.blast {
+    background-image: url('../img/presetArt/btBack.svg');
+}
+
+li.hdword {
+    background-image: url('../img/presetArt/hdBack.svg');
+}
+li.boost {
+    background-image: url('../img/presetArt/bsBack.svg');
+}
+
+li.lettertileFreePlay {
+    background-image: url('../img/presetArt/ltBack.svg');
+	background-size:86% auto
+}
+
+.object.happy {
+	background-image:url(../img/backgrounds/happy.png);
+	background-size:60% auto;
+	background-position:center center;
+	background-repeat: no-repeat;
+	background-color:#fff;
+}
+
+/*Sound Wall Styling*/
+body.sdw {
+    background-color:black;
+    font-family:"TeachText";
+}
+
+.sdw .presetList li {
+    color:var(--ghost80);
+}
+.sdw #wrapper .img {
+    border-radius:0em;
+}
+
+
+.sdw #wrapper .icn {
+    background-color:var(--control2);
+    cursor:pointer;
+}
+
+.sdw #wrapper .lst li.soundFlag {
+    background-color:var(--primary);
+    height:2em;
+    color:#fff;
+    overflow: visible;
+    font-size:2em;
+    font-family:"DisplayText";
+    line-height: 1.75em;
+    margin:1em;
+    margin-bottom:.5em;
+}
+
+.sdw #wrapper .swIconLabel {
+    font-size:8em;
+    color:#fff;
+}
+
+.sdw #wrapper .swSubGroup {
+    background-color:var(--primary);
+    z-index: 100000;
+}
+
+.sdw #wrapper .vid .vidBtn {
+    position:absolute;
+    bottom:0;
+    height:8em;
+    width:100%;
+    background-color:var(--control1);
+    z-index: 100000;
+    border-radius:2em;
+    background-image:url(../../common/img/interface/playVid.svg);
+    background-size:auto 70%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    cursor:pointer;
+}
+
+.sdw #wrapper .vid  {
+    position:absolute;
+    background-color:rgba(0,0,0,.2);
+    z-index: 100000;
+    border-radius:2em;
+
+}
+.sdw #wrapper .photo {
+    position:absolute;
+    border-radius:2em;
+}
+
+.sdw #wrapper .logo {
+    position:absolute;
+    border-radius:0em;
+}
+/*.sdw .copyright {
+    position:absolute;
+    border-radius:0em;
+    color:var(--ghost80);
+    font-family:"BodyText";
+    font-size:2.5em;
+}-->
+*/
+.sdw .backLogo {
+    position:absolute;
+    border-radius:0em;
+}
+
+.sdw #wrapper .vid video {
+    position:absolute;
+    top:0em;
+    left:0;
+    height:18em;
+    width:auto;
+    background-color:var(--control1);
+    border-radius:2em;
+}
+
+.sdw #wrapper .playOverlay .playOverlay {
+    position:absolute;
+    /*top:0em;
+    left:0;*/
+    height:100%;
+    width:100%;
+    background-color:var(--ghostBlack60);
+    background-image: url('../img/interface/playVid.svg');
+    background-position:center center;
+    background-size: auto 50%;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    border-radius:2em;
+    z-index: 10000;
+}
+.sdw #wrapper .aud {
+    background-color:var(--primary);
+    z-index: 100000;
+    border-radius:50%;
+    background-image:url(../../common/img/interface/playAud.svg);
+    background-size:auto 50%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    border:solid .25em var(--primary);
+}
+
+.sdw #wrapper .aud:hover {
+    background-color:var(--primaryLight);
+    border:solid .25em var(--secondary);
+}
+
+.sdw #wrapper .swLabelMed {
+   font-size:6em;
+}
+.sdw #wrapper .swLargePanel {
+   font-size:.4em;
+}
+.sdw #wrapper .closeX {
+   background-color:var(--secondary);
+    background-image: url(../../common/img/interface/btnClose.svg);
+    background-size:80% 80%;
+    background-position:center center;
+    background-repeat: no-repeat;
+    cursor:pointer;
+}
+.sdw #wrapper .altFont{
+    border-radius:0em;
+}
+/*VITSC STYLING*/
+.vtc #wrapper .sld {
+      background-color:var(--textBlack);
+}
+
+
+.vtc #wrapper .btn, .vtc #wrapper .lnk {
+    background-color:var(--control1);
+    color:var(--ghostWhite80);
+    font-size:.5em;
+    border-radius:.2em;
+    padding:1em;
+    height:auto;
+    font-family: "DisplayText";
+    color:var(--textWhite);
+    cursor:pointer;
+    text-decoration: none;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.vtc #wrapper .btn.primary, .vtc #wrapper .lnk.primary {
+    background-color:var(--primary);
+}
+
+.vtc #wrapper .btn.secondary, .vtc #wrapper .lnk.secondary {
+    background-color:var(--primary);
+}
+/*VITSC Program Branding*/
+body.vtc #wrapper {
+    background-color:var(--textBlack);
+}
+body.vtc #wrapper .sld{
+    background-color:var(--vitcbk);
+}
+body.vtc #wrapper .grp{
+    background-color:var(--vitcgroup);
+    box-shadow: 0em 0em .5em rgba(0,0,0,.1);
+}
+.vtc #wrapper .logo{
+    border-radius:0;
+}
+
+.vtc #wrapper .heading{
+    text-align: left;
+    font-size:2em;
+    margin-left:1.75em;
+    color:var(--primary);
+}
+.vtc #wrapper .description{
+    text-align: left;
+    font-size:.5em;
+    color:var(--ghostBlack80);
+    padding:1em;
+    font-family: "BodyText";
+    line-height: 1.2em;
+}
+.vtc #wrapper .grp .heading{
+    text-align: center;
+    font-size:.8em;
+    color:var(--textWhite);
+    margin-left:0em;
+    text-align: left;
+    padding:.25em;
+    background-color:var(--ghostBlack40);
+    line-height: 1.0em;
+}
+
+body.vtc #wrapper .grp{
+    background-size:auto 9.5em;
+    background-repeat: no-repeat;
+    background-position:center -.5em;
+    border-radius:.4rem;
+    margin:0;
+    padding:0;
+    border:none;
+ 
+    
+}
+
+body.vtc #wrapper .grp.grp1{
+    background-image: url(../../assets/img/imgCovers/Playground.png);
+}
+body.vtc #wrapper .grp.grp2{
+ background-image: url(../../assets/img/imgCovers/ELBestPractices.png);
+}
+body.vtc #wrapper .grp.grp3{
+    background-image: url(../../assets/img/imgCovers/RGRespanol.png);
+}
+body.vtc #wrapper .grp.grp4{
+     background-image: url(../../assets/img/imgCovers/Infercabulary.jpg);
+}
+
+
+/*VITSC STYLING*/
+.mph #wrapper .sld {
+      background-color:var(--textBlack);
+}
+
+
+.mph #wrapper .btn, .mph #wrapper .lnk {
+    background-color:var(--control1);
+    color:var(--ghostWhite80);
+    font-size:.5em;
+    border-radius:.2em;
+    padding:1em;
+    height:auto;
+    font-family: "DisplayText";
+    color:var(--textWhite);
+    cursor:pointer;
+    text-decoration: none;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.mph #wrapper .btn.primary, .mph #wrapper .lnk.primary {
+    background-color:var(--primary);
+}
+
+.mph #wrapper .btn.secondary, .mph #wrapper .lnk.secondary {
+    background-color:var(--primary);
+}
+/*VITSC Program Branding*/
+body.mph #wrapper {
+    background-color:var(--textBlack);
+}
+body.mph #wrapper .sld{
+    background-color:var(--vitcbk);
+}
+body.mph #wrapper .grp{
+    background-color:var(--vitcgroup);
+    box-shadow: 0em 0em .5em rgba(0,0,0,.1);
+}
+.mph #wrapper .logo{
+    border-radius:0;
+}
+
+.mph #wrapper .heading{
+    text-align: left;
+    font-size:2em;
+    margin-left:1.75em;
+    color:var(--primary);
+}
+.mph #wrapper .description{
+    text-align: left;
+    font-size:.5em;
+    color:var(--ghostBlack80);
+    padding:1em;
+    font-family: "BodyText";
+    line-height: 1.2em;
+}
+.mph #wrapper .grp .heading{
+    text-align: center;
+    font-size:.8em;
+    color:var(--textWhite);
+    margin-left:0em;
+    text-align: left;
+    padding:.25em;
+    background-color:var(--ghostBlack40);
+    line-height: 1.0em;
+}
+
+body.mph #wrapper .grp{
+    background-size:auto 9.5em;
+    background-repeat: no-repeat;
+    background-position:center -.5em;
+    border-radius:.4rem;
+    margin:0;
+    padding:0;
+    border:none;
+ 
+    
+}
+
+body.mph #wrapper .grp.grp1{
+    background-image: url(../../assets/img/imgCovers/Playground.png);
+}
+body.mph #wrapper .grp.grp2{
+ background-image: url(../../assets/img/imgCovers/ELBestPractices.png);
+}
+body.mph #wrapper .grp.grp3{
+    background-image: url(../../assets/img/imgCovers/RGRespanol.png);
+}
+body.mph #wrapper .grp.grp4{
+     background-image: url(../../assets/img/imgCovers/Infercabulary.jpg);
+}
+
+body.admin #wrapper {
+    background-color:var(--textBlack);
+}
+body.admin #wrapper .sld{
+    background-color:var(--control5);
+}
+
+
+/* Nick Admin Stuff for you here */
+body.admin #wrapper .primary  {
+    background-color:var(--primary);
+}
+body.admin #wrapper .secondary  {
+    background-color:var(--secondary);
+}
+body.admin #wrapper .tertiary  {
+    background-color:var(--tertiary);
+}
+
+body.admin #wrapper .grp{
+    background-size:auto 9.5em;
+    background-repeat: no-repeat;
+    background-position:center -.5em;
+    border-radius:.4rem;
+    margin:0;
+    padding:0;
+    border:none;  
+}
+
+.admin #wrapper .btn, .admin #wrapper .lnk {
+    background-color:var(--control1);
+    color:var(--ghostWhite80);
+    font-size:.5em;
+    border-radius:.2em;
+    padding:1em;
+    height:auto;
+    font-family: "DisplayText";
+    color:var(--textWhite);
+    cursor:pointer;
+    text-decoration: none;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.admin #wrapper .btn.primary, .admin #wrapper .lnk.primary {
+    background-color:var(--primary);
+}
+
+.admin #wrapper .btn.secondary, .admin #wrapper .lnk.secondary {
+    background-color:var(--primary);
+}
+body.admin #wrapper .Logo{
+    border-radius:0;
+}
+
+body.admin #wrapper .heading{
+    color:var(--ghost80);
+    text-align: left;
+    font-size: 2em;
+    padding: .5em;
+}
+body.admin #wrapper .grp .heading{
+    color:var(--ghost80);
+    background-color:var(--ghostBlack60);
+    font-size:.75em;
+}
+
+.admin #wrapper .description{
+    text-align: left;
+    font-size:.5em;
+    color:var(--ghostBlack80);
+    padding:1em;
+    font-family: "BodyText";
+    line-height: 1.2em;
+}
+
+
+body.admin #wrapper .lst {
+    position:absolute;
+    padding:.25em;
+    text-align: left;
+    border-radius:.5em;
+    overflow: visible;
+    background-color:var(--ghostBlack20);
+    
+}
+
+
+body.admin #wrapper .lst .itm  {
+    font-family: "BoldText";
+    color:var(--ghost80);
+    border-radius:.5em;
+    padding:.5em;
+    cursor:pointer;
+    margin:.25em;
+    overflow: visible;
+    position:relative;
+}
+
+body.admin #wrapper .lst .itm .toggleChildTrigger  {
+    position:absolute;
+    top:-.25em;
+    bottom:-.25em;
+    left:-.25em;
+    right:-.25em;
+    border-radius:.5em;
+    cursor:pointer;
+    border:solid .25em var(--ghost20);
+}
+body.admin #wrapper .lst .itm .toggleChildTrigger:focus  {
+    border:solid .25em var(--ghost80);
+}
+
+body.admin #wrapper .lst .itm a {
+    text-decoration: none;
+    color:var(--ghost80);
+    cursor:pointer;
+}
+body.admin #wrapper .lst .itm:hover  {
+    color:var(--ghostBlack80);
+}
+body.admin #wrapper .lst  .lst  {
+   display:none;
+}
+body.admin #wrapper .lst .itm .lst .itm  {
+   margin:0;
+}
+
+body.admin #wrapper .lst .itm .lst .itm:hover  {
+    background-color:var(--control5);
+}
+
+body.admin #wrapper .lst .itm .lst {
+    background:var(--ghostBlack80);;
+}
+
+body.admin #wrapper .lst .itm .lst .itm  {
+    font-size:.8em;
+    background:none;
+}
+
+
+
+body.admin #wrapper .lst .itm .lst li.itm {
+    display: block;
+    
+}

@@ -1,0 +1,22 @@
+/*Color Palettes for Pandemic 2020*/
+#wrapper {
+    --dark: rgba(80,80,80,1);
+    --med: rgba(120,120,120,1);
+    --light: rgba(240,240,240,1);
+    --uninfected: rgba(255,255,255,1);
+    /*--justInfected: rgba(255,30,0,1);*/
+	/*--contagious: rgba(255,80,180,1);*/
+    --justInfected: rgba(255,100,80,1);
+    --contagious: rgba(90,200,255,1);
+    --noLongerContagious: rgba(120,120,120,1);
+    --nctmLightBlue: rgba(20,130,200,1);
+    --nctmBlue: rgba(40,160,220,1);
+}
+
+body {
+    --history: #00a6d1;
+    --variation: #b9b532;
+    --experience: #f58e35;
+	--red: #b61e5c;
+    --other: #888;
+}

@@ -1,0 +1,267 @@
+@charset "UTF-8";
+
+
+body,
+html {
+    width: 100%;
+    font-size: 14px;
+    height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: 'BodyText', 'arial';
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+}
+.announcementClose {
+    position: absolute;
+    top:0;
+    right:0;
+    height:2em;
+    width:2em;
+    border-bottom-left-radius: .5em;
+    background-color:var(--control1);
+    cursor:pointer;
+    background-image:url(../img/interface/btnClose.svg);
+    background-size:auto 50%;
+    background-repeat:no-repeat;
+    background-position: center center;
+}
+.announceText {
+    overflow: hidden;;
+    background-color: var(--primary);
+    padding: 1em;
+    padding-left:8em;
+    line-height: 1.3em;
+    color: var(--textWhite);
+    position: absolute;
+    width: auto;
+    height: auto;
+    bottom: 2em;
+    left: 8em;
+    right: 8em;
+    border-radius: 1.2em;
+    font-size: 1.5em;
+    font-family: 'BodyText';
+    background-image:url(../img/interface/RGRBurstWhite.png);
+    background-size:auto 66%;
+    background-repeat:no-repeat;
+    background-position: .1em center;
+}
+
+.announceText strong {
+    font-family: 'DisplayText';
+}
+
+#announcement {
+    background-color: var(--ghostBlack80);
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:100000;
+}
+
+#login {
+    background-color: var(--control3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    display: none;
+}
+
+.loginBox {
+    position: absolute;
+    top: 15em;
+    left: 15em;
+    width: 40em;
+    background-color: var(--control4);
+    padding: 2em;
+    border-radius: 5em;
+    text-align: center;
+}
+
+.loginBox input {
+    padding: .5em;
+    font-family: 'DisplayText';
+    border-radius: 1em;
+    margin: .25em;
+    border: none;
+    font-size: 2em;
+    display: inline-block;
+}
+
+#btnLogin {
+    background-color: var(--control3);
+    font-family: 'DisplayText';
+    color: #fff;
+    padding: .5em;
+    border-radius: .5em;
+    display: inline-block;
+    margin: .25em;
+    font-size: 2em;
+    cursor: pointer;
+    height: 1.25em;
+    cursor: pointer;
+}
+
+.splashback {
+    position: absolute;
+    z-index: -1;
+}
+
+#controller {
+    font-size: .4em;
+    position: absolute;
+    bottom: 0em;
+    left: 0em;
+    right: 0em;
+    top: 0;
+    overflow: visible;
+    z-index: 0;
+}
+
+#controller.opened {
+    opacity: 12;
+    font-size: .6em;
+}
+
+#btnToolToggle {
+    position: relative;
+    display: inline-block;
+    width: 10em;
+    height: 10em;
+    background-image: url(file:///C:/Users/LindseyRick/OneDrive%20-%20REALLY%20GREAT%20READING/Documents/GitHub/RGRUI/RGRUI/assets/logos/Logo_Full/Logo_Full_Countdown_Purple.svg);
+    background-size: auto 80%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    cursor: pointer;
+    border: solid .2em var(--clearblack);
+    border-radius: 50%;
+}
+
+#btnToolToggle:focus {
+    border: solid .2em var(--ghost80);
+}
+
+.tools {
+    display: inline-block;
+    transition: all .5s;
+    font-size: 0em;
+}
+
+.tools.opened {
+    font-size: 1em;
+}
+
+#btnMoveToggle {
+    position: relative;
+    display: inline-block;
+    width: 10em;
+    height: 10em;
+    background-image: url('../img/interface/rgrMove.svg');
+    background-size: auto 80%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: .2;
+    cursor: pointer;
+}
+
+#btnMoveToggle.opened {
+    opacity: 1;
+}
+
+/*.presetList {
+    padding:0;
+    margin:0;
+	margin-left:.5em;
+    height:auto;
+    width:auto;
+    display:inline-block;
+    position:relative;
+    top:-6.75em;
+    left:0em;
+}*/
+.presetList {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: visible;
+}
+
+.presetList ul {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+.presetList li {
+    padding: 0;
+    margin: 0;
+    height: 9em;
+    width: 9em;
+    display: inline-grid;
+    position: relative;
+    cursor: pointer;
+    margin: 1em;
+    background-color: var(--control4);
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 2em;
+    text-align: center;
+    border: solid .25em rgba(0, 0, 0, 0);
+    overflow: hidden;
+}
+
+.presetList li a {
+    font-size: .01em;
+}
+
+.presetList li:hover,
+.presetList li:focus {
+    border: solid .25em var(--textWhite);
+}
+
+.presetList li.current {
+    border: solid .35em var(--textWhite);
+}
+
+.presetList li h1 {
+    width: auto;
+    text-align: center;
+    font-family: 'BoldText';
+    color: var(--ghost80);
+    position: absolute;
+    top: 4.3em;
+    font-size: 1.2em;
+    line-height: 1em;
+    height: 1em;
+}
+
+.presetList li h1 a {
+    text-decoration: none;
+    color: var(--ghost80);
+
+
+}
+
+#wrapper {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    text-align: center;
+    transition: all .5s;
+}

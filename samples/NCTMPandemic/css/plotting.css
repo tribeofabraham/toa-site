@@ -1,0 +1,134 @@
+/*CSS to handle elements involved in plotting and charting pandemic data*/
+#populationCanvas {
+    background-color:rgba(20,20,20,1);
+    height:100%;
+    width:100%;
+    display:none;
+}
+
+#populationDiv {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    font-size:1.2em;
+    z-index: 11;
+    display:none;
+
+}
+#populationDivSVG {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    font-size:1.2em;
+    z-index: 12;
+    background-color:var(--light);
+    display:none;
+        
+}
+#populationLoader {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: var(--light);
+    z-index: 12;
+    font-size:2em;
+    padding-top:5em;
+    background-image:url(../../../img/ajax-loader.html);
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:10% auto;
+    display:none;
+}
+#popTable {
+    font-size:1em;
+}
+.human {
+    height:1em;
+    width:1em;
+    background-color:var(--uninfected);
+    box-sizing: border-box;
+    border:solid 1px var(--med);
+    padding:0;
+    margin:0;
+    line-height:0;
+    display:inline-block;
+}
+
+.uninfected {
+    background-color:var(--uninfected);
+    fill:var(--uninfected);
+    stroke-width:.5;
+    stroke:rgb(0,0,0);
+}
+.justInfected {
+    background-color:var(--justInfected);
+    fill:var(--justInfected);
+    stroke-width:.5;
+    stroke:rgb(0,0,0);
+}
+.contagious {
+    background-color:var(--contagious);
+    fill:var(--contagious);
+    stroke-width:.5;
+    stroke:rgb(0,0,0);
+}
+.noLongerContagious {
+    background-color:var(--noLongerContagious);
+    fill:var(--noLongerContagious);
+    stroke-width:.5;
+    stroke:rgb(0,0,0);
+}
+
+/*Graphing-----------------*/
+#graphCanvas {
+ width:100%;
+    height:100%;
+}
+#graphCanvas svg {
+    display:inline-block;
+}
+#graphSVG line {
+     stroke:rgba(0,0,0,.5);
+    stroke-width:1px;
+}
+
+#chartSVG{
+    position:absolute;
+    top:10%;
+    left:10%
+}
+#vertAxisSVG text {
+    fill:var(--dark);
+    font-weight: bold;
+}
+#horizAxisSVG text {
+    fill:var(--dark);
+    font-weight: bold;
+}
+
+#chartSVG line {
+    stroke:var(--dark);
+    stroke-width:2px;
+}
+
+#chartSVG rect {
+    stroke:var(--dark);
+    stroke-width:.5px;
+}
+
+#horizAxisSVG {
+
+}
+
+#vertAxisSVG {
+
+}
+
+
+

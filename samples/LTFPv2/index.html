@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>RGR Letter Tile Freeplay</title>
+    <!-- Allow web app to be run in full-screen mode. -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Make the app title different than the page title. -->
+    <meta name="apple-mobile-web-app-title" content="RGR Letter Tile Freeplay">
+
+    <!-- Configure the status bar. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-transparent">
+
+    <!-- Set the viewport. -->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+
+  
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="css/colors.css">
+    <link rel="stylesheet" type="text/css" href="css/lettertiles.css">
+    <link rel="stylesheet" type="text/css" href="css/grid.css">
+    <link rel="stylesheet" type="text/css" href="css/tabs.css">
+    <link rel="stylesheet" type="text/css" href="css/controls.css">
+    <link rel="stylesheet" type="text/css" href="css/widgets.css">
+
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/sizer.js"></script>
+    <script src="js/grid.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="js/video.js"></script>
+</head>
+
+<body>
+    <div id="wrapper" role="main">
+
+<div id="branding"><img alt="Really Great Reading Logo" src="img/RGRWhiteLogo.svg"/></div>
+        <audio id="audioPlayer" nocontrols></audio>
+        <div id="widgets">
+
+        </div>
+
+        <div class="tabs" role="navigation">
+            <div id="t1" class="tab">
+                <div class="tLabel" tabindex="0">presets</div>
+                <div class="preset">ough</div>
+                <div class="preset">ough</div>
+                <div class="preset">ough</div>
+                <div class="preset">ough</div>
+            </div>
+
+        </div>
+        <div id="refDot"></div>
+        <div class="grid"></div>
+        <div id="tileArea"></div>
+        <div id="tiles">
+
+        </div>
+        <div class="controls">
+            <div class="toolLogo controlButton" tabindex="0" role="button" aria-label="open menu">
+                <div class="toolTip"><span>open menu</span></div>
+            </div>
+            <div class="tool delete disabled" tabindex="0" role="button" aria-label="delete tile">
+                <div class="toolTip"><span>delete tile</span></div>
+            </div>
+            <div class="tool clear disabled" tabindex="0" role="button" aria-label="clear tiles">
+                <div class="toolTip"><span>clear tiles</span></div>
+            </div>
+            <div class="tool tileSize" tabindex="0" role="button" aria-label="toggle tile size">
+                <div class="toolTip"><span>toggle tile size</span></div>
+            </div>
+            <div class="tool vowelColor" tabindex="0" role="button" aria-label="toggle vowel color">
+                <div class="toolTip"><span>toggle vowel color</span></div>
+            </div>
+            <div class="tool video vidBub4x3" tabindex="0" role="button" aria-label="tutorial video">
+                <div class="toolTip"><span>tutorial video</span></div>
+            </div>
+            <div class="tool resize" tabindex="0" role="button" aria-label="toggle scaling">
+                <div class="toolTip"><span>toggle scaling</span></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

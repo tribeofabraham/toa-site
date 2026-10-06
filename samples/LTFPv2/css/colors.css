@@ -1,0 +1,32 @@
+body {
+/*Universal Colors*/
+    --control: rgb(155, 78, 149);
+    /*--back: #004ca8;*/
+    /*--back:rgb(27,110,200,100);*/
+    --back:rgba(0, 0, 0, 0.85);
+    --tertiary: #7db40a;
+    --focus: rgb(60, 30, 255);
+	--clear: rgba(255, 255, 255, 0);
+    --clearblack: rgba(0, 0, 0, 0);
+    --solidgrey: #b5b5b5;
+    --textBlack:#333333;
+    --textWhite:#ffffff;  
+    --ghostWhite20: rgba(255,255,255,.2);
+    --ghostWhite40: rgba(255,255,255,.4);
+    --ghostWhite60: rgba(255,255,255,.6);
+    --ghostWhite80: rgba(255,255,255,.8);
+    --Red:#C0504D;
+    --Green:#9BBB59;
+    --Blue:#1888E7;
+    --Cyan:#4BACC6;
+    --Magenta:#c0c;
+    --Yellow:#F7EB45;
+    --Purple:#8064A2;
+    --Orange:#F79646;
+    --Gray:#9F9F9F;
+
+    --vowelRed:rgb(204,0,0);
+
+}
+
+

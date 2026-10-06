@@ -1,0 +1,178 @@
+#pmWarning {
+    position: absolute;
+    z-index: 10000000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--textBlack);
+    color:var(--textWhite);
+    text-align: center;
+    padding-top: 4em;
+    display:none;
+}
+
+#pmWarning h1, h2{
+    color:var(--textWhite);
+    font-family: 'DisplayText';
+    line-height: 1.2em;
+    margin-bottom:1em;
+}
+
+#pmWarning h1 {
+    font-size:1.2em;
+}
+.vidClose {
+    position:absolute;
+    right: 5.2em;
+    top:8.9em;
+    height:1em;
+    width:1em;
+    font-size:.91em;
+    background-color:var(--ghostWhite40);
+    background-size:60% auto;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url(../img/btnClose.svg);
+    border-radius: 50%;
+    cursor:pointer;
+    border:solid .1em var(--ghostWhite60);
+}
+
+.vidClose:hover,.vidClose:focus {
+    border:solid .1em var(--textWhite);
+}
+
+
+.videoBubble {
+    position:absolute;
+    top:.5em;
+    right:.5em;
+    height:8em;
+    width:6em;
+    border-top-left-radius:1em;
+    border-top-right-radius:1em;
+    border-bottom-left-radius:1em;
+    border-bottom-right-radius:1em;
+    /*background-color: var(--control);*/
+    /*background-image:url(../widgets/mediaplayer/img/bubbleVidBack.png);*/
+    background-position : center center;
+    background-size:100% auto;
+    background-repeat: no-repeat;
+    cursor:move;
+    z-index: 1000000;
+}
+.videoBubble.videoBubble16x9 {
+    font-size:1.6em;
+    top:-.5em;
+    right:1.5em;
+}
+.videoBubble.videoBubble4x3 {
+    background-image:url(../widgets/mediaplayer/img/bubbleVid4X3Back.png);
+}
+.videoBubble.videoBubble16x9 {
+    background-image:url(../widgets/mediaplayer/img/bubbleVid16X9Back2025.png);
+    width:9em;
+}
+.videoBubble.videoBubble16x9 .vidFrameBubble {
+    /*background-image:url(../widgets/mediaplayer/img/bubbleVid16X9Back.png);*/
+    width:7.4em;
+}
+.videoBubble.avatar {
+    position:absolute;
+    background-size:auto 100%;
+    background-image:url(../widgets/mediaplayer/img/bubbleAvatarBack.png);
+    width:9em;
+    top:1em;
+    right:1.5em;
+}
+.videoBubble.avatar .avatarFrameBubble {
+    /*background-image:url(../widgets/mediaplayer/img/bubbleVid16X9Back.png);*/
+    position:absolute;
+    top:1.4em;
+    right:1.8em;
+    width:5.6em;
+    height:6em;
+    border-radius:.5em;
+    overflow: hidden;
+    border:solid .02em var(--textBlack);
+    background-color:var(--Gray);
+}
+.videoBubble.avatar .close {
+    top:.2em;;
+    right:.7em;
+}
+.videoBubble .move {
+    position:absolute;
+    bottom:0;
+    right:4em;
+    height:2em;
+    width:2em;
+    background-image: url(../img/interface/moveK.svg);
+    cursor:pointer;
+    z-index: 100000;;
+}
+.videoBubble .close {
+    position:absolute;
+    top:1em;
+    right:.78em;
+    height:1em;
+    width:1em;
+    border-radius:50%;
+    border: solid .05em transparent;
+    background-image: url(../img/interface/close.svg);
+    background-repeat:no-repeat;
+    background-size:60% auto;
+    background-position: center center;
+    cursor:pointer;
+    z-index:100000;
+}
+.videoBubble .close:hover {
+    border: solid .05em var(--textWhite);
+}
+.videoBubble .close:focus {
+    border: solid .05em var(--textWhite);
+}
+
+
+.vidFrameBubble {
+    position:absolute;
+    top:1.5em;
+    left:0em;
+    z-index:100000;
+    cursor:pointer;
+    height:6em;
+    width:4.4em;
+    overflow:hidden;
+}
+#widgets {
+    position: absolute;
+    top: 0em;
+    bottom: 0em;
+    left: 0em;
+    right: 0em;
+    z-index: 10;
+    display: none;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+#widgets .vidFrame {
+    position: absolute;
+    top: .5em;
+    left: 5em;
+    height: 15em;
+    width: 18em;
+}
+
+#widgets .webFrame {
+    position: absolute;
+    top: .5em;
+    left: 2.4em;
+    height: 10em;
+    width: 18em;
+    border-radius:1em;
+    overflow: hidden;
+    padding:1em;
+    background-color:#000;
+}
+

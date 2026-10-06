@@ -1,0 +1,8 @@
+Red #C0504D
+Yellow #F7EB45
+Blue #1888E7
+Green #9BBB59
+Orange #F79646
+Purple #8064A2
+Teal #4BACC6
+Gray #9F9F9F

@@ -1,0 +1,12 @@
+# Downloaded packages: never part of the site (a stray npm install left 20 MB of these here once)
+node_modules/
+
+# Editor and OS clutter
+.DS_Store
+Thumbs.db
+
+# Personal Claude Code settings (the shared .claude/settings.json stays)
+.claude/settings.local.json
+
+# Licensed VectorStock originals: not used by any page, and this repo is public
+samples/NashvilleNotation/img/guitarchords/vectorstock_*

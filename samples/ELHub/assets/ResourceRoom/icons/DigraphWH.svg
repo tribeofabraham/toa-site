@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 61.42 75.58">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #414142;
+      }
+
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        stroke: #fff;
+        stroke-width: 4px;
+      }
+
+      .cls-3 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-4 {
+        fill: #231f20;
+      }
+
+      .cls-4, .cls-5, .cls-6 {
+        stroke-width: 0px;
+      }
+
+      .cls-5 {
+        fill: #f47c25;
+      }
+
+      .cls-6 {
+        fill: #fff;
+      }
+    </style>
+    <filter id="drop-shadow-1" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3"/>
+      <feGaussianBlur result="blur" stdDeviation="1"/>
+      <feFlood flood-color="#231f20" flood-opacity=".1"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <g>
+        <path class="cls-4" d="M0,52.89h2.31l5.26,12.5,5.55-12.5h.39l5.52,12.5,5.36-12.5h2.34l-7.5,17.24h-.42l-5.49-12.34-5.52,12.34h-.42L0,52.89Z"/>
+        <path class="cls-4" d="M29.32,46.24h2.24v9.74c1.79-2.37,3.96-3.54,6.46-3.54,1.27,0,2.4.32,3.41,1.01,1.01.65,1.75,1.53,2.24,2.63.49,1.1.71,2.83.71,5.2v8.86h-2.24v-8.21c0-1.98-.07-3.31-.23-3.99-.55-2.31-2.01-3.44-4.35-3.44-1.33,0-2.53.45-3.6,1.33-1.07.88-1.75,1.98-2.11,3.31-.19.84-.29,2.4-.29,4.68v6.33h-2.24v-23.9Z"/>
+      </g>
+      <g class="cls-3">
+        <rect class="cls-5" x="7.03" width="32.46" height="38.98"/>
+      </g>
+      <line class="cls-1" x1="29.03" y1="75.08" x2="44.39" y2="75.08"/>
+      <line class="cls-1" y1="75.08" x2="26.76" y2="75.08"/>
+      <g>
+        <path class="cls-2" d="M52.24,63.37c8.49-9.57,9.38-23.24,3.1-33.64"/>
+        <polygon class="cls-6" points="60.94 27.53 49.82 23.11 51.54 34.95 60.94 27.53"/>
+      </g>
+    </g>
+  </g>
+</svg>

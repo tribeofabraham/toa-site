@@ -1,0 +1,63 @@
+.audioHidden video {
+    display:none;
+}
+
+#wrapper .sld.media.karioke {
+    background-color:var(--paperWhite);
+}
+
+#wrapper .sld .karioke {
+    background-color:var(--primary);
+    border-radius:1em;
+}
+
+#wrapper .sld .karioke .txt {
+    border-radius:1em;
+    color:var(--paperWhite);
+    font-size:2.5em;
+    line-height: 1.5em;
+}
+#wrapper .sld .karioke .txt  b.current {
+    color:var(--textWhite);
+    display:inline-block;
+    background-image:url(../../common/img/bursts/bb1.svg);
+     background-repeat:no-repeat;
+     background-position:center center;
+     background-size:auto 110%;
+    overflow: visible;
+    
+    font-family:"DisplayText";
+    text-shadow:
+    -.05em -.05em 0 var(--textBlack),
+    .05em -.05em 0 var(--textBlack),
+    -.05em .05em 0 var(--textBlack),
+    .05em .05em 0 var(--textBlack); 
+    border-radius:2em;
+}
+
+b.correct {
+     background-image:url(../../common/img/bursts/bb0.svg);
+}
+
+b.incorrect {
+     background-image:url(../../common/img/bursts/bb1.svg);
+}
+/*b.bb0 {
+  background-image:url(../../common/img/bursts/bb0.svg);
+}
+b.bb1 {
+  background-image:url(../../common/img/bursts/bb1.svg);
+}*/
+ /*.bb0 {
+    color:var(--paperWhite);
+     background-image:url(../../assets/img/spanish/bb0.svg);
+     background-repeat:no-repeat;
+     background-position:center center;
+     background-size:100% 100%;
+     font-family:"DisplayText";
+    text-shadow:
+    -.05em -.05em 0 var(--textBlack),
+    .05em -.05em 0 var(--textBlack),
+    -.05em .05em 0 var(--textBlack),
+    .05em .05em 0 var(--textBlack); 
+}*/

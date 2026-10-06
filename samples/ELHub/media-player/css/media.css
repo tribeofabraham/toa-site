@@ -1,0 +1,758 @@
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    user-select: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    text-align: center;
+}
+
+/*Standard Video Presentation*/
+.vid.standard {
+    font-size: .6em;
+    /*position: absolute;*/
+    display: inline-block;
+    position: relative;
+    background-color: var(--control);
+    height: 21em;
+    width: 35em;
+    display: inline-block;
+    overflow: visible;
+    text-align: center;
+    border-radius: 2em;
+    top: .4em;
+    left: .4em;
+    float: left;
+    box-shadow: 0.625em 0.4375em 1.25em rgba(0, 0, 0, 0.2);
+
+
+    
+}
+
+.vid.standard .vidThumbnail {
+    position: absolute;
+    height: auto;
+    width: 33em;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.vid.standard h1 {
+    opacity: 0;
+}
+
+.vid.standard .videoBox {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    right: 1em;
+    bottom: 1.4em;
+    background-color: var(--control);
+    border-radius: 1em;
+    overflow: hidden;
+    border: solid .1em var(--ghostWhite40);
+}
+
+.vid.standard video {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: auto;
+    width: 100%;
+    background-color: var(--control);
+}
+
+
+
+.vid.standard .vidPlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(../img/play.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.vid.standard .videoControlBlock {
+    background-color: var(--control);
+    position: absolute;
+    z-index: -1;
+    bottom: -3.8em;
+    height: 3.8em;
+    width: 10.6em;
+    right: 2em;
+    border-bottom-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    box-shadow: 0.625em 0.4375em 1.25em rgba(0, 0, 0, 0.2);
+
+}
+
+.vid.standard .control {
+    position: absolute;
+    bottom: 0em;
+    height: 3.4em;
+    left: 0em;
+    right: 0em;
+    z-index: 0;
+    background-color: rgba(0, 0, 0, .5);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.vid.standard .btn {
+    font-size: .8em;
+    position: absolute;
+    bottom: 2em;
+    height: 2em;
+    width: 2em;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: solid .2em rgba(255, 255, 255, 0);
+}
+
+.vid.standard .btn:hover {
+    position: absolute;
+
+    background-color: rgba(255, 255, 255, .2);
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: solid .2em rgba(255, 255, 255, .4);
+}
+
+.vid.standard .btn:focus {
+    border: solid .2em rgba(255, 255, 255, 1);
+    outline: none;
+}
+
+.vid.standard .vidPlayToggle {
+    right: 10em;
+    background-image: url(../img/pause.svg);
+}
+
+.vid.standard .vidPlayToggle.paused {
+    background-image: url(../img/play.svg);
+}
+
+
+
+.vid.standard .vidCCToggle {
+    right: 7em;
+    background-image: url(../img/captions.svg);
+}
+
+.vid.standard .vidCCToggle.captionsOff {
+    background-image: url(../img/captionsOff.svg);
+}
+
+.vid.standard .vidAudioToggle {
+    right: 4em;
+    background-image: url(../img/unmuted.svg);
+}
+
+.vid.standard .vidFullScreen {
+    right: 1em;
+    background-image: url(../img/fullscreen.svg);
+}
+
+.vid.standard .vidClose {
+    left: 32em;
+    background-size: 60% auto;
+    background-image: url(../img/btnClose.svg);
+}
+
+.vid.standard .vidAudioToggle.audioOff {
+    background-image: url(../img/muted.svg);
+}
+
+.vid.standard .captionBlock {
+    color: #fff;
+    position: absolute;
+    top: 21.4em;
+    left: 1em;
+    width: 21em;
+    height: auto;
+
+}
+
+.vid.standard .vidCaptionTextBlock {
+    background-color: rgba(0, 0, 0, .6);
+
+    position: relative;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    font-size: .9em;
+    font-family: "BodyText";
+    border-radius: .5em;
+    background-color: var(--control);
+    box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+
+}
+
+.vid.standard .vidCaption {
+    padding: .25em;
+    color: var(--control);
+    position: relative;
+    display: inline-block;
+    width: auto;
+    font-family: "BodyText";
+    margin: .25em;
+}
+
+.vid.standard .vidSlider {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+    bottom: .6em;
+    right: 1.6em;
+    width: 17em;
+    display: block;
+    font-size: .5em;
+}
+
+/*Input Range Slider*/
+.vid.standard input[type="range"] {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    /* removing default appearance */
+
+    /* creating a custom design */
+    cursor: pointer;
+    outline: none;
+    border-radius: 2em;
+    overflow: hidden;
+    /* New additions */
+    background-color: var(--clearBlack);
+    border: solid .1em var(--ghostWhite60);
+    z-index: 1;
+}
+
+.vid.standard input[type="range"]:focus {
+    border: solid .1em #fff;
+
+}
+
+/* Video Track */
+.vid.standard input[type="range"]::-webkit-slider-runnable-track {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+/* Thumb: webkit */
+.vid.standard input[type="range"].playing::-webkit-slider-thumb {
+    background-color: none;
+}
+
+.vid.standard input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    /* creating a custom design */
+    background-image: url(../img/slider.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 1em;
+    width: 1em;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 50%;
+    border: solid .2em rgba(255, 255, 255, 0);
+    transition: .2s ease-in-out;
+    box-shadow: -8em 0 0 8em var(--ghostWhite80);
+}
+
+.vid.standard input[type="range"].playing:hover::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, .6);
+}
+
+.vid.standard input[type="range"]:hover::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, .6);
+}
+
+.vid.standard input[type="range"].playing:focus::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, 1);
+    background-image: url(../img/interface/sdwIcons/pause.svg);
+}
+
+.vid.standard input[type="range"]:focus::-webkit-slider-thumb {
+    border: solid .2em rgba(255, 255, 255, 1);
+}
+
+
+/*Styles Begin Here Noel!*/
+/*S1 shows progress bar but it is not scrubbable*/
+.vid.s1.standard input[type="range"] {
+    cursor: not-allowed;
+}
+
+.vid.s1.standard input[type="range"] {
+    opacity: .6;
+}
+
+/*S2 is a reskin example. This is where we need to organize things moving forward.*/
+.vid.s2.standard {
+    font-size: 1.2em;
+    background-color: var(--control);
+    height: 30em;
+    width: 30em;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+}
+
+.vid.s2.standard .videoBox {
+    background-color: var(--control);
+    border-radius: 50%;
+    left: 3em;
+    right: 3em;
+    top: 3em;
+    bottom: 3em;
+    z-index: 1;
+}
+
+.vid.s2.standard .captionBlock {
+    top: 0em;
+    left: 1em;
+    width: 28em;
+    height: auto;
+    z-index: 3;
+}
+
+.vid.s2.standard .vidCaption {
+    color: var(--control);
+    font-family: "BodyText";
+}
+
+.vid.s2.standard video {
+    position: absolute;
+    top: 0em;
+    left: -15em;
+    right: 0;
+    width: auto;
+    height: 30em;
+    background-color: var(--control);
+}
+
+.vid.s2.standard .vidCaptionTextBlock {
+    background-color: white;
+    color: var(--control);
+    border: solid .25em var(--control);
+}
+
+.vid.s2.standard .videoControlBlock {
+    background-color: var(--control);
+    position: absolute;
+    bottom: -4em;
+    height: 5em;
+    width: 10.6em;
+    left: 10em;
+    right: auto;
+    border-bottom-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+}
+
+/*S3 is a reskin example. This is where we need to organize things moving forward.*/
+.vid.s3.standard {
+    font-size: 1.2em;
+    background-color: var(--control);
+    height: 30em;
+    width: 30em;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+}
+
+.vid.s3.standard input[type="range"] {
+    opacity: .6;
+}
+
+.vid.s3.standard .videoBox {
+    border-radius: 50%;
+    background-color: var(--control);
+    left: 3em;
+    right: 3em;
+    top: 3em;
+    bottom: 3em;
+    z-index: 1;
+}
+
+.vid.s3.standard .captionBlock {
+    top: 0em;
+    left: 1em;
+    width: 28em;
+    height: auto;
+    z-index: 3;
+}
+
+.vid.s3.standard .vidCaption {
+    color: var(--control);
+    font-family: "BodyText";
+}
+
+.vid.s3.standard video {
+    position: absolute;
+    top: 0em;
+    left: -15em;
+    right: 0;
+    width: auto;
+    height: 30em;
+    background-color: var(--control);
+}
+
+.vid.s3.standard .vidCaptionTextBlock {
+    background-color: white;
+    color: var(--control);
+    border: solid .25em var(--control);
+}
+
+.vid.s3.standard .videoControlBlock {
+    background-color: var(--control);
+    position: absolute;
+    bottom: -4em;
+    height: 5em;
+    width: 10.6em;
+    left: 10em;
+    right: auto;
+    border-bottom-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+    z-index: -1;
+    ;
+}
+
+.vid.s3.standard input[type="range"] {
+    cursor: not-allowed;
+}
+
+/*Pre-K Players Here-------------------------*/
+.vid.s10.standard {
+    background-color: var(--textWhite);
+}
+
+.vid.s10.standard .vidCaption {
+    background-color: var(--textWhite);
+    color: var(--textBlack);
+    font-family: "BodyText";
+    border-radius: .4em;
+}
+
+.vid.s10.standard .vidCaptionTextBlock {
+    background-color: var(--textWhite);
+}
+
+.vid.s10.standard .videoBox {
+    background-color: var(--textWhite);
+}
+
+.vid.s10.standard .videoControlBlock {
+    background-color: var(--textWhite);
+}
+
+.vid.s10.standard .btn {
+    background-color: var(--ghostBlack40);
+}
+
+.vid.s10.standard .vidSlider {
+    background-color: var(--ghostBlack40);
+
+}
+
+/*Middle School Style Players Here-------------------*/
+.vid.s20.standard {
+    background-color: var(--textWhite);
+}
+
+.vid.s20.standard .vidCaption {
+    background-color: var(--textWhite);
+    color: var(--textBlack);
+    font-family: "BodyText";
+    border-radius: .4em;
+}
+
+.vid.s20.standard .vidCaptionTextBlock {
+    background-color: var(--textWhite);
+}
+
+.vid.s20.standard .videoBox {
+    background-color: var(--textWhite);
+}
+
+.vid.s20.standard .videoControlBlock {
+    background-color: var(--textWhite);
+}
+
+.vid.s20.standard .btn {
+    background-color: var(--ghostBlack40);
+}
+
+.vid.s20.standard .vidSlider {
+    background-color: var(--ghostBlack40);
+
+}
+
+/*Adult Style Players Here-------------------*/
+/*--NOEL NEW BUTTON ICONS!--*/
+
+.vid.s30.standard .vidPlayToggle {
+    left: .3em;
+    top:1em;
+    background-image: url(../img/pauseK.svg);
+    opacity: 0.7
+}
+
+.vid.s30.standard .vidPlayToggle.paused {
+    background-image: url(../img/playK.svg);
+    opacity: 0.7
+}
+
+.vid.s30.standard .vidCCToggle {
+        left: .3em;
+    top:4em;
+    background-image: url(../img/captionsK.svg);
+    opacity: 0.7
+}
+
+.vid.s30.standard .vidCCToggle.captionsOff {
+    background-image: url(../img/captionsOffK.svg);
+    opacity: 0.7
+}
+
+.vid.s30.standard .vidAudioToggle {
+        left: .3em;
+    top:7em;
+    background-image: url(../img/unmutedK.svg);
+    opacity: 0.7
+}
+
+.vid.s30.standard .vidFullScreen {
+        left: .3em;
+    top:10em;
+    background-image: url(../img/fullscreenK.svg);
+    opacity: 0.7
+}
+
+.vid.s30.standard .vidClose {
+    top:0;
+    left: 1em;
+    background-size: 60% auto;
+    background-image: url(../img/btnCloseK.svg);
+    opacity: 0.7
+}
+
+.vid.s30.standard .vidAudioToggle.audioOff {
+    background-image: url(../img/mutedK.svg);
+    opacity: 0.7
+}
+
+/*--End of BUTTON ICONS STUFF--*/
+.vid.s30.standard {
+        background-color: rgba(245, 247, 251, 1);
+
+    border-radius: 2em;
+ 
+}
+.vid.s30.standard .captionBlock {
+    color: var(--textBlack);
+    font-family: "BodyText";
+    border-radius: .4em;
+    width:33em;
+}
+.vid.s30.standard .vidCaption {
+    background-color: var(--textWhite);
+    color: var(--textBlack);
+    font-family: "BodyText";
+    border-radius: .4em;
+}
+
+.vid.s30.standard .vidCaptionTextBlock {
+    background-color: var(--textWhite);
+    border-radius: 1em;
+    box-shadow: 0em 0em 0.75em 0.25em rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+.vid.s30.standard .videoBox {
+    background-color: #e0e5ec;
+
+}
+
+.vid.s30.standard .videoControlBlock {
+    background-color: rgba(245, 247, 251, 1);
+    overflow: visible;
+    position:absolute;
+    top:9em;
+    left:auto;
+    right:-2em;
+    height:10em;
+    width:2em;
+    bottom:auto;
+    z-index: 0;
+    border-radius:0em;
+    border-top-right-radius: 1em;
+    border-bottom-right-radius:1em;
+}
+
+.vid.s30.standard .btn {
+    border: none;
+    /*background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);*/
+    box-shadow: 0.3em 0.3em 0.6em #686f7dbd, -0.3em -0.3em 0.6em #d7cdcd;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.98, 0.45, 0.58, 1);
+    outline: none;
+
+}
+
+.vid.s30.standard .btn:active {
+     box-shadow: inset 0 0 0 0.18em rgb(73 74 75), /* inner stroke */ inset 0.2em 0.2em 0.5em #bec4d0,inset -0.2em -0.2em 0.5em #ffffff;}
+
+
+.vid.s30.standard .btn:hover {
+    box-shadow: inset 0 0 0 0.15em rgb(73 74 75), /* inner stroke */0.3em 0.3em 0.6em #bec4d0,-0.3em -0.3em 0.6em #ffffff;
+}
+
+.vid.s30.standard .btn:focus {
+   box-shadow: 0 0 0 0.2em rgb(73 74 75), /* outer ring */0.3em 0.3em 0.6em #686f7dbd,-0.3em -0.3em 0.6em #d7cdcd;
+}                                                           
+
+
+.vid.s30.standard .vidSlider {
+
+    background: rgb(6, 6, 6, 1);
+    box-shadow: inset 0.2em 0.2em 0.4em #263c67, inset -0.2em -0.2em 0.4em #ffffff;
+    right:32em;
+    bottom:-3.6em;
+}
+
+
+
+/*Storyline Style Players Here-------------------*/
+.vid.s80.standard {
+    background-color: var(--textWhite);
+}
+
+.vid.s80.standard .vidCaption {
+    background-color: var(--textWhite);
+    color: var(--textBlack);
+    font-family: "BodyText";
+    border-radius: .4em;
+}
+
+.vid.s80.standard .vidCaptionTextBlock {
+    background-color: var(--textWhite);
+}
+
+.vid.s80.standard .videoBox {
+    background-color: var(--textWhite);
+}
+
+.vid.s80.standard .videoControlBlock {
+    background-color: var(--textWhite);
+}
+
+.vid.s80.standard .btn {
+    background-color: var(--ghostBlack40);
+}
+
+.vid.s80.standard .vidSlider {
+    background-color: var(--ghostBlack40);
+
+}
+
+
+/*Playbook Intro Style Players Here-------------------*/
+.vid.s170.standard {
+    background-color: var(--textWhite);
+    background-color: #18A57F;
+    font-size: .36em;
+    float: none;
+
+}
+
+.vid.s170.standard .vidCaption {
+    background-color: var(--textWhite);
+    color: var(--textBlack);
+    font-family: "BodyText";
+    border-radius: .4em;
+}
+
+.vid.s170.standard .vidCaptionTextBlock {
+    background-color: var(--textWhite);
+}
+
+.vid.s170.standard .videoBox {
+    background-color: var(--textWhite);
+}
+
+.vid.s170.standard .videoControlBlock {
+    background-color: #18A57F;
+}
+
+.vid.s170.standard .btn {
+    background-color: #18A57F;
+    box-shadow: 0.3em 0.3em 0.6em #4a3f65d1, -0.3em -0.3em 0.6em #18A57F;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.98, 0.45, 0.58, 1);
+
+}
+
+.vid.s170.standard .vidSlider {
+    background-color: rgb(6, 6, 6);
+    box-shadow: inset 0.1em 0.1em 0.4em #263c67, inset -0.1em -0.1em 0.4em #ffffff;
+
+}
+
+/*Sample Players Here-------------------*/
+.vid.s99.standard {
+    background-color: var(--textWhite);
+}
+
+.vid.s99.standard .vidCaption {
+    background-color: red;
+    color: var(--textBlack);
+    font-family: "BodyText";
+    border-radius: .4em;
+}
+
+.vid.s99.standard .vidCaptionTextBlock {
+    background-color: red;
+}
+
+.vid.s99.standard .videoBox {
+    background-color: red;
+}
+
+.vid.s99.standard .videoControlBlock {
+    background-color: red;
+}
+
+.vid.s99.standard .btn {
+    background-color: var(--ghostBlack40);
+}
+
+.vid.s99.standard .vidSlider {
+    background-color: var(--ghostBlack40);
+
+}

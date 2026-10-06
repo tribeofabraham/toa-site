@@ -1,0 +1,62 @@
+
+.tile {
+    display:block;
+    float:left;
+    margin:1em;
+    height:2em;
+    width:1.5em;
+    background-color:var(--paperWhite);
+    border:solid .02em var(--textBlack);
+    font-size:4.5em;
+    font-family:"BoldText";
+    text-align: center;
+    line-height: 1.5em;
+    padding:0em;
+   
+}
+
+.letterTile {
+    background-color:var(--paperWhite);
+    font-family:"BoldText";
+    text-align: center;
+    text-decoration-line: underline;
+    text-underline-offset: .25em;
+}
+
+.colorTile.primary {
+    background-color:var(--primary);
+}
+
+.syllaBoard {
+    display:block;
+    float:left;
+    margin:1em;
+    height:3em;
+    min-width: 6em;
+    background-color:var(--paperWhite);
+    border:solid .02em var(--textBlack);
+    font-size:4em;
+    font-family:"BoldText";
+    text-align: center;
+    line-height: 3em;
+}
+.icon {
+    height:9em;
+    width:9em;
+    margin:1em;
+    background-color:var(--primary);
+    border-radius:50%;
+    display:block;
+    float:left;
+}
+
+.button {
+    height:9em;
+    width:9em;
+    margin:1em;
+    background-color:var(--primary);
+    border-radius:1em;
+    display:block;
+    float:left;
+}
+
