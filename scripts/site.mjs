@@ -169,15 +169,46 @@ async function deploy() {
   const files = listFiles(DIST)
   const hashes = Object.fromEntries(files.map((f) => [f, createHash('sha256').update(readFileSync(join(DIST, f))).digest('hex')]))
 
-  const ftp = new Client(30000)
-  try {
-    console.log(`\nConnecting to ${DEPLOY_HOST}…`)
-    await ftp.access({
+  // Bluehost drops long FTP sessions now and then (ECONNRESET), so a dropped connection is reopened and
+  // the file tried again, and the record is saved as the upload goes: a deploy that still fails
+  // picks up where it stopped next time instead of starting over.
+  const connect = async () => {
+    const client = new Client(30000)
+    await client.access({
       host: DEPLOY_HOST, port: Number(process.env.DEPLOY_PORT || 21), user: DEPLOY_USER, password: DEPLOY_PASSWORD,
       secure: true,
       secureOptions: DEPLOY_CERT_NAME ? { checkServerIdentity: (_h, cert) => checkServerIdentity(DEPLOY_CERT_NAME, cert) } : undefined,
     })
-    const root = DEPLOY_PATH.startsWith('/') ? DEPLOY_PATH : posix.join(await ftp.pwd(), DEPLOY_PATH)
+    return client
+  }
+  const TRIES = 4
+  async function withRetry(what, job) {
+    for (let attempt = 1; ; attempt++) {
+      try {
+        return await job()
+      } catch (err) {
+        if (attempt === TRIES) throw err
+        console.log(`  … ${what}: ${err.message}; reconnecting (try ${attempt + 1} of ${TRIES})`)
+        ftp.close()
+        await new Promise((r) => setTimeout(r, 2000 * attempt))
+        ftp = await connect()
+      }
+    }
+  }
+
+  let ftp
+  let root
+  let known = {}   // what the server has, as far as the record knows
+  const saveRecord = (record) => withRetry('saving the record', async () => {
+    writeFileSync(join(SITE, RECORD), JSON.stringify(record))
+    await ftp.uploadFrom(join(SITE, RECORD), posix.join(root, RECORD))
+    rmSync(join(SITE, RECORD))
+  })
+  let sent = 0
+  try {
+    console.log(`\nConnecting to ${DEPLOY_HOST}…`)
+    ftp = await connect()
+    root = DEPLOY_PATH.startsWith('/') ? DEPLOY_PATH : posix.join(await ftp.pwd(), DEPLOY_PATH)
     const here = await ftp.list(root).catch(() => null)
     if (!here || !here.some((e) => e.name === 'index.html')) fail(`${root} has no index.html. Is DEPLOY_PATH the site's folder?`)
 
@@ -188,29 +219,39 @@ async function deploy() {
       before = JSON.parse(readFileSync(tmp, 'utf8'))
       rmSync(tmp)
     } catch { /* first deploy from here: everything goes up */ }
+    known = { ...before }
 
     // index.html files last: a page only changes once everything it loads is there.
     const order = files.sort((a, b) => (a.endsWith('index.html') - b.endsWith('index.html')))
-    let sent = 0
-    for (const f of order) {
-      if (!process.argv.includes('--all') && before[f] === hashes[f]) continue
-      const dir = posix.dirname(posix.join(root, f))
-      await ftp.ensureDir(dir)
-      await ftp.uploadFrom(join(DIST, f), posix.join(root, f))
-      console.log(`  ↑ ${f}`)
+    const todo = order.filter((f) => process.argv.includes('--all') || before[f] !== hashes[f])
+    console.log(`${todo.length} file(s) to upload, ${files.length - todo.length} unchanged.`)
+    for (const f of todo) {
+      await withRetry(f, async () => {
+        await ftp.ensureDir(posix.dirname(posix.join(root, f)))
+        await ftp.uploadFrom(join(DIST, f), posix.join(root, f))
+      })
+      known[f] = hashes[f]
       sent++
+      console.log(`  ↑ ${f}  (${sent}/${todo.length})`)
+      if (sent % 50 === 0) await saveRecord(known)
     }
-    writeFileSync(join(SITE, RECORD), JSON.stringify(hashes))
-    await ftp.uploadFrom(join(SITE, RECORD), posix.join(root, RECORD))
-    rmSync(join(SITE, RECORD))
+    await saveRecord(hashes)
     const gone = Object.keys(before).filter((f) => !hashes[f])
     console.log(`\n✔ Deployed: ${sent} uploaded, ${files.length - sent} unchanged.`)
     if (gone.length) console.log(`  (${gone.length} file(s) no longer in the site were left on the server, e.g. ${gone[0]})`)
     console.log('  https://tribeofabraham.com  (Ctrl+F5 to see it)\n')
   } catch (err) {
-    fail(`Deploy failed: ${err.message}`)
+    // Keep what did go up, so running deploy again carries on from here
+    if (sent) {
+      try {
+        ftp?.close()
+        ftp = await connect()
+        await saveRecord(known)
+      } catch { /* the next deploy will just send a little more */ }
+    }
+    fail(`Deploy failed after ${sent} upload(s): ${err.message}\n  Run npm run deploy again: it carries on from where it stopped.`)
   } finally {
-    ftp.close()
+    ftp?.close()
   }
 }
 
