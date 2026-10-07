@@ -7,8 +7,8 @@ Built by musicians, educators, and craftspeople in
 rural Pennsylvania.
 
 ## Tools
-- [Nashville Notation Wheel](../nashville-notation) — 
-Interactive music theory for guitar and piano
+- [Nashville Notation](../nashville-react) — 
+Chord progressions in Nashville numbers, for guitar, bass and piano (React; built into notation/)
 - [Drum Sequencer](../drum-sequencer) — 
 Rhythm and subdivision explorer
 - [Harmony & Rhythm](../harmony-rhythm) — 
