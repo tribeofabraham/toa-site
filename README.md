@@ -11,8 +11,6 @@ rural Pennsylvania.
 Chord progressions in Nashville numbers, for guitar, bass and piano (React; built into notation/)
 - [Drum Sequencer](../drum-sequencer) — 
 Rhythm and subdivision explorer
-- [Harmony & Rhythm](../harmony-rhythm) — 
-Integrated theory and beat maker
 
 ## Hardware
 - [MIDI Foot Pedal](../midi-foot-pedal) — 
