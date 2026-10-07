@@ -107,30 +107,37 @@ nav {
 /* ── HERO ─────────────────────────────────────────────── */
 .hero {
   min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-  padding: 6.5rem 3rem 4rem;
-  position: relative; overflow: hidden;
-}
-/* The app itself, live: as big as the screen allows under the heading */
-.hero-app {
-  width: 100%; max-width: 1500px; height: min(74vh, 58vw); min-height: 420px;
-  border: 1px solid rgba(184,146,58,0.25); background: #12150a; margin-bottom: 2rem;
-  position: relative; z-index: 1;
-  animation: fadeUp 1s ease-out 0.5s both;
-}
-.hero-app iframe { width: 100%; height: 100%; border: 0; display: block; }
-@media (max-width: 700px) {
-  .hero { padding: 5.5rem 0.75rem 3rem; }
-  .hero-app { height: 78vh; min-height: 0; }   /* the app's own phone layout, scrolling inside */
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  align-items: center; gap: 4rem;
+  max-width: 1500px; margin: 0 auto;
+  padding: 7rem 3rem 4rem;
+  position: relative;
 }
 .hero::before {
   content: '';
   position: absolute; width: 800px; height: 800px; border-radius: 50%;
   background: radial-gradient(circle, rgba(184,146,58,0.06) 0%, transparent 70%);
-  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  top: 50%; left: 70%; transform: translate(-50%, -50%);
   pointer-events: none;
+}
+/* The app, as a picture that opens it */
+.hero-shot {
+  display: flex; flex-direction: column; gap: 0.9rem;
+  text-decoration: none; color: var(--brass-light); position: relative;
+  animation: fadeUp 1s ease-out 0.5s both;
+}
+.hero-shot img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid rgba(184,146,58,0.3); transition: border-color 0.25s, transform 0.25s;
+}
+.hero-shot:hover img { border-color: var(--brass); transform: translateY(-3px); }
+.hero-shot-label { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.hero-shot:hover .hero-shot-label { text-decoration: underline; }
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 6rem 1.5rem 3rem; min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-shot:hover img { transform: none; }
 }
 
 
@@ -146,7 +153,7 @@ nav {
 }
 .hero h1 {
   font-family: var(--serif);
-  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+  font-size: clamp(2.4rem, 4.6vw, 4.4rem);
   font-weight: 400; line-height: 1.1; color: var(--paper);
   margin-bottom: 1.4rem;
   animation: fadeUp 1s ease-out 0.4s both;
@@ -154,11 +161,11 @@ nav {
 .hero h1 em { font-style: italic; color: var(--brass-light); }
 .hero-sub {
   font-size: 1.1rem; font-weight: 300; color: var(--cream); opacity: 0.9;
-  max-width: 760px; line-height: 1.8; margin: 0 auto 2.2rem;
+  max-width: 560px; line-height: 1.8; margin: 0 0 1.2rem;
   animation: fadeUp 1s ease-out 0.6s both;
 }
 .hero-cta {
-  display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+  display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 1rem;
   animation: fadeUp 1s ease-out 0.7s both;
 }
 .btn {
@@ -455,20 +462,24 @@ footer {
   </ul>
 </nav>
 
-<!-- HERO: Nashville Notation, live, the first thing you see -->
+<!-- HERO: Nashville Notation first, as a picture that opens it -->
 <main id="main">
 <section class="hero" id="notation">
-  <p class="hero-eyebrow">Open Source Music Education</p>
-  <h1>Play together. <em>Right now.</em></h1>
-  <div class="hero-app">
-    <iframe src="notation/" title="Nashville Notation: pick a key and build a chord progression"></iframe>
+  <div class="hero-text">
+    <p class="hero-eyebrow">Open Source Music Education</p>
+    <h1>Play together. <em>Right now.</em></h1>
+    <p class="hero-sub"><strong>Nashville Notation.</strong> Pick a key on the wheel and see every chord as its Nashville number and its name, with diagrams for guitar or bass and color-coded piano keys, each note marked by its place in the chord.</p>
+    <p class="hero-sub">Change chord types, transpose, start from a preset song, or switch to scales. Built to be readable across a room: run it on a TV and everyone at the session can see where they are.</p>
+    <div class="hero-cta">
+      <a href="notation/" class="btn" target="_blank" rel="noopener">Open Nashville Notation →</a>
+      <a href="https://github.com/tribeofabraham/nashville-react" class="btn btn-ghost">GitHub</a>
+    </div>
   </div>
-  <p class="hero-sub"><strong>Nashville Notation.</strong> Pick a key on the wheel and see every chord as its Nashville number and its name, with diagrams for guitar or bass and color-coded piano keys. Change chord types, transpose, start from a preset song, or switch to scales. Built to be readable across a room: run it on a TV and everyone at the session can see where they are.</p>
-  <div class="hero-cta">
-    <a href="notation/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
-    <a href="https://github.com/tribeofabraham/nashville-react" class="btn btn-ghost">GitHub</a>
-    <a href="#pedal" class="btn btn-ghost">See the Pedal</a>
-  </div>
+  <a class="hero-shot" href="notation/" target="_blank" rel="noopener">
+    <img src="images/nashville-notation.jpg" width="1200" height="944"
+         alt="Nashville Notation: an eight-chord progression in G with guitar diagrams, piano keys and the key wheel">
+    <span class="hero-shot-label">Click to open Nashville Notation <span aria-hidden="true">→</span></span>
+  </a>
 </section>
 
 <!-- MISSION -->
