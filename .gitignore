@@ -10,3 +10,9 @@ Thumbs.db
 
 # Licensed VectorStock originals: not used by any page, and this repo is public
 samples/NashvilleNotation/img/guitarchords/vectorstock_*
+
+# The assembled site (npm run build) and deploy login/records
+dist/
+.env.deploy.local
+.deployed.json
+.deployed.tmp

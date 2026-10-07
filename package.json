@@ -1,0 +1,13 @@
+{
+  "name": "toa-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/site.mjs build",
+    "preview": "node scripts/site.mjs preview",
+    "deploy": "node scripts/site.mjs deploy"
+  },
+  "devDependencies": {
+    "basic-ftp": "^6.2.2"
+  }
+}
