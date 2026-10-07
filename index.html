@@ -196,23 +196,6 @@ nav::after {
 .btn-ghost::before { background: rgba(184,146,58,0.1); }
 .btn-ghost:hover { color: var(--paper); }
 
-/* ── MISSION ──────────────────────────────────────────── */
-.mission {
-  background: var(--warm); padding: 7rem 5rem;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
-}
-.mission-text p {
-  font-size: 1.05rem; color: var(--cream);
-  line-height: 1.85; margin-bottom: 1.2rem;
-}
-.mission-text p strong { color: var(--paper); font-weight: 500; }
-.mission-pull {
-  font-family: var(--serif);
-  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-  font-weight: 400; line-height: 1.4; color: var(--paper);
-  border-left: 3px solid var(--brass); padding-left: 2rem;
-}
-.mission-pull em { font-style: italic; color: var(--brass-light); }
 
 /* ── SECTION COMMONS ──────────────────────────────────── */
 section { padding: 7rem 5rem; }
@@ -269,6 +252,13 @@ h2 em { font-style: italic; color: var(--brass-light); }
 }
 .lm-card:hover { background: rgba(30,24,16,0.6); }
 .lm-card:hover::before { transform: scaleX(1); }
+/* A picture of the tool, as Nashville Notation's above; it opens the tool, as the card's link does */
+.lm-shot { display: block; margin-bottom: 1.6rem; }
+.lm-shot img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid rgba(184,146,58,0.3); transition: border-color 0.25s, transform 0.25s;
+}
+.lm-shot:hover img { border-color: var(--brass); transform: translateY(-3px); }
 .lm-card h3 {
   font-family: var(--serif); font-size: 1.6rem;
   font-weight: 400; color: var(--paper);
@@ -444,8 +434,8 @@ footer {
 @media (max-width: 900px) {
   nav { padding: 1.2rem 1.5rem; }
   .nav-links { display: none; }
-  section, .mission, .opensource { padding: 5rem 1.5rem; }
-  .mission, .opensource { grid-template-columns: 1fr; gap: 3rem; }
+  section, .opensource { padding: 5rem 1.5rem; }
+  .opensource { grid-template-columns: 1fr; gap: 3rem; }
   .tools-grid { grid-template-columns: 1fr; }
   footer { flex-direction: column; text-align: center; }
 }
@@ -504,6 +494,9 @@ footer {
   <div class="loudmath-grid">
 
     <div class="lm-card reveal">
+      <a class="lm-shot" href="loud-math/fractional-beats/?preset=poly" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+        <img src="images/loudmath-fractions.png" width="1220" height="700" loading="lazy" alt="">
+      </a>
       <div class="lm-tag">Rhythm &amp; Fractions</div>
       <h3>Fraction Drum <em>Machine</em></h3>
       <p>The denominator is the beat. Stack fractions — quarter notes, triplets, sixteenths — and hear them layer into polyrhythms. Each row is a different instrument with multi-level velocity. Change a fraction, and the groove reorganizes itself. The math of African polyrhythms, visible and audible at the same time.</p>
@@ -513,6 +506,9 @@ footer {
     </div>
 
     <div class="lm-card reveal reveal-delay-1">
+      <a class="lm-shot" href="loud-math/phat-decimals/?preset=base10" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+        <img src="images/loudmath-phat.png" width="1220" height="700" loading="lazy" alt="">
+      </a>
       <div class="lm-tag">Rhythm &amp; Decimals</div>
       <h3>Phat <em>Decimals</em></h3>
       <p>Fractions dropped the 4/8/16 grid — decimals drop the grid entirely. Type any decimal as a step value and slice the measure into rhythms Western music never found. 0.1 for base-ten grooves. 0.15 for something phat. Make the measure itself 0.875 and watch a 7/8 feel emerge from numbers a calculator understands. Polyrhythm by way of decimal expansion.</p>
@@ -521,21 +517,6 @@ footer {
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- MISSION -->
-<section class="mission" id="mission">
-  <div class="mission-text reveal">
-    <p class="section-label">Why This Exists</p>
-    <h2>Music is a <em>shared language</em></h2>
-    <div class="divider"></div>
-    <p>Most people who've taken lessons still can't play with other people. They learned songs, not the language. The Nashville Number System changes that — it's how working musicians communicate in real time, without sheet music, without rehearsal.</p>
-    <p>Tribe of Abraham builds free, open-source tools that teach that language. <strong>The goal is simple:</strong> a family sitting together, the chord chart on the screen, everyone finding their part. The same way television replaced silence in the living room — music can replace television.</p>
-    <p>We've seen it work with communities that had never encountered this kind of music at all. The tools meet people exactly where they are.</p>
-  </div>
-  <div class="mission-pull reveal reveal-delay-2">
-    <em>"The chord chart on the screen. Everyone finds their part. The music starts."</em>
   </div>
 </section>
 
