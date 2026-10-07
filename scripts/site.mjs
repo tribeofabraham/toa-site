@@ -63,6 +63,9 @@ function unpack(repo, into) {
   rmSync(tar)
   if (r.status !== 0) fail(`Couldn't unpack ${repo}`)
   for (const name of NOT_FOR_THE_WEB) rmSync(join(into, name), { recursive: true, force: true })
+  for (const f of listFiles(into)) {                      // placeholders and clutter, at any depth
+    if (['.gitkeep', '.DS_Store', 'Thumbs.db'].includes(posix.basename(f))) rmSync(join(into, f))
+  }
 }
 
 function build({ strict }) {
