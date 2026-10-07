@@ -6,12 +6,14 @@
 //
 // Every repo is taken as committed (git archive), never with unsaved edits. Deploy also
 // insists each one matches GitHub, so the live site is always what's on GitHub.
+// A tool marked "build": true (a React app) is built from its committed files, and its dist/ goes in.
 // Login details for deploy live in .env.deploy.local (not in git).
 
 import { execFileSync, spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { createServer } from 'node:http'
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { dirname, extname, join, posix, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -54,17 +56,38 @@ function drift(repo, fetch) {
   return notes.join(', ')
 }
 
-// A repo's committed files into a folder of dist/.
-function unpack(repo, into) {
+// A repo's committed files, as they are, into a folder.
+function unpackRaw(repo, into) {
   mkdirSync(into, { recursive: true })
   const tar = join(into, '.site.tar')
   execFileSync('git', ['-C', repo, 'archive', '--format=tar', '-o', tar, 'HEAD'])
   const r = spawnSync('tar', ['-xf', '.site.tar'], { cwd: into, stdio: 'inherit' })
   rmSync(tar)
   if (r.status !== 0) fail(`Couldn't unpack ${repo}`)
+}
+
+// A repo's committed files into a folder of dist/, without what's only for working on it.
+function unpack(repo, into) {
+  unpackRaw(repo, into)
   for (const name of NOT_FOR_THE_WEB) rmSync(join(into, name), { recursive: true, force: true })
   for (const f of listFiles(into)) {                      // placeholders and clutter, at any depth
     if (['.gitkeep', '.DS_Store', 'Thumbs.db'].includes(posix.basename(f))) rmSync(join(into, f))
+  }
+}
+
+// A tool that needs building: its committed files into a scratch folder, npm ci + npm run build there,
+// and its dist/ into the site.
+function buildTool(repo, into) {
+  const work = mkdtempSync(join(tmpdir(), 'toa-build-'))
+  try {
+    unpackRaw(repo, work)
+    for (const args of [['ci', '--no-audit', '--no-fund'], ['run', 'build']]) {
+      const r = spawnSync('npm', args, { cwd: work, stdio: ['ignore', 'ignore', 'inherit'], shell: true })
+      if (r.status !== 0) fail(`npm ${args.join(' ')} failed for ${repo}`)
+    }
+    cpSync(join(work, 'dist'), into, { recursive: true })
+  } finally {
+    rmSync(work, { recursive: true, force: true })
   }
 }
 
@@ -90,8 +113,9 @@ function build({ strict }) {
   for (const r of repos) {
     const into = join(DIST, r.folder)
     if (r.folder && existsSync(into)) fail(`toa-site has its own ${r.folder}/ folder, but tools.json says ${r.repo} supplies it`)
-    unpack(r.path, into)
-    console.log(`  ✔ ${(r.folder || '(the site)').padEnd(26)} ← ${r.repo} @ ${git(r.path, 'rev-parse', '--short', 'HEAD')}`)
+    if (r.build) buildTool(r.path, into)
+    else unpack(r.path, into)
+    console.log(`  ✔ ${(r.folder || '(the site)').padEnd(26)} ← ${r.repo} @ ${git(r.path, 'rev-parse', '--short', 'HEAD')}${r.build ? ' (built)' : ''}`)
   }
   console.log(`\nBuilt dist/: ${listFiles(DIST).length} files.`)
 }

@@ -1,11 +1,12 @@
 {
-  "_comment": "Each tool lives in its own repo, beside this one in D:\\TribeOfAbrahamGit. npm run build puts it in the site under 'folder' (its address: tribeofabraham.com/<folder>/).",
+  "_comment": "Each tool lives in its own repo, beside this one in D:\\TribeOfAbrahamGit. npm run build puts it in the site under 'folder' (its address: tribeofabraham.com/<folder>/). \"build\": true means it's built first (npm ci, npm run build) and its dist/ goes in.",
   "tools": [
     { "folder": "notation",                "repo": "nashville-notation" },
     { "folder": "kaleidescope",            "repo": "kaleidoscope" },
     { "folder": "sequencer",               "repo": "drum-sequencer" },
     { "folder": "music",                   "repo": "harmony-rhythm" },
     { "folder": "midi-foot-pedal-flasher", "repo": "midi-foot-pedal-flasher" },
-    { "folder": "loud-math",               "repo": "loud-math" }
+    { "folder": "loud-math",               "repo": "loud-math" },
+    { "folder": "nashville",               "repo": "nashville-react", "build": true }
   ]
 }
