@@ -316,28 +316,31 @@ h2 em { font-style: italic; color: var(--brass-light); }
 }
 
 /* ── NOTATION PREVIEW ─────────────────────────────────── */
-.notation-preview { background: var(--warm); }
-.notation-preview-header { max-width: 540px; margin-bottom: 3rem; }
+.notation-preview {
+  background: var(--warm);
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 4rem; align-items: center;
+}
+.notation-preview-header { max-width: 540px; }
 .notation-preview p {
   font-size: 1rem; color: var(--cream);
   line-height: 1.8; margin-bottom: 1rem; max-width: 560px;
 }
-.preview-wrapper {
-  position: relative; border: 1px solid rgba(184,146,58,0.2);
-  overflow: hidden; background: #111;
+/* A picture of the tool beside its text, as Nashville Notation's at the top; a click opens it full size */
+.preview-shot {
+  display: flex; flex-direction: column; gap: 0.9rem;
+  text-decoration: none; color: var(--brass-light);
 }
-.preview-wrapper iframe {
-  width: 100%; aspect-ratio: 3 / 2; border: none; display: block;
+.preview-shot img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid rgba(184,146,58,0.3); transition: border-color 0.25s, transform 0.25s;
 }
-.preview-cta {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 1rem;
-  background: rgba(13,11,9,0.55);
-  opacity: 0; transition: opacity 0.3s;
+.preview-shot:hover img { border-color: var(--brass); transform: translateY(-3px); }
+.preview-shot-label { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.preview-shot:hover .preview-shot-label { text-decoration: underline; }
+@media (max-width: 1000px) {
+  .notation-preview { grid-template-columns: 1fr; gap: 2.5rem; }
 }
-.preview-wrapper:hover .preview-cta { opacity: 1; }
 
 /* ── OPEN SOURCE ──────────────────────────────────────── */
 .opensource {
@@ -552,12 +555,10 @@ footer {
     <p>Most people only know the rhythms they grew up with. This sequencer is loaded with patterns from musical traditions around the world — so you can hear how a 7/8 Balkan groove feels, what makes an Afrobeat pattern lock in, or why a bossa nova swings differently than a shuffle. Pick a pattern and press play.</p>
     <p style="margin-top: 1rem;"><a href="sequencer/" class="btn" target="_blank" rel="noopener">Open Sequencer →</a> <a href="https://github.com/tribeofabraham/drum-sequencer" class="btn btn-ghost">GitHub</a></p>
   </div>
-  <div class="preview-wrapper reveal reveal-delay-1">
-    <iframe src="sequencer/" title="Drum Sequencer" scrolling="no"></iframe>
-    <div class="preview-cta">
-      <a href="sequencer/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
-    </div>
-  </div>
+  <a class="preview-shot reveal reveal-delay-1" href="sequencer/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+    <img src="images/sequencer.png" width="1280" height="800" loading="lazy" alt="">
+    <span class="preview-shot-label">Click to open the Drum Sequencer →</span>
+  </a>
 </section>
 
 <!-- KALEIDOSCOPE -->
@@ -569,12 +570,10 @@ footer {
     <p>This has absolutely nothing to do with music education. But we built it, it's mesmerizing, and we're not taking it down. Twelve mirrored slices, pure HTML5 and CSS transforms — pick a pattern, control the speed, and lose a few minutes.</p>
     <p style="margin-top: 1rem;"><a href="kaleidescope/" class="btn" target="_blank" rel="noopener">Open Kaleidoscope →</a> <a href="https://github.com/tribeofabraham/kaleidoscope" class="btn btn-ghost">GitHub</a></p>
   </div>
-  <div class="preview-wrapper reveal reveal-delay-1">
-    <iframe src="kaleidescope/" title="Kaleidoscope" scrolling="no"></iframe>
-    <div class="preview-cta">
-      <a href="kaleidescope/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
-    </div>
-  </div>
+  <a class="preview-shot reveal reveal-delay-1" href="kaleidescope/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+    <img src="images/kaleidoscope.jpg" width="1280" height="800" loading="lazy" alt="">
+    <span class="preview-shot-label">Click to open the Kaleidoscope →</span>
+  </a>
 </section>
 
 <!-- OPEN SOURCE -->
