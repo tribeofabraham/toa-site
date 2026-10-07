@@ -135,6 +135,7 @@ nav {
 .hero-shot:hover .hero-shot-label { text-decoration: underline; }
 @media (max-width: 1000px) {
   .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 6rem 1.5rem 3rem; min-height: 0; }
+  .hero-shot { order: -1; }   /* the app first, on a phone too */
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-shot:hover img { transform: none; }
@@ -467,7 +468,7 @@ footer {
 <section class="hero" id="notation">
   <div class="hero-text">
     <p class="hero-eyebrow">Open Source Music Education</p>
-    <h1>Play together. <em>Right now.</em></h1>
+    <h1>Play together.<br><em>Right now.</em></h1>
     <p class="hero-sub"><strong>Nashville Notation.</strong> Pick a key on the wheel and see every chord as its Nashville number and its name, with diagrams for guitar or bass and color-coded piano keys, each note marked by its place in the chord.</p>
     <p class="hero-sub">Change chord types, transpose, start from a preset song, or switch to scales. Built to be readable across a room: run it on a TV and everyone at the session can see where they are.</p>
     <div class="hero-cta">
