@@ -110,8 +110,20 @@ nav {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center;
-  padding: 9rem 3rem 6rem;
+  padding: 6.5rem 3rem 4rem;
   position: relative; overflow: hidden;
+}
+/* The app itself, live: as big as the screen allows under the heading */
+.hero-app {
+  width: 100%; max-width: 1500px; height: min(74vh, 58vw); min-height: 420px;
+  border: 1px solid rgba(184,146,58,0.25); background: #12150a; margin-bottom: 2rem;
+  position: relative; z-index: 1;
+  animation: fadeUp 1s ease-out 0.5s both;
+}
+.hero-app iframe { width: 100%; height: 100%; border: 0; display: block; }
+@media (max-width: 700px) {
+  .hero { padding: 5.5rem 0.75rem 3rem; }
+  .hero-app { height: 78vh; min-height: 0; }   /* the app's own phone layout, scrolling inside */
 }
 .hero::before {
   content: '';
@@ -134,20 +146,20 @@ nav {
 }
 .hero h1 {
   font-family: var(--serif);
-  font-size: clamp(3rem, 7vw, 5.8rem);
+  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
   font-weight: 400; line-height: 1.1; color: var(--paper);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
   animation: fadeUp 1s ease-out 0.4s both;
 }
 .hero h1 em { font-style: italic; color: var(--brass-light); }
 .hero-sub {
   font-size: 1.1rem; font-weight: 300; color: var(--cream); opacity: 0.9;
-  max-width: 540px; line-height: 1.8; margin: 0 auto 2.5rem;
-  animation: fadeUp 1s ease-out 0.5s both;
+  max-width: 760px; line-height: 1.8; margin: 0 auto 2.2rem;
+  animation: fadeUp 1s ease-out 0.6s both;
 }
 .hero-cta {
   display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
-  animation: fadeUp 1s ease-out 0.6s both;
+  animation: fadeUp 1s ease-out 0.7s both;
 }
 .btn {
   display: inline-block; padding: 0.85rem 2.2rem;
@@ -443,15 +455,18 @@ footer {
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- HERO: Nashville Notation, live, the first thing you see -->
 <main id="main">
-<section class="hero">
-  <img src="images/LogoFull.svg" alt="Tribe of Abraham" class="hero-logo" style="width: clamp(220px, 36vw, 420px); margin-bottom: 2.5rem; animation: fadeUp 1s ease-out 0.2s both;">
+<section class="hero" id="notation">
   <p class="hero-eyebrow">Open Source Music Education</p>
-  <h1>Play together.<br><em>Right now.</em></h1>
-  <p class="hero-sub">Free tools that help people make music together without years of theory. Pick up a guitar. Sit down at a keyboard. Find the 1 chord and go.</p>
+  <h1>Play together. <em>Right now.</em></h1>
+  <div class="hero-app">
+    <iframe src="notation/" title="Nashville Notation: pick a key and build a chord progression"></iframe>
+  </div>
+  <p class="hero-sub"><strong>Nashville Notation.</strong> Pick a key on the wheel and see every chord as its Nashville number and its name, with diagrams for guitar or bass and color-coded piano keys. Change chord types, transpose, start from a preset song, or switch to scales. Built to be readable across a room: run it on a TV and everyone at the session can see where they are.</p>
   <div class="hero-cta">
-    <a href="notation/" class="btn" target="_blank" rel="noopener">Open Nashville Notation</a>
+    <a href="notation/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
+    <a href="https://github.com/tribeofabraham/nashville-react" class="btn btn-ghost">GitHub</a>
     <a href="#pedal" class="btn btn-ghost">See the Pedal</a>
   </div>
 </section>
@@ -468,24 +483,6 @@ footer {
   </div>
   <div class="mission-pull reveal reveal-delay-2">
     <em>"The chord chart on the screen. Everyone finds their part. The music starts."</em>
-  </div>
-</section>
-
-<!-- NASHVILLE NOTATION (the showcase) -->
-<section class="notation-preview" id="notation">
-  <div class="notation-preview-header reveal">
-    <p class="section-label">Nashville Notation</p>
-    <h2>Find the <em>1 chord.</em><br>Everything else follows.</h2>
-    <div class="divider"></div>
-    <p>A chord progression in the Nashville Number System, up to eight chords at a time. Pick a key on the wheel and see every chord as its number and its name, with diagrams for guitar or bass and color-coded piano keys, each note marked by its place in the chord. Change chord types, transpose, start from a preset song, or switch to scales. It scales itself to fill any screen.</p>
-    <p>Built to be readable across a room. Run it on a TV or a tablet and everyone at the session can see where they are.</p>
-    <p style="margin-top: 1rem;"><a href="notation/" class="btn" target="_blank" rel="noopener">Open Nashville Notation →</a> <a href="https://github.com/tribeofabraham/nashville-react" class="btn btn-ghost">GitHub</a></p>
-  </div>
-  <div class="preview-wrapper reveal reveal-delay-1">
-    <iframe src="notation/" title="Nashville Notation" scrolling="no"></iframe>
-    <div class="preview-cta">
-      <a href="notation/" class="btn" target="_blank" rel="noopener">Open Full Screen →</a>
-    </div>
   </div>
 </section>
 
