@@ -1,11 +1,12 @@
 {
-  "_comment": "Each tool lives in its own repo, beside this one in D:\\TribeOfAbrahamGit. npm run build puts it in the site under 'folder' (its address: tribeofabraham.com/<folder>/). \"build\": true means it's built first (npm ci, npm run build) and its dist/ goes in.",
+  "_comment": "Each tool lives in its own repo, beside this one in D:\\TribeOfAbrahamGit. npm run build puts it in the site under 'folder' (its address: tribeofabraham.com/<folder>/). \"build\": true means it's built first (npm ci, npm run build) and its dist/ goes in. Order matters: a folder inside another tool's (loud-math/archimedes-pi) comes after it.",
   "tools": [
     { "folder": "notation",                "repo": "nashville-react", "build": true },
     { "folder": "kaleidescope",            "repo": "kaleidoscope" },
     { "folder": "sequencer",               "repo": "drum-sequencer" },
     { "folder": "midi-foot-pedal-flasher", "repo": "midi-foot-pedal-flasher" },
     { "folder": "loud-math",               "repo": "loud-math", "build": true },
+    { "folder": "loud-math/archimedes-pi", "repo": "archimedes-react", "build": true },
     { "folder": "samples",                 "repo": "samples-react", "build": true }
   ]
 }
